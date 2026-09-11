@@ -76,3 +76,13 @@
 2026-09-11 10:33:00.046 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
 2026-09-11 10:38:00.034 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
 2026-09-11 10:43:00.022 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-09-11 10:47:35.430 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application LAMB-EVALUACION-MS with eureka with status DOWN
+2026-09-11 10:47:35.431 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1789123655431, current=DOWN, previous=UP]
+2026-09-11 10:47:35.432 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-EVALUACION-MS/lamb-evaluacion-ms:44878554b4229c7d3223296ed041ec7f: registering service...
+2026-09-11 10:47:35.443 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-EVALUACION-MS/lamb-evaluacion-ms:44878554b4229c7d3223296ed041ec7f - registration status: 204
+2026-09-11 10:47:35.462 [] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-09-11 10:47:35.467 [] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-09-11 10:47:35.487 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-11 10:47:35.504 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-09-11 10:47:35.509 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-09-11 10:47:35.511 [] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...

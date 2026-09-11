@@ -370,3 +370,14 @@ com.netflix.discovery.shared.transport.TransportException: Cannot execute reques
 2026-09-11 10:31:16.590 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
 2026-09-11 10:36:16.578 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
 2026-09-11 10:41:16.566 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-09-11 10:46:16.554 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-09-11 10:47:21.725 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application LAMB-MATRICULA-MS with eureka with status DOWN
+2026-09-11 10:47:21.725 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1789123641725, current=DOWN, previous=UP]
+2026-09-11 10:47:21.726 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3: registering service...
+2026-09-11 10:47:21.740 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3 - registration status: 204
+2026-09-11 10:47:21.747 [] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-09-11 10:47:21.752 [] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-09-11 10:47:21.770 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-11 10:47:21.788 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-09-11 10:47:21.793 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-09-11 10:47:21.795 [] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
