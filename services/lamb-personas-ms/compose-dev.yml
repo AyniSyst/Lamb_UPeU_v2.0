@@ -1,0 +1,18 @@
+name: lamb-personas-dev
+
+services:
+  postgres-personas-dev:
+    image: postgres:16-alpine
+    container_name: lamb-postgres-personas-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lamb_personas_db
+      POSTGRES_USER: lamb
+      POSTGRES_PASSWORD: lamb
+    ports:
+      - "15451:5432"
+    volumes:
+      - lamb_personas_dev_data:/var/lib/postgresql/data
+
+volumes:
+  lamb_personas_dev_data:

@@ -1,0 +1,61 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: lamb-personas
+              uri: lb://lamb-personas-ms
+              predicates:
+                - Path=/api/v1/personas/**
+            - id: lamb-institucional-facultades
+              uri: lb://lamb-institucional-ms
+              predicates:
+                - Path=/api/v1/facultades/**
+            - id: lamb-institucional-programas
+              uri: lb://lamb-institucional-ms
+              predicates:
+                - Path=/api/v1/programas/**
+            - id: lamb-planificacion-cursos
+              uri: lb://lamb-planificacion-ms
+              predicates:
+                - Path=/api/v1/cursos/**
+            - id: lamb-planificacion-secciones
+              uri: lb://lamb-planificacion-ms
+              predicates:
+                - Path=/api/v1/secciones/**
+            - id: lamb-admision
+              uri: lb://lamb-admision-ms
+              predicates:
+                - Path=/api/v1/postulaciones/**
+            - id: lamb-matricula
+              uri: lb://lamb-matricula-ms
+              predicates:
+                - Path=/api/v1/matriculas/**
+            - id: lamb-evaluacion
+              uri: lb://lamb-evaluacion-ms
+              predicates:
+                - Path=/api/v1/notas/**
+            - id: lamb-finanzas
+              uri: lb://lamb-finanzas-ms
+              predicates:
+                - Path=/api/v1/pagos/**
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
+  client:
+    service-url:
+      defaultZone: http://lamb-eureka:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: never

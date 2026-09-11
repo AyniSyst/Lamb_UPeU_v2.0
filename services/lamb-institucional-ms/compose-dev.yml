@@ -1,0 +1,18 @@
+name: lamb-institucional-dev
+
+services:
+  postgres-institucional-dev:
+    image: postgres:16-alpine
+    container_name: lamb-postgres-institucional-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lamb_institucional_db
+      POSTGRES_USER: lamb
+      POSTGRES_PASSWORD: lamb
+    ports:
+      - "15452:5432"
+    volumes:
+      - lamb_institucional_dev_data:/var/lib/postgresql/data
+
+volumes:
+  lamb_institucional_dev_data:
