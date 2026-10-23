@@ -19,6 +19,7 @@ import java.time.Instant;
 public class PagoResponse {
     private Long id;
     private Long idPersona;
+    private Long matriculaId;
     private String concepto;
     private BigDecimal monto;
     private MetodoPago metodo;

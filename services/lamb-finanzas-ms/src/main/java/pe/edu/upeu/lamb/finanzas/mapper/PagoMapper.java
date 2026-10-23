@@ -26,6 +26,7 @@ public class PagoMapper {
         return PagoResponse.builder()
                 .id(pago.getId())
                 .idPersona(pago.getIdPersona())
+                .matriculaId(pago.getMatriculaId())
                 .concepto(pago.getConcepto())
                 .monto(pago.getMonto())
                 .metodo(pago.getMetodo())

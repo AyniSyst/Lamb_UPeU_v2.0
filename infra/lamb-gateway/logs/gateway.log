@@ -1,0 +1,94 @@
+2026-10-23 06:19:31.020 [] INFO  p.e.u.l.g.LambGatewayApplication - Starting LambGatewayApplication using Java 21.0.11 with PID 28068 (F:\SISTEMAS\Lamb_UPeU_v2.0\infra\lamb-gateway\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\infra\lamb-gateway)
+2026-10-23 06:19:31.025 [] INFO  p.e.u.l.g.LambGatewayApplication - The following 1 profile is active: "dev"
+2026-10-23 06:19:31.077 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-23 06:19:31.077 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-gateway, profiles=[default], label=null, version=null, state=null
+2026-10-23 06:19:31.078 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-23 06:19:31.079 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-gateway, profiles=[dev], label=null, version=null, state=null
+2026-10-23 06:19:31.087 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-23 06:19:31.088 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-23 06:19:32.361 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=49dd73b1-161a-3b0a-adec-560aa7a7f48c
+2026-10-23 06:19:32.768 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 18080 (http)
+2026-10-23 06:19:32.799 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-23 06:19:32.800 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-23 06:19:32.848 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1759 ms
+2026-10-23 06:19:33.775 [] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestClient.
+2026-10-23 06:19:34.043 [] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-23 06:19:34.049 [] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoints beneath base path '/actuator'
+2026-10-23 06:19:34.128 [] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2026-10-23 06:19:34.172 [] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2026-10-23 06:19:34.176 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 06:19:34.185 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2026-10-23 06:19:34.185 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2026-10-23 06:19:34.185 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2026-10-23 06:19:34.185 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2026-10-23 06:19:34.185 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2026-10-23 06:19:34.185 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2026-10-23 06:19:34.185 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2026-10-23 06:19:34.430 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2026-10-23 06:19:34.432 [] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2026-10-23 06:19:34.434 [] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-10-23 06:19:34.436 [] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1792754374435 with initial instances count: 10
+2026-10-23 06:19:34.439 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application LAMB-GATEWAY with eureka with status UP
+2026-10-23 06:19:34.440 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1792754374440, current=UP, previous=STARTING]
+2026-10-23 06:19:34.441 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-GATEWAY/lamb-gateway:18080: registering service...
+2026-10-23 06:19:34.483 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-GATEWAY/lamb-gateway:18080 - registration status: 204
+2026-10-23 06:19:34.483 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 18080 (http) with context path '/'
+2026-10-23 06:19:34.484 [] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 18080
+2026-10-23 06:19:34.496 [] INFO  p.e.u.l.g.LambGatewayApplication - Started LambGatewayApplication in 4.952 seconds (process running for 5.528)
+2026-10-23 06:19:40.131 [] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-23 06:19:40.131 [] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-10-23 06:19:40.133 [] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-10-23 06:20:31.487 [] INFO  p.e.u.l.g.LambGatewayApplication - Starting LambGatewayApplication using Java 21.0.11 with PID 24816 (F:\SISTEMAS\Lamb_UPeU_v2.0\infra\lamb-gateway\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\infra\lamb-gateway)
+2026-10-23 06:20:31.492 [] INFO  p.e.u.l.g.LambGatewayApplication - The following 1 profile is active: "dev"
+2026-10-23 06:20:31.530 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-23 06:20:31.531 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-gateway, profiles=[default], label=null, version=null, state=null
+2026-10-23 06:20:31.531 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-23 06:20:31.533 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-gateway, profiles=[dev], label=null, version=null, state=null
+2026-10-23 06:20:31.535 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-23 06:20:31.535 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-23 06:20:32.465 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=f4ec0d4a-febd-34c7-89a7-ac1f5c5fdd4f
+2026-10-23 06:20:32.902 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 18080 (http)
+2026-10-23 06:20:32.918 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-23 06:20:32.918 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-23 06:20:32.979 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1443 ms
+2026-10-23 06:22:58.559 [] INFO  p.e.u.l.g.LambGatewayApplication - Starting LambGatewayApplication using Java 21.0.11 with PID 21852 (F:\SISTEMAS\Lamb_UPeU_v2.0\infra\lamb-gateway\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\infra\lamb-gateway)
+2026-10-23 06:22:58.562 [] INFO  p.e.u.l.g.LambGatewayApplication - The following 1 profile is active: "dev"
+2026-10-23 06:22:58.595 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-23 06:22:58.596 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-gateway, profiles=[default], label=null, version=null, state=null
+2026-10-23 06:22:58.597 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-23 06:22:58.597 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-gateway, profiles=[dev], label=null, version=null, state=null
+2026-10-23 06:22:58.599 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-23 06:22:58.600 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-23 06:22:59.335 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=f4ec0d4a-febd-34c7-89a7-ac1f5c5fdd4f
+2026-10-23 06:22:59.604 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 18080 (http)
+2026-10-23 06:22:59.623 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-23 06:22:59.624 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-23 06:22:59.663 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1062 ms
+2026-10-23 06:23:00.437 [] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestClient.
+2026-10-23 06:23:00.579 [] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-23 06:23:00.587 [] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-10-23 06:23:00.624 [] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2026-10-23 06:23:00.641 [] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2026-10-23 06:23:00.644 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 06:23:00.650 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2026-10-23 06:23:00.651 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2026-10-23 06:23:00.651 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2026-10-23 06:23:00.652 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2026-10-23 06:23:00.653 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2026-10-23 06:23:00.653 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2026-10-23 06:23:00.654 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2026-10-23 06:23:00.800 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2026-10-23 06:23:00.801 [] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2026-10-23 06:23:00.803 [] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-10-23 06:23:00.804 [] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1792754580804 with initial instances count: 10
+2026-10-23 06:23:00.808 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application LAMB-GATEWAY with eureka with status UP
+2026-10-23 06:23:00.809 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1792754580809, current=UP, previous=STARTING]
+2026-10-23 06:23:00.810 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-GATEWAY/lamb-gateway:18080: registering service...
+2026-10-23 06:23:00.826 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 18080 (http) with context path '/'
+2026-10-23 06:23:00.827 [] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 18080
+2026-10-23 06:23:00.839 [] INFO  p.e.u.l.g.LambGatewayApplication - Started LambGatewayApplication in 3.075 seconds (process running for 3.584)
+2026-10-23 06:23:00.842 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-GATEWAY/lamb-gateway:18080 - registration status: 204
+2026-10-23 06:23:02.900 [] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-23 06:23:02.900 [] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-10-23 06:23:02.902 [] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-10-23 06:28:00.662 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration

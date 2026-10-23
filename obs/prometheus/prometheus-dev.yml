@@ -13,3 +13,10 @@ scrape_configs:
         regex: "localhost:(.+)"
         target_label: __address__
         replacement: "host.docker.internal:$1"
+
+  - job_name: "lamb-keycloak"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["host.docker.internal:19000"]
+        labels:
+          application: lamb-keycloak

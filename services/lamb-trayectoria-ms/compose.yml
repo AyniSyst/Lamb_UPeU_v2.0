@@ -1,0 +1,53 @@
+name: lamb-trayectoria-prod
+
+services:
+  postgres-trayectoria:
+    image: postgres:16-alpine
+    container_name: lamb-postgres-trayectoria
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    volumes:
+      - lamb_trayectoria_data:/var/lib/postgresql/data
+    ports:
+      - "25459:5432"
+    networks:
+      - lamb-trayectoria-int
+
+  lamb-trayectoria-ms:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      postgres-trayectoria:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      CONFIG_SERVER_URL: ${CONFIG_SERVER_URL}
+      DB_HOST: lamb-postgres-trayectoria
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS}
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - lamb-trayectoria-int
+      - lamb-prod-net
+
+volumes:
+  lamb_trayectoria_data:
+
+networks:
+  lamb-trayectoria-int:
+    name: lamb-trayectoria-int
+  lamb-prod-net:
+    external: true

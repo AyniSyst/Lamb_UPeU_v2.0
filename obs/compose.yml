@@ -28,6 +28,8 @@ services:
     volumes:
       - ./promtail/promtail-config.yml:/etc/promtail/config.yml:ro
       - ../services:/var/log/lamb:ro
+      - ../infra/lamb-gateway/logs:/var/log/lamb-gateway:ro
+      - ../keycloak/logs:/var/log/lamb-keycloak:ro
     command: -config.file=/etc/promtail/config.yml
     depends_on:
       - lamb-loki

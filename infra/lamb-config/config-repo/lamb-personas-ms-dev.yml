@@ -2,6 +2,11 @@ server:
   port: 8081
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:18180/realms/lamb
   datasource:
     url: jdbc:postgresql://localhost:15451/lamb_personas_db
     username: lamb

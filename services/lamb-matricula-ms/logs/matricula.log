@@ -1,31 +1,35 @@
-2026-09-11 10:11:11.970 [] INFO  p.e.u.l.m.LambMatriculaMsApplication - Starting LambMatriculaMsApplication v0.0.1-SNAPSHOT using Java 21.0.12 with PID 1 (/app/app.jar started by root in /app)
-2026-09-11 10:11:11.972 [] INFO  p.e.u.l.m.LambMatriculaMsApplication - The following 1 profile is active: "prod"
-2026-09-11 10:11:12.005 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://lamb-config:8888
-2026-09-11 10:11:12.005 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-matricula-ms, profiles=[default], label=null, version=null, state=null
-2026-09-11 10:11:12.007 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://lamb-config:8888
-2026-09-11 10:11:12.007 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-matricula-ms, profiles=[prod], label=null, version=null, state=null
-2026-09-11 10:11:12.710 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-09-11 10:11:12.792 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 74 ms. Found 1 JPA repository interface.
-2026-09-11 10:11:12.974 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=ae41f1f4-dadf-3b04-afc5-db87112b3336
-2026-09-11 10:11:13.389 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8085 (http)
-2026-09-11 10:11:13.403 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-09-11 10:11:13.403 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
-2026-09-11 10:11:13.430 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1420 ms
-2026-09-11 10:11:13.793 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-09-11 10:11:13.943 [] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7792e14f
-2026-09-11 10:11:13.944 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-09-11 10:11:13.971 [] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://lamb-postgres-matricula:5432/lamb_matricula_db (PostgreSQL 16.14)
-2026-09-11 10:11:14.014 [] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
-2026-09-11 10:11:14.019 [] INFO  o.f.core.internal.command.DbValidate - Successfully validated 1 migration (execution time 00:00.020s)
-2026-09-11 10:11:14.047 [] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
-2026-09-11 10:11:14.141 [] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
-2026-09-11 10:11:14.153 [] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create matricula tables"
-2026-09-11 10:11:14.214 [] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.032s)
-2026-09-11 10:11:14.374 [] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-09-11 10:11:14.425 [] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.24.Final
-2026-09-11 10:11:14.865 [] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-09-11 10:11:14.940 [] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://lamb-postgres-matricula:5432/lamb_matricula_db]
+2026-10-23 04:45:17.209 [] INFO  p.e.u.l.m.LambMatriculaMsApplication - Starting LambMatriculaMsApplication using Java 21.0.11 with PID 31816 (F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-matricula-ms\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-matricula-ms)
+2026-10-23 04:45:17.212 [] DEBUG p.e.u.l.m.LambMatriculaMsApplication - Running with Spring Boot v4.0.8, Spring v7.0.9
+2026-10-23 04:45:17.213 [] INFO  p.e.u.l.m.LambMatriculaMsApplication - The following 1 profile is active: "dev"
+2026-10-23 04:45:17.246 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-23 04:45:17.247 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-matricula-ms, profiles=[default], label=null, version=null, state=null
+2026-10-23 04:45:17.248 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-23 04:45:17.248 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-matricula-ms, profiles=[dev], label=null, version=null, state=null
+2026-10-23 04:45:17.249 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-23 04:45:17.250 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-23 04:45:18.070 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-23 04:45:18.160 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 83 ms. Found 1 JPA repository interface.
+2026-10-23 04:45:18.404 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=bb66ff85-44d4-3a7e-9d71-309b9ed4695a
+2026-10-23 04:45:19.038 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8085 (http)
+2026-10-23 04:45:19.052 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-23 04:45:19.052 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-23 04:45:19.103 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1853 ms
+2026-10-23 04:45:19.363 [] DEBUG p.e.u.l.m.filter.CorrelationIdFilter - Filter 'correlationIdFilter' configured for use
+2026-10-23 04:45:19.539 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-10-23 04:45:19.690 [] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@f1eff85
+2026-10-23 04:45:19.691 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-10-23 04:45:19.713 [] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:15455/lamb_matricula_db (PostgreSQL 16.14)
+2026-10-23 04:45:19.762 [] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2026-10-23 04:45:19.766 [] INFO  o.f.core.internal.command.DbValidate - Successfully validated 1 migration (execution time 00:00.015s)
+2026-10-23 04:45:19.797 [] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2026-10-23 04:45:19.888 [] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2026-10-23 04:45:19.894 [] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create matricula tables"
+2026-10-23 04:45:19.957 [] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.037s)
+2026-10-23 04:45:20.055 [] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-23 04:45:20.098 [] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.24.Final
+2026-10-23 04:45:20.467 [] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-23 04:45:20.537 [] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:15455/lamb_matricula_db]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 16.14
@@ -36,348 +40,286 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-09-11 10:11:15.829 [] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-09-11 10:11:15.873 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-09-11 10:11:15.929 [] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-09-11 10:11:16.077 [] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-09-11 10:11:16.509 [] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestClient.
-2026-09-11 10:11:16.538 [] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2026-09-11 10:11:16.544 [] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
-2026-09-11 10:11:16.601 [] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
-2026-09-11 10:11:16.622 [] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
-2026-09-11 10:11:16.625 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:11:16.632 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
-2026-09-11 10:11:16.632 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
-2026-09-11 10:11:16.632 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
-2026-09-11 10:11:16.633 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
-2026-09-11 10:11:16.633 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
-2026-09-11 10:11:16.633 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
-2026-09-11 10:11:16.633 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
-2026-09-11 10:11:16.937 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
-2026-09-11 10:11:16.939 [] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
-2026-09-11 10:11:16.942 [] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
-2026-09-11 10:11:16.943 [] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1789121476943 with initial instances count: 5
-2026-09-11 10:11:16.948 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application LAMB-MATRICULA-MS with eureka with status UP
-2026-09-11 10:11:16.948 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1789121476948, current=UP, previous=STARTING]
-2026-09-11 10:11:16.949 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3: registering service...
-2026-09-11 10:11:16.968 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8085 (http) with context path '/'
-2026-09-11 10:11:16.969 [] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8085
-2026-09-11 10:11:16.979 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3 - registration status: 204
-2026-09-11 10:11:16.982 [] INFO  p.e.u.l.m.LambMatriculaMsApplication - Started LambMatriculaMsApplication in 6.453 seconds (process running for 7.329)
-2026-09-11 10:16:16.623 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:16:16.986 [] INFO  c.n.d.s.t.d.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://lamb-eureka:8761/eureka/} exception=I/O error on PUT request for "http://lamb-eureka:8761/eureka/apps/LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3": Connect to http://lamb-eureka:8761 failed: Connection refused
-org.springframework.web.client.ResourceAccessException: I/O error on PUT request for "http://lamb-eureka:8761/eureka/apps/LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3": Connect to http://lamb-eureka:8761 failed: Connection refused
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.createResourceAccessException(DefaultRestClient.java:779)
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:624)
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchange(DefaultRestClient.java:572)
-	at org.springframework.web.client.RestClient$RequestHeadersSpec.exchange(RestClient.java:747)
-	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.executeAndExtract(DefaultRestClient.java:924)
-	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.toEntityInternal(DefaultRestClient.java:870)
-	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.toEntity(DefaultRestClient.java:859)
-	at org.springframework.cloud.netflix.eureka.http.RestClientEurekaHttpClient.sendHeartBeat(RestClientEurekaHttpClient.java:91)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:90)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:860)
-	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1418)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
-	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.base/java.lang.Thread.run(Unknown Source)
-Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://lamb-eureka:8761 failed: Connection refused
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
-	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source)
-	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
-	at java.base/java.net.Socket.connect(Unknown Source)
-	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:226)
-	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:497)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:164)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:174)
-	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:144)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:195)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:168)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:112)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:110)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:185)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
-	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
-	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:87)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:80)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeWithRequestAndBody(AbstractBufferingClientHttpRequest.java:89)
-	at org.springframework.http.client.InterceptingClientHttpRequest$EndOfChainRequestExecution.execute(InterceptingClientHttpRequest.java:102)
-	at org.springframework.cloud.netflix.eureka.http.RestClientTransportClientFactory.lambda$newClient$2(RestClientTransportClientFactory.java:98)
-	at org.springframework.http.client.ClientHttpRequestInterceptor.lambda$apply$0(ClientHttpRequestInterceptor.java:89)
-	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:73)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:50)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:80)
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:614)
-	... 22 common frames omitted
-2026-09-11 10:16:16.986 [] INFO  c.n.d.s.t.d.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://lamb-eureka:8761/eureka/} exception=I/O error on GET request for "http://lamb-eureka:8761/eureka/apps/delta": Connect to http://lamb-eureka:8761 failed: Connection refused
-org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://lamb-eureka:8761/eureka/apps/delta": Connect to http://lamb-eureka:8761 failed: Connection refused
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.createResourceAccessException(DefaultRestClient.java:779)
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:624)
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchange(DefaultRestClient.java:572)
-	at org.springframework.web.client.RestClient$RequestHeadersSpec.exchange(RestClient.java:747)
-	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.executeAndExtract(DefaultRestClient.java:924)
-	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.toEntityInternal(DefaultRestClient.java:870)
-	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.toEntity(DefaultRestClient.java:859)
-	at org.springframework.cloud.netflix.eureka.http.RestClientEurekaHttpClient.getApplicationsInternal(RestClientEurekaHttpClient.java:201)
-	at org.springframework.cloud.netflix.eureka.http.RestClientEurekaHttpClient.getDelta(RestClientEurekaHttpClient.java:142)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:90)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152)
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149)
-	at com.netflix.discovery.DiscoveryClient.getAndUpdateDelta(DiscoveryClient.java:1095)
-	at com.netflix.discovery.DiscoveryClient.fetchRegistry(DiscoveryClient.java:978)
-	at com.netflix.discovery.DiscoveryClient.refreshRegistry(DiscoveryClient.java:1489)
-	at com.netflix.discovery.DiscoveryClient$CacheRefreshThread.run(DiscoveryClient.java:1457)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
-	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.base/java.lang.Thread.run(Unknown Source)
-Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://lamb-eureka:8761 failed: Connection refused
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
-	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source)
-	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
-	at java.base/java.net.Socket.connect(Unknown Source)
-	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:226)
-	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:497)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:164)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:174)
-	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:144)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:195)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:168)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:112)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:110)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:185)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
-	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
-	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:87)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:80)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeWithRequestAndBody(AbstractBufferingClientHttpRequest.java:89)
-	at org.springframework.http.client.InterceptingClientHttpRequest$EndOfChainRequestExecution.execute(InterceptingClientHttpRequest.java:102)
-	at org.springframework.cloud.netflix.eureka.http.RestClientTransportClientFactory.lambda$newClient$2(RestClientTransportClientFactory.java:98)
-	at org.springframework.http.client.ClientHttpRequestInterceptor.lambda$apply$0(ClientHttpRequestInterceptor.java:89)
-	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:73)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:50)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:80)
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:614)
-	... 25 common frames omitted
-2026-09-11 10:16:16.996 [] WARN  c.n.d.s.t.d.RetryableEurekaHttpClient - Request execution failed with message: I/O error on PUT request for "http://lamb-eureka:8761/eureka/apps/LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3": Connect to http://lamb-eureka:8761 failed: Connection refused
-2026-09-11 10:16:16.996 [] WARN  c.n.d.s.t.d.RetryableEurekaHttpClient - Request execution failed with message: I/O error on GET request for "http://lamb-eureka:8761/eureka/apps/delta": Connect to http://lamb-eureka:8761 failed: Connection refused
-2026-09-11 10:16:17.007 [] INFO  c.n.d.s.t.d.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://lamb-eureka:8761/eureka/}, exception=I/O error on PUT request for "http://lamb-eureka:8761/eureka/apps/LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3": Connect to http://lamb-eureka:8761 failed: Connection refused
-org.springframework.web.client.ResourceAccessException: I/O error on PUT request for "http://lamb-eureka:8761/eureka/apps/LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3": Connect to http://lamb-eureka:8761 failed: Connection refused
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.createResourceAccessException(DefaultRestClient.java:779)
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:624)
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchange(DefaultRestClient.java:572)
-	at org.springframework.web.client.RestClient$RequestHeadersSpec.exchange(RestClient.java:747)
-	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.executeAndExtract(DefaultRestClient.java:924)
-	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.toEntityInternal(DefaultRestClient.java:870)
-	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.toEntity(DefaultRestClient.java:859)
-	at org.springframework.cloud.netflix.eureka.http.RestClientEurekaHttpClient.sendHeartBeat(RestClientEurekaHttpClient.java:91)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:120)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:79)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:860)
-	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1418)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
-	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.base/java.lang.Thread.run(Unknown Source)
-Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://lamb-eureka:8761 failed: Connection refused
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
-	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source)
-	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
-	at java.base/java.net.Socket.connect(Unknown Source)
-	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:226)
-	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:497)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:164)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:174)
-	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:144)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:195)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:168)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:112)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:110)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:185)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
-	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
-	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:87)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:80)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeWithRequestAndBody(AbstractBufferingClientHttpRequest.java:89)
-	at org.springframework.http.client.InterceptingClientHttpRequest$EndOfChainRequestExecution.execute(InterceptingClientHttpRequest.java:102)
-	at org.springframework.cloud.netflix.eureka.http.RestClientTransportClientFactory.lambda$newClient$2(RestClientTransportClientFactory.java:98)
-	at org.springframework.http.client.ClientHttpRequestInterceptor.lambda$apply$0(ClientHttpRequestInterceptor.java:89)
-	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:73)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:50)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:80)
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:614)
-	... 23 common frames omitted
-2026-09-11 10:16:17.007 [] INFO  c.n.d.s.t.d.RedirectingEurekaHttpClient - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://lamb-eureka:8761/eureka/}, exception=I/O error on GET request for "http://lamb-eureka:8761/eureka/apps/delta": Connect to http://lamb-eureka:8761 failed: Connection refused
-org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://lamb-eureka:8761/eureka/apps/delta": Connect to http://lamb-eureka:8761 failed: Connection refused
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.createResourceAccessException(DefaultRestClient.java:779)
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:624)
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchange(DefaultRestClient.java:572)
-	at org.springframework.web.client.RestClient$RequestHeadersSpec.exchange(RestClient.java:747)
-	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.executeAndExtract(DefaultRestClient.java:924)
-	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.toEntityInternal(DefaultRestClient.java:870)
-	at org.springframework.web.client.DefaultRestClient$DefaultResponseSpec.toEntity(DefaultRestClient.java:859)
-	at org.springframework.cloud.netflix.eureka.http.RestClientEurekaHttpClient.getApplicationsInternal(RestClientEurekaHttpClient.java:201)
-	at org.springframework.cloud.netflix.eureka.http.RestClientEurekaHttpClient.getDelta(RestClientEurekaHttpClient.java:142)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:120)
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:79)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152)
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149)
-	at com.netflix.discovery.DiscoveryClient.getAndUpdateDelta(DiscoveryClient.java:1095)
-	at com.netflix.discovery.DiscoveryClient.fetchRegistry(DiscoveryClient.java:978)
-	at com.netflix.discovery.DiscoveryClient.refreshRegistry(DiscoveryClient.java:1489)
-	at com.netflix.discovery.DiscoveryClient$CacheRefreshThread.run(DiscoveryClient.java:1457)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
-	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.base/java.lang.Thread.run(Unknown Source)
-Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://lamb-eureka:8761 failed: Connection refused
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
-	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source)
-	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
-	at java.base/java.net.Socket.connect(Unknown Source)
-	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:226)
-	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:497)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:164)
-	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:174)
-	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:144)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:195)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:168)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:112)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:110)
-	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
-	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:185)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
-	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
-	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
-	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:87)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:80)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeWithRequestAndBody(AbstractBufferingClientHttpRequest.java:89)
-	at org.springframework.http.client.InterceptingClientHttpRequest$EndOfChainRequestExecution.execute(InterceptingClientHttpRequest.java:102)
-	at org.springframework.cloud.netflix.eureka.http.RestClientTransportClientFactory.lambda$newClient$2(RestClientTransportClientFactory.java:98)
-	at org.springframework.http.client.ClientHttpRequestInterceptor.lambda$apply$0(ClientHttpRequestInterceptor.java:89)
-	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:73)
-	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:50)
-	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:80)
-	at org.springframework.web.client.DefaultRestClient$DefaultRequestBodyUriSpec.exchangeInternal(DefaultRestClient.java:614)
-	... 26 common frames omitted
-2026-09-11 10:16:17.008 [] WARN  c.n.d.s.t.d.RetryableEurekaHttpClient - Request execution failed with message: I/O error on PUT request for "http://lamb-eureka:8761/eureka/apps/LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3": Connect to http://lamb-eureka:8761 failed: Connection refused
-2026-09-11 10:16:17.012 [] WARN  c.n.d.s.t.d.RetryableEurekaHttpClient - Request execution failed with message: I/O error on GET request for "http://lamb-eureka:8761/eureka/apps/delta": Connect to http://lamb-eureka:8761 failed: Connection refused
-2026-09-11 10:16:17.012 [] ERROR c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3 - was unable to send heartbeat!
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89)
-	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:860)
-	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1418)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
-	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.base/java.lang.Thread.run(Unknown Source)
-2026-09-11 10:16:17.013 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3 - was unable to refresh its cache! This periodic background refresh will be retried in 30 seconds. status = Cannot execute request on any known server
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152)
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149)
-	at com.netflix.discovery.DiscoveryClient.getAndUpdateDelta(DiscoveryClient.java:1095)
-	at com.netflix.discovery.DiscoveryClient.fetchRegistry(DiscoveryClient.java:978)
-	at com.netflix.discovery.DiscoveryClient.refreshRegistry(DiscoveryClient.java:1489)
-	at com.netflix.discovery.DiscoveryClient$CacheRefreshThread.run(DiscoveryClient.java:1457)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
-	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.base/java.lang.Thread.run(Unknown Source)
-2026-09-11 10:16:47.023 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3 - Re-registering apps/LAMB-MATRICULA-MS
-2026-09-11 10:16:47.026 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3: registering service...
-2026-09-11 10:16:47.033 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3 - registration status: 204
-2026-09-11 10:17:47.231 [] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-09-11 10:17:47.231 [] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-09-11 10:17:47.236 [] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 5 ms
-2026-09-11 10:21:16.614 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:26:16.603 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:31:16.590 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:36:16.578 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:41:16.566 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:46:16.554 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:47:21.725 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application LAMB-MATRICULA-MS with eureka with status DOWN
-2026-09-11 10:47:21.725 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1789123641725, current=DOWN, previous=UP]
-2026-09-11 10:47:21.726 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3: registering service...
-2026-09-11 10:47:21.740 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:20982a2b727e28d96ee625f761de44f3 - registration status: 204
-2026-09-11 10:47:21.747 [] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
-2026-09-11 10:47:21.752 [] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
-2026-09-11 10:47:21.770 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-09-11 10:47:21.788 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-09-11 10:47:21.793 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-09-11 10:47:21.795 [] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2026-10-23 04:45:21.244 [] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-23 04:45:21.294 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-23 04:45:21.432 [] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-23 04:45:21.850 [] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-23 04:45:21.918 [] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
+2026-10-23 04:45:21.975 [] INFO  o.s.c.o.FeignClientFactoryBean - For 'lamb-planificacion-ms' URL not provided. Will try picking an instance via load-balancing.
+2026-10-23 04:45:23.671 [] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestClient.
+2026-10-23 04:45:23.736 [] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-23 04:45:23.752 [] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-10-23 04:45:23.826 [] INFO  o.a.k.common.config.AbstractConfig - AdminClientConfig values: 
+	bootstrap.controllers = []
+	bootstrap.servers = [localhost:18092]
+	client.dns.lookup = use_all_dns_ips
+	client.id = lamb-matricula-ms-admin-0
+	connections.max.idle.ms = 300000
+	default.api.timeout.ms = 60000
+	enable.metrics.push = false
+	metadata.max.age.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+
+2026-10-23 04:45:23.925 [] INFO  o.a.kafka.common.utils.AppInfoParser - Kafka version: 4.1.2
+2026-10-23 04:45:23.926 [] INFO  o.a.kafka.common.utils.AppInfoParser - Kafka commitId: c82fd9b934b4c1e6
+2026-10-23 04:45:23.926 [] INFO  o.a.kafka.common.utils.AppInfoParser - Kafka startTimeMs: 1792748723924
+2026-10-23 04:45:24.300 [] INFO  o.a.kafka.common.metrics.Metrics - Metrics scheduler closed
+2026-10-23 04:45:24.300 [] INFO  o.a.kafka.common.metrics.Metrics - Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-10-23 04:45:24.300 [] INFO  o.a.kafka.common.metrics.Metrics - Metrics reporters closed
+2026-10-23 04:45:24.301 [] INFO  o.a.kafka.common.utils.AppInfoParser - App info kafka.admin.client for lamb-matricula-ms-admin-0 unregistered
+2026-10-23 04:45:24.304 [] INFO  o.a.kafka.common.metrics.Metrics - Metrics scheduler closed
+2026-10-23 04:45:24.304 [] INFO  o.a.kafka.common.metrics.Metrics - Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-10-23 04:45:24.304 [] INFO  o.a.kafka.common.metrics.Metrics - Metrics reporters closed
+2026-10-23 04:45:24.315 [] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2026-10-23 04:45:24.331 [] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2026-10-23 04:45:24.334 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 04:45:24.339 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2026-10-23 04:45:24.340 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2026-10-23 04:45:24.340 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2026-10-23 04:45:24.340 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2026-10-23 04:45:24.340 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2026-10-23 04:45:24.340 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2026-10-23 04:45:24.340 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2026-10-23 04:45:24.507 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2026-10-23 04:45:24.508 [] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2026-10-23 04:45:24.509 [] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-10-23 04:45:24.511 [] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1792748724510 with initial instances count: 6
+2026-10-23 04:45:24.520 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application LAMB-MATRICULA-MS with eureka with status UP
+2026-10-23 04:45:24.521 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1792748724521, current=UP, previous=STARTING]
+2026-10-23 04:45:24.522 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:8085: registering service...
+2026-10-23 04:45:24.530 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8085 (http) with context path '/'
+2026-10-23 04:45:24.531 [] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8085
+2026-10-23 04:45:24.540 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-MATRICULA-MS/lamb-matricula-ms:8085 - registration status: 204
+2026-10-23 04:45:24.595 [] INFO  p.e.u.l.m.LambMatriculaMsApplication - Started LambMatriculaMsApplication in 8.349 seconds (process running for 8.889)
+2026-10-23 04:45:24.600 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-23 04:45:24.600 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-23 04:48:43.924 [] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-23 04:48:43.924 [] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-10-23 04:48:43.924 [] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2026-10-23 04:50:24.343 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 04:50:38.884 [dd2d6e90-e862-4b0a-8f60-4516b774c75e] INFO  p.e.u.l.m.s.PlanificacionConsultaService - [PLANIFICACION] Consultando seccion 1 por Feign
+2026-10-23 04:50:38.962 [dd2d6e90-e862-4b0a-8f60-4516b774c75e] WARN  p.e.u.l.m.s.PlanificacionConsultaService - [PLANIFICACION] Fallback activado para seccion 1. Motivo: [401] during [GET] to [http://lamb-planificacion-ms/api/v1/secciones/1] [PlanificacionClient#obtenerSeccion(Long)]: []
+2026-10-23 04:50:38.962 [dd2d6e90-e862-4b0a-8f60-4516b774c75e] WARN  p.e.u.l.m.service.MatriculaService - component=client seccionId=1 status=no_verificado motivo="planificacion no respondio"
+2026-10-23 04:50:42.787 [737bd04f-849f-481e-aa6c-13750612e9ca] INFO  p.e.u.l.m.service.MatriculaService - component=processor matriculaId=1 idPersona=3 estado=CONFIRMADA status=processed
+2026-10-23 04:50:42.809 [737bd04f-849f-481e-aa6c-13750612e9ca] INFO  o.a.k.common.config.AbstractConfig - ProducerConfig values: 
+	acks = -1
+	batch.size = 16384
+	bootstrap.servers = [localhost:18092]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = lamb-matricula-ms-producer-1
+	compression.gzip.level = -1
+	compression.lz4.level = 9
+	compression.type = none
+	compression.zstd.level = 3
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = true
+	enable.metrics.push = true
+	interceptor.classes = []
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 5
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.adaptive.partitioning.enable = true
+	partitioner.availability.timeout.ms = 0
+	partitioner.class = null
+	partitioner.ignore.keys = false
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transaction.two.phase.commit.enable = false
+	transactional.id = null
+	value.serializer = class org.springframework.kafka.support.serializer.JacksonJsonSerializer
+
+2026-10-23 04:50:42.817 [737bd04f-849f-481e-aa6c-13750612e9ca] INFO  o.a.k.c.t.i.KafkaMetricsCollector - initializing Kafka metrics collector
+2026-10-23 04:50:42.830 [737bd04f-849f-481e-aa6c-13750612e9ca] INFO  o.a.k.clients.producer.KafkaProducer - [Producer clientId=lamb-matricula-ms-producer-1] Instantiated an idempotent producer.
+2026-10-23 04:50:42.833 [737bd04f-849f-481e-aa6c-13750612e9ca] INFO  o.a.kafka.common.utils.AppInfoParser - Kafka version: 4.1.2
+2026-10-23 04:50:42.833 [737bd04f-849f-481e-aa6c-13750612e9ca] INFO  o.a.kafka.common.utils.AppInfoParser - Kafka commitId: c82fd9b934b4c1e6
+2026-10-23 04:50:42.833 [737bd04f-849f-481e-aa6c-13750612e9ca] INFO  o.a.kafka.common.utils.AppInfoParser - Kafka startTimeMs: 1792749042833
+2026-10-23 04:50:42.851 [] INFO  org.apache.kafka.clients.Metadata - [Producer clientId=lamb-matricula-ms-producer-1] Cluster ID: MkU3OEVBNTcwNTJENDM2Qk
+2026-10-23 04:50:42.851 [] INFO  o.a.k.c.p.i.TransactionManager - [Producer clientId=lamb-matricula-ms-producer-1] ProducerId set to 3 with epoch 0
+2026-10-23 04:50:42.886 [] INFO  p.e.u.l.m.m.MatriculaEventosProducer - component=producer topic=matricula-eventos partition=2 offset=0 eventType=matricula.confirmada idPersona=3 status=published
+2026-10-23 04:50:54.323 [9adbe4bd-2a91-4398-92f9-b4f72ebddafb] WARN  p.e.u.l.m.service.MatriculaService - component=processor matriculaId=1 status=ignored motivo="ya estaba confirmada"
+2026-10-23 04:55:24.352 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:00:24.364 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:05:24.370 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:10:24.378 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:15:24.389 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:20:24.398 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:25:24.407 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:30:24.415 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:35:24.425 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:40:24.434 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:45:24.442 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:50:24.452 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:55:24.459 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 06:00:24.468 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 06:05:24.479 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 06:10:24.489 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 06:15:24.497 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 06:20:24.507 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration

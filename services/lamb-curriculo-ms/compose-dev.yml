@@ -1,0 +1,18 @@
+name: lamb-curriculo-dev
+
+services:
+  postgres-curriculo-dev:
+    image: postgres:16-alpine
+    container_name: lamb-postgres-curriculo-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lamb_curriculo_db
+      POSTGRES_USER: lamb
+      POSTGRES_PASSWORD: lamb
+    ports:
+      - "15458:5432"
+    volumes:
+      - lamb_curriculo_dev_data:/var/lib/postgresql/data
+
+volumes:
+  lamb_curriculo_dev_data:

@@ -33,6 +33,11 @@ public class SeccionController {
         return seccionService.crear(request);
     }
 
+    @PostMapping("/{id}/revalidar")
+    public SeccionResponse revalidar(@PathVariable Long id) {
+        return seccionService.revalidar(id);
+    }
+
     @PutMapping("/{id}")
     public SeccionResponse actualizar(@PathVariable Long id, @Valid @RequestBody SeccionRequest request) {
         return seccionService.actualizar(id, request);

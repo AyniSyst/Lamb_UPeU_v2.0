@@ -31,4 +31,11 @@ public class Seccion {
 
     @Column(name = "horario", length = 100)
     private String horario;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado", nullable = false, length = 30)
+    private EstadoSeccion estado;
+
+    @Column(name = "motivo", length = 255)
+    private String motivo;
 }

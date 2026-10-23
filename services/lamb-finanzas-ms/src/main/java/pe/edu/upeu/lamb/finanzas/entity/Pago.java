@@ -22,14 +22,20 @@ public class Pago {
     @Column(name = "id_persona", nullable = false)
     private Long idPersona;
 
+    // Matricula que origino el cargo (null para pagos que no vienen de un evento de matricula).
+    // Unica: evita generar un cargo duplicado si el evento matricula.confirmada se reentrega.
+    @Column(name = "matricula_id", unique = true)
+    private Long matriculaId;
+
     @Column(name = "concepto", nullable = false, length = 150)
     private String concepto;
 
     @Column(name = "monto", nullable = false, precision = 10, scale = 2)
     private BigDecimal monto;
 
+    // Nulo mientras el cargo esta PENDIENTE (recien generado, sin canal de pago elegido todavia).
     @Enumerated(EnumType.STRING)
-    @Column(name = "metodo", nullable = false, length = 20)
+    @Column(name = "metodo", length = 20)
     private MetodoPago metodo;
 
     @Enumerated(EnumType.STRING)

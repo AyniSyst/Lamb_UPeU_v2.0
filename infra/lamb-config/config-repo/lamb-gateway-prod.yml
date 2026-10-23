@@ -2,6 +2,11 @@ server:
   port: 8080
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://lamb-keycloak:8080/realms/lamb
   cloud:
     gateway:
       server:
@@ -31,6 +36,10 @@ spring:
               uri: lb://lamb-admision-ms
               predicates:
                 - Path=/api/v1/postulaciones/**
+            - id: lamb-curriculo
+              uri: lb://lamb-curriculo-ms
+              predicates:
+                - Path=/api/v1/planes-estudio/**
             - id: lamb-matricula
               uri: lb://lamb-matricula-ms
               predicates:
@@ -39,6 +48,14 @@ spring:
               uri: lb://lamb-evaluacion-ms
               predicates:
                 - Path=/api/v1/notas/**
+            - id: lamb-evaluacion-actas
+              uri: lb://lamb-evaluacion-ms
+              predicates:
+                - Path=/api/v1/actas/**
+            - id: lamb-trayectoria
+              uri: lb://lamb-trayectoria-ms
+              predicates:
+                - Path=/api/v1/trayectorias/**
             - id: lamb-finanzas
               uri: lb://lamb-finanzas-ms
               predicates:
@@ -55,7 +72,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health,info,metrics,prometheus
   endpoint:
     health:
       show-details: never

@@ -56,3 +56,31 @@ scrape_configs:
         labels:
           application: lamb-finanzas-ms
           __path__: /var/log/lamb/lamb-finanzas-ms/logs/*.log
+
+  - job_name: lamb-curriculo-ms
+    static_configs:
+      - targets: [localhost]
+        labels:
+          application: lamb-curriculo-ms
+          __path__: /var/log/lamb/lamb-curriculo-ms/logs/*.log
+
+  - job_name: lamb-trayectoria-ms
+    static_configs:
+      - targets: [localhost]
+        labels:
+          application: lamb-trayectoria-ms
+          __path__: /var/log/lamb/lamb-trayectoria-ms/logs/*.log
+
+  - job_name: lamb-gateway
+    static_configs:
+      - targets: [localhost]
+        labels:
+          application: lamb-gateway
+          __path__: /var/log/lamb-gateway/*.log
+
+  - job_name: lamb-keycloak
+    static_configs:
+      - targets: [localhost]
+        labels:
+          application: lamb-keycloak
+          __path__: /var/log/lamb-keycloak/*.log

@@ -1,31 +1,35 @@
-2026-09-11 10:05:45.464 [] INFO  p.e.u.l.i.LambInstitucionalMsApplication - Starting LambInstitucionalMsApplication v0.0.1-SNAPSHOT using Java 21.0.12 with PID 1 (/app/app.jar started by root in /app)
-2026-09-11 10:05:45.466 [] INFO  p.e.u.l.i.LambInstitucionalMsApplication - The following 1 profile is active: "prod"
-2026-09-11 10:05:45.502 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://lamb-config:8888
-2026-09-11 10:05:45.502 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-institucional-ms, profiles=[default], label=null, version=null, state=null
-2026-09-11 10:05:45.504 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://lamb-config:8888
-2026-09-11 10:05:45.504 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-institucional-ms, profiles=[prod], label=null, version=null, state=null
-2026-09-11 10:05:46.196 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-09-11 10:05:46.291 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 87 ms. Found 2 JPA repository interfaces.
-2026-09-11 10:05:46.513 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=3380f6d2-ff70-30f1-97b1-aa1a2ba54a9c
-2026-09-11 10:05:46.884 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
-2026-09-11 10:05:46.897 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-09-11 10:05:46.898 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
-2026-09-11 10:05:46.928 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1421 ms
-2026-09-11 10:05:47.321 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-09-11 10:05:47.441 [] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@63c6c5e5
-2026-09-11 10:05:47.443 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-09-11 10:05:47.465 [] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://lamb-postgres-institucional:5432/lamb_institucional_db (PostgreSQL 16.14)
-2026-09-11 10:05:47.504 [] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
-2026-09-11 10:05:47.506 [] INFO  o.f.core.internal.command.DbValidate - Successfully validated 1 migration (execution time 00:00.017s)
-2026-09-11 10:05:47.520 [] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
-2026-09-11 10:05:47.590 [] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
-2026-09-11 10:05:47.599 [] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create institucional tables"
-2026-09-11 10:05:47.647 [] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.028s)
-2026-09-11 10:05:47.715 [] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-09-11 10:05:47.756 [] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.24.Final
-2026-09-11 10:05:48.126 [] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-09-11 10:05:48.184 [] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://lamb-postgres-institucional:5432/lamb_institucional_db]
+2026-10-23 04:44:54.239 [] INFO  p.e.u.l.i.LambInstitucionalMsApplication - Starting LambInstitucionalMsApplication using Java 21.0.11 with PID 20028 (F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-institucional-ms\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-institucional-ms)
+2026-10-23 04:44:54.266 [] DEBUG p.e.u.l.i.LambInstitucionalMsApplication - Running with Spring Boot v4.0.8, Spring v7.0.9
+2026-10-23 04:44:54.267 [] INFO  p.e.u.l.i.LambInstitucionalMsApplication - The following 1 profile is active: "dev"
+2026-10-23 04:44:54.300 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-23 04:44:54.300 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-institucional-ms, profiles=[default], label=null, version=null, state=null
+2026-10-23 04:44:54.300 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-23 04:44:54.300 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-institucional-ms, profiles=[dev], label=null, version=null, state=null
+2026-10-23 04:44:54.302 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-23 04:44:54.302 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-23 04:44:55.004 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-23 04:44:55.121 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 110 ms. Found 2 JPA repository interfaces.
+2026-10-23 04:44:55.367 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=680ebfbf-0386-3acf-b848-9ae4fc8c9edd
+2026-10-23 04:44:55.744 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8082 (http)
+2026-10-23 04:44:55.756 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-23 04:44:55.757 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-23 04:44:55.806 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1504 ms
+2026-10-23 04:44:55.964 [] DEBUG p.e.u.l.i.filter.CorrelationIdFilter - Filter 'correlationIdFilter' configured for use
+2026-10-23 04:44:56.091 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-10-23 04:44:56.242 [] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@469ec072
+2026-10-23 04:44:56.244 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-10-23 04:44:56.268 [] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:15452/lamb_institucional_db (PostgreSQL 16.14)
+2026-10-23 04:44:56.320 [] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2026-10-23 04:44:56.323 [] INFO  o.f.core.internal.command.DbValidate - Successfully validated 1 migration (execution time 00:00.014s)
+2026-10-23 04:44:56.354 [] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2026-10-23 04:44:56.444 [] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2026-10-23 04:44:56.457 [] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create institucional tables"
+2026-10-23 04:44:56.517 [] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.041s)
+2026-10-23 04:44:56.596 [] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-23 04:44:56.661 [] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.24.Final
+2026-10-23 04:44:57.127 [] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-23 04:44:57.210 [] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:15452/lamb_institucional_db]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
 	Database version: 16.14
@@ -36,62 +40,56 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-09-11 10:05:48.806 [] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-09-11 10:05:48.838 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-09-11 10:05:48.900 [] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-09-11 10:05:49.407 [] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-09-11 10:05:49.809 [] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestClient.
-2026-09-11 10:05:49.837 [] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2026-09-11 10:05:49.844 [] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
-2026-09-11 10:05:49.897 [] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
-2026-09-11 10:05:49.919 [] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
-2026-09-11 10:05:49.921 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:05:49.927 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
-2026-09-11 10:05:49.927 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
-2026-09-11 10:05:49.928 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
-2026-09-11 10:05:49.928 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
-2026-09-11 10:05:49.928 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
-2026-09-11 10:05:49.928 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
-2026-09-11 10:05:49.929 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
-2026-09-11 10:05:50.135 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
-2026-09-11 10:05:50.137 [] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
-2026-09-11 10:05:50.138 [] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
-2026-09-11 10:05:50.140 [] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1789121150140 with initial instances count: 2
-2026-09-11 10:05:50.143 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application LAMB-INSTITUCIONAL-MS with eureka with status UP
-2026-09-11 10:05:50.144 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1789121150144, current=UP, previous=STARTING]
-2026-09-11 10:05:50.145 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-INSTITUCIONAL-MS/lamb-institucional-ms:7b54b3f412cf91489ee42a4a1dfdc06d: registering service...
-2026-09-11 10:05:50.156 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path '/'
-2026-09-11 10:05:50.157 [] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8082
-2026-09-11 10:05:50.165 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-INSTITUCIONAL-MS/lamb-institucional-ms:7b54b3f412cf91489ee42a4a1dfdc06d - registration status: 204
-2026-09-11 10:05:50.168 [] INFO  p.e.u.l.i.LambInstitucionalMsApplication - Started LambInstitucionalMsApplication in 5.728 seconds (process running for 6.282)
-2026-09-11 10:10:49.924 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:15:49.920 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:16:20.450 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-INSTITUCIONAL-MS/lamb-institucional-ms:7b54b3f412cf91489ee42a4a1dfdc06d - Re-registering apps/LAMB-INSTITUCIONAL-MS
-2026-09-11 10:16:20.452 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-INSTITUCIONAL-MS/lamb-institucional-ms:7b54b3f412cf91489ee42a4a1dfdc06d: registering service...
-2026-09-11 10:16:20.505 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-INSTITUCIONAL-MS/lamb-institucional-ms:7b54b3f412cf91489ee42a4a1dfdc06d - registration status: 204
-2026-09-11 10:16:50.384 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
-2026-09-11 10:16:50.385 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
-2026-09-11 10:16:50.385 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
-2026-09-11 10:16:50.385 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
-2026-09-11 10:16:50.386 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
-2026-09-11 10:16:50.386 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: false
-2026-09-11 10:16:50.386 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
-2026-09-11 10:16:50.393 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
-2026-09-11 10:17:09.414 [] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-09-11 10:17:09.415 [] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-09-11 10:17:09.449 [] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 33 ms
-2026-09-11 10:20:49.909 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:25:49.899 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:30:49.887 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:35:49.876 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:40:49.864 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-09-11 10:40:53.056 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application LAMB-INSTITUCIONAL-MS with eureka with status DOWN
-2026-09-11 10:40:53.057 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1789123253057, current=DOWN, previous=UP]
-2026-09-11 10:40:53.057 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-INSTITUCIONAL-MS/lamb-institucional-ms:7b54b3f412cf91489ee42a4a1dfdc06d: registering service...
-2026-09-11 10:40:53.086 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-INSTITUCIONAL-MS/lamb-institucional-ms:7b54b3f412cf91489ee42a4a1dfdc06d - registration status: 204
-2026-09-11 10:40:53.107 [] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
-2026-09-11 10:40:53.118 [] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
-2026-09-11 10:40:53.155 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-09-11 10:40:53.191 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-09-11 10:40:53.201 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-09-11 10:40:53.205 [] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2026-10-23 04:44:57.949 [] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-23 04:44:58.059 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-23 04:44:58.141 [] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-23 04:44:59.241 [] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-23 04:45:00.034 [] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
+2026-10-23 04:45:00.178 [] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestClient.
+2026-10-23 04:45:00.204 [] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-23 04:45:00.204 [] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-10-23 04:45:00.288 [] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2026-10-23 04:45:00.315 [] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2026-10-23 04:45:00.319 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 04:45:00.333 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2026-10-23 04:45:00.334 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2026-10-23 04:45:00.334 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2026-10-23 04:45:00.336 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2026-10-23 04:45:00.336 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2026-10-23 04:45:00.336 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2026-10-23 04:45:00.336 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2026-10-23 04:45:00.635 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2026-10-23 04:45:00.635 [] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2026-10-23 04:45:00.639 [] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-10-23 04:45:00.639 [] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1792748700639 with initial instances count: 6
+2026-10-23 04:45:00.644 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application LAMB-INSTITUCIONAL-MS with eureka with status UP
+2026-10-23 04:45:00.645 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1792748700645, current=UP, previous=STARTING]
+2026-10-23 04:45:00.653 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-INSTITUCIONAL-MS/lamb-institucional-ms:8082: registering service...
+2026-10-23 04:45:00.671 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8082 (http) with context path '/'
+2026-10-23 04:45:00.672 [] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8082
+2026-10-23 04:45:00.680 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-INSTITUCIONAL-MS/lamb-institucional-ms:8082 - registration status: 204
+2026-10-23 04:45:00.688 [] INFO  p.e.u.l.i.LambInstitucionalMsApplication - Started LambInstitucionalMsApplication in 7.454 seconds (process running for 8.01)
+2026-10-23 04:45:00.751 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-23 04:45:00.755 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-23 04:50:00.338 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 04:55:00.352 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:00:00.369 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:05:00.382 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:10:00.395 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:15:00.406 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:20:00.415 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:25:00.424 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:30:00.433 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:35:00.443 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:40:00.452 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:45:00.459 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:50:00.467 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 05:55:00.478 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 06:00:00.485 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 06:05:00.497 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 06:10:00.502 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 06:15:00.504 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-23 06:19:42.944 [] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-23 06:19:42.945 [] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-10-23 06:19:42.972 [] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 26 ms
+2026-10-23 06:20:00.514 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration

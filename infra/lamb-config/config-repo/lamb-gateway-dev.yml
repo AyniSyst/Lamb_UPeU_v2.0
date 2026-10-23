@@ -2,7 +2,15 @@ server:
   port: 18080
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:18180/realms/lamb
   cloud:
+    loadbalancer:
+      cache:
+        ttl: 5s
     gateway:
       server:
         webmvc:
@@ -31,6 +39,10 @@ spring:
               uri: lb://lamb-admision-ms
               predicates:
                 - Path=/api/v1/postulaciones/**
+            - id: lamb-curriculo
+              uri: lb://lamb-curriculo-ms
+              predicates:
+                - Path=/api/v1/planes-estudio/**
             - id: lamb-matricula
               uri: lb://lamb-matricula-ms
               predicates:
@@ -39,6 +51,14 @@ spring:
               uri: lb://lamb-evaluacion-ms
               predicates:
                 - Path=/api/v1/notas/**
+            - id: lamb-evaluacion-actas
+              uri: lb://lamb-evaluacion-ms
+              predicates:
+                - Path=/api/v1/actas/**
+            - id: lamb-trayectoria
+              uri: lb://lamb-trayectoria-ms
+              predicates:
+                - Path=/api/v1/trayectorias/**
             - id: lamb-finanzas
               uri: lb://lamb-finanzas-ms
               predicates:
@@ -49,6 +69,7 @@ eureka:
     hostname: localhost
     instance-id: ${spring.application.name}:${server.port}
   client:
+    registry-fetch-interval-seconds: 5
     service-url:
       defaultZone: http://localhost:18761/eureka
 
@@ -56,7 +77,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health,info,metrics,prometheus
   endpoint:
     health:
       show-details: always

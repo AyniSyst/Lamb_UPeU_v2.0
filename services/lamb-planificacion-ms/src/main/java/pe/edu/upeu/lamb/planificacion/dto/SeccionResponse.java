@@ -1,5 +1,6 @@
 package pe.edu.upeu.lamb.planificacion.dto;
 
+import pe.edu.upeu.lamb.planificacion.entity.EstadoSeccion;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,5 +18,7 @@ public class SeccionResponse {
     private String docente;
     private Integer cupoMaximo;
     private String horario;
+    private EstadoSeccion estado;
+    private String motivo;
     private CursoResponse curso;
 }

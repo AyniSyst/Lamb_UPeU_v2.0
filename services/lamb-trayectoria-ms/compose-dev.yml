@@ -1,0 +1,18 @@
+name: lamb-trayectoria-dev
+
+services:
+  postgres-trayectoria-dev:
+    image: postgres:16-alpine
+    container_name: lamb-postgres-trayectoria-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lamb_trayectoria_db
+      POSTGRES_USER: lamb
+      POSTGRES_PASSWORD: lamb
+    ports:
+      - "15459:5432"
+    volumes:
+      - lamb_trayectoria_dev_data:/var/lib/postgresql/data
+
+volumes:
+  lamb_trayectoria_dev_data:

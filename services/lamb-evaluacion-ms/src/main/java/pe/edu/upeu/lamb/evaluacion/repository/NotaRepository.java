@@ -6,5 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface NotaRepository extends JpaRepository<Nota, Long> {
+    List<Nota> findByIdSeccion(Long idSeccion);
+
     List<Nota> findByIdPersonaAndIdSeccion(Long idPersona, Long idSeccion);
 }

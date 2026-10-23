@@ -28,6 +28,8 @@ public class SeccionMapper {
                 .docente(seccion.getDocente())
                 .cupoMaximo(seccion.getCupoMaximo())
                 .horario(seccion.getHorario())
+                .estado(seccion.getEstado())
+                .motivo(seccion.getMotivo())
                 .curso(cursoMapper.toResponse(seccion.getCurso()))
                 .build();
     }

@@ -2,8 +2,10 @@ package pe.edu.upeu.lamb.planificacion;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
+@EnableFeignClients
 public class LambPlanificacionMsApplication {
 
 	public static void main(String[] args) {
