@@ -1,0 +1,3564 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sistema universitario integrado - historias de usuario, microservicios y arquitectura">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Lamb UPeU 2.0 - Lamb UPeU 2.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lamb-upeu-20" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="." title="Lamb UPeU 2.0" class="md-header__button md-logo" aria-label="Lamb UPeU 2.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lamb UPeU 2.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lamb UPeU 2.0
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AyniSyst/Lamb_UPeU_v2.0" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    AyniSyst/Lamb_UPeU_v2.0
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Lamb UPeU 2.0" class="md-nav__button md-logo" aria-label="Lamb UPeU 2.0" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Lamb UPeU 2.0
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AyniSyst/Lamb_UPeU_v2.0" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    AyniSyst/Lamb_UPeU_v2.0
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#producto-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Producto del proyecto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contenido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contenido
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contenido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-historias-de-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Historias de usuario
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Historias de usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#m1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Institucional y Organización
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Personas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Admisión e Ingreso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Currículo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Planificación y Oferta Académica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Matrícula
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Evaluación y Cierre Académico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Trayectoria Académica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Finanzas del Estudiante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Egreso, Grados, Títulos y Certificación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Ingresos, Cobranza y Pagos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Extensión, Educación Continua y Eventos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. LMS / Aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Servicios al Estudiante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Investigación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Prácticas, Internado y Vinculación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Movilidad e Internacionalización
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Egresados y Seguimiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Convenios y Relaciones Institucionales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Biblioteca y Recursos Académicos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Analítica, Indicadores y BI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Plataforma Transversal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-microservicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Microservicios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-atributos-por-microservicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Atributos por microservicio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitectura-lamb-upeu-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitectura Lamb UPeU 2.0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquitectura Lamb UPeU 2.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nivel-1-contexto-del-sistema-system-context-c4-nivel-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nivel 1: Contexto del sistema (System Context - C4 nivel 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nivel-2-contenedores-container-diagram-c4-nivel-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nivel 2: Contenedores (Container diagram - C4 nivel 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eventos-clave-entre-servicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eventos clave entre servicios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flujo-de-trabajo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo de trabajo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enlaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enlaces
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#producto-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Producto del proyecto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contenido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contenido
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contenido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-historias-de-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Historias de usuario
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Historias de usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#m1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Institucional y Organización
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Personas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Admisión e Ingreso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Currículo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Planificación y Oferta Académica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Matrícula
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Evaluación y Cierre Académico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Trayectoria Académica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Finanzas del Estudiante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Egreso, Grados, Títulos y Certificación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Ingresos, Cobranza y Pagos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Extensión, Educación Continua y Eventos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. LMS / Aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Servicios al Estudiante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Investigación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Prácticas, Internado y Vinculación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Movilidad e Internacionalización
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Egresados y Seguimiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Convenios y Relaciones Institucionales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Biblioteca y Recursos Académicos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Analítica, Indicadores y BI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Plataforma Transversal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-microservicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Microservicios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-atributos-por-microservicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Atributos por microservicio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitectura-lamb-upeu-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitectura Lamb UPeU 2.0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquitectura Lamb UPeU 2.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nivel-1-contexto-del-sistema-system-context-c4-nivel-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nivel 1: Contexto del sistema (System Context - C4 nivel 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nivel-2-contenedores-container-diagram-c4-nivel-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nivel 2: Contenedores (Container diagram - C4 nivel 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eventos-clave-entre-servicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eventos clave entre servicios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flujo-de-trabajo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo de trabajo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enlaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enlaces
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="lamb-upeu-20">Lamb UPeU 2.0<a class="headerlink" href="#lamb-upeu-20" title="Permanent link">&para;</a></h1>
+<p>Plataforma integrada de gestión académica y administrativa para la universidad: desde la admisión y la matrícula hasta la evaluación, las finanzas del estudiante, el egreso y el seguimiento de egresados, con servicios transversales de identidad, flujos, notificaciones y auditoría.</p>
+<p>El sistema se organiza en <strong>22 módulos funcionales</strong> y <strong>94 historias de usuario</strong>, y se implementa como un conjunto de microservicios coordinados por un punto único de acceso.</p>
+<div class="grid cards">
+<ul>
+<li>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 5v6h5V5m-11 6h5V5h-5m6 13h5v-6h-5m-6 6h5v-6h-5m-6 6h5v-6H4m0-1h5V5H4z"/></svg></span> <strong>22</strong> módulos funcionales</p>
+</li>
+<li>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3m3 11H2v-2c0-2.21 2.69-4 6-4s6 1.79 6 4m8-6v2h-9v-2m9-4v2h-9V8m9-4v2h-9V4Z"/></svg></span> <strong>94</strong> historias de usuario</p>
+</li>
+<li>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg></span> <strong>22</strong> roles identificados</p>
+</li>
+<li>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/></svg></span> <strong>24</strong> microservicios de dominio</p>
+</li>
+</ul>
+</div>
+<h2 id="producto-del-proyecto">Producto del proyecto<a class="headerlink" href="#producto-del-proyecto" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Sistema universitario integrado de microservicios end-to-end: configurable,
+seguro, consistente, observable, con inicio de sesión único (SSO) y operable
+por estudiantes, docentes, postulantes, egresados y personal administrativo.
+</code></pre></div>
+<p>Resultado esperado:</p>
+<p>Cada módulo del sistema queda respaldado por historias de usuario con criterios de aceptación verificables, asignado a un microservicio con responsabilidad y datos propios, y conectado con los demás mediante el Gateway, llamadas síncronas puntuales y eventos asíncronos.</p>
+<h2 id="contenido">Contenido<a class="headerlink" href="#contenido" title="Permanent link">&para;</a></h2>
+<h3 id="1-historias-de-usuario">1. Historias de usuario<a class="headerlink" href="#1-historias-de-usuario" title="Permanent link">&para;</a></h3>
+<p>Resumen del alcance funcional: 22 módulos, 94 historias.</p>
+<table>
+<thead>
+<tr>
+<th>Módulo</th>
+<th>Nombre</th>
+<th>Historias</th>
+<th>Rango</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="#m1">Institucional y Organización</a></td>
+<td>4</td>
+<td>HU 001–004</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#m2">Personas</a></td>
+<td>4</td>
+<td>HU 005–008</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#m3">Admisión e Ingreso</a></td>
+<td>5</td>
+<td>HU 009–013</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#m4">Currículo</a></td>
+<td>5</td>
+<td>HU 014–018</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#m5">Planificación y Oferta Académica</a></td>
+<td>6</td>
+<td>HU 019–024</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#m6">Matrícula</a></td>
+<td>6</td>
+<td>HU 025–030</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#m7">Evaluación y Cierre Académico</a></td>
+<td>5</td>
+<td>HU 031–035</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#m8">Trayectoria Académica</a></td>
+<td>4</td>
+<td>HU 036–039</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#m9">Finanzas del Estudiante</a></td>
+<td>5</td>
+<td>HU 040–044</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="#m10">Egreso, Grados, Títulos y Certificación</a></td>
+<td>4</td>
+<td>HU 045–048</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="#m11">Ingresos, Cobranza y Pagos</a></td>
+<td>5</td>
+<td>HU 049–053</td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="#m12">Extensión, Educación Continua y Eventos</a></td>
+<td>4</td>
+<td>HU 054–057</td>
+</tr>
+<tr>
+<td>13</td>
+<td><a href="#m13">LMS / Aprendizaje</a></td>
+<td>5</td>
+<td>HU 058–062</td>
+</tr>
+<tr>
+<td>14</td>
+<td><a href="#m14">Servicios al Estudiante</a></td>
+<td>4</td>
+<td>HU 063–066</td>
+</tr>
+<tr>
+<td>15</td>
+<td><a href="#m15">Investigación</a></td>
+<td>4</td>
+<td>HU 067–070</td>
+</tr>
+<tr>
+<td>16</td>
+<td><a href="#m16">Prácticas, Internado y Vinculación</a></td>
+<td>4</td>
+<td>HU 071–074</td>
+</tr>
+<tr>
+<td>17</td>
+<td><a href="#m17">Movilidad e Internacionalización</a></td>
+<td>3</td>
+<td>HU 075–077</td>
+</tr>
+<tr>
+<td>18</td>
+<td><a href="#m18">Egresados y Seguimiento</a></td>
+<td>3</td>
+<td>HU 078–080</td>
+</tr>
+<tr>
+<td>19</td>
+<td><a href="#m19">Convenios y Relaciones Institucionales</a></td>
+<td>3</td>
+<td>HU 081–083</td>
+</tr>
+<tr>
+<td>20</td>
+<td><a href="#m20">Biblioteca y Recursos Académicos</a></td>
+<td>4</td>
+<td>HU 084–087</td>
+</tr>
+<tr>
+<td>21</td>
+<td><a href="#m21">Analítica, Indicadores y BI</a></td>
+<td>3</td>
+<td>HU 088–090</td>
+</tr>
+<tr>
+<td>22</td>
+<td><a href="#m22">Plataforma Transversal</a></td>
+<td>4</td>
+<td>HU 091–094</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m1">1. Institucional y Organización<a class="headerlink" href="#m1" title="Permanent link">&para;</a></h4>
+<p><em>Institución, campus, sedes, facultades, escuelas, programas, periodos y calendarios</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>001</td>
+<td>Administrador</td>
+<td>registrar la institución con sus sedes y campus</td>
+<td>tener la estructura organizacional base del sistema</td>
+<td>• Cada sede se registra con nombre, dirección y campus asociados.<br>• No se puede eliminar una sede con facultades activas.<br>• La estructura registrada queda disponible para el resto de módulos.</td>
+</tr>
+<tr>
+<td>002</td>
+<td>Administrador</td>
+<td>crear facultades y escuelas dentro de cada sede</td>
+<td>organizar los programas académicos por unidad</td>
+<td>• Cada escuela pertenece obligatoriamente a una facultad.<br>• Se puede editar el nombre y el responsable de cada unidad.<br>• Las escuelas creadas aparecen disponibles al registrar programas.</td>
+</tr>
+<tr>
+<td>003</td>
+<td>Administrador</td>
+<td>definir los periodos académicos y su calendario</td>
+<td>que el resto del sistema use las mismas fechas de referencia</td>
+<td>• Cada periodo define fecha de inicio, fin y fechas clave (matrícula, retiros, cierre).<br>• No se pueden crear dos periodos con fechas superpuestas.<br>• Los módulos de matrícula y evaluación toman las fechas de este calendario.</td>
+</tr>
+<tr>
+<td>004</td>
+<td>Administrador</td>
+<td>configurar los programas académicos ofrecidos por cada escuela</td>
+<td>que estén disponibles al crear planes de estudio</td>
+<td>• Cada programa se asocia a una sola escuela.<br>• Se registra el grado o título que otorga el programa.<br>• Un programa sin planes de estudio no puede activarse para admisión.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m2">2. Personas<a class="headerlink" href="#m2" title="Permanent link">&para;</a></h4>
+<p><em>Persona, identificación, datos personales, contactos y documentos</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>005</td>
+<td>Administrador</td>
+<td>registrar a una persona con su identificación y datos personales</td>
+<td>tener una única fuente de verdad de identidad en el sistema</td>
+<td>• El documento de identidad es único: no se permiten registros duplicados.<br>• Una misma persona puede tener varios roles (estudiante, docente, etc.).<br>• El registro queda disponible para todos los módulos que la referencien.</td>
+</tr>
+<tr>
+<td>006</td>
+<td>Estudiante</td>
+<td>actualizar mis datos de contacto (correo, teléfono, dirección)</td>
+<td>que la institución tenga información vigente para comunicarse conmigo</td>
+<td>• Puedo editar mis datos de contacto desde mi perfil en cualquier momento.<br>• El sistema valida el formato del correo y el teléfono.<br>• Las notificaciones futuras usan automáticamente los datos actualizados.</td>
+</tr>
+<tr>
+<td>007</td>
+<td>Estudiante</td>
+<td>subir mis documentos de identidad y estudios previos</td>
+<td>completar mi expediente personal</td>
+<td>• Se aceptan archivos PDF o imagen hasta un tamaño máximo definido.<br>• Cada documento queda marcado como pendiente o verificado.<br>• Puedo reemplazar un documento mientras no haya sido verificado.</td>
+</tr>
+<tr>
+<td>008</td>
+<td>Administrador</td>
+<td>buscar una persona por documento de identidad o nombre</td>
+<td>ubicar rápidamente su información en cualquier trámite</td>
+<td>• La búsqueda funciona por coincidencia parcial de nombre o documento exacto.<br>• Los resultados muestran los roles activos de la persona.<br>• Solo usuarios autorizados pueden ver los documentos adjuntos.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m3">3. Admisión e Ingreso<a class="headerlink" href="#m3" title="Permanent link">&para;</a></h4>
+<p><em>Prospectos, postulantes, evaluaciones, resultados e ingreso</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>009</td>
+<td>Prospecto</td>
+<td>inscribirme como postulante indicando el programa al que aspiro</td>
+<td>participar en el proceso de admisión</td>
+<td>• El formulario pide datos personales, programa de interés y documentos requeridos.<br>• Al enviarlo recibo una constancia de postulación.<br>• Solo puedo postular a programas con proceso de admisión abierto.</td>
+</tr>
+<tr>
+<td>010</td>
+<td>Postulante</td>
+<td>rendir el examen de admisión en línea</td>
+<td>completar el proceso de evaluación</td>
+<td>• El examen solo está disponible dentro de la fecha y hora programadas.<br>• El sistema controla el tiempo restante y envía automáticamente al finalizar.<br>• Una vez enviado no se puede volver a rendir el mismo examen.</td>
+</tr>
+<tr>
+<td>011</td>
+<td>Postulante</td>
+<td>consultar el resultado de mi evaluación de admisión</td>
+<td>saber si fui admitido</td>
+<td>• El resultado solo es visible después de la publicación oficial.<br>• Se muestra el puntaje obtenido y el estado (admitido / no admitido).<br>• Recibo una notificación en cuanto el resultado está disponible.</td>
+</tr>
+<tr>
+<td>012</td>
+<td>Administrador De Admisión</td>
+<td>publicar los resultados del examen de admisión</td>
+<td>que los postulantes conozcan su situación</td>
+<td>• La publicación se hace en bloque para todo un proceso de admisión.<br>• Antes de publicar puedo revisar la lista de resultados como borrador.<br>• Una vez publicado, el resultado no puede modificarse sin registrar el motivo.</td>
+</tr>
+<tr>
+<td>013</td>
+<td>Administrador De Admisión</td>
+<td>registrar el ingreso de un postulante admitido al núcleo académico</td>
+<td>que quede habilitado como estudiante y pueda matricularse</td>
+<td>• Solo se puede registrar el ingreso de postulantes marcados como admitidos.<br>• El sistema crea automáticamente el registro de persona/estudiante si no existe.<br>• El estudiante ingresado queda habilitado para matricularse en el periodo correspondiente.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m4">4. Currículo<a class="headerlink" href="#m4" title="Permanent link">&para;</a></h4>
+<p><em>Programas, planes, versiones, asignaturas, créditos, requisitos y equivalencias</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>014</td>
+<td>Coordinador Académico</td>
+<td>crear un plan de estudios con sus asignaturas y créditos</td>
+<td>definir la malla curricular de un programa</td>
+<td>• Cada asignatura registra sus créditos y el ciclo en que se dicta.<br>• La suma de créditos del plan se calcula automáticamente.<br>• Un plan sin asignaturas no puede publicarse como vigente.</td>
+</tr>
+<tr>
+<td>015</td>
+<td>Coordinador Académico</td>
+<td>crear una nueva versión de un plan de estudios</td>
+<td>actualizar la malla sin afectar a los estudiantes de versiones anteriores</td>
+<td>• Cada estudiante queda vinculado a la versión del plan vigente al momento de su ingreso.<br>• La nueva versión puede copiar asignaturas de la versión anterior como base.<br>• Las versiones anteriores quedan archivadas pero consultables.</td>
+</tr>
+<tr>
+<td>016</td>
+<td>Coordinador Académico</td>
+<td>definir los prerrequisitos entre asignaturas</td>
+<td>que el sistema controle el orden en que se pueden llevar</td>
+<td>• No se permite guardar un requisito que forme un ciclo entre asignaturas.<br>• El sistema impide inscribir una asignatura sin el prerrequisito aprobado.<br>• Se puede consultar el árbol de prerrequisitos de cualquier asignatura.</td>
+</tr>
+<tr>
+<td>017</td>
+<td>Coordinador Académico</td>
+<td>registrar equivalencias entre asignaturas de distintos planes</td>
+<td>que un estudiante que cambia de plan no repita contenido ya aprobado</td>
+<td>• Cada equivalencia registra la asignatura de origen y la de destino.<br>• Al aplicarse una equivalencia, la nota original se traslada al nuevo plan.<br>• Queda un registro de qué equivalencia originó cada traslado de nota.</td>
+</tr>
+<tr>
+<td>018</td>
+<td>Estudiante</td>
+<td>consultar mi malla curricular con el estado de cada asignatura</td>
+<td>saber qué me falta para egresar</td>
+<td>• Cada asignatura se marca como aprobada, en curso, pendiente o bloqueada.<br>• Las asignaturas bloqueadas indican qué prerrequisito falta.<br>• La malla se organiza visualmente por ciclo.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m5">5. Planificación y Oferta Académica<a class="headerlink" href="#m5" title="Permanent link">&para;</a></h4>
+<p><em>Cursos, secciones, docentes, horarios, aulas, cupos, modalidad y carga docente</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>019</td>
+<td>Coordinador Académico</td>
+<td>abrir secciones de un curso para un periodo académico</td>
+<td>ofrecer la asignatura a los estudiantes</td>
+<td>• Cada sección se asocia a una asignatura y un periodo específico.<br>• Se define la modalidad de la sección: presencial, virtual o híbrida.<br>• Una sección sin docente ni horario no puede publicarse en el catálogo.</td>
+</tr>
+<tr>
+<td>020</td>
+<td>Coordinador Académico</td>
+<td>asignar un docente y un aula a cada sección</td>
+<td>dejar la oferta lista antes de matrícula</td>
+<td>• El sistema advierte si el docente ya tiene otra sección en el mismo horario.<br>• El aula asignada debe tener capacidad igual o mayor al cupo de la sección.<br>• Se puede reasignar docente o aula mientras la sección no tenga matriculados.</td>
+</tr>
+<tr>
+<td>021</td>
+<td>Coordinador Académico</td>
+<td>definir el horario de cada sección evitando cruces de aula</td>
+<td>que no se solapen dos secciones en el mismo espacio</td>
+<td>• El sistema rechaza un horario si el aula ya está ocupada en ese bloque.<br>• Se pueden definir varios bloques horarios para una misma sección.<br>• El horario final queda visible en el catálogo de oferta.</td>
+</tr>
+<tr>
+<td>022</td>
+<td>Coordinador Académico</td>
+<td>establecer el cupo máximo de cada sección</td>
+<td>controlar cuántos estudiantes pueden inscribirse</td>
+<td>• La matrícula rechaza inscripciones una vez alcanzado el cupo.<br>• Se puede ampliar el cupo de una sección mientras existan vacantes de aula.<br>• El cupo disponible se actualiza en tiempo real al matricular o retirar estudiantes.</td>
+</tr>
+<tr>
+<td>023</td>
+<td>Docente</td>
+<td>consultar mi carga docente del periodo con mis secciones asignadas</td>
+<td>conocer mi horario de clases</td>
+<td>• Se muestra el curso, aula y horario de cada sección asignada.<br>• Se muestra el número de estudiantes matriculados por sección.<br>• La información se actualiza si el coordinador modifica alguna sección.</td>
+</tr>
+<tr>
+<td>024</td>
+<td>Estudiante</td>
+<td>consultar el catálogo de secciones disponibles de un periodo</td>
+<td>elegir en qué inscribirme</td>
+<td>• El catálogo muestra docente, horario, modalidad y vacantes disponibles.<br>• Se puede filtrar por asignatura, ciclo o modalidad.<br>• Las secciones sin cupo se muestran marcadas como llenas.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m6">6. Matrícula<a class="headerlink" href="#m6" title="Permanent link">&para;</a></h4>
+<p><em>Inscripción, retiros, cambios, reservas, reglas y bloqueos</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>025</td>
+<td>Estudiante</td>
+<td>inscribirme en las secciones de los cursos que voy a llevar</td>
+<td>formalizar mi matrícula del periodo</td>
+<td>• El sistema valida prerrequisitos, cupo y cruces de horario antes de confirmar.<br>• Se muestra un costo estimado antes de enviar la matrícula.<br>• Al confirmar, se genera el cargo correspondiente en Finanzas del Estudiante.</td>
+</tr>
+<tr>
+<td>026</td>
+<td>Estudiante</td>
+<td>elegir el número de cuotas para el pago de mi matrícula</td>
+<td>distribuir el costo en varios meses</td>
+<td>• El número de cuotas solo puede elegirse dentro del rango permitido por la institución.<br>• Cada cuota elegida genera un cargo de enseñanza programado para su mes.<br>• El estudiante puede ver el detalle de cuotas antes de confirmar la matrícula.</td>
+</tr>
+<tr>
+<td>027</td>
+<td>Estudiante</td>
+<td>retirarme de una sección antes de la fecha límite</td>
+<td>dejar de cursar una asignatura sin que afecte mi historial</td>
+<td>• El retiro solo está permitido dentro del plazo definido en el calendario del periodo.<br>• La sección liberada aumenta el cupo disponible para otros estudiantes.<br>• El curso retirado se marca como "retirado", no como reprobado.</td>
+</tr>
+<tr>
+<td>028</td>
+<td>Estudiante</td>
+<td>cambiar de sección de un curso en el periodo de reprogramación</td>
+<td>ajustar mi horario</td>
+<td>• El cambio solo procede si la nueva sección tiene cupo disponible.<br>• El sistema valida que no se generen cruces de horario con mis otros cursos.<br>• El cambio no genera un cargo adicional si es la misma asignatura.</td>
+</tr>
+<tr>
+<td>029</td>
+<td>Estudiante</td>
+<td>reservar mi matrícula para no perder mi vacante en el programa</td>
+<td>conservar mi lugar sin inscribir cursos ese periodo</td>
+<td>• La reserva tiene un número máximo de periodos consecutivos permitidos.<br>• Un estudiante con reserva no genera cargos de matrícula ese periodo.<br>• Al vencer el plazo de reserva, el sistema alerta que debe matricularse o perderá la vacante.</td>
+</tr>
+<tr>
+<td>030</td>
+<td>Administrador</td>
+<td>bloquear la matrícula de un estudiante con deuda o trámite pendiente</td>
+<td>impedir que se inscriba hasta que regularice su situación</td>
+<td>• El bloqueo indica el motivo (financiero, documentario, disciplinario, etc.).<br>• Un estudiante bloqueado no puede completar el proceso de matrícula.<br>• El bloqueo se libera automáticamente al resolverse el motivo o manualmente por un administrador.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m7">7. Evaluación y Cierre Académico<a class="headerlink" href="#m7" title="Permanent link">&para;</a></h4>
+<p><em>Evaluaciones, notas, actas, rectificaciones y cierre</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>031</td>
+<td>Docente</td>
+<td>registrar las notas de mis estudiantes en cada evaluación</td>
+<td>llevar el control de su desempeño</td>
+<td>• Solo puedo registrar notas de estudiantes matriculados en mi sección.<br>• El sistema valida que la nota esté dentro de la escala permitida.<br>• Puedo editar una nota mientras el acta de la sección no esté cerrada.</td>
+</tr>
+<tr>
+<td>032</td>
+<td>Estudiante</td>
+<td>consultar mis notas de cada curso durante el periodo</td>
+<td>hacer seguimiento a mi rendimiento</td>
+<td>• Se muestran las notas registradas por evaluación y el promedio parcial del curso.<br>• Las notas se actualizan apenas el docente las registra.<br>• Puedo ver el detalle de cada evaluación (nombre, fecha, peso).</td>
+</tr>
+<tr>
+<td>033</td>
+<td>Docente</td>
+<td>cerrar el acta final de notas de mi sección</td>
+<td>formalizar los resultados del periodo</td>
+<td>• El acta solo se puede cerrar si todos los estudiantes tienen nota final registrada.<br>• Una vez cerrada el acta, las notas dejan de ser editables directamente.<br>• El cierre del acta actualiza automáticamente la trayectoria académica del estudiante.</td>
+</tr>
+<tr>
+<td>034</td>
+<td>Coordinador Académico</td>
+<td>aprobar una rectificación de nota solicitada por un docente</td>
+<td>corregir un error después del cierre del acta</td>
+<td>• La solicitud debe incluir la nota anterior, la nueva y el motivo del cambio.<br>• Solo un coordinador puede aprobar o rechazar la rectificación.<br>• Toda rectificación aprobada queda registrada en el historial de auditoría.</td>
+</tr>
+<tr>
+<td>035</td>
+<td>Administrador</td>
+<td>cerrar académicamente el periodo una vez cerradas todas las actas</td>
+<td>habilitar el cálculo de trayectoria y avance</td>
+<td>• El sistema impide el cierre si existen actas de secciones aún pendientes.<br>• Al cerrar el periodo se recalcula el promedio y el avance de créditos de cada estudiante.<br>• Después del cierre, cualquier corrección requiere una rectificación formal.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m8">8. Trayectoria Académica<a class="headerlink" href="#m8" title="Permanent link">&para;</a></h4>
+<p><em>Historial, promedio, créditos, avance, convalidaciones y reconocimientos</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>036</td>
+<td>Estudiante</td>
+<td>consultar mi historial académico completo</td>
+<td>ver todos los cursos que he llevado y sus notas</td>
+<td>• El historial se organiza por periodo académico.<br>• Se distinguen los cursos aprobados, desaprobados, retirados y convalidados.<br>• El historial se deriva de matrícula, evaluación y convalidaciones, no se edita directamente.</td>
+</tr>
+<tr>
+<td>037</td>
+<td>Estudiante</td>
+<td>ver mi promedio ponderado y mi avance de créditos</td>
+<td>saber cuánto me falta para culminar el programa</td>
+<td>• El promedio se recalcula automáticamente al cerrarse cada periodo.<br>• Se muestra el porcentaje de créditos aprobados frente al total del plan.<br>• El avance refleja las equivalencias y convalidaciones ya aplicadas.</td>
+</tr>
+<tr>
+<td>038</td>
+<td>Estudiante</td>
+<td>solicitar la convalidación de un curso llevado en otra institución</td>
+<td>no repetirlo si ya lo aprobé antes</td>
+<td>• La solicitud requiere adjuntar el certificado y el sílabo del curso externo.<br>• Puedo hacer seguimiento del estado de mi solicitud (en revisión, aprobada, rechazada).<br>• Si se aprueba, el curso queda reflejado en mi trayectoria como convalidado.</td>
+</tr>
+<tr>
+<td>039</td>
+<td>Coordinador Académico</td>
+<td>evaluar y aprobar o rechazar una solicitud de convalidación</td>
+<td>decidir si el curso externo es equivalente</td>
+<td>• Puedo comparar el sílabo del curso externo con la asignatura del plan.<br>• Toda decisión requiere un sustento o comentario registrado.<br>• El estudiante recibe una notificación con el resultado de su solicitud.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m9">9. Finanzas del Estudiante<a class="headerlink" href="#m9" title="Permanent link">&para;</a></h4>
+<p><em>Matrícula, enseñanza, derechos académicos, becas y descuentos</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>040</td>
+<td>Estudiante</td>
+<td>ver el cargo de matrícula generado tras inscribir mis cursos</td>
+<td>saber cuánto debo pagar y cuándo</td>
+<td>• El monto se calcula con el costo real de cada curso, no el estimado de matrícula.<br>• El cargo muestra el concepto (matrícula) y la unidad organizacional del programa.<br>• El cargo queda disponible para pago desde el momento en que se confirma la matrícula.</td>
+</tr>
+<tr>
+<td>041</td>
+<td>Estudiante</td>
+<td>ver el calendario de cargos de enseñanza de las cuotas siguientes</td>
+<td>planificar mis pagos mensuales</td>
+<td>• Se muestra un cargo de enseñanza por cada cuota elegida en matrícula, con su fecha.<br>• Los cargos futuros aparecen como programados, no cobrables aún.<br>• Un cargo se habilita para pago automáticamente al llegar su fecha.</td>
+</tr>
+<tr>
+<td>042</td>
+<td>Administrador De Finanzas</td>
+<td>aplicar un descuento o beca a un estudiante</td>
+<td>reflejar el beneficio en sus cargos</td>
+<td>• El descuento puede ser un porcentaje o un monto fijo, con vigencia definida.<br>• El beneficio se aplica automáticamente a los cargos generados mientras esté vigente.<br>• Se registra el motivo y el responsable que autorizó el beneficio.</td>
+</tr>
+<tr>
+<td>043</td>
+<td>Administrador De Finanzas</td>
+<td>configurar el tarifario por crédito y programa antes de cada periodo</td>
+<td>que los cargos se calculen con el costo correcto</td>
+<td>• El tarifario se define por programa y puede variar entre periodos.<br>• No se pueden generar cargos de un periodo sin tarifario configurado.<br>• Un cambio de tarifario no afecta cargos ya generados en periodos anteriores.</td>
+</tr>
+<tr>
+<td>044</td>
+<td>Estudiante</td>
+<td>ver el saldo pendiente de cada uno de mis cargos</td>
+<td>saber cuánto me falta pagar</td>
+<td>• El saldo se actualiza automáticamente con cada pago registrado, en línea o en caja.<br>• La suma de pagos de un cargo nunca puede superar su monto total.<br>• Se distingue claramente entre cargos ya cancelados y con saldo pendiente.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m10">10. Egreso, Grados, Títulos y Certificación<a class="headerlink" href="#m10" title="Permanent link">&para;</a></h4>
+<p><em>Trámite de egreso, obtención de grados, títulos y constancias</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>045</td>
+<td>Estudiante</td>
+<td>solicitar mi trámite de egreso al completar el plan de estudios</td>
+<td>iniciar el proceso de titulación</td>
+<td>• La solicitud solo se habilita si mi avance de créditos llega al 100% del plan.<br>• Puedo ver el estado de mi trámite en cada etapa del proceso.<br>• Se me informa si tengo algún requisito pendiente (deuda, documento, etc.).</td>
+</tr>
+<tr>
+<td>046</td>
+<td>Administrador Académico</td>
+<td>verificar que un estudiante cumple los requisitos de egreso</td>
+<td>aprobar o rechazar la solicitud</td>
+<td>• El sistema muestra un checklist con créditos, deuda y documentos pendientes.<br>• Solo puedo aprobar el egreso si todos los requisitos están completos.<br>• Un rechazo requiere indicar el motivo para que el estudiante lo subsane.</td>
+</tr>
+<tr>
+<td>047</td>
+<td>Estudiante</td>
+<td>solicitar mi título profesional o grado académico</td>
+<td>obtener el documento oficial</td>
+<td>• La solicitud solo procede si mi trámite de egreso ya fue aprobado.<br>• Puedo elegir la modalidad de titulación disponible para mi programa.<br>• Recibo una notificación cuando el título esté listo para recoger o descargar.</td>
+</tr>
+<tr>
+<td>048</td>
+<td>Egresado</td>
+<td>descargar mi certificado de estudios o constancia</td>
+<td>presentarlo ante terceros</td>
+<td>• El documento se genera con un código de verificación único.<br>• Puedo descargarlo en PDF desde mi cuenta en cualquier momento.<br>• Un tercero puede validar su autenticidad ingresando el código de verificación.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m11">11. Ingresos, Cobranza y Pagos<a class="headerlink" href="#m11" title="Permanent link">&para;</a></h4>
+<p><em>Cargos, cuentas por cobrar, caja, pagos, pasarelas y comprobantes</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>049</td>
+<td>Estudiante</td>
+<td>pagar un cargo pendiente a través de una pasarela en línea</td>
+<td>cancelar mi deuda sin acercarme a caja</td>
+<td>• Antes de cobrar, el sistema verifica el saldo vigente del cargo con Finanzas del Estudiante.<br>• Al confirmarse el pago en la pasarela, el saldo se actualiza automáticamente.<br>• Si el pago falla o se cancela, el cargo permanece con su saldo original.</td>
+</tr>
+<tr>
+<td>050</td>
+<td>Cajero</td>
+<td>registrar el pago presencial de un estudiante en ventanilla</td>
+<td>actualizar su saldo al instante</td>
+<td>• Puedo buscar los cargos pendientes de un estudiante por su documento de identidad.<br>• El sistema no permite registrar un pago mayor al saldo pendiente del cargo.<br>• El pago queda reflejado de inmediato en el saldo consultado por el estudiante.</td>
+</tr>
+<tr>
+<td>051</td>
+<td>Estudiante</td>
+<td>combinar un pago parcial en línea y el resto en caja</td>
+<td>cubrir un cargo usando ambos canales</td>
+<td>• Cada canal descuenta del mismo saldo compartido del cargo, sin duplicar el cobro.<br>• El cargo se marca como cancelado solo cuando la suma de ambos pagos llega al total.<br>• Puedo ver el detalle de qué monto se pagó por cada canal.</td>
+</tr>
+<tr>
+<td>052</td>
+<td>Cajero</td>
+<td>emitir el comprobante de pago de una transacción</td>
+<td>entregar constancia al estudiante</td>
+<td>• El comprobante incluye monto, concepto, fecha y medio de pago.<br>• Cada comprobante tiene un número correlativo único.<br>• El comprobante puede reimprimirse o reenviarse por correo posteriormente.</td>
+</tr>
+<tr>
+<td>053</td>
+<td>Administrador De Finanzas</td>
+<td>procesar la devolución de un pago realizado en exceso</td>
+<td>regularizar la cuenta del estudiante</td>
+<td>• La devolución no puede superar el monto efectivamente pagado en exceso.<br>• Se registra el motivo y el medio por el que se realiza la devolución.<br>• El saldo del estudiante se actualiza una vez procesada la devolución.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m12">12. Extensión, Educación Continua y Eventos<a class="headerlink" href="#m12" title="Permanent link">&para;</a></h4>
+<p><em>Talleres, diplomados, seminarios, congresos e inscripciones</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>054</td>
+<td>Participante</td>
+<td>inscribirme en un taller, diplomado o curso libre</td>
+<td>participar en la actividad de extensión</td>
+<td>• La inscripción solo se habilita si el evento tiene cupo disponible.<br>• Si el evento tiene costo, la inscripción queda ligada a su cargo de pago.<br>• Recibo una confirmación de inscripción con los datos del evento.</td>
+</tr>
+<tr>
+<td>055</td>
+<td>Coordinador De Extensión</td>
+<td>publicar un nuevo evento o programa de educación continua</td>
+<td>abrir sus inscripciones al público</td>
+<td>• El evento define fechas, cupo máximo y costo (si aplica).<br>• Un evento sin fechas definidas no puede publicarse.<br>• El evento publicado queda visible en el catálogo de extensión.</td>
+</tr>
+<tr>
+<td>056</td>
+<td>Coordinador De Extensión</td>
+<td>registrar la asistencia de los participantes de un evento</td>
+<td>llevar el control de quienes completaron la actividad</td>
+<td>• La asistencia se registra por sesión cuando el evento tiene varias fechas.<br>• Solo los participantes con asistencia mínima requerida son elegibles para certificado.<br>• Se puede exportar la lista de asistencia del evento.</td>
+</tr>
+<tr>
+<td>057</td>
+<td>Participante</td>
+<td>descargar mi certificado de participación al finalizar el curso</td>
+<td>acreditar mi asistencia</td>
+<td>• El certificado solo se genera si cumplí el porcentaje de asistencia requerido.<br>• El documento incluye el nombre del evento, fechas y horas certificadas.<br>• Puedo descargarlo en PDF desde mi cuenta.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m13">13. LMS / Aprendizaje<a class="headerlink" href="#m13" title="Permanent link">&para;</a></h4>
+<p><em>Contenidos, tareas, foros, evaluaciones, recursos y seguimiento</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>058</td>
+<td>Docente</td>
+<td>publicar contenidos y recursos de mi curso en el aula virtual</td>
+<td>que mis estudiantes accedan al material</td>
+<td>• Puedo organizar los contenidos por unidad o semana.<br>• Solo los estudiantes matriculados en la sección pueden ver el material.<br>• Puedo programar la fecha de publicación de cada contenido.</td>
+</tr>
+<tr>
+<td>059</td>
+<td>Estudiante</td>
+<td>entregar una tarea asignada dentro del plazo establecido</td>
+<td>cumplir con las actividades del curso</td>
+<td>• El sistema bloquea la entrega automáticamente al vencer el plazo.<br>• Puedo ver el estado de mi entrega (pendiente, entregada, calificada).<br>• Puedo reemplazar mi entrega mientras el plazo no haya vencido.</td>
+</tr>
+<tr>
+<td>060</td>
+<td>Estudiante</td>
+<td>participar en el foro de discusión de mi curso</td>
+<td>resolver dudas e interactuar con compañeros y docente</td>
+<td>• Puedo crear un nuevo tema o responder a uno existente.<br>• Los mensajes muestran el nombre del autor y la fecha de publicación.<br>• El docente puede fijar o cerrar un tema del foro.</td>
+</tr>
+<tr>
+<td>061</td>
+<td>Docente</td>
+<td>crear una evaluación en línea con calificación automática</td>
+<td>agilizar la revisión de mis estudiantes</td>
+<td>• Las preguntas de opción única o múltiple se califican automáticamente al enviar.<br>• Puedo definir tiempo límite y número de intentos permitidos.<br>• El resultado se refleja automáticamente en el registro de notas del curso.</td>
+</tr>
+<tr>
+<td>062</td>
+<td>Docente</td>
+<td>hacer seguimiento del progreso de mis estudiantes en el curso</td>
+<td>identificar a quienes necesitan apoyo adicional</td>
+<td>• Se muestra el porcentaje de avance de cada estudiante en el contenido del curso.<br>• Se resaltan los estudiantes con tareas no entregadas o notas bajas.<br>• Puedo exportar el reporte de seguimiento del curso.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m14">14. Servicios al Estudiante<a class="headerlink" href="#m14" title="Permanent link">&para;</a></h4>
+<p><em>Tutoría, asesoría académica, bienestar, trámites, solicitudes y reclamos</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>063</td>
+<td>Estudiante</td>
+<td>solicitar una cita de tutoría o asesoría académica</td>
+<td>recibir orientación sobre mi desempeño</td>
+<td>• Puedo elegir entre los horarios disponibles del tutor o asesor.<br>• Recibo una confirmación con fecha, hora y modalidad de la cita.<br>• Puedo cancelar la cita con una anticipación mínima definida.</td>
+</tr>
+<tr>
+<td>064</td>
+<td>Estudiante</td>
+<td>registrar un trámite o solicitud administrativa</td>
+<td>pedir un servicio de la universidad</td>
+<td>• Puedo elegir el tipo de trámite de una lista predefinida.<br>• El sistema me muestra el tiempo estimado de atención de cada tipo de trámite.<br>• Puedo hacer seguimiento del estado de mi trámite hasta su resolución.</td>
+</tr>
+<tr>
+<td>065</td>
+<td>Estudiante</td>
+<td>presentar un reclamo formal sobre un servicio recibido</td>
+<td>que sea atendido por la instancia correspondiente</td>
+<td>• El reclamo se enruta automáticamente al área responsable según su categoría.<br>• Recibo un número de seguimiento al registrar el reclamo.<br>• Se me notifica cuando el reclamo cambia de estado o recibe respuesta.</td>
+</tr>
+<tr>
+<td>066</td>
+<td>Asesor</td>
+<td>dar seguimiento a los casos de acompañamiento de mis estudiantes asignados</td>
+<td>monitorear su bienestar y avance</td>
+<td>• Puedo registrar notas de seguimiento en cada caso.<br>• Los casos se pueden marcar como abiertos, en seguimiento o cerrados.<br>• Solo tengo acceso a los casos de los estudiantes asignados a mí.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m15">15. Investigación<a class="headerlink" href="#m15" title="Permanent link">&para;</a></h4>
+<p><em>Proyectos, grupos, investigadores, semilleros, producción científica y repositorio</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>067</td>
+<td>Investigador</td>
+<td>registrar un nuevo proyecto de investigación con su grupo</td>
+<td>formalizar el inicio de sus actividades</td>
+<td>• El proyecto registra investigador principal, colaboradores y fechas de ejecución.<br>• Puedo asociar el proyecto a una línea de investigación institucional.<br>• El proyecto queda visible en el listado de proyectos activos de la institución.</td>
+</tr>
+<tr>
+<td>068</td>
+<td>Estudiante</td>
+<td>unirme a un semillero de investigación</td>
+<td>participar en actividades científicas dentro de mi programa</td>
+<td>• Puedo ver los semilleros activos y su línea temática antes de postular.<br>• La incorporación requiere aprobación del investigador responsable del semillero.<br>• Una vez aceptado, aparezco listado como miembro activo del semillero.</td>
+</tr>
+<tr>
+<td>069</td>
+<td>Investigador</td>
+<td>publicar la producción científica derivada de mi proyecto</td>
+<td>que quede disponible en el repositorio institucional</td>
+<td>• Puedo adjuntar el documento junto con autores, resumen y palabras clave.<br>• La publicación queda vinculada al proyecto de investigación de origen.<br>• El repositorio permite buscar la producción por autor, año o línea de investigación.</td>
+</tr>
+<tr>
+<td>070</td>
+<td>Investigador</td>
+<td>inscribir mi trabajo en una jornada de investigación</td>
+<td>presentarlo ante la comunidad académica</td>
+<td>• La inscripción solo se habilita mientras la jornada tenga convocatoria abierta.<br>• Debo indicar el título, resumen y modalidad de presentación del trabajo.<br>• Recibo confirmación con la fecha y sesión asignada para mi presentación.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m16">16. Prácticas, Internado y Vinculación<a class="headerlink" href="#m16" title="Permanent link">&para;</a></h4>
+<p><em>Prácticas preprofesionales, internado, centros de práctica y convenios</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>071</td>
+<td>Estudiante</td>
+<td>postular a una plaza de práctica preprofesional o internado</td>
+<td>iniciar mi proceso de prácticas</td>
+<td>• Solo puedo postular si cumplo el avance de créditos mínimo requerido.<br>• Puedo ver las plazas disponibles por centro de práctica y área.<br>• Recibo notificación cuando el centro de práctica acepta o rechaza mi postulación.</td>
+</tr>
+<tr>
+<td>072</td>
+<td>Supervisor De Prácticas</td>
+<td>registrar la evaluación de un estudiante en su centro de práctica</td>
+<td>calificar su desempeño</td>
+<td>• La evaluación usa una rúbrica con criterios definidos por la universidad.<br>• Solo puedo evaluar a los estudiantes que tengo asignados como supervisor.<br>• La calificación registrada se refleja en el expediente de prácticas del estudiante.</td>
+</tr>
+<tr>
+<td>073</td>
+<td>Estudiante</td>
+<td>subir las evidencias de mis actividades de práctica</td>
+<td>sustentar el cumplimiento de mis horas</td>
+<td>• Cada evidencia se asocia a una fecha y a un número de horas realizadas.<br>• El sistema acumula automáticamente el total de horas registradas.<br>• Mi supervisor puede revisar y validar cada evidencia subida.</td>
+</tr>
+<tr>
+<td>074</td>
+<td>Coordinador De Prácticas</td>
+<td>gestionar los convenios con los centros de práctica disponibles</td>
+<td>ofrecer plazas vigentes a los estudiantes</td>
+<td>• Cada convenio registra vigencia, responsable y número de plazas ofrecidas.<br>• Un centro con convenio vencido no puede publicar nuevas plazas.<br>• Recibo una alerta cuando un convenio esté próximo a vencer.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m17">17. Movilidad e Internacionalización<a class="headerlink" href="#m17" title="Permanent link">&para;</a></h4>
+<p><em>Intercambio, movilidad entrante/saliente, estancias y reconocimiento académico</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>075</td>
+<td>Estudiante</td>
+<td>postular a un programa de movilidad o intercambio</td>
+<td>realizar una estancia académica en otra institución</td>
+<td>• Solo puedo postular a convenios de movilidad vigentes con mi universidad.<br>• Debo indicar el periodo de destino y los cursos que planeo llevar allá.<br>• Recibo notificación del resultado de mi postulación en el plazo definido.</td>
+</tr>
+<tr>
+<td>076</td>
+<td>Coordinador De Movilidad</td>
+<td>registrar la llegada de un estudiante de movilidad entrante</td>
+<td>incorporarlo temporalmente a un programa</td>
+<td>• El registro crea un perfil temporal vinculado a la institución de origen.<br>• El estudiante entrante queda habilitado solo para las secciones autorizadas.<br>• Al finalizar su estancia, el acceso se desactiva automáticamente.</td>
+</tr>
+<tr>
+<td>077</td>
+<td>Estudiante</td>
+<td>solicitar el reconocimiento académico de los cursos llevados durante mi movilidad</td>
+<td>que se incorporen a mi trayectoria</td>
+<td>• Debo adjuntar el certificado de notas emitido por la institución de destino.<br>• La solicitud sigue el mismo flujo de revisión que una convalidación.<br>• Los cursos reconocidos se reflejan en mi historial académico como tal.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m18">18. Egresados y Seguimiento<a class="headerlink" href="#m18" title="Permanent link">&para;</a></h4>
+<p><em>Empleabilidad, bolsa de trabajo, seguimiento laboral y alumni</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>078</td>
+<td>Egresado</td>
+<td>actualizar mi situación laboral en el sistema de seguimiento</td>
+<td>que la universidad conozca mi trayectoria profesional</td>
+<td>• Puedo indicar si estoy empleado, buscando empleo o estudiando.<br>• Puedo actualizar mi información laboral cuando lo necesite.<br>• El sistema guarda un historial de mis actualizaciones anteriores.</td>
+</tr>
+<tr>
+<td>079</td>
+<td>Egresado</td>
+<td>postular a una oferta publicada en la bolsa de trabajo</td>
+<td>acceder a oportunidades laborales</td>
+<td>• Puedo filtrar ofertas por carrera, ubicación o modalidad de trabajo.<br>• Al postular, mi hoja de vida se envía automáticamente al empleador registrado.<br>• Puedo ver el estado de mis postulaciones enviadas.</td>
+</tr>
+<tr>
+<td>080</td>
+<td>Administrador</td>
+<td>publicar indicadores de empleabilidad de los egresados de un programa</td>
+<td>reportarlos ante entidades de acreditación</td>
+<td>• El indicador se calcula a partir de la información de seguimiento reportada por los egresados.<br>• Se puede filtrar el indicador por programa, cohorte y periodo.<br>• El reporte puede exportarse en un formato apto para entidades externas.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m19">19. Convenios y Relaciones Institucionales<a class="headerlink" href="#m19" title="Permanent link">&para;</a></h4>
+<p><em>Instituciones asociadas, convenios marco y específicos, vigencia y beneficios</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>081</td>
+<td>Administrador De Convenios</td>
+<td>registrar un convenio marco con una institución asociada</td>
+<td>formalizar la relación institucional</td>
+<td>• El convenio registra institución asociada, responsables y periodo de vigencia.<br>• No se puede registrar un convenio marco duplicado con la misma institución vigente.<br>• El convenio queda disponible como base para registrar convenios específicos.</td>
+</tr>
+<tr>
+<td>082</td>
+<td>Administrador De Convenios</td>
+<td>registrar un convenio específico bajo un convenio marco vigente</td>
+<td>detallar compromisos y beneficios concretos</td>
+<td>• Solo se puede crear un convenio específico si su convenio marco está vigente.<br>• Se registran los compromisos y beneficios propios de ese convenio específico.<br>• La vigencia del convenio específico no puede exceder la del convenio marco.</td>
+</tr>
+<tr>
+<td>083</td>
+<td>Administrador De Convenios</td>
+<td>recibir una alerta cuando un convenio esté por vencer</td>
+<td>gestionar su renovación a tiempo</td>
+<td>• La alerta se genera con una anticipación configurable antes del vencimiento.<br>• Se muestra un listado de convenios próximos a vencer ordenado por fecha.<br>• Un convenio vencido queda marcado y deja de habilitar nuevas actividades asociadas.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m20">20. Biblioteca y Recursos Académicos<a class="headerlink" href="#m20" title="Permanent link">&para;</a></h4>
+<p><em>Catálogo, préstamos, recursos digitales y bases de datos</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>084</td>
+<td>Estudiante</td>
+<td>buscar un libro o recurso disponible en el catálogo de la biblioteca</td>
+<td>ubicar material de estudio</td>
+<td>• Puedo buscar por título, autor o tema.<br>• Los resultados muestran la disponibilidad de ejemplares físicos.<br>• Puedo filtrar los resultados por tipo de recurso (físico o digital).</td>
+</tr>
+<tr>
+<td>085</td>
+<td>Estudiante</td>
+<td>solicitar el préstamo de un libro físico</td>
+<td>llevarlo en calidad de préstamo</td>
+<td>• El préstamo solo se habilita si hay un ejemplar disponible.<br>• El sistema indica la fecha límite de devolución al confirmar el préstamo.<br>• No puedo solicitar un nuevo préstamo si tengo devoluciones vencidas pendientes.</td>
+</tr>
+<tr>
+<td>086</td>
+<td>Bibliotecario</td>
+<td>registrar la devolución de un libro prestado</td>
+<td>actualizar la disponibilidad del ejemplar</td>
+<td>• El ejemplar vuelve a quedar disponible inmediatamente tras la devolución.<br>• Si la devolución es tardía, el sistema calcula la penalidad correspondiente.<br>• Queda un registro histórico de cada préstamo y su devolución.</td>
+</tr>
+<tr>
+<td>087</td>
+<td>Estudiante</td>
+<td>acceder a recursos digitales y bases de datos académicas</td>
+<td>consultar bibliografía especializada en línea</td>
+<td>• El acceso se valida automáticamente con mi sesión institucional, sin credenciales adicionales.<br>• Los recursos digitales están organizados por área temática.<br>• Solo puedo acceder a las bases de datos con licencia vigente para mi institución.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m21">21. Analítica, Indicadores y BI<a class="headerlink" href="#m21" title="Permanent link">&para;</a></h4>
+<p><em>Dashboards, rendimiento, retención, deserción e indicadores institucionales</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>088</td>
+<td>Directivo</td>
+<td>visualizar un dashboard con los indicadores de rendimiento y deserción</td>
+<td>tomar decisiones basadas en datos</td>
+<td>• El dashboard se puede filtrar por facultad, programa y periodo.<br>• Los indicadores se calculan a partir de los datos ya cerrados de cada periodo.<br>• Puedo exportar los indicadores mostrados en un archivo descargable.</td>
+</tr>
+<tr>
+<td>089</td>
+<td>Directivo</td>
+<td>consultar la demanda de cursos y la carga docente por periodo</td>
+<td>planificar la oferta académica siguiente</td>
+<td>• Se muestra qué cursos tuvieron mayor demanda de matrícula frente a su cupo ofertado.<br>• Se muestra la carga docente promedio por facultad y por docente.<br>• Los datos se actualizan automáticamente al cerrarse cada periodo académico.</td>
+</tr>
+<tr>
+<td>090</td>
+<td>Directivo</td>
+<td>consultar los indicadores de ingresos institucionales consolidados</td>
+<td>monitorear la salud financiera de la universidad</td>
+<td>• El indicador consolida los cargos cobrados de matrícula, enseñanza y otros conceptos.<br>• Se puede comparar el periodo actual contra periodos anteriores.<br>• El detalle contable de estos ingresos permanece a cargo del ERP Administrativo, no de este módulo.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="m22">22. Plataforma Transversal<a class="headerlink" href="#m22" title="Permanent link">&para;</a></h4>
+<p><em>Seguridad, roles, permisos, SSO, workflow, notificaciones y auditoría</em></p>
+<table>
+<thead>
+<tr>
+<th>HU</th>
+<th>Como</th>
+<th>Quiero</th>
+<th>Para</th>
+<th>Criterios de aceptación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>091</td>
+<td>Usuario</td>
+<td>iniciar sesión una sola vez y acceder a todos los módulos del sistema</td>
+<td>no autenticarme repetidamente en cada módulo</td>
+<td>• La autenticación se resuelve mediante un proveedor de identidad externo (SSO).<br>• Al cerrar sesión en un módulo, la sesión se cierra en todos los demás.<br>• Si mi sesión expira, se me redirige nuevamente al inicio de sesión único.</td>
+</tr>
+<tr>
+<td>092</td>
+<td>Administrador</td>
+<td>configurar los roles y permisos de acceso por módulo</td>
+<td>controlar qué puede hacer cada tipo de usuario</td>
+<td>• Cada rol se compone de un conjunto de permisos específicos por módulo.<br>• Un usuario puede tener más de un rol asignado a la vez.<br>• Los cambios de permisos se aplican la próxima vez que el usuario ingresa al sistema.</td>
+</tr>
+<tr>
+<td>093</td>
+<td>Usuario</td>
+<td>firmar digitalmente un documento dentro de un flujo de trabajo</td>
+<td>formalizar una aprobación sin papel</td>
+<td>• La firma queda vinculada a mi identidad y a la fecha y hora exactas del acto.<br>• Un documento firmado no puede modificarse sin invalidar la firma existente.<br>• El flujo avanza automáticamente al siguiente responsable una vez firmado.</td>
+</tr>
+<tr>
+<td>094</td>
+<td>Administrador</td>
+<td>consultar el registro de auditoría de acciones realizadas en el sistema</td>
+<td>investigar cambios o incidentes</td>
+<td>• Cada registro de auditoría indica usuario, acción, módulo y fecha/hora.<br>• Puedo filtrar el registro por usuario, módulo o rango de fechas.<br>• Los registros de auditoría no pueden editarse ni eliminarse.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-microservicios">2. Microservicios<a class="headerlink" href="#2-microservicios" title="Permanent link">&para;</a></h3>
+<p>Cada módulo funcional se materializa en un microservicio con su propia base de datos. El módulo 22 (Plataforma Transversal) se reparte entre Keycloak (SSO, roles y permisos) y tres servicios propios.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Microservicio</th>
+<th>Módulo</th>
+<th>HU</th>
+<th>Responsabilidad</th>
+<th>Base de datos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>institucional-ms</code></td>
+<td>1. Institucional y Organización</td>
+<td>001–004</td>
+<td>Estructura organizacional: institución, sedes, campus, facultades, escuelas, programas, periodos y calendario académico.</td>
+<td><code>institucional_db</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>persona-ms</code></td>
+<td>2. Personas</td>
+<td>005–008</td>
+<td>Fuente única de identidad: personas, datos de contacto, documentos y roles asociados.</td>
+<td><code>persona_db</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>admision-ms</code></td>
+<td>3. Admisión e Ingreso</td>
+<td>009–013</td>
+<td>Proceso de admisión: postulación, examen en línea, publicación de resultados e ingreso al núcleo académico.</td>
+<td><code>admision_db</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>curriculo-ms</code></td>
+<td>4. Currículo</td>
+<td>014–018</td>
+<td>Planes de estudio, versiones, asignaturas, créditos, prerrequisitos y equivalencias; malla curricular del estudiante.</td>
+<td><code>curriculo_db</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>oferta-ms</code></td>
+<td>5. Planificación y Oferta Académica</td>
+<td>019–024</td>
+<td>Oferta académica del periodo: secciones, docentes, aulas, horarios, cupos y modalidad.</td>
+<td><code>oferta_db</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>matricula-ms</code></td>
+<td>6. Matrícula</td>
+<td>025–030</td>
+<td>Inscripción, retiros, cambios de sección, reservas y bloqueos de matrícula, con validación de reglas.</td>
+<td><code>matricula_db</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>evaluacion-ms</code></td>
+<td>7. Evaluación y Cierre Académico</td>
+<td>031–035</td>
+<td>Evaluaciones, registro de notas, cierre de actas, rectificaciones y cierre académico del periodo.</td>
+<td><code>evaluacion_db</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>trayectoria-ms</code></td>
+<td>8. Trayectoria Académica</td>
+<td>036–039</td>
+<td>Historial académico derivado, promedio ponderado, avance de créditos, convalidaciones y reconocimientos.</td>
+<td><code>trayectoria_db</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>finanzas-estudiante-ms</code></td>
+<td>9. Finanzas del Estudiante</td>
+<td>040–044</td>
+<td>Cargos del estudiante (matrícula, enseñanza, derechos), tarifario, becas, descuentos y saldos.</td>
+<td><code>finanzas_estudiante_db</code></td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>egreso-ms</code></td>
+<td>10. Egreso, Grados, Títulos y Certificación</td>
+<td>045–048</td>
+<td>Trámite de egreso, solicitud de grados y títulos, y certificados y constancias verificables.</td>
+<td><code>egreso_db</code></td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>cobranza-ms</code></td>
+<td>11. Ingresos, Cobranza y Pagos</td>
+<td>049–053</td>
+<td>Pagos en línea y en caja, pasarela, comprobantes y devoluciones; consulta el saldo vigente a Finanzas del Estudiante.</td>
+<td><code>cobranza_db</code></td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>extension-ms</code></td>
+<td>12. Extensión, Educación Continua y Eventos</td>
+<td>054–057</td>
+<td>Talleres, diplomados, seminarios y congresos: publicación, inscripción, asistencia y certificado de participación.</td>
+<td><code>extension_db</code></td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>lms-ms</code></td>
+<td>13. LMS / Aprendizaje</td>
+<td>058–062</td>
+<td>Aula virtual: contenidos, tareas, foros, evaluaciones en línea y seguimiento del progreso.</td>
+<td><code>lms_db</code></td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>servicios-estudiante-ms</code></td>
+<td>14. Servicios al Estudiante</td>
+<td>063–066</td>
+<td>Tutoría y asesoría, trámites y solicitudes administrativas, reclamos y casos de acompañamiento.</td>
+<td><code>servicios_estudiante_db</code></td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>investigacion-ms</code></td>
+<td>15. Investigación</td>
+<td>067–070</td>
+<td>Proyectos, grupos y semilleros de investigación, producción científica, repositorio y jornadas.</td>
+<td><code>investigacion_db</code></td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>practicas-ms</code></td>
+<td>16. Prácticas, Internado y Vinculación</td>
+<td>071–074</td>
+<td>Prácticas preprofesionales e internado: plazas, postulaciones, evidencias, horas y evaluación del supervisor.</td>
+<td><code>practicas_db</code></td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>movilidad-ms</code></td>
+<td>17. Movilidad e Internacionalización</td>
+<td>075–077</td>
+<td>Movilidad saliente y entrante, estancias académicas y reconocimiento de cursos.</td>
+<td><code>movilidad_db</code></td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>egresados-ms</code></td>
+<td>18. Egresados y Seguimiento</td>
+<td>078–080</td>
+<td>Seguimiento laboral de egresados, bolsa de trabajo e indicadores de empleabilidad.</td>
+<td><code>egresados_db</code></td>
+</tr>
+<tr>
+<td>19</td>
+<td><code>convenios-ms</code></td>
+<td>19. Convenios y Relaciones Institucionales</td>
+<td>081–083</td>
+<td>Instituciones asociadas, convenios marco y específicos, vigencia y alertas de vencimiento.</td>
+<td><code>convenios_db</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td><code>biblioteca-ms</code></td>
+<td>20. Biblioteca y Recursos Académicos</td>
+<td>084–087</td>
+<td>Catálogo, préstamos, devoluciones, penalidades y acceso a recursos digitales y bases de datos.</td>
+<td><code>biblioteca_db</code></td>
+</tr>
+<tr>
+<td>21</td>
+<td><code>analitica-ms</code></td>
+<td>21. Analítica, Indicadores y BI</td>
+<td>088–090</td>
+<td>Dashboards e indicadores institucionales (rendimiento, deserción, demanda, carga docente, ingresos). Solo lectura sobre datos cerrados.</td>
+<td><code>analitica_db</code></td>
+</tr>
+<tr>
+<td>22</td>
+<td><code>workflow-ms</code></td>
+<td>22. Plataforma Transversal</td>
+<td>093</td>
+<td>Flujos de trabajo y firma digital de documentos.</td>
+<td><code>workflow_db</code></td>
+</tr>
+<tr>
+<td>23</td>
+<td><code>notificacion-ms</code></td>
+<td>22. Plataforma Transversal</td>
+<td>transversal</td>
+<td>Notificaciones transversales por correo y en la plataforma (resultados, trámites, alertas, confirmaciones).</td>
+<td><code>notificacion_db</code></td>
+</tr>
+<tr>
+<td>24</td>
+<td><code>auditoria-ms</code></td>
+<td>22. Plataforma Transversal</td>
+<td>094</td>
+<td>Registro de auditoría inmutable de acciones del sistema.</td>
+<td><code>auditoria_db</code></td>
+</tr>
+</tbody>
+</table>
+<p>Componentes de infraestructura y plataforma:</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>config-server</code></td>
+<td>Configuración centralizada por ambientes.</td>
+</tr>
+<tr>
+<td><code>eureka</code></td>
+<td>Registro y descubrimiento de servicios.</td>
+</tr>
+<tr>
+<td><code>gateway</code></td>
+<td>Punto único de acceso, enrutamiento, balanceo de carga y validación del JWT.</td>
+</tr>
+<tr>
+<td><code>keycloak</code></td>
+<td>Proveedor de identidad externo: SSO, roles y permisos por módulo (HU 091 y 092).</td>
+</tr>
+<tr>
+<td><code>kafka</code></td>
+<td>Broker de mensajería para eventos entre servicios.</td>
+</tr>
+<tr>
+<td><code>lamb-ng</code></td>
+<td>Cliente frontend (Angular) que consume el sistema por el Gateway.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-atributos-por-microservicio">3. Atributos por microservicio<a class="headerlink" href="#3-atributos-por-microservicio" title="Permanent link">&para;</a></h3>
+<p>Entidades principales y sus atributos, derivados de las historias de usuario. Despliega cada microservicio para ver su detalle.</p>
+<details class="info">
+<summary>1. institucional-ms</summary>
+<p>Estructura organizacional: institución, sedes, campus, facultades, escuelas, programas, periodos y calendario académico.</p>
+<p>Base de datos: <code>institucional_db</code> · Historias: 001–004</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Institucion</code></td>
+<td>id, nombre</td>
+</tr>
+<tr>
+<td><code>Sede</code></td>
+<td>id, nombre, direccion, campus_id, institucion_id</td>
+</tr>
+<tr>
+<td><code>Campus</code></td>
+<td>id, nombre, sede_id</td>
+</tr>
+<tr>
+<td><code>Facultad</code></td>
+<td>id, nombre, responsable, sede_id</td>
+</tr>
+<tr>
+<td><code>Escuela</code></td>
+<td>id, nombre, responsable, facultad_id</td>
+</tr>
+<tr>
+<td><code>Programa</code></td>
+<td>id, nombre, grado_titulo, escuela_id, estado_admision</td>
+</tr>
+<tr>
+<td><code>PeriodoAcademico</code></td>
+<td>id, codigo, fecha_inicio, fecha_fin, estado</td>
+</tr>
+<tr>
+<td><code>FechaClave</code></td>
+<td>id, periodo_id, tipo (matricula, retiro, cierre), fecha</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>2. persona-ms</summary>
+<p>Fuente única de identidad: personas, datos de contacto, documentos y roles asociados.</p>
+<p>Base de datos: <code>persona_db</code> · Historias: 005–008</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Persona</code></td>
+<td>id, tipo_documento, numero_documento (único), nombres, apellidos, fecha_nacimiento</td>
+</tr>
+<tr>
+<td><code>Contacto</code></td>
+<td>id, persona_id, correo, telefono, direccion</td>
+</tr>
+<tr>
+<td><code>DocumentoPersona</code></td>
+<td>id, persona_id, tipo, archivo, estado (pendiente, verificado)</td>
+</tr>
+<tr>
+<td><code>RolPersona</code></td>
+<td>id, persona_id, rol (estudiante, docente, etc.), estado</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>3. admision-ms</summary>
+<p>Proceso de admisión: postulación, examen en línea, publicación de resultados e ingreso al núcleo académico.</p>
+<p>Base de datos: <code>admision_db</code> · Historias: 009–013</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ProcesoAdmision</code></td>
+<td>id, programa_id, periodo_id, fecha_inicio, fecha_fin, estado (abierto, cerrado)</td>
+</tr>
+<tr>
+<td><code>Postulante</code></td>
+<td>id, persona_id, proceso_id, programa_id, constancia, estado</td>
+</tr>
+<tr>
+<td><code>ExamenAdmision</code></td>
+<td>id, proceso_id, fecha_hora_inicio, duracion</td>
+</tr>
+<tr>
+<td><code>IntentoExamen</code></td>
+<td>id, postulante_id, examen_id, hora_envio, puntaje</td>
+</tr>
+<tr>
+<td><code>ResultadoAdmision</code></td>
+<td>id, postulante_id, puntaje, estado (admitido, no admitido), publicado, motivo_modificacion</td>
+</tr>
+<tr>
+<td><code>IngresoEstudiante</code></td>
+<td>id, postulante_id, estudiante_id, periodo_id, fecha</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>4. curriculo-ms</summary>
+<p>Planes de estudio, versiones, asignaturas, créditos, prerrequisitos y equivalencias; malla curricular del estudiante.</p>
+<p>Base de datos: <code>curriculo_db</code> · Historias: 014–018</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PlanEstudios</code></td>
+<td>id, programa_id, version, estado (borrador, vigente, archivado), total_creditos</td>
+</tr>
+<tr>
+<td><code>Asignatura</code></td>
+<td>id, plan_id, codigo, nombre, creditos, ciclo</td>
+</tr>
+<tr>
+<td><code>Prerrequisito</code></td>
+<td>id, asignatura_id, requisito_id</td>
+</tr>
+<tr>
+<td><code>Equivalencia</code></td>
+<td>id, asignatura_origen_id, asignatura_destino_id, plan_origen_id, plan_destino_id</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>5. oferta-ms</summary>
+<p>Oferta académica del periodo: secciones, docentes, aulas, horarios, cupos y modalidad.</p>
+<p>Base de datos: <code>oferta_db</code> · Historias: 019–024</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Seccion</code></td>
+<td>id, asignatura_id, periodo_id, docente_id, aula_id, modalidad (presencial, virtual, híbrida), cupo_maximo, cupo_disponible, estado</td>
+</tr>
+<tr>
+<td><code>BloqueHorario</code></td>
+<td>id, seccion_id, aula_id, dia, hora_inicio, hora_fin</td>
+</tr>
+<tr>
+<td><code>Aula</code></td>
+<td>id, codigo, capacidad, sede_id</td>
+</tr>
+<tr>
+<td><code>AsignacionDocente</code></td>
+<td>id, seccion_id, docente_id, periodo_id</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>6. matricula-ms</summary>
+<p>Inscripción, retiros, cambios de sección, reservas y bloqueos de matrícula, con validación de reglas.</p>
+<p>Base de datos: <code>matricula_db</code> · Historias: 025–030</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Matricula</code></td>
+<td>id, estudiante_id, periodo_id, estado, numero_cuotas, costo_estimado</td>
+</tr>
+<tr>
+<td><code>DetalleMatricula</code></td>
+<td>id, matricula_id, seccion_id, estado (inscrito, retirado)</td>
+</tr>
+<tr>
+<td><code>ReservaMatricula</code></td>
+<td>id, estudiante_id, periodo_id, estado, periodos_consecutivos</td>
+</tr>
+<tr>
+<td><code>BloqueoMatricula</code></td>
+<td>id, estudiante_id, motivo (financiero, documentario, disciplinario), estado, fecha_inicio, fecha_liberacion</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>7. evaluacion-ms</summary>
+<p>Evaluaciones, registro de notas, cierre de actas, rectificaciones y cierre académico del periodo.</p>
+<p>Base de datos: <code>evaluacion_db</code> · Historias: 031–035</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Evaluacion</code></td>
+<td>id, seccion_id, nombre, fecha, peso</td>
+</tr>
+<tr>
+<td><code>Nota</code></td>
+<td>id, evaluacion_id, estudiante_id, valor</td>
+</tr>
+<tr>
+<td><code>Acta</code></td>
+<td>id, seccion_id, estado (abierta, cerrada), fecha_cierre</td>
+</tr>
+<tr>
+<td><code>Rectificacion</code></td>
+<td>id, nota_id, nota_anterior, nota_nueva, motivo, estado, aprobada_por</td>
+</tr>
+<tr>
+<td><code>CierrePeriodo</code></td>
+<td>id, periodo_id, estado, fecha_cierre</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>8. trayectoria-ms</summary>
+<p>Historial académico derivado, promedio ponderado, avance de créditos, convalidaciones y reconocimientos.</p>
+<p>Base de datos: <code>trayectoria_db</code> · Historias: 036–039</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RegistroAcademico</code></td>
+<td>id, estudiante_id, asignatura_id, periodo_id, estado (aprobado, desaprobado, retirado, convalidado), nota</td>
+</tr>
+<tr>
+<td><code>AvanceAcademico</code></td>
+<td>id, estudiante_id, plan_id, promedio_ponderado, creditos_aprobados, porcentaje_avance</td>
+</tr>
+<tr>
+<td><code>SolicitudConvalidacion</code></td>
+<td>id, estudiante_id, curso_externo, institucion_origen, certificado, silabo, estado (en revisión, aprobada, rechazada), sustento</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>9. finanzas-estudiante-ms</summary>
+<p>Cargos del estudiante (matrícula, enseñanza, derechos), tarifario, becas, descuentos y saldos.</p>
+<p>Base de datos: <code>finanzas_estudiante_db</code> · Historias: 040–044</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Cargo</code></td>
+<td>id, estudiante_id, concepto, unidad_organizacional, monto_total, saldo, fecha_vencimiento, estado (programado, pendiente, cancelado)</td>
+</tr>
+<tr>
+<td><code>Tarifario</code></td>
+<td>id, programa_id, periodo_id, costo_por_credito</td>
+</tr>
+<tr>
+<td><code>Beneficio</code></td>
+<td>id, estudiante_id, tipo (porcentaje, monto fijo), valor, vigencia_desde, vigencia_hasta, motivo, autorizado_por</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>10. egreso-ms</summary>
+<p>Trámite de egreso, solicitud de grados y títulos, y certificados y constancias verificables.</p>
+<p>Base de datos: <code>egreso_db</code> · Historias: 045–048</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TramiteEgreso</code></td>
+<td>id, estudiante_id, estado, checklist_requisitos, motivo_rechazo</td>
+</tr>
+<tr>
+<td><code>SolicitudTitulo</code></td>
+<td>id, tramite_egreso_id, modalidad_titulacion, estado, fecha_solicitud</td>
+</tr>
+<tr>
+<td><code>Certificado</code></td>
+<td>id, estudiante_id, tipo (certificado, constancia), codigo_verificacion (único), archivo_pdf, fecha_emision</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>11. cobranza-ms</summary>
+<p>Pagos en línea y en caja, pasarela, comprobantes y devoluciones; consulta el saldo vigente a Finanzas del Estudiante.</p>
+<p>Base de datos: <code>cobranza_db</code> · Historias: 049–053</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Pago</code></td>
+<td>id, cargo_id, monto, canal (en línea, caja), estado, referencia_pasarela, fecha</td>
+</tr>
+<tr>
+<td><code>Comprobante</code></td>
+<td>id, pago_id, numero_correlativo (único), concepto, monto, medio_pago, fecha</td>
+</tr>
+<tr>
+<td><code>Devolucion</code></td>
+<td>id, pago_id, monto, motivo, medio_devolucion, estado</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>12. extension-ms</summary>
+<p>Talleres, diplomados, seminarios y congresos: publicación, inscripción, asistencia y certificado de participación.</p>
+<p>Base de datos: <code>extension_db</code> · Historias: 054–057</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EventoExtension</code></td>
+<td>id, tipo, nombre, fecha_inicio, fecha_fin, cupo_maximo, costo, estado (borrador, publicado)</td>
+</tr>
+<tr>
+<td><code>InscripcionEvento</code></td>
+<td>id, evento_id, participante_id, cargo_id, estado</td>
+</tr>
+<tr>
+<td><code>AsistenciaEvento</code></td>
+<td>id, inscripcion_id, sesion_fecha, presente</td>
+</tr>
+<tr>
+<td><code>CertificadoParticipacion</code></td>
+<td>id, inscripcion_id, horas_certificadas, codigo_verificacion, archivo_pdf</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>13. lms-ms</summary>
+<p>Aula virtual: contenidos, tareas, foros, evaluaciones en línea y seguimiento del progreso.</p>
+<p>Base de datos: <code>lms_db</code> · Historias: 058–062</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Contenido</code></td>
+<td>id, seccion_id, unidad_semana, titulo, recurso, fecha_publicacion</td>
+</tr>
+<tr>
+<td><code>Tarea</code></td>
+<td>id, seccion_id, titulo, fecha_limite</td>
+</tr>
+<tr>
+<td><code>Entrega</code></td>
+<td>id, tarea_id, estudiante_id, archivo, estado (pendiente, entregada, calificada), fecha_entrega</td>
+</tr>
+<tr>
+<td><code>TemaForo</code></td>
+<td>id, seccion_id, autor_id, titulo, fijado, cerrado</td>
+</tr>
+<tr>
+<td><code>MensajeForo</code></td>
+<td>id, tema_id, autor_id, contenido, fecha</td>
+</tr>
+<tr>
+<td><code>EvaluacionLinea</code></td>
+<td>id, seccion_id, tiempo_limite, intentos_permitidos</td>
+</tr>
+<tr>
+<td><code>ProgresoEstudiante</code></td>
+<td>id, seccion_id, estudiante_id, porcentaje_avance</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>14. servicios-estudiante-ms</summary>
+<p>Tutoría y asesoría, trámites y solicitudes administrativas, reclamos y casos de acompañamiento.</p>
+<p>Base de datos: <code>servicios_estudiante_db</code> · Historias: 063–066</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CitaTutoria</code></td>
+<td>id, estudiante_id, tutor_id, fecha_hora, modalidad, estado</td>
+</tr>
+<tr>
+<td><code>Tramite</code></td>
+<td>id, estudiante_id, tipo, tiempo_estimado_atencion, estado</td>
+</tr>
+<tr>
+<td><code>Reclamo</code></td>
+<td>id, estudiante_id, categoria, area_responsable, numero_seguimiento, estado, respuesta</td>
+</tr>
+<tr>
+<td><code>CasoAcompanamiento</code></td>
+<td>id, estudiante_id, asesor_id, estado (abierto, en seguimiento, cerrado), notas</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>15. investigacion-ms</summary>
+<p>Proyectos, grupos y semilleros de investigación, producción científica, repositorio y jornadas.</p>
+<p>Base de datos: <code>investigacion_db</code> · Historias: 067–070</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ProyectoInvestigacion</code></td>
+<td>id, titulo, investigador_principal_id, colaboradores, fecha_inicio, fecha_fin, linea_id</td>
+</tr>
+<tr>
+<td><code>Semillero</code></td>
+<td>id, nombre, linea_tematica, responsable_id</td>
+</tr>
+<tr>
+<td><code>MiembroSemillero</code></td>
+<td>id, semillero_id, estudiante_id, estado (postulante, activo)</td>
+</tr>
+<tr>
+<td><code>ProduccionCientifica</code></td>
+<td>id, proyecto_id, titulo, autores, resumen, palabras_clave, anio, documento</td>
+</tr>
+<tr>
+<td><code>JornadaInvestigacion</code></td>
+<td>id, nombre, convocatoria_abierta, fecha</td>
+</tr>
+<tr>
+<td><code>TrabajoInscrito</code></td>
+<td>id, jornada_id, investigador_id, titulo, resumen, modalidad, sesion_asignada</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>16. practicas-ms</summary>
+<p>Prácticas preprofesionales e internado: plazas, postulaciones, evidencias, horas y evaluación del supervisor.</p>
+<p>Base de datos: <code>practicas_db</code> · Historias: 071–074</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CentroPractica</code></td>
+<td>id, nombre, convenio_id, estado</td>
+</tr>
+<tr>
+<td><code>PlazaPractica</code></td>
+<td>id, centro_id, area, vacantes, creditos_minimos, estado</td>
+</tr>
+<tr>
+<td><code>PostulacionPractica</code></td>
+<td>id, plaza_id, estudiante_id, estado</td>
+</tr>
+<tr>
+<td><code>EvidenciaPractica</code></td>
+<td>id, postulacion_id, fecha, horas, archivo, validada</td>
+</tr>
+<tr>
+<td><code>EvaluacionPractica</code></td>
+<td>id, postulacion_id, supervisor_id, rubrica, calificacion</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>17. movilidad-ms</summary>
+<p>Movilidad saliente y entrante, estancias académicas y reconocimiento de cursos.</p>
+<p>Base de datos: <code>movilidad_db</code> · Historias: 075–077</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PostulacionMovilidad</code></td>
+<td>id, estudiante_id, convenio_id, periodo_destino, cursos_planeados, estado</td>
+</tr>
+<tr>
+<td><code>EstudianteEntrante</code></td>
+<td>id, persona_id, institucion_origen, fecha_inicio, fecha_fin, secciones_autorizadas, estado</td>
+</tr>
+<tr>
+<td><code>SolicitudReconocimiento</code></td>
+<td>id, estudiante_id, certificado_notas, estado, sustento</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>18. egresados-ms</summary>
+<p>Seguimiento laboral de egresados, bolsa de trabajo e indicadores de empleabilidad.</p>
+<p>Base de datos: <code>egresados_db</code> · Historias: 078–080</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SituacionLaboral</code></td>
+<td>id, egresado_id, estado (empleado, buscando empleo, estudiando), empresa, cargo, fecha_actualizacion</td>
+</tr>
+<tr>
+<td><code>OfertaLaboral</code></td>
+<td>id, empleador_id, titulo, carrera, ubicacion, modalidad, estado</td>
+</tr>
+<tr>
+<td><code>PostulacionOferta</code></td>
+<td>id, oferta_id, egresado_id, estado, fecha</td>
+</tr>
+<tr>
+<td><code>IndicadorEmpleabilidad</code></td>
+<td>id, programa_id, cohorte, periodo, tasa_empleo</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>19. convenios-ms</summary>
+<p>Instituciones asociadas, convenios marco y específicos, vigencia y alertas de vencimiento.</p>
+<p>Base de datos: <code>convenios_db</code> · Historias: 081–083</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InstitucionAsociada</code></td>
+<td>id, nombre, pais, responsable</td>
+</tr>
+<tr>
+<td><code>ConvenioMarco</code></td>
+<td>id, institucion_id, responsables, fecha_inicio, fecha_fin, estado</td>
+</tr>
+<tr>
+<td><code>ConvenioEspecifico</code></td>
+<td>id, convenio_marco_id, compromisos, beneficios, fecha_inicio, fecha_fin</td>
+</tr>
+<tr>
+<td><code>AlertaVencimiento</code></td>
+<td>id, convenio_id, dias_anticipacion, fecha_alerta</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>20. biblioteca-ms</summary>
+<p>Catálogo, préstamos, devoluciones, penalidades y acceso a recursos digitales y bases de datos.</p>
+<p>Base de datos: <code>biblioteca_db</code> · Historias: 084–087</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Recurso</code></td>
+<td>id, titulo, autor, tema, tipo (físico, digital)</td>
+</tr>
+<tr>
+<td><code>Ejemplar</code></td>
+<td>id, recurso_id, codigo, estado (disponible, prestado)</td>
+</tr>
+<tr>
+<td><code>Prestamo</code></td>
+<td>id, ejemplar_id, usuario_id, fecha_prestamo, fecha_limite, fecha_devolucion</td>
+</tr>
+<tr>
+<td><code>Penalidad</code></td>
+<td>id, prestamo_id, dias_retraso, monto</td>
+</tr>
+<tr>
+<td><code>BaseDatosAcademica</code></td>
+<td>id, nombre, area_tematica, licencia_vigente_hasta</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>21. analitica-ms</summary>
+<p>Dashboards e indicadores institucionales (rendimiento, deserción, demanda, carga docente, ingresos). Solo lectura sobre datos cerrados.</p>
+<p>Base de datos: <code>analitica_db</code> · Historias: 088–090</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>IndicadorRendimiento</code></td>
+<td>id, facultad_id, programa_id, periodo_id, promedio, tasa_aprobacion</td>
+</tr>
+<tr>
+<td><code>IndicadorDesercion</code></td>
+<td>id, programa_id, periodo_id, retenidos, desertores</td>
+</tr>
+<tr>
+<td><code>DemandaCurso</code></td>
+<td>id, asignatura_id, periodo_id, matriculados, cupo_ofertado</td>
+</tr>
+<tr>
+<td><code>CargaDocente</code></td>
+<td>id, docente_id, facultad_id, periodo_id, secciones, horas</td>
+</tr>
+<tr>
+<td><code>IndicadorIngresos</code></td>
+<td>id, periodo_id, concepto, monto_cobrado</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>22. workflow-ms</summary>
+<p>Flujos de trabajo y firma digital de documentos.</p>
+<p>Base de datos: <code>workflow_db</code> · Historias: 093</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Flujo</code></td>
+<td>id, tipo, estado, paso_actual</td>
+</tr>
+<tr>
+<td><code>PasoFlujo</code></td>
+<td>id, flujo_id, responsable_id, orden, estado</td>
+</tr>
+<tr>
+<td><code>FirmaDigital</code></td>
+<td>id, documento_id, usuario_id, fecha_hora, hash_documento, valida</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>23. notificacion-ms</summary>
+<p>Notificaciones transversales por correo y en la plataforma (resultados, trámites, alertas, confirmaciones).</p>
+<p>Base de datos: <code>notificacion_db</code> · Historias: transversal</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Notificacion</code></td>
+<td>id, destinatario_id, canal, asunto, mensaje, estado, fecha_envio</td>
+</tr>
+<tr>
+<td><code>PlantillaNotificacion</code></td>
+<td>id, codigo, asunto, cuerpo</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>24. auditoria-ms</summary>
+<p>Registro de auditoría inmutable de acciones del sistema.</p>
+<p>Base de datos: <code>auditoria_db</code> · Historias: 094</p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Atributos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RegistroAuditoria</code></td>
+<td>id, usuario_id, accion, modulo, fecha_hora, detalle (solo lectura, no editable ni eliminable)</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h2 id="arquitectura-lamb-upeu-20">Arquitectura Lamb UPeU 2.0<a class="headerlink" href="#arquitectura-lamb-upeu-20" title="Permanent link">&para;</a></h2>
+<h3 id="nivel-1-contexto-del-sistema-system-context-c4-nivel-1">Nivel 1: Contexto del sistema (System Context - C4 nivel 1)<a class="headerlink" href="#nivel-1-contexto-del-sistema-system-context-c4-nivel-1" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart LR
+    Estudiante(["Estudiante / Postulante / Egresado"])
+    Docente(["Docente / Investigador"])
+    Personal(["Personal administrativo y directivos"])
+    Lamb["Lamb UPeU 2.0 - sistema universitario integrado"]
+    Pasarela["Pasarela de pagos externa"]
+    ERP["ERP Administrativo"]
+    Externos["Instituciones asociadas, centros de práctica y empleadores"]
+
+    Estudiante --&gt;|"matrícula, notas, pagos, trámites"| Lamb
+    Docente --&gt;|"secciones, notas, aula virtual"| Lamb
+    Personal --&gt;|"gestión, reportes, indicadores"| Lamb
+    Lamb --&gt;|"cobro en línea"| Pasarela
+    Lamb --&gt;|"ingresos cobrados"| ERP
+    Lamb &lt;--&gt;|"convenios, plazas, ofertas laborales"| Externos
+
+    classDef system fill:#eef6ff,stroke:#2b6cb0,stroke-width:2px,color:#111;
+    classDef external fill:#fff3cd,stroke:#b7791f,stroke-width:2px,color:#5f370e;
+    class Lamb system;
+    class Pasarela,ERP,Externos external;</code></pre>
+<p>Lamb se ve como una sola caja negra: importa quién lo usa (estudiantes, docentes, personal administrativo y directivos) y con qué sistemas externos conversa (pasarela de pagos, ERP Administrativo, instituciones y empleadores). El detalle contable permanece en el ERP; Lamb solo informa los ingresos cobrados.</p>
+<h3 id="nivel-2-contenedores-container-diagram-c4-nivel-2">Nivel 2: Contenedores (Container diagram - C4 nivel 2)<a class="headerlink" href="#nivel-2-contenedores-container-diagram-c4-nivel-2" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>%%{init: {"flowchart": {"nodeSpacing": 18, "rankSpacing": 28, "curve": "basis"}} }%%
+flowchart LR
+    Angular["lamb-ng (Angular)"]
+    KC["Keycloak - SSO, roles y permisos"]
+
+    subgraph Infra["infra"]
+        Config["Config Server"]
+        Eureka["Eureka"]
+        Gateway["API Gateway"]
+    end
+
+    subgraph Runtime["microservicios - cada uno con su base de datos"]
+        subgraph Core["núcleo académico"]
+            Inst["institucional-ms"]
+            Pers["persona-ms"]
+            Adm["admision-ms"]
+            Curr["curriculo-ms"]
+            Ofe["oferta-ms"]
+            Mat["matricula-ms"]
+            Eva["evaluacion-ms"]
+            Tray["trayectoria-ms"]
+            Egr["egreso-ms"]
+        end
+
+        subgraph Fin["finanzas"]
+            FinEst["finanzas-estudiante-ms"]
+            Cob["cobranza-ms"]
+        end
+
+        subgraph Serv["servicios académicos"]
+            Ext["extension-ms"]
+            Lms["lms-ms"]
+            SEst["servicios-estudiante-ms"]
+            Bib["biblioteca-ms"]
+        end
+
+        subgraph Vinc["investigación y vinculación"]
+            Inv["investigacion-ms"]
+            Prac["practicas-ms"]
+            Mov["movilidad-ms"]
+            Egd["egresados-ms"]
+            Conv["convenios-ms"]
+        end
+
+        subgraph Trans["plataforma transversal"]
+            Flujo["workflow-ms"]
+            Notif["notificacion-ms"]
+            Aud["auditoria-ms"]
+        end
+
+        Ana["analitica-ms"]
+    end
+
+    subgraph Msg["kafka"]
+        Broker["Kafka broker"]
+    end
+
+    subgraph Ext2["sistemas externos"]
+        Pasarela["Pasarela de pagos"]
+        ERP["ERP Administrativo"]
+    end
+
+    Angular --&gt; Gateway
+    Angular -. "login SSO" .-&gt; KC
+    Gateway -. "valida JWT" .-&gt; KC
+    Gateway --&gt; Runtime
+
+    Config -. "carga configuración" .-&gt; Runtime
+    Runtime -. "registra instancias" .-&gt; Eureka
+    Gateway -. "descubre servicios" .-&gt; Eureka
+
+    Adm --&gt;|"Feign: crea persona/estudiante"| Pers
+    Mat --&gt;|"Feign: prerrequisitos"| Curr
+    Mat --&gt;|"Feign: cupo y horario"| Ofe
+    Cob --&gt;|"Feign: saldo vigente"| FinEst
+    Cob --&gt; Pasarela
+    Ana --&gt;|"ingresos cobrados"| ERP
+
+    Mat --&gt;|"matricula.confirmada"| Broker
+    Eva --&gt;|"acta.cerrada, periodo.cerrado"| Broker
+    Cob --&gt;|"pago.registrado"| Broker
+    Adm --&gt;|"resultado.publicado"| Broker
+    Broker --&gt; FinEst
+    Broker --&gt; Tray
+    Broker --&gt; Mat
+    Broker --&gt; Ana
+    Broker --&gt; Notif
+    Broker --&gt; Aud
+
+    classDef external fill:#fff3cd,stroke:#b7791f,stroke-width:2px,color:#5f370e;
+    class Pasarela,ERP external;</code></pre>
+<p>Convención del diagrama: las flechas continuas representan interacciones de negocio o consultas directas; las flechas punteadas representan dependencias de infraestructura, seguridad, configuración o descubrimiento.</p>
+<h3 id="eventos-clave-entre-servicios">Eventos clave entre servicios<a class="headerlink" href="#eventos-clave-entre-servicios" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Evento</th>
+<th>Publica</th>
+<th>Consume</th>
+<th>HU relacionadas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>resultado.publicado</code></td>
+<td>admision-ms</td>
+<td>notificacion-ms</td>
+<td>011, 012</td>
+</tr>
+<tr>
+<td><code>ingreso.registrado</code></td>
+<td>admision-ms</td>
+<td>persona-ms, matricula-ms</td>
+<td>013</td>
+</tr>
+<tr>
+<td><code>matricula.confirmada</code></td>
+<td>matricula-ms</td>
+<td>finanzas-estudiante-ms, notificacion-ms</td>
+<td>025, 026, 040, 041</td>
+</tr>
+<tr>
+<td><code>matricula.retirada</code></td>
+<td>matricula-ms</td>
+<td>oferta-ms (libera cupo)</td>
+<td>027</td>
+</tr>
+<tr>
+<td><code>acta.cerrada</code></td>
+<td>evaluacion-ms</td>
+<td>trayectoria-ms</td>
+<td>033</td>
+</tr>
+<tr>
+<td><code>periodo.cerrado</code></td>
+<td>evaluacion-ms</td>
+<td>trayectoria-ms, analitica-ms</td>
+<td>035, 037, 088–090</td>
+</tr>
+<tr>
+<td><code>pago.registrado</code></td>
+<td>cobranza-ms</td>
+<td>finanzas-estudiante-ms, notificacion-ms</td>
+<td>044, 049, 050, 051</td>
+</tr>
+<tr>
+<td><code>cargo.cancelado</code></td>
+<td>finanzas-estudiante-ms</td>
+<td>matricula-ms (libera bloqueo financiero)</td>
+<td>030, 044</td>
+</tr>
+<tr>
+<td><code>convenio.por_vencer</code></td>
+<td>convenios-ms</td>
+<td>notificacion-ms</td>
+<td>083</td>
+</tr>
+</tbody>
+</table>
+<p><code>auditoria-ms</code> consume todos los eventos para mantener el registro de auditoría (HU 094).</p>
+<h2 id="flujo-de-trabajo">Flujo de trabajo<a class="headerlink" href="#flujo-de-trabajo" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Base institucional:</strong> el administrador registra sedes, facultades, escuelas, programas y periodos (módulo 1), y las personas con su identidad única (módulo 2).</li>
+<li><strong>Admisión:</strong> el postulante rinde el examen en línea, se publican los resultados y el ingreso del admitido lo habilita como estudiante (módulo 3).</li>
+<li><strong>Currículo y oferta:</strong> el coordinador define planes, prerrequisitos y equivalencias (módulo 4) y abre secciones con docente, aula, horario y cupo (módulo 5).</li>
+<li><strong>Matrícula y finanzas:</strong> el estudiante se inscribe validando prerrequisitos, cupo y horario (módulo 6); se generan los cargos de matrícula y enseñanza (módulo 9) y se pagan en línea o en caja (módulo 11).</li>
+<li><strong>Evaluación y trayectoria:</strong> el docente registra notas y cierra actas (módulo 7); el cierre del periodo recalcula promedio y avance (módulo 8).</li>
+<li><strong>Egreso:</strong> con el plan completo, el estudiante tramita egreso, título y certificados verificables (módulo 10).</li>
+<li><strong>Servicios y vinculación:</strong> aula virtual, extensión, biblioteca, servicios al estudiante, investigación, prácticas, movilidad, egresados y convenios (módulos 12 al 20).</li>
+<li><strong>Gestión:</strong> analítica e indicadores sobre datos cerrados (módulo 21), con SSO, roles, firma digital, notificaciones y auditoría transversales (módulo 22).</li>
+</ol>
+<h2 id="enlaces">Enlaces<a class="headerlink" href="#enlaces" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/AyniSyst/Lamb_UPeU_v2.0">Repositorio del proyecto</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.top", "toc.follow", "content.code.copy", "search.highlight"], "search": "assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
