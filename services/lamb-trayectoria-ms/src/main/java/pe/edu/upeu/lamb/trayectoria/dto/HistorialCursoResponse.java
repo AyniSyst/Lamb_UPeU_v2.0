@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public record HistorialCursoResponse(
         Long id,
         Long idPersona,
-        Long idSeccion,
+        Long idGrupo,
         Long idActa,
         String codigoCurso,
         String periodo,

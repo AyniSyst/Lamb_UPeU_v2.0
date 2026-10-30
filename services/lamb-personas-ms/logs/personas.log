@@ -1,38 +1,331 @@
-2026-10-23 04:45:37.201 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Starting LambPersonasMsApplication using Java 21.0.11 with PID 22224 (F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms)
-2026-10-23 04:45:37.209 [] DEBUG p.e.u.l.p.LambPersonasMsApplication - Running with Spring Boot v4.0.8, Spring v7.0.9
-2026-10-23 04:45:37.209 [] INFO  p.e.u.l.p.LambPersonasMsApplication - The following 1 profile is active: "dev"
-2026-10-23 04:45:37.239 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
-2026-10-23 04:45:37.240 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[default], label=null, version=null, state=null
-2026-10-23 04:45:37.240 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
-2026-10-23 04:45:37.240 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[dev], label=null, version=null, state=null
-2026-10-23 04:45:37.242 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-10-23 04:45:37.243 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-10-23 04:45:37.891 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-10-23 04:45:37.978 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 81 ms. Found 1 JPA repository interface.
-2026-10-23 04:45:38.197 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=58b01e1c-eaf1-3456-819a-8e830a2be72a
-2026-10-23 04:45:38.546 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
-2026-10-23 04:45:38.557 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-10-23 04:45:38.557 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
-2026-10-23 04:45:38.602 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1358 ms
-2026-10-23 04:45:38.746 [] DEBUG p.e.u.l.p.filter.CorrelationIdFilter - Filter 'correlationIdFilter' configured for use
-2026-10-23 04:45:38.869 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-10-23 04:45:39.019 [] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@217e0ec5
-2026-10-23 04:45:39.020 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-10-23 04:45:39.046 [] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:15451/lamb_personas_db (PostgreSQL 16.14)
-2026-10-23 04:45:39.099 [] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
-2026-10-23 04:45:39.102 [] INFO  o.f.core.internal.command.DbValidate - Successfully validated 1 migration (execution time 00:00.014s)
-2026-10-23 04:45:39.132 [] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
-2026-10-23 04:45:39.215 [] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
-2026-10-23 04:45:39.223 [] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create personas tables"
-2026-10-23 04:45:39.290 [] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.044s)
-2026-10-23 04:45:39.357 [] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-10-23 04:45:39.403 [] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.24.Final
-2026-10-23 04:45:39.764 [] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-10-23 04:45:39.827 [] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+2026-10-30 00:14:18.729 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Starting LambPersonasMsApplication using Java 21.0.11 with PID 155084 (F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms)
+2026-10-30 00:14:18.733 [] DEBUG p.e.u.l.p.LambPersonasMsApplication - Running with Spring Boot v4.0.8, Spring v7.0.9
+2026-10-30 00:14:18.733 [] INFO  p.e.u.l.p.LambPersonasMsApplication - The following 1 profile is active: "dev"
+2026-10-30 00:14:18.765 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 00:14:18.765 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=application, profiles=[default], label=null, version=null, state=null
+2026-10-30 00:14:18.769 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 00:14:18.769 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[default], label=null, version=null, state=null
+2026-10-30 00:14:18.769 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 00:14:18.769 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[dev], label=null, version=null, state=null
+2026-10-30 00:14:18.771 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-30 00:14:18.771 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-30 00:14:19.593 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-30 00:14:19.694 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 91 ms. Found 1 JPA repository interface.
+2026-10-30 00:14:19.954 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=58b01e1c-eaf1-3456-819a-8e830a2be72a
+2026-10-30 00:14:20.424 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8110 (http)
+2026-10-30 00:14:20.436 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-30 00:14:20.437 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-30 00:14:20.498 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1727 ms
+2026-10-30 00:14:20.668 [] DEBUG p.e.u.l.p.filter.CorrelationIdFilter - Filter 'correlationIdFilter' configured for use
+2026-10-30 00:14:20.810 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-10-30 00:14:21.878 [] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'flywayInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+----------------------------------------------------------------------------------------------------------
+SQL State  : 28P01
+Error Code : 0
+Message    : FATAL: la autentificaci�n password fall� para el usuario �lamb�
+
+2026-10-30 00:14:21.882 [] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2026-10-30 00:14:21.892 [] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-30 00:14:21.907 [] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'flywayInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+----------------------------------------------------------------------------------------------------------
+SQL State  : 28P01
+Error Code : 0
+Message    : FATAL: la autentificaci�n password fall� para el usuario �lamb�
+
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at pe.edu.upeu.lamb.personas.LambPersonasMsApplication.main(LambPersonasMsApplication.java:10)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+----------------------------------------------------------------------------------------------------------
+SQL State  : 28P01
+Error Code : 0
+Message    : FATAL: la autentificaci�n password fall� para el usuario �lamb�
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1815)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309)
+	... 13 common frames omitted
+Caused by: org.flywaydb.core.internal.exception.sqlExceptions.FlywaySqlUnableToConnectToDbException: Unable to obtain connection from database: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+----------------------------------------------------------------------------------------------------------
+SQL State  : 28P01
+Error Code : 0
+Message    : FATAL: la autentificaci�n password fall� para el usuario �lamb�
+
+	at org.flywaydb.core.internal.jdbc.JdbcUtils.openConnection(JdbcUtils.java:70)
+	at org.flywaydb.core.internal.jdbc.JdbcConnectionFactory.<init>(JdbcConnectionFactory.java:76)
+	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:142)
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:186)
+	at org.springframework.boot.flyway.autoconfigure.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:67)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1862)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1811)
+	... 20 common frames omitted
+Caused by: org.postgresql.util.PSQLException: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:837)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:309)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:367)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:52)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:295)
+	at org.postgresql.Driver.makeConnection(Driver.java:437)
+	at org.postgresql.Driver.connect(Driver.java:305)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:144)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:373)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:210)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:488)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:576)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:97)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
+	at org.flywaydb.core.internal.jdbc.JdbcUtils.openConnection(JdbcUtils.java:65)
+	... 26 common frames omitted
+2026-10-30 00:38:56.878 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Starting LambPersonasMsApplication using Java 21.0.11 with PID 66292 (F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms)
+2026-10-30 00:38:56.881 [] DEBUG p.e.u.l.p.LambPersonasMsApplication - Running with Spring Boot v4.0.8, Spring v7.0.9
+2026-10-30 00:38:56.881 [] INFO  p.e.u.l.p.LambPersonasMsApplication - The following 1 profile is active: "dev"
+2026-10-30 00:38:56.914 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 00:38:56.914 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=application, profiles=[default], label=null, version=null, state=null
+2026-10-30 00:38:56.917 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 00:38:56.917 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[default], label=null, version=null, state=null
+2026-10-30 00:38:56.917 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 00:38:56.917 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[dev], label=null, version=null, state=null
+2026-10-30 00:38:56.923 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-30 00:38:56.923 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-30 00:38:57.812 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-30 00:38:57.915 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 97 ms. Found 1 JPA repository interface.
+2026-10-30 00:38:58.197 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=58b01e1c-eaf1-3456-819a-8e830a2be72a
+2026-10-30 00:38:58.612 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8110 (http)
+2026-10-30 00:38:58.626 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-30 00:38:58.626 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-30 00:38:58.690 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1763 ms
+2026-10-30 00:38:58.874 [] DEBUG p.e.u.l.p.filter.CorrelationIdFilter - Filter 'correlationIdFilter' configured for use
+2026-10-30 00:38:59.015 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-10-30 00:39:00.107 [] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'flywayInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+----------------------------------------------------------------------------------------------------------
+SQL State  : 28P01
+Error Code : 0
+Message    : FATAL: la autentificaci�n password fall� para el usuario �lamb�
+
+2026-10-30 00:39:00.107 [] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2026-10-30 00:39:00.123 [] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-30 00:39:00.140 [] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'flywayInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+----------------------------------------------------------------------------------------------------------
+SQL State  : 28P01
+Error Code : 0
+Message    : FATAL: la autentificaci�n password fall� para el usuario �lamb�
+
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at pe.edu.upeu.lamb.personas.LambPersonasMsApplication.main(LambPersonasMsApplication.java:10)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+----------------------------------------------------------------------------------------------------------
+SQL State  : 28P01
+Error Code : 0
+Message    : FATAL: la autentificaci�n password fall� para el usuario �lamb�
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1815)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309)
+	... 13 common frames omitted
+Caused by: org.flywaydb.core.internal.exception.sqlExceptions.FlywaySqlUnableToConnectToDbException: Unable to obtain connection from database: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+----------------------------------------------------------------------------------------------------------
+SQL State  : 28P01
+Error Code : 0
+Message    : FATAL: la autentificaci�n password fall� para el usuario �lamb�
+
+	at org.flywaydb.core.internal.jdbc.JdbcUtils.openConnection(JdbcUtils.java:70)
+	at org.flywaydb.core.internal.jdbc.JdbcConnectionFactory.<init>(JdbcConnectionFactory.java:76)
+	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:142)
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:186)
+	at org.springframework.boot.flyway.autoconfigure.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:67)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1862)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1811)
+	... 20 common frames omitted
+Caused by: org.postgresql.util.PSQLException: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:837)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:309)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:367)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:52)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:295)
+	at org.postgresql.Driver.makeConnection(Driver.java:437)
+	at org.postgresql.Driver.connect(Driver.java:305)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:144)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:373)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:210)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:488)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:576)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:97)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
+	at org.flywaydb.core.internal.jdbc.JdbcUtils.openConnection(JdbcUtils.java:65)
+	... 26 common frames omitted
+2026-10-30 00:52:33.295 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Starting LambPersonasMsApplication using Java 21.0.11 with PID 111568 (F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms)
+2026-10-30 00:52:33.296 [] DEBUG p.e.u.l.p.LambPersonasMsApplication - Running with Spring Boot v4.0.8, Spring v7.0.9
+2026-10-30 00:52:33.297 [] INFO  p.e.u.l.p.LambPersonasMsApplication - The following 1 profile is active: "dev"
+2026-10-30 00:52:33.329 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 00:52:33.329 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=application, profiles=[default], label=null, version=null, state=null
+2026-10-30 00:52:33.332 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 00:52:33.332 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[default], label=null, version=null, state=null
+2026-10-30 00:52:33.333 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 00:52:33.333 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[dev], label=null, version=null, state=null
+2026-10-30 00:52:33.336 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-30 00:52:33.336 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-30 00:52:34.338 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-30 00:52:34.453 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 106 ms. Found 1 JPA repository interface.
+2026-10-30 00:52:34.768 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=58b01e1c-eaf1-3456-819a-8e830a2be72a
+2026-10-30 00:52:35.276 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8110 (http)
+2026-10-30 00:52:35.292 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-30 00:52:35.293 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-30 00:52:35.352 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 2016 ms
+2026-10-30 00:52:35.536 [] DEBUG p.e.u.l.p.filter.CorrelationIdFilter - Filter 'correlationIdFilter' configured for use
+2026-10-30 00:52:35.685 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-10-30 00:52:36.769 [] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'flywayInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+----------------------------------------------------------------------------------------------------------
+SQL State  : 28P01
+Error Code : 0
+Message    : FATAL: la autentificaci�n password fall� para el usuario �lamb�
+
+2026-10-30 00:52:36.769 [] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2026-10-30 00:52:36.784 [] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-30 00:52:36.795 [] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'flywayInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+----------------------------------------------------------------------------------------------------------
+SQL State  : 28P01
+Error Code : 0
+Message    : FATAL: la autentificaci�n password fall� para el usuario �lamb�
+
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at pe.edu.upeu.lamb.personas.LambPersonasMsApplication.main(LambPersonasMsApplication.java:10)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/flyway/autoconfigure/FlywayAutoConfiguration$FlywayConfiguration.class]: Unable to obtain connection from database: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+----------------------------------------------------------------------------------------------------------
+SQL State  : 28P01
+Error Code : 0
+Message    : FATAL: la autentificaci�n password fall� para el usuario �lamb�
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1815)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309)
+	... 13 common frames omitted
+Caused by: org.flywaydb.core.internal.exception.sqlExceptions.FlywaySqlUnableToConnectToDbException: Unable to obtain connection from database: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+----------------------------------------------------------------------------------------------------------
+SQL State  : 28P01
+Error Code : 0
+Message    : FATAL: la autentificaci�n password fall� para el usuario �lamb�
+
+	at org.flywaydb.core.internal.jdbc.JdbcUtils.openConnection(JdbcUtils.java:70)
+	at org.flywaydb.core.internal.jdbc.JdbcConnectionFactory.<init>(JdbcConnectionFactory.java:76)
+	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:142)
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:186)
+	at org.springframework.boot.flyway.autoconfigure.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:67)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1862)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1811)
+	... 20 common frames omitted
+Caused by: org.postgresql.util.PSQLException: FATAL: la autentificaci�n password fall� para el usuario �lamb�
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:837)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:309)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:367)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:52)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:295)
+	at org.postgresql.Driver.makeConnection(Driver.java:437)
+	at org.postgresql.Driver.connect(Driver.java:305)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:144)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:373)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:210)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:488)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:576)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:97)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
+	at org.flywaydb.core.internal.jdbc.JdbcUtils.openConnection(JdbcUtils.java:65)
+	... 26 common frames omitted
+2026-10-30 02:47:15.846 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Starting LambPersonasMsApplication using Java 21.0.11 with PID 108064 (F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms)
+2026-10-30 02:47:15.869 [] DEBUG p.e.u.l.p.LambPersonasMsApplication - Running with Spring Boot v4.0.8, Spring v7.0.9
+2026-10-30 02:47:15.870 [] INFO  p.e.u.l.p.LambPersonasMsApplication - The following 1 profile is active: "dev"
+2026-10-30 02:47:15.902 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 02:47:15.902 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=application, profiles=[default], label=null, version=null, state=null
+2026-10-30 02:47:15.904 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 02:47:15.904 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[default], label=null, version=null, state=null
+2026-10-30 02:47:15.905 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 02:47:15.905 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[dev], label=null, version=null, state=null
+2026-10-30 02:47:15.907 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-30 02:47:15.907 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-30 02:47:16.708 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-30 02:47:16.808 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 93 ms. Found 1 JPA repository interface.
+2026-10-30 02:47:17.110 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=58b01e1c-eaf1-3456-819a-8e830a2be72a
+2026-10-30 02:47:17.561 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8110 (http)
+2026-10-30 02:47:17.575 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-30 02:47:17.575 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-30 02:47:17.636 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1729 ms
+2026-10-30 02:47:17.804 [] DEBUG p.e.u.l.p.filter.CorrelationIdFilter - Filter 'correlationIdFilter' configured for use
+2026-10-30 02:47:18.011 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-10-30 02:47:18.118 [] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6f100bb5
+2026-10-30 02:47:18.119 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-10-30 02:47:18.141 [] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:15451/lamb_personas_db (PostgreSQL 16.4)
+2026-10-30 02:47:18.177 [] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2026-10-30 02:47:18.180 [] INFO  o.f.core.internal.command.DbValidate - Successfully validated 1 migration (execution time 00:00.019s)
+2026-10-30 02:47:18.192 [] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2026-10-30 02:47:18.265 [] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2026-10-30 02:47:18.270 [] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create personas tables"
+2026-10-30 02:47:18.302 [] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.022s)
+2026-10-30 02:47:18.382 [] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-30 02:47:18.429 [] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.24.Final
+2026-10-30 02:47:18.816 [] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-30 02:47:18.884 [] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
 	Database JDBC URL [jdbc:postgresql://localhost:15451/lamb_personas_db]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
-	Database version: 16.14
+	Database version: 16.4
 	Default catalog/schema: lamb_personas_db/public
 	Autocommit mode: undefined/unknown
 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
@@ -40,59 +333,281 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-10-23 04:45:40.427 [] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-10-23 04:45:40.481 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-10-23 04:45:40.529 [] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-10-23 04:45:40.653 [] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-10-23 04:45:41.189 [] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
-2026-10-23 04:45:41.311 [] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestClient.
-2026-10-23 04:45:41.332 [] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2026-10-23 04:45:41.336 [] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
-2026-10-23 04:45:41.391 [] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
-2026-10-23 04:45:41.406 [] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
-2026-10-23 04:45:41.409 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 04:45:41.414 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
-2026-10-23 04:45:41.414 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
-2026-10-23 04:45:41.416 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
-2026-10-23 04:45:41.416 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
-2026-10-23 04:45:41.416 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
-2026-10-23 04:45:41.416 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
-2026-10-23 04:45:41.416 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
-2026-10-23 04:45:41.590 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
-2026-10-23 04:45:41.592 [] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
-2026-10-23 04:45:41.592 [] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
-2026-10-23 04:45:41.592 [] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1792748741592 with initial instances count: 8
-2026-10-23 04:45:41.597 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application LAMB-PERSONAS-MS with eureka with status UP
-2026-10-23 04:45:41.597 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1792748741597, current=UP, previous=STARTING]
-2026-10-23 04:45:41.597 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-PERSONAS-MS/lamb-personas-ms:8081: registering service...
-2026-10-23 04:45:41.608 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
-2026-10-23 04:45:41.615 [] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8081
-2026-10-23 04:45:41.616 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-PERSONAS-MS/lamb-personas-ms:8081 - registration status: 204
-2026-10-23 04:45:41.626 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Started LambPersonasMsApplication in 5.306 seconds (process running for 5.816)
-2026-10-23 04:45:41.671 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
-2026-10-23 04:45:41.671 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
-2026-10-23 04:48:43.574 [] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-10-23 04:48:43.574 [] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-10-23 04:48:43.574 [] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
-2026-10-23 04:49:00.408 [94acb0c5-fc34-49ae-a2b9-34b09dc7fc98] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public pe.edu.upeu.lamb.personas.dto.PersonaResponse pe.edu.upeu.lamb.personas.controller.PersonaController.crear(pe.edu.upeu.lamb.personas.dto.PersonaRequest): [Field error in object 'personaRequest' on field 'tipo': rejected value [null]; codes [NotNull.personaRequest.tipo,NotNull.tipo,NotNull.pe.edu.upeu.lamb.personas.entity.TipoPersona,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [personaRequest.tipo,tipo]; arguments []; default message [tipo]]; default message [no debe ser nulo]] ]
-2026-10-23 04:49:00.447 [14f19c27-82a1-4474-98d0-98617ff8a4da] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public pe.edu.upeu.lamb.personas.dto.PersonaResponse pe.edu.upeu.lamb.personas.controller.PersonaController.crear(pe.edu.upeu.lamb.personas.dto.PersonaRequest): [Field error in object 'personaRequest' on field 'tipo': rejected value [null]; codes [NotNull.personaRequest.tipo,NotNull.tipo,NotNull.pe.edu.upeu.lamb.personas.entity.TipoPersona,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [personaRequest.tipo,tipo]; arguments []; default message [tipo]]; default message [no debe ser nulo]] ]
-2026-10-23 04:49:00.470 [955ee00a-36ee-4361-84b3-4d50de3b1586] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public pe.edu.upeu.lamb.personas.dto.PersonaResponse pe.edu.upeu.lamb.personas.controller.PersonaController.crear(pe.edu.upeu.lamb.personas.dto.PersonaRequest): [Field error in object 'personaRequest' on field 'tipo': rejected value [null]; codes [NotNull.personaRequest.tipo,NotNull.tipo,NotNull.pe.edu.upeu.lamb.personas.entity.TipoPersona,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [personaRequest.tipo,tipo]; arguments []; default message [tipo]]; default message [no debe ser nulo]] ]
-2026-10-23 04:50:41.424 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 04:55:41.435 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 05:00:41.450 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 05:05:41.467 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 05:10:41.484 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 05:15:41.488 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 05:20:41.498 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 05:25:41.507 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 05:30:41.516 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 05:35:41.525 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 05:40:41.534 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 05:45:41.543 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 05:50:41.551 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 05:55:41.566 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 06:00:41.567 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 06:05:41.579 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 06:10:41.589 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 06:15:41.598 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
-2026-10-23 06:20:41.606 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-30 02:47:19.607 [] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-30 02:47:19.645 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-30 02:47:19.723 [] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-30 02:47:19.875 [] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-30 02:47:20.475 [] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
+2026-10-30 02:47:20.578 [] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestClient.
+2026-10-30 02:47:20.607 [] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-30 02:47:20.613 [] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-10-30 02:47:20.673 [] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2026-10-30 02:47:20.691 [] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2026-10-30 02:47:20.695 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-30 02:47:20.703 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2026-10-30 02:47:20.703 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2026-10-30 02:47:20.703 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2026-10-30 02:47:20.703 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2026-10-30 02:47:20.703 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2026-10-30 02:47:20.703 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2026-10-30 02:47:20.703 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2026-10-30 02:47:20.931 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2026-10-30 02:47:20.934 [] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2026-10-30 02:47:20.935 [] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-10-30 02:47:20.936 [] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1793346440936 with initial instances count: 6
+2026-10-30 02:47:20.938 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application LAMB-PERSONAS-MS with eureka with status UP
+2026-10-30 02:47:20.938 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1793346440938, current=UP, previous=STARTING]
+2026-10-30 02:47:20.939 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-PERSONAS-MS/lamb-personas-ms:8110: registering service...
+2026-10-30 02:47:20.957 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8110 (http) with context path '/'
+2026-10-30 02:47:20.958 [] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8110
+2026-10-30 02:47:20.964 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-PERSONAS-MS/lamb-personas-ms:8110 - registration status: 204
+2026-10-30 02:47:20.972 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Started LambPersonasMsApplication in 6.076 seconds (process running for 6.647)
+2026-10-30 02:47:21.028 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-30 02:47:21.028 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-30 02:48:05.859 [] INFO  o.a.tomcat.util.http.parser.Cookie - A cookie header was received [g_state={"i_l":0,"i_ll":1783814451052,"i_b":"552ZZo+NHJ1htGT+tOX8YE2qJXaWwqCfQJa2WhNDoGs","i_e":{"enable_itp_optimization":24},"i_et":1783814451052};] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2026-10-30 02:48:05.863 [] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-30 02:48:05.863 [] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-10-30 02:48:05.866 [] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-10-30 02:52:20.710 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-30 02:57:20.719 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-30 03:02:20.728 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-30 03:07:20.738 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-30 03:22:58.126 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Starting LambPersonasMsApplication using Java 21.0.11 with PID 67284 (F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms)
+2026-10-30 03:22:58.129 [] DEBUG p.e.u.l.p.LambPersonasMsApplication - Running with Spring Boot v4.0.8, Spring v7.0.9
+2026-10-30 03:22:58.129 [] INFO  p.e.u.l.p.LambPersonasMsApplication - The following 1 profile is active: "dev"
+2026-10-30 03:22:58.164 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 03:22:58.164 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=application, profiles=[default], label=null, version=null, state=null
+2026-10-30 03:22:58.169 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 03:22:58.169 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[default], label=null, version=null, state=null
+2026-10-30 03:22:58.169 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 03:22:58.169 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[dev], label=null, version=null, state=null
+2026-10-30 03:22:58.171 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-30 03:22:58.172 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-30 03:22:59.169 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-30 03:22:59.280 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 105 ms. Found 1 JPA repository interface.
+2026-10-30 03:22:59.646 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=58b01e1c-eaf1-3456-819a-8e830a2be72a
+2026-10-30 03:23:00.169 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8110 (http)
+2026-10-30 03:23:00.184 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-30 03:23:00.184 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-30 03:23:00.254 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 2082 ms
+2026-10-30 03:23:00.458 [] DEBUG p.e.u.l.p.filter.CorrelationIdFilter - Filter 'correlationIdFilter' configured for use
+2026-10-30 03:23:00.693 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-10-30 03:23:00.858 [] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@717c962f
+2026-10-30 03:23:00.860 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-10-30 03:23:00.891 [] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:15451/lamb_personas_db (PostgreSQL 16.4)
+2026-10-30 03:23:00.980 [] INFO  o.f.core.internal.command.DbValidate - Successfully validated 1 migration (execution time 00:00.037s)
+2026-10-30 03:23:01.024 [] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 1
+2026-10-30 03:23:01.026 [] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-10-30 03:23:01.133 [] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-30 03:23:01.198 [] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.24.Final
+2026-10-30 03:23:01.744 [] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-30 03:23:01.840 [] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:15451/lamb_personas_db]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.4
+	Default catalog/schema: lamb_personas_db/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-30 03:23:02.775 [] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-30 03:23:02.859 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-30 03:23:02.944 [] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-30 03:23:03.133 [] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-30 03:23:03.800 [] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
+2026-10-30 03:23:03.916 [] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestClient.
+2026-10-30 03:23:03.944 [] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-30 03:23:03.950 [] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-10-30 03:23:04.006 [] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2026-10-30 03:23:04.024 [] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2026-10-30 03:23:04.028 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-30 03:23:04.034 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2026-10-30 03:23:04.034 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2026-10-30 03:23:04.034 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2026-10-30 03:23:04.034 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2026-10-30 03:23:04.034 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2026-10-30 03:23:04.034 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2026-10-30 03:23:04.034 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2026-10-30 03:23:04.259 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2026-10-30 03:23:04.260 [] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2026-10-30 03:23:04.262 [] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-10-30 03:23:04.263 [] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1793348584263 with initial instances count: 2
+2026-10-30 03:23:04.266 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application LAMB-PERSONAS-MS with eureka with status UP
+2026-10-30 03:23:04.267 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1793348584267, current=UP, previous=STARTING]
+2026-10-30 03:23:04.268 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-PERSONAS-MS/lamb-personas-ms:8110: registering service...
+2026-10-30 03:23:04.283 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8110 (http) with context path '/'
+2026-10-30 03:23:04.285 [] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8110
+2026-10-30 03:23:04.288 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-PERSONAS-MS/lamb-personas-ms:8110 - registration status: 204
+2026-10-30 03:23:04.296 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Started LambPersonasMsApplication in 7.257 seconds (process running for 7.916)
+2026-10-30 03:23:04.345 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-30 03:23:04.345 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-30 03:28:04.046 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-30 03:33:04.060 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-30 03:40:11.470 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Starting LambPersonasMsApplication using Java 21.0.11 with PID 38804 (F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms)
+2026-10-30 03:40:11.473 [] DEBUG p.e.u.l.p.LambPersonasMsApplication - Running with Spring Boot v4.0.8, Spring v7.0.9
+2026-10-30 03:40:11.474 [] INFO  p.e.u.l.p.LambPersonasMsApplication - The following 1 profile is active: "dev"
+2026-10-30 03:40:11.511 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 03:40:11.511 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=application, profiles=[default], label=null, version=null, state=null
+2026-10-30 03:40:11.515 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 03:40:11.515 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[default], label=null, version=null, state=null
+2026-10-30 03:40:11.515 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 03:40:11.515 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[dev], label=null, version=null, state=null
+2026-10-30 03:40:11.518 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-30 03:40:11.518 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-30 03:40:12.553 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-30 03:40:12.668 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 106 ms. Found 1 JPA repository interface.
+2026-10-30 03:40:12.992 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=58b01e1c-eaf1-3456-819a-8e830a2be72a
+2026-10-30 03:40:13.528 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8110 (http)
+2026-10-30 03:40:13.541 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-30 03:40:13.542 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-30 03:40:13.618 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 2099 ms
+2026-10-30 03:40:13.848 [] DEBUG p.e.u.l.p.filter.CorrelationIdFilter - Filter 'correlationIdFilter' configured for use
+2026-10-30 03:40:14.026 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-10-30 03:40:14.158 [] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@69d693ed
+2026-10-30 03:40:14.159 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-10-30 03:40:14.186 [] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:15451/lamb_personas_db (PostgreSQL 16.4)
+2026-10-30 03:40:14.245 [] INFO  o.f.core.internal.command.DbValidate - Successfully validated 1 migration (execution time 00:00.027s)
+2026-10-30 03:40:14.302 [] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 1
+2026-10-30 03:40:14.304 [] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-10-30 03:40:14.400 [] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-30 03:40:14.461 [] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.24.Final
+2026-10-30 03:40:14.999 [] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-30 03:40:15.097 [] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:15451/lamb_personas_db]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.4
+	Default catalog/schema: lamb_personas_db/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-30 03:40:16.018 [] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-30 03:40:16.062 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-30 03:40:16.152 [] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-30 03:40:16.338 [] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-30 03:40:17.143 [] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
+2026-10-30 03:40:17.306 [] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestClient.
+2026-10-30 03:40:17.344 [] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-30 03:40:17.350 [] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-10-30 03:40:17.422 [] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2026-10-30 03:40:17.442 [] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2026-10-30 03:40:17.445 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-30 03:40:17.452 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2026-10-30 03:40:17.453 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2026-10-30 03:40:17.453 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2026-10-30 03:40:17.453 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2026-10-30 03:40:17.453 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2026-10-30 03:40:17.453 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2026-10-30 03:40:17.453 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2026-10-30 03:40:17.679 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2026-10-30 03:40:17.680 [] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2026-10-30 03:40:17.682 [] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-10-30 03:40:17.683 [] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1793349617683 with initial instances count: 1
+2026-10-30 03:40:17.686 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application LAMB-PERSONAS-MS with eureka with status UP
+2026-10-30 03:40:17.687 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1793349617687, current=UP, previous=STARTING]
+2026-10-30 03:40:17.688 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-PERSONAS-MS/lamb-personas-ms:8110: registering service...
+2026-10-30 03:40:17.707 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8110 (http) with context path '/'
+2026-10-30 03:40:17.707 [] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8110
+2026-10-30 03:40:17.713 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-PERSONAS-MS/lamb-personas-ms:8110 - registration status: 204
+2026-10-30 03:40:17.726 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Started LambPersonasMsApplication in 7.321 seconds (process running for 7.957)
+2026-10-30 03:40:17.785 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-30 03:40:17.786 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-30 04:55:49.102 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Starting LambPersonasMsApplication using Java 21.0.11 with PID 151892 (F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms\target\classes started by iosef in F:\SISTEMAS\Lamb_UPeU_v2.0\services\lamb-personas-ms)
+2026-10-30 04:55:49.121 [] DEBUG p.e.u.l.p.LambPersonasMsApplication - Running with Spring Boot v4.0.8, Spring v7.0.9
+2026-10-30 04:55:49.121 [] INFO  p.e.u.l.p.LambPersonasMsApplication - The following 1 profile is active: "dev"
+2026-10-30 04:55:49.156 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 04:55:49.156 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=application, profiles=[default], label=null, version=null, state=null
+2026-10-30 04:55:49.159 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 04:55:49.160 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[default], label=null, version=null, state=null
+2026-10-30 04:55:49.160 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Fetching config from server at : http://localhost:18888
+2026-10-30 04:55:49.160 [] INFO  o.s.c.c.c.ConfigServerConfigDataLoader - Located environment: name=lamb-personas-ms, profiles=[dev], label=null, version=null, state=null
+2026-10-30 04:55:49.163 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-30 04:55:49.163 [] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-30 04:55:50.099 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-30 04:55:50.285 [] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 178 ms. Found 49 JPA repository interfaces.
+2026-10-30 04:55:50.581 [] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=7193304a-6ac9-38ea-ac42-574f4d75e5a8
+2026-10-30 04:55:50.977 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8110 (http)
+2026-10-30 04:55:50.994 [] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-30 04:55:50.994 [] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-30 04:55:51.053 [] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1888 ms
+2026-10-30 04:55:51.210 [] DEBUG p.e.u.l.p.filter.CorrelationIdFilter - Filter 'correlationIdFilter' configured for use
+2026-10-30 04:55:51.339 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-10-30 04:55:51.457 [] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@649bc5d1
+2026-10-30 04:55:51.458 [] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-10-30 04:55:51.478 [] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:15451/lamb_personas_db (PostgreSQL 16.4)
+2026-10-30 04:55:51.609 [] INFO  o.f.core.internal.command.DbValidate - Successfully validated 7 migrations (execution time 00:00.090s)
+2026-10-30 04:55:51.620 [] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 1
+2026-10-30 04:55:51.633 [] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create persona group tables"
+2026-10-30 04:55:51.762 [] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create identificacion group tables"
+2026-10-30 04:55:51.812 [] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create datos personales group tables"
+2026-10-30 04:55:51.907 [] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "5 - create contacto direccion group tables"
+2026-10-30 04:55:51.977 [] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "6 - create relacion responsable group tables"
+2026-10-30 04:55:52.006 [] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "7 - create documento persona group tables"
+2026-10-30 04:55:52.070 [] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 6 migrations to schema "public", now at version v7 (execution time 00:00.402s)
+2026-10-30 04:55:52.148 [] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-30 04:55:52.208 [] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.24.Final
+2026-10-30 04:55:52.654 [] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-30 04:55:52.721 [] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:15451/lamb_personas_db]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.4
+	Default catalog/schema: lamb_personas_db/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-30 04:55:53.819 [] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-30 04:55:53.882 [] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-30 04:55:53.952 [] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-30 04:55:54.519 [] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-30 04:55:55.202 [] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
+2026-10-30 04:55:55.304 [] INFO  o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration - Eureka HTTP Client uses RestClient.
+2026-10-30 04:55:55.328 [] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-30 04:55:55.333 [] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-10-30 04:55:55.387 [] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2026-10-30 04:55:55.402 [] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2026-10-30 04:55:55.404 [] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2026-10-30 04:55:55.410 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2026-10-30 04:55:55.410 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2026-10-30 04:55:55.410 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2026-10-30 04:55:55.410 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2026-10-30 04:55:55.410 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2026-10-30 04:55:55.410 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2026-10-30 04:55:55.410 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2026-10-30 04:55:55.592 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2026-10-30 04:55:55.593 [] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2026-10-30 04:55:55.594 [] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-10-30 04:55:55.595 [] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1793354155595 with initial instances count: 0
+2026-10-30 04:55:55.598 [] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application LAMB-PERSONAS-MS with eureka with status UP
+2026-10-30 04:55:55.598 [] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1793354155598, current=UP, previous=STARTING]
+2026-10-30 04:55:55.599 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-PERSONAS-MS/lamb-personas-ms:8110: registering service...
+2026-10-30 04:55:55.616 [] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8110 (http) with context path '/'
+2026-10-30 04:55:55.616 [] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8110
+2026-10-30 04:55:55.621 [] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_LAMB-PERSONAS-MS/lamb-personas-ms:8110 - registration status: 204
+2026-10-30 04:55:55.628 [] INFO  p.e.u.l.p.LambPersonasMsApplication - Started LambPersonasMsApplication in 7.406 seconds (process running for 7.947)
+2026-10-30 04:55:55.676 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-30 04:55:55.677 [] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-30 04:55:58.265 [] INFO  o.a.tomcat.util.http.parser.Cookie - A cookie header was received [g_state={"i_l":0,"i_ll":1783814451052,"i_b":"552ZZo+NHJ1htGT+tOX8YE2qJXaWwqCfQJa2WhNDoGs","i_e":{"enable_itp_optimization":24},"i_et":1783814451052};] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2026-10-30 04:55:58.272 [] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-30 04:55:58.272 [] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-10-30 04:55:58.274 [] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-10-30 04:56:02.715 [f872a410-bb56-4ee8-a256-53c7774cc695] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 772 ms
+2026-10-30 04:56:25.597 [] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2026-10-30 04:56:25.597 [] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2026-10-30 04:56:25.597 [] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2026-10-30 04:56:25.597 [] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2026-10-30 04:56:25.597 [] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2026-10-30 04:56:25.597 [] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: false
+2026-10-30 04:56:25.597 [] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2026-10-30 04:56:25.622 [] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200

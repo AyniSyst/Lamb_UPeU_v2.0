@@ -30,7 +30,7 @@ public class TrayectoriaMapper {
         return HistorialCursoResponse.builder()
                 .id(historial.getId())
                 .idPersona(historial.getIdPersona())
-                .idSeccion(historial.getIdSeccion())
+                .idGrupo(historial.getIdGrupo())
                 .idActa(historial.getIdActa())
                 .codigoCurso(historial.getCodigoCurso())
                 .periodo(historial.getPeriodo())

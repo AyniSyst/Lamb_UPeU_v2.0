@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface ActaRepository extends JpaRepository<Acta, Long> {
-    Optional<Acta> findByIdSeccion(Long idSeccion);
+    Optional<Acta> findByIdGrupo(Long idGrupo);
 }

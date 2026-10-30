@@ -1,0 +1,14 @@
+{
+  "db_type": "postgresql",
+  "port": 15432,
+  "credentials": {
+    "type": "postgresql",
+    "host": "localhost",
+    "port": 15432,
+    "database": "lms_db",
+    "user": "lms",
+    "password": "lms",
+    "raw_url": "jdbc:postgresql://localhost:15432/lms_db",
+    "is_cloud": false
+  }
+}

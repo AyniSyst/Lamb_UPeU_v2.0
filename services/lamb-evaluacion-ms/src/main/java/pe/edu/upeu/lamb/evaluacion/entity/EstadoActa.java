@@ -1,7 +1,7 @@
 package pe.edu.upeu.lamb.evaluacion.entity;
 
 public enum EstadoActa {
-    // acta lista para registrar notas de la seccion
+    // acta lista para registrar notas del grupo
     ABIERTA,
     // no se pudo abrir (regla de negocio): dispara la compensacion en planificacion
     RECHAZADA,

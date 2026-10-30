@@ -36,21 +36,25 @@ public class PostulacionService {
     @Value("${spring.application.name}")
     private String nombreServicio;
 
+    @Transactional(readOnly = true)
     public List<PostulacionResponse> listar() {
         return postulacionRepository.findAll().stream()
                 .map(postulacionMapper::toResponse)
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public PostulacionResponse obtener(Long id) {
         return postulacionMapper.toResponse(buscarOFallar(id));
     }
 
+    @Transactional
     public PostulacionResponse crear(PostulacionRequest request) {
         Postulacion postulacion = postulacionMapper.toEntity(request);
         return postulacionMapper.toResponse(postulacionRepository.save(postulacion));
     }
 
+    @Transactional
     public PostulacionResponse evaluar(Long id, EvaluarPostulacionRequest request) {
         Postulacion postulacion = buscarOFallar(id);
         validarEstado(postulacion, EstadoPostulacion.INSCRITO, "evaluar");
@@ -88,6 +92,7 @@ public class PostulacionService {
         return postulacionMapper.toResponse(guardada);
     }
 
+    @Transactional
     public PostulacionResponse rechazar(Long id) {
         Postulacion postulacion = buscarOFallar(id);
         validarEstado(postulacion, EstadoPostulacion.EVALUADO, "rechazar");

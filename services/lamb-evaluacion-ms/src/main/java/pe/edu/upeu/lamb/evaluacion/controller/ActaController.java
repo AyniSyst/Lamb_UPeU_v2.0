@@ -2,12 +2,14 @@ package pe.edu.upeu.lamb.evaluacion.controller;
 
 import pe.edu.upeu.lamb.evaluacion.entity.Acta;
 import pe.edu.upeu.lamb.evaluacion.service.ActaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// Las actas no se crean por HTTP: nacen del evento seccion.abierta. Por HTTP se consultan y se cierran
+@Tag(name = "Acta", description = "Acta de notas del grupo: nace del evento grupo.abierto; por HTTP se consulta y se cierra")
+// Las actas no se crean por HTTP: nacen del evento grupo.abierto. Por HTTP se consultan y se cierran
 @RestController
 @RequestMapping("/api/v1/actas")
 @RequiredArgsConstructor
@@ -30,8 +32,8 @@ public class ActaController {
         return actaService.cerrar(id);
     }
 
-    @GetMapping("/seccion/{idSeccion}")
-    public Acta obtenerPorSeccion(@PathVariable Long idSeccion) {
-        return actaService.obtenerPorSeccion(idSeccion);
+    @GetMapping("/grupo/{idGrupo}")
+    public Acta obtenerPorGrupo(@PathVariable Long idGrupo) {
+        return actaService.obtenerPorGrupo(idGrupo);
     }
 }

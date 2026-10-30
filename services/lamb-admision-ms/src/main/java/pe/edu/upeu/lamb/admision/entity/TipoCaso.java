@@ -1,0 +1,6 @@
+package pe.edu.upeu.lamb.admision.entity;
+
+public enum TipoCaso {
+    FICHA_SOCIOECONOMICA, DISCAPACIDAD, PRORROGA_EXAMEN,
+    CONVALIDACION_TRASLADO, ANULACION_INSCRIPCION, CARGA_MASIVA, OTRO
+}

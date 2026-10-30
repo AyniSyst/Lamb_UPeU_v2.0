@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Eventos acta.abierta / acta.rechazada / acta.cerrada del topic evaluacion-eventos (key = seccionId).
+ * Eventos acta.abierta / acta.rechazada / acta.cerrada del topic evaluacion-eventos (key = grupoId).
  */
 @Data
 @Builder
@@ -19,7 +19,7 @@ public class ActaEvento {
 
     private String tipoEvento;
     private Long actaId;
-    private Long seccionId;
+    private Long grupoId;
     private String estado;
     private String motivo;
     private String codigoCurso;

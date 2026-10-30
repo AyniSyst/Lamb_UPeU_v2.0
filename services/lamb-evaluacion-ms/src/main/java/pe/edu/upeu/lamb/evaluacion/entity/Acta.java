@@ -18,8 +18,8 @@ public class Acta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_seccion", nullable = false, unique = true)
-    private Long idSeccion;
+    @Column(name = "id_grupo", nullable = false, unique = true)
+    private Long idGrupo;
 
     @Column(name = "codigo_curso", nullable = false, length = 20)
     private String codigoCurso;
@@ -27,8 +27,9 @@ public class Acta {
     @Column(name = "periodo", nullable = false, length = 20)
     private String periodo;
 
-    @Column(name = "docente", length = 150)
-    private String docente;
+    // FUSION: Docente es del MS de docentes/RR. HH., que aun no existe. Por ahora es el idPersona de lamb-personas-ms
+    @Column(name = "id_docente")
+    private Long idDocente;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false, length = 20)

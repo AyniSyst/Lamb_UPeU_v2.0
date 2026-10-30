@@ -28,6 +28,18 @@ public class Trayectoria {
     @Column(name = "id_postulacion", nullable = false)
     private Long idPostulacion;
 
+    @Column(name = "id_plan")
+    private Long idPlan;
+
+    @Column(name = "creditos_totales_plan")
+    private Integer creditosTotalesPlan;
+
+    @Column(name = "id_escuela")
+    private Long idEscuela;
+
+    @Column(name = "id_sede")
+    private Long idSede;
+
     @Column(name = "periodo_ingreso", nullable = false, length = 20)
     private String periodoIngreso;
 

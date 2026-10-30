@@ -23,6 +23,17 @@ public class PlanPublicadoEvento {
     private String version;
     private Long idPlanDerogado;
     private List<String> codigosCursos;
+    // Datos del catalogo de cada curso: planificacion actualiza con ellos su copia local de cursos
+    private List<CursoPublicado> cursos;
     private String origen;
     private Long timestamp;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class CursoPublicado {
+        private String codigo;
+        private String nombre;
+        private Integer creditos;
+    }
 }

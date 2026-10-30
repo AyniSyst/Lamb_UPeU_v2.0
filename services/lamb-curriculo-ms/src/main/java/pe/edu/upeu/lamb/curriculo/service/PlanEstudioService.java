@@ -5,13 +5,18 @@ import pe.edu.upeu.lamb.curriculo.dto.PlanEstudioRequest;
 import pe.edu.upeu.lamb.curriculo.dto.PlanEstudioResponse;
 import pe.edu.upeu.lamb.curriculo.dto.PrerrequisitoRequest;
 import pe.edu.upeu.lamb.curriculo.entity.EstadoPlan;
+import pe.edu.upeu.lamb.curriculo.entity.Modalidad;
 import pe.edu.upeu.lamb.curriculo.entity.PlanCurso;
 import pe.edu.upeu.lamb.curriculo.entity.PlanEstudio;
 import pe.edu.upeu.lamb.curriculo.entity.Prerrequisito;
 import pe.edu.upeu.lamb.curriculo.exception.BusinessRuleException;
 import pe.edu.upeu.lamb.curriculo.exception.ResourceNotFoundException;
 import pe.edu.upeu.lamb.curriculo.mapper.PlanEstudioMapper;
+import pe.edu.upeu.lamb.curriculo.repository.AreaCurricularRepository;
+import pe.edu.upeu.lamb.curriculo.repository.CursoCatalogoRepository;
+import pe.edu.upeu.lamb.curriculo.repository.ModalidadRepository;
 import pe.edu.upeu.lamb.curriculo.repository.PlanCursoRepository;
+import pe.edu.upeu.lamb.curriculo.repository.TipoCursoRepository;
 import pe.edu.upeu.lamb.curriculo.repository.PlanEstudioRepository;
 import pe.edu.upeu.lamb.curriculo.repository.PrerrequisitoRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +36,10 @@ public class PlanEstudioService {
     private final PlanEstudioRepository planEstudioRepository;
     private final PlanCursoRepository planCursoRepository;
     private final PrerrequisitoRepository prerrequisitoRepository;
+    private final CursoCatalogoRepository cursoCatalogoRepository;
+    private final TipoCursoRepository tipoCursoRepository;
+    private final AreaCurricularRepository areaCurricularRepository;
+    private final ModalidadRepository modalidadRepository;
     private final PlanEstudioMapper planEstudioMapper;
     private final CurriculoEventosProducer producer;
 
@@ -61,7 +70,7 @@ public class PlanEstudioService {
     @Transactional(readOnly = true)
     public VigenciaCursoResponse consultarVigencia(String codigoCurso) {
         String codigo = codigoCurso.trim().toUpperCase();
-        return planCursoRepository.findFirstByCodigoCursoAndPlanEstado(codigo, EstadoPlan.VIGENTE)
+        return planCursoRepository.findFirstByCursoCatalogoCodigoAndPlanEstado(codigo, EstadoPlan.VIGENTE)
                 .map(c -> VigenciaCursoResponse.builder()
                         .codigoCurso(codigo)
                         .enPlanVigente(true)
@@ -79,7 +88,32 @@ public class PlanEstudioService {
             throw new BusinessRuleException("Ya existe el plan " + request.getVersion() + " para el programa " + request.getIdPrograma());
         }
         PlanEstudio plan = planEstudioMapper.toEntity(request);
+        plan.setModalidad(buscarModalidad(request.getIdModalidad()));
         return planEstudioMapper.toResponse(planEstudioRepository.save(plan));
+    }
+
+    // Solo un plan en BORRADOR se edita: uno VIGENTE o DEROGADO ya es historia oficial
+    @Transactional
+    public PlanEstudioResponse actualizar(Long id, PlanEstudioRequest request) {
+        PlanEstudio plan = buscarOFallar(id);
+        validarBorrador(plan);
+        String version = request.getVersion().trim();
+        boolean cambiaClave = !plan.getIdPrograma().equals(request.getIdPrograma()) || !plan.getVersion().equals(version);
+        if (cambiaClave && planEstudioRepository.existsByIdProgramaAndVersion(request.getIdPrograma(), version)) {
+            throw new BusinessRuleException("Ya existe el plan " + version + " para el programa " + request.getIdPrograma());
+        }
+        plan.setIdPrograma(request.getIdPrograma());
+        plan.setVersion(version);
+        plan.setNombre(request.getNombre().trim());
+        plan.setModalidad(buscarModalidad(request.getIdModalidad()));
+        return planEstudioMapper.toResponse(planEstudioRepository.save(plan));
+    }
+
+    @Transactional
+    public void eliminar(Long id) {
+        PlanEstudio plan = buscarOFallar(id);
+        validarBorrador(plan);
+        planEstudioRepository.delete(plan);
     }
 
     @Transactional
@@ -87,7 +121,15 @@ public class PlanEstudioService {
         PlanEstudio plan = buscarOFallar(idPlan);
         validarBorrador(plan);
         PlanCurso curso = planEstudioMapper.toEntity(request, plan);
-        if (planCursoRepository.existsByPlanIdAndCodigoCurso(idPlan, curso.getCodigoCurso())) {
+        curso.setCursoCatalogo(cursoCatalogoRepository.findById(request.getIdCursoCatalogo())
+                .orElseThrow(() -> new ResourceNotFoundException("Curso del catalogo no encontrado: " + request.getIdCursoCatalogo())));
+        curso.setTipo(tipoCursoRepository.findById(request.getIdTipoCurso())
+                .orElseThrow(() -> new ResourceNotFoundException("Tipo de curso no encontrado: " + request.getIdTipoCurso())));
+        if (request.getIdAreaCurricular() != null) {
+            curso.setAreaCurricular(areaCurricularRepository.findById(request.getIdAreaCurricular())
+                    .orElseThrow(() -> new ResourceNotFoundException("Area curricular no encontrada: " + request.getIdAreaCurricular())));
+        }
+        if (planCursoRepository.existsByPlanIdAndCursoCatalogoId(idPlan, curso.getCursoCatalogo().getId())) {
             throw new BusinessRuleException("El curso " + curso.getCodigoCurso() + " ya esta en el plan");
         }
         plan.getCursos().add(curso);
@@ -164,6 +206,14 @@ public class PlanEstudioService {
         // Se envia a Kafka despues del commit (curriculo-eventos, key = planId)
         producer.publicarTrasCommit(planEstudioMapper.toPlanPublicadoEvento(publicado, idPlanDerogado, nombreServicio));
         return planEstudioMapper.toResponse(publicado);
+    }
+
+    private Modalidad buscarModalidad(Long idModalidad) {
+        if (idModalidad == null) {
+            return null;
+        }
+        return modalidadRepository.findById(idModalidad)
+                .orElseThrow(() -> new ResourceNotFoundException("Modalidad no encontrada: " + idModalidad));
     }
 
     private void validarBorrador(PlanEstudio plan) {

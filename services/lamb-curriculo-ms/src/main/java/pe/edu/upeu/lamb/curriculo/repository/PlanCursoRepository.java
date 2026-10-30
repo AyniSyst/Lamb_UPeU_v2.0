@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface PlanCursoRepository extends JpaRepository<PlanCurso, Long> {
     Optional<PlanCurso> findByIdAndPlanId(Long id, Long idPlan);
 
-    Optional<PlanCurso> findFirstByCodigoCursoAndPlanEstado(String codigoCurso, EstadoPlan estado);
+    Optional<PlanCurso> findFirstByCursoCatalogoCodigoAndPlanEstado(String codigoCurso, EstadoPlan estado);
 
-    boolean existsByPlanIdAndCodigoCurso(Long idPlan, String codigoCurso);
+    boolean existsByPlanIdAndCursoCatalogoId(Long idPlan, Long idCursoCatalogo);
 }

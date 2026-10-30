@@ -21,7 +21,7 @@ public class ActaCerradaEvento {
 
     private String tipoEvento;
     private Long actaId;
-    private Long seccionId;
+    private Long grupoId;
     private String codigoCurso;
     private String periodo;
     private Integer creditos;

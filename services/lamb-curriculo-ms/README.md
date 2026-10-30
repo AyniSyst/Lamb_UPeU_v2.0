@@ -1,6 +1,6 @@
 # lamb-curriculo-ms
 
-Planes de estudio por programa, cursos del plan y prerrequisitos. Microservicio Spring Boot 4 / Java 21, registrado en Eureka y configurado via Config Server.
+Que se estudia: 47 CRUD (programa, plan de estudios, catalogo de cursos, silabos, organizacion curricular, perfiles, requisitos de egreso, equivalencias y gestion curricular). Este README detalla solo el plan de estudios; el resto esta en Swagger (`/swagger-ui.html`). Microservicio Spring Boot 4 / Java 21, registrado en Eureka y configurado via Config Server.
 
 ## Correr en local
 ```
@@ -18,7 +18,8 @@ Swagger: http://localhost:8088/swagger-ui.html
 | GET | `/api/v1/planes-estudio/{id}` | Plan con sus cursos y prerrequisitos |
 | GET | `/api/v1/planes-estudio/programa/{idPrograma}/vigente` | Plan VIGENTE del programa |
 | POST | `/api/v1/planes-estudio` | Crea plan en BORRADOR |
-| POST | `/api/v1/planes-estudio/{id}/cursos` | Agrega curso al plan |
+| PUT / DELETE | `/api/v1/planes-estudio/{id}` | Edita / elimina un plan en BORRADOR |
+| POST | `/api/v1/planes-estudio/{id}/cursos` | Agrega al plan un curso del catalogo `{idCursoCatalogo, ciclo, idTipoCurso, idAreaCurricular?}` |
 | DELETE | `/api/v1/planes-estudio/{id}/cursos/{idPlanCurso}` | Quita curso del plan |
 | POST | `/api/v1/planes-estudio/{id}/cursos/{idPlanCurso}/prerrequisitos` | Agrega prerrequisito |
 | DELETE | `/api/v1/planes-estudio/{id}/cursos/{idPlanCurso}/prerrequisitos/{idPlanCursoRequisito}` | Quita prerrequisito |
@@ -27,7 +28,7 @@ Swagger: http://localhost:8088/swagger-ui.html
 ## Reglas
 - Estados: `BORRADOR` -> `VIGENTE` -> `DEROGADO`. Solo un plan en BORRADOR se puede modificar (si no, 409).
 - `version` es unica por programa. Solo hay un plan VIGENTE por programa: al publicar uno nuevo, el anterior pasa a DEROGADO.
-- El codigo de curso es unico dentro del plan. Un prerrequisito debe ser de un ciclo anterior.
+- El curso se define una sola vez en el catalogo (`/api/v1/cursos-catalogo`) y no se repite dentro del plan. Un prerrequisito debe ser de un ciclo anterior.
 - No se puede publicar un plan sin cursos ni quitar un curso que es prerrequisito de otro.
 
 ## Endpoint para otros servicios
@@ -41,6 +42,6 @@ Todas las rutas exigen JWT (resource server, claves en `lamb-auth-ms`).
 | `curriculo-eventos` | `planId` | `plan.publicado` | Al publicar un plan (despues del commit) |
 
 ```json
-{"tipoEvento":"plan.publicado","planId":2,"idPrograma":10,"version":"2027","idPlanDerogado":1,"codigosCursos":["IS101"],"origen":"lamb-curriculo-ms","timestamp":1792123866000}
+{"tipoEvento":"plan.publicado","planId":2,"idPrograma":10,"version":"2027","idPlanDerogado":1,"codigosCursos":["IS101"],"cursos":[{"codigo":"IS101","nombre":"Programacion I","creditos":4}],"origen":"lamb-curriculo-ms","timestamp":1792123866000}
 ```
-Consumidor: `lamb-planificacion-ms` (revalida las secciones PENDIENTE_VALIDACION). Ver `docs/modulo02-u2-s6-s9.md`.
+Consumidor: `lamb-planificacion-ms` (actualiza su copia de cursos y revalida los grupos PENDIENTE_VALIDACION). Ver `docs/modulo02-u2-s6-s9.md`.

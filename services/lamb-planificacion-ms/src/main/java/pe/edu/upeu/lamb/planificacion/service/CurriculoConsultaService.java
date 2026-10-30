@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * Bean aparte a proposito: si consultarVigencia viviera en SeccionService, la llamada seria
+ * Bean aparte a proposito: si consultarVigencia viviera en GrupoService, la llamada seria
  * auto-invocacion y el proxy de @CircuitBreaker nunca se activaria.
  */
 @Slf4j
@@ -24,7 +24,7 @@ public class CurriculoConsultaService {
         return curriculoClient.consultarVigencia(codigoCurso);
     }
 
-    // null = no se pudo confirmar; la seccion queda PENDIENTE_VALIDACION en vez de un 500
+    // null = no se pudo confirmar; el grupo queda PENDIENTE_VALIDACION en vez de un 500
     public VigenciaCursoDto fallbackVigencia(String codigoCurso, Throwable ex) {
         log.warn("[CURRICULO] Fallback activado para curso {}. Motivo: {}", codigoCurso, ex.getMessage());
         return null;

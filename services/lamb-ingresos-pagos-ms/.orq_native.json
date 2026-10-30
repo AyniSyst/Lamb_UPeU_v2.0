@@ -1,0 +1,14 @@
+{
+  "db_type": "postgresql",
+  "port": 15433,
+  "credentials": {
+    "type": "postgresql",
+    "host": "localhost",
+    "port": 15433,
+    "database": "ingresos_pagos_db",
+    "user": "ingresospagos",
+    "password": "ingresospagos",
+    "raw_url": "jdbc:postgresql://localhost:15433/ingresos_pagos_db",
+    "is_cloud": false
+  }
+}

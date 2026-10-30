@@ -1,6 +1,6 @@
 package pe.edu.upeu.lamb.planificacion.messaging;
 
-import pe.edu.upeu.lamb.planificacion.event.SeccionAbiertaEvento;
+import pe.edu.upeu.lamb.planificacion.event.GrupoAbiertoEvento;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,13 +14,13 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 @RequiredArgsConstructor
 public class PlanificacionEventosProducer {
 
-    private final KafkaTemplate<String, SeccionAbiertaEvento> kafkaTemplate;
+    private final KafkaTemplate<String, GrupoAbiertoEvento> kafkaTemplate;
 
     @Value("${app.kafka.topic.planificacion}")
     private String topicPlanificacion;
 
-    // Se envia solo si la seccion quedo guardada (afterCommit)
-    public void publicarTrasCommit(SeccionAbiertaEvento evento) {
+    // Se envia solo si el grupo quedo guardado (afterCommit)
+    public void publicarTrasCommit(GrupoAbiertoEvento evento) {
         if (TransactionSynchronizationManager.isSynchronizationActive()) {
             TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
                 @Override
@@ -33,19 +33,19 @@ public class PlanificacionEventosProducer {
         }
     }
 
-    private void enviar(SeccionAbiertaEvento evento) {
-        kafkaTemplate.send(topicPlanificacion, String.valueOf(evento.getSeccionId()), evento)
+    private void enviar(GrupoAbiertoEvento evento) {
+        kafkaTemplate.send(topicPlanificacion, String.valueOf(evento.getGrupoId()), evento)
                 .whenComplete((resultado, ex) -> {
                     if (ex != null) {
-                        log.error("component=producer topic={} eventType={} seccionId={} status=error error=\"{}\"",
-                                topicPlanificacion, evento.getTipoEvento(), evento.getSeccionId(), ex.getMessage());
+                        log.error("component=producer topic={} eventType={} grupoId={} status=error error=\"{}\"",
+                                topicPlanificacion, evento.getTipoEvento(), evento.getGrupoId(), ex.getMessage());
                         return;
                     }
-                    log.info("component=producer topic={} partition={} offset={} eventType={} seccionId={} status=published",
+                    log.info("component=producer topic={} partition={} offset={} eventType={} grupoId={} status=published",
                             resultado.getRecordMetadata().topic(),
                             resultado.getRecordMetadata().partition(),
                             resultado.getRecordMetadata().offset(),
-                            evento.getTipoEvento(), evento.getSeccionId());
+                            evento.getTipoEvento(), evento.getGrupoId());
                 });
     }
 }

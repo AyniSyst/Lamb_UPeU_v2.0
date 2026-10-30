@@ -1,6 +1,5 @@
 package pe.edu.upeu.lamb.evaluacion.dto;
 
-import pe.edu.upeu.lamb.evaluacion.entity.TipoEvaluacion;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -19,10 +18,10 @@ public class NotaRequest {
     private Long idPersona;
 
     @NotNull
-    private Long idSeccion;
+    private Long idGrupo;
 
     @NotNull
-    private TipoEvaluacion tipoEvaluacion;
+    private Long idComponente;
 
     @NotNull
     @DecimalMin(value = "0.0")

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Lo que planificacion necesita de curriculo para abrir una seccion (no es copia de su entidad).
+ * Lo que planificacion necesita de curriculo para abrir un grupo (no es copia de su entidad).
  */
 @Getter
 @Setter

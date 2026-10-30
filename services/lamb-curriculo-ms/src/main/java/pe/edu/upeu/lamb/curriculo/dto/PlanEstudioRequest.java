@@ -20,4 +20,6 @@ public class PlanEstudioRequest {
     @NotBlank
     @Size(max = 150)
     private String nombre;
+
+    private Long idModalidad;
 }

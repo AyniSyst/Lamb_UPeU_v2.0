@@ -74,7 +74,7 @@ public class TrayectoriaService {
 
     /**
      * acta.cerrada: agrega una fila de historial por estudiante y recalcula su resumen.
-     * Cada fila se protege con existsByIdPersonaAndIdSeccion y con uk_historial_persona_seccion.
+     * Cada fila se protege con existsByIdPersonaAndIdGrupo y con uk_historial_persona_grupo.
      */
     @Transactional
     public void registrarActa(ActaCerradaEvento acta) {
@@ -84,14 +84,14 @@ public class TrayectoriaService {
         }
         int nuevos = 0;
         for (ActaCerradaEvento.ResultadoNota r : acta.getResultados()) {
-            if (historialRepository.existsByIdPersonaAndIdSeccion(r.getIdPersona(), acta.getSeccionId())) {
-                log.warn("component=processor idPersona={} seccionId={} status=ignored motivo=\"nota ya registrada en el historial (evento duplicado)\"",
-                        r.getIdPersona(), acta.getSeccionId());
+            if (historialRepository.existsByIdPersonaAndIdGrupo(r.getIdPersona(), acta.getGrupoId())) {
+                log.warn("component=processor idPersona={} grupoId={} status=ignored motivo=\"nota ya registrada en el historial (evento duplicado)\"",
+                        r.getIdPersona(), acta.getGrupoId());
                 continue;
             }
             historialRepository.save(HistorialCurso.builder()
                     .idPersona(r.getIdPersona())
-                    .idSeccion(acta.getSeccionId())
+                    .idGrupo(acta.getGrupoId())
                     .idActa(acta.getActaId())
                     .codigoCurso(acta.getCodigoCurso())
                     .periodo(acta.getPeriodo())

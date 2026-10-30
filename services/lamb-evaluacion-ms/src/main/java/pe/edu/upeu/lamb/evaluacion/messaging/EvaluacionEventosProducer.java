@@ -34,18 +34,18 @@ public class EvaluacionEventosProducer {
     }
 
     private void enviar(ActaEvento evento) {
-        kafkaTemplate.send(topicEvaluacion, String.valueOf(evento.getSeccionId()), evento)
+        kafkaTemplate.send(topicEvaluacion, String.valueOf(evento.getGrupoId()), evento)
                 .whenComplete((resultado, ex) -> {
                     if (ex != null) {
-                        log.error("component=producer topic={} eventType={} seccionId={} status=error error=\"{}\"",
-                                topicEvaluacion, evento.getTipoEvento(), evento.getSeccionId(), ex.getMessage());
+                        log.error("component=producer topic={} eventType={} grupoId={} status=error error=\"{}\"",
+                                topicEvaluacion, evento.getTipoEvento(), evento.getGrupoId(), ex.getMessage());
                         return;
                     }
-                    log.info("component=producer topic={} partition={} offset={} eventType={} seccionId={} status=published",
+                    log.info("component=producer topic={} partition={} offset={} eventType={} grupoId={} status=published",
                             resultado.getRecordMetadata().topic(),
                             resultado.getRecordMetadata().partition(),
                             resultado.getRecordMetadata().offset(),
-                            evento.getTipoEvento(), evento.getSeccionId());
+                            evento.getTipoEvento(), evento.getGrupoId());
                 });
     }
 }

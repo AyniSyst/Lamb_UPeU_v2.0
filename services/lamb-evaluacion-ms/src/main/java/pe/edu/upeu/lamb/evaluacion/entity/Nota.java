@@ -21,12 +21,13 @@ public class Nota {
     @Column(name = "id_persona", nullable = false)
     private Long idPersona;
 
-    @Column(name = "id_seccion", nullable = false)
-    private Long idSeccion;
+    @Column(name = "id_grupo", nullable = false)
+    private Long idGrupo;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_evaluacion", nullable = false, length = 20)
-    private TipoEvaluacion tipoEvaluacion;
+    // CRUD 1: el componente reemplaza al antiguo tipo fijo (PRACTICA, PARCIAL, FINAL)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_componente", nullable = false)
+    private ComponenteEvaluacion componente;
 
     @Column(name = "calificacion", nullable = false, precision = 4, scale = 2)
     private BigDecimal calificacion;

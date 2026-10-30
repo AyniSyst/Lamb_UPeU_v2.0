@@ -33,6 +33,10 @@ public class PlanEstudio {
     @Column(name = "estado", nullable = false, length = 20)
     private EstadoPlan estado;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_modalidad")
+    private Modalidad modalidad;
+
     @Column(name = "fecha_registro", nullable = false)
     private Instant fechaRegistro;
 
@@ -40,7 +44,7 @@ public class PlanEstudio {
     private Instant fechaPublicacion;
 
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OrderBy("ciclo ASC, codigoCurso ASC")
+    @OrderBy("ciclo ASC, id ASC")
     @Builder.Default
     private List<PlanCurso> cursos = new ArrayList<>();
 }

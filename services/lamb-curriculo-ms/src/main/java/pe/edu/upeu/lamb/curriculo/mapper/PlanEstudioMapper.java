@@ -29,11 +29,7 @@ public class PlanEstudioMapper {
     public PlanCurso toEntity(PlanCursoRequest request, PlanEstudio plan) {
         return PlanCurso.builder()
                 .plan(plan)
-                .codigoCurso(request.getCodigoCurso().trim().toUpperCase())
-                .nombreCurso(request.getNombreCurso().trim())
                 .ciclo(request.getCiclo())
-                .creditos(request.getCreditos())
-                .tipo(request.getTipo())
                 .build();
     }
 
@@ -43,6 +39,7 @@ public class PlanEstudioMapper {
                 .idPrograma(plan.getIdPrograma())
                 .version(plan.getVersion())
                 .nombre(plan.getNombre())
+                .idModalidad(plan.getModalidad() != null ? plan.getModalidad().getId() : null)
                 .estado(plan.getEstado())
                 .fechaRegistro(plan.getFechaRegistro())
                 .fechaPublicacion(plan.getFechaPublicacion())
@@ -54,11 +51,13 @@ public class PlanEstudioMapper {
     public PlanCursoResponse toResponse(PlanCurso curso) {
         return PlanCursoResponse.builder()
                 .id(curso.getId())
+                .idCursoCatalogo(curso.getCursoCatalogo().getId())
                 .codigoCurso(curso.getCodigoCurso())
                 .nombreCurso(curso.getNombreCurso())
                 .ciclo(curso.getCiclo())
                 .creditos(curso.getCreditos())
-                .tipo(curso.getTipo())
+                .tipo(curso.getTipo().getCodigo())
+                .areaCurricular(curso.getAreaCurricular() != null ? curso.getAreaCurricular().getCodigo() : null)
                 .prerrequisitos(codigosPrerrequisitos(curso))
                 .build();
     }
@@ -71,6 +70,9 @@ public class PlanEstudioMapper {
                 .version(plan.getVersion())
                 .idPlanDerogado(idPlanDerogado)
                 .codigosCursos(plan.getCursos().stream().map(PlanCurso::getCodigoCurso).toList())
+                .cursos(plan.getCursos().stream()
+                        .map(c -> new PlanPublicadoEvento.CursoPublicado(c.getCodigoCurso(), c.getNombreCurso(), c.getCreditos()))
+                        .toList())
                 .origen(origen)
                 .timestamp(Instant.now().toEpochMilli())
                 .build();

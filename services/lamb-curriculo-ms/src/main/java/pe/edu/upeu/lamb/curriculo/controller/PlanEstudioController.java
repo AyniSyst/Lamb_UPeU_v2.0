@@ -6,6 +6,7 @@ import pe.edu.upeu.lamb.curriculo.dto.PlanEstudioResponse;
 import pe.edu.upeu.lamb.curriculo.dto.PrerrequisitoRequest;
 import pe.edu.upeu.lamb.curriculo.dto.VigenciaCursoResponse;
 import pe.edu.upeu.lamb.curriculo.service.PlanEstudioService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Plan de estudios", description = "CRUD 5 · Plan de estudios con sus cursos (PlanCurso) y prerrequisitos")
 @RestController
 @RequestMapping("/api/v1/planes-estudio")
 @RequiredArgsConstructor
@@ -44,6 +46,17 @@ public class PlanEstudioController {
     @ResponseStatus(HttpStatus.CREATED)
     public PlanEstudioResponse crear(@Valid @RequestBody PlanEstudioRequest request) {
         return planEstudioService.crear(request);
+    }
+
+    @PutMapping("/{id}")
+    public PlanEstudioResponse actualizar(@PathVariable Long id, @Valid @RequestBody PlanEstudioRequest request) {
+        return planEstudioService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminar(@PathVariable Long id) {
+        planEstudioService.eliminar(id);
     }
 
     @PostMapping("/{id}/cursos")

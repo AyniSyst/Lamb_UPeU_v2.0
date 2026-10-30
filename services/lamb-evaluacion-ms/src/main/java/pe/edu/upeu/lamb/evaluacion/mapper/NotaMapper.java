@@ -11,8 +11,7 @@ public class NotaMapper {
     public Nota toEntity(NotaRequest request) {
         return Nota.builder()
                 .idPersona(request.getIdPersona())
-                .idSeccion(request.getIdSeccion())
-                .tipoEvaluacion(request.getTipoEvaluacion())
+                .idGrupo(request.getIdGrupo())
                 .calificacion(request.getCalificacion())
                 .periodo(request.getPeriodo())
                 .build();
@@ -22,8 +21,9 @@ public class NotaMapper {
         return NotaResponse.builder()
                 .id(nota.getId())
                 .idPersona(nota.getIdPersona())
-                .idSeccion(nota.getIdSeccion())
-                .tipoEvaluacion(nota.getTipoEvaluacion())
+                .idGrupo(nota.getIdGrupo())
+                .idComponente(nota.getComponente().getId())
+                .codigoComponente(nota.getComponente().getCodigo())
                 .calificacion(nota.getCalificacion())
                 .periodo(nota.getPeriodo())
                 .build();

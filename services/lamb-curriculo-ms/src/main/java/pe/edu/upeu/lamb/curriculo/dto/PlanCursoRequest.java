@@ -1,25 +1,18 @@
 package pe.edu.upeu.lamb.curriculo.dto;
 
-import pe.edu.upeu.lamb.curriculo.entity.TipoCurso;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+// El curso se elige del catalogo (CRUD 12); el plan solo decide ciclo, tipo y area
 @Getter
 @Setter
 public class PlanCursoRequest {
 
-    @NotBlank
-    @Size(max = 20)
-    private String codigoCurso;
-
-    @NotBlank
-    @Size(max = 150)
-    private String nombreCurso;
+    @NotNull
+    private Long idCursoCatalogo;
 
     @NotNull
     @Min(1)
@@ -27,10 +20,7 @@ public class PlanCursoRequest {
     private Integer ciclo;
 
     @NotNull
-    @Min(1)
-    @Max(10)
-    private Integer creditos;
+    private Long idTipoCurso;
 
-    @NotNull
-    private TipoCurso tipo;
+    private Long idAreaCurricular;
 }

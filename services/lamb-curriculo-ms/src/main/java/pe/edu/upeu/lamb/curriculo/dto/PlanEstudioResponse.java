@@ -20,6 +20,7 @@ public class PlanEstudioResponse {
     private Long idPrograma;
     private String version;
     private String nombre;
+    private Long idModalidad;
     private EstadoPlan estado;
     private Instant fechaRegistro;
     private Instant fechaPublicacion;

@@ -18,7 +18,7 @@ public class ActaEvento {
 
     private String tipoEvento;
     private Long actaId;
-    private Long seccionId;
+    private Long grupoId;
     private String estado;
     private String motivo;
     private String origen;

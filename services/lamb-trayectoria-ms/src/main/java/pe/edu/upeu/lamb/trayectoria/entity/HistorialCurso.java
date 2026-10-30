@@ -22,8 +22,8 @@ public class HistorialCurso {
     @Column(name = "id_persona", nullable = false)
     private Long idPersona;
 
-    @Column(name = "id_seccion", nullable = false)
-    private Long idSeccion;
+    @Column(name = "id_grupo", nullable = false)
+    private Long idGrupo;
 
     @Column(name = "id_acta", nullable = false)
     private Long idActa;

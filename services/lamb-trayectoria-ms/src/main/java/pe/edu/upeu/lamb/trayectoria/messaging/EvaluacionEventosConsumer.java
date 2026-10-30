@@ -24,8 +24,8 @@ public class EvaluacionEventosConsumer {
             log.debug("component=consumer eventType={} status=ignored", evento.getTipoEvento());
             return;
         }
-        log.info("component=consumer eventType={} actaId={} seccionId={} status=consumed",
-                evento.getTipoEvento(), evento.getActaId(), evento.getSeccionId());
+        log.info("component=consumer eventType={} actaId={} grupoId={} status=consumed",
+                evento.getTipoEvento(), evento.getActaId(), evento.getGrupoId());
         trayectoriaService.registrarActa(evento);
     }
 }

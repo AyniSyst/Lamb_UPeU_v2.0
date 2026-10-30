@@ -1,0 +1,14 @@
+{
+  "db_type": "postgresql",
+  "port": 15452,
+  "credentials": {
+    "type": "postgresql",
+    "host": "localhost",
+    "port": 15452,
+    "database": "lamb_institucional_db",
+    "user": "lamb",
+    "password": "lamb",
+    "raw_url": "jdbc:postgresql://localhost:15452/lamb_institucional_db",
+    "is_cloud": false
+  }
+}

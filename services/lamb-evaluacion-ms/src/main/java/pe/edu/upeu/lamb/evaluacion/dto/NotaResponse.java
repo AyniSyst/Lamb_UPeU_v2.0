@@ -1,6 +1,5 @@
 package pe.edu.upeu.lamb.evaluacion.dto;
 
-import pe.edu.upeu.lamb.evaluacion.entity.TipoEvaluacion;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,8 +16,9 @@ import java.math.BigDecimal;
 public class NotaResponse {
     private Long id;
     private Long idPersona;
-    private Long idSeccion;
-    private TipoEvaluacion tipoEvaluacion;
+    private Long idGrupo;
+    private Long idComponente;
+    private String codigoComponente;
     private BigDecimal calificacion;
     private String periodo;
 }
