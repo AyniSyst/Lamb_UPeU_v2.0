@@ -10,14 +10,14 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
+      primary: blue
       accent: amber
       toggle:
         icon: material/weather-night
         name: Modo oscuro
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
+      primary: blue
       accent: amber
       toggle:
         icon: material/weather-sunny

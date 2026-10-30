@@ -20,7 +20,7 @@ El sistema se organiza en **22 módulos funcionales** y **94 historias de usuari
 
 </div>
 
-## Producto del proyecto
+## Producto del curso
 
 ```
 Sistema universitario integrado de microservicios end-to-end: configurable,
