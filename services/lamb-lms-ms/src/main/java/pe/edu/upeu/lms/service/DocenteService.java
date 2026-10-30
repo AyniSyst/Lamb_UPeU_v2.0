@@ -10,8 +10,10 @@ import pe.edu.upeu.lms.mapper.DocenteMapper;
 import pe.edu.upeu.lms.repository.DocenteRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class DocenteService {
 

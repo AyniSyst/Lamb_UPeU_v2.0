@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.CruceHorarioAutorizadoRepository;
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CruceHorarioAutorizadoService {
 
@@ -35,6 +37,17 @@ public class CruceHorarioAutorizadoService {
         CruceHorarioAutorizado cruceHorarioAutorizado = cruceHorarioAutorizadoMapper.toEntity(request);
         cruceHorarioAutorizado.setFechaAutorizacion(Instant.now());
         return cruceHorarioAutorizadoMapper.toResponse(cruceHorarioAutorizadoRepository.save(cruceHorarioAutorizado));
+    }
+
+    public CruceHorarioAutorizadoResponse actualizar(Long id, CruceHorarioAutorizadoRequest request) {
+        CruceHorarioAutorizado existente = buscarOFallar(id);
+        CruceHorarioAutorizado cruceHorarioAutorizado = cruceHorarioAutorizadoMapper.toEntity(request);
+        cruceHorarioAutorizado.setFechaAutorizacion(Instant.now());
+        return cruceHorarioAutorizadoMapper.toResponse(cruceHorarioAutorizadoRepository.save(Actualizacion.copiar(cruceHorarioAutorizado, existente)));
+    }
+
+    public void eliminar(Long id) {
+        cruceHorarioAutorizadoRepository.delete(buscarOFallar(id));
     }
 
     private CruceHorarioAutorizado buscarOFallar(Long id) {

@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.CargaMinimaAutorizadaRepository;
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CargaMinimaAutorizadaService {
 
@@ -35,6 +37,17 @@ public class CargaMinimaAutorizadaService {
         CargaMinimaAutorizada cargaMinimaAutorizada = cargaMinimaAutorizadaMapper.toEntity(request);
         cargaMinimaAutorizada.setFechaAutorizacion(Instant.now());
         return cargaMinimaAutorizadaMapper.toResponse(cargaMinimaAutorizadaRepository.save(cargaMinimaAutorizada));
+    }
+
+    public CargaMinimaAutorizadaResponse actualizar(Long id, CargaMinimaAutorizadaRequest request) {
+        CargaMinimaAutorizada existente = buscarOFallar(id);
+        CargaMinimaAutorizada cargaMinimaAutorizada = cargaMinimaAutorizadaMapper.toEntity(request);
+        cargaMinimaAutorizada.setFechaAutorizacion(Instant.now());
+        return cargaMinimaAutorizadaMapper.toResponse(cargaMinimaAutorizadaRepository.save(Actualizacion.copiar(cargaMinimaAutorizada, existente)));
+    }
+
+    public void eliminar(Long id) {
+        cargaMinimaAutorizadaRepository.delete(buscarOFallar(id));
     }
 
     private CargaMinimaAutorizada buscarOFallar(Long id) {

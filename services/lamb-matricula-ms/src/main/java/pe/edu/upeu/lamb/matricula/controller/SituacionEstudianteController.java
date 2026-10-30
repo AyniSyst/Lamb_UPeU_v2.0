@@ -62,6 +62,17 @@ public class SituacionEstudianteController {
         return condicionMatriculaService.crear(request);
     }
 
+    @PutMapping("/condiciones/{id}")
+    public CondicionMatriculaResponse actualizarCondicion(@PathVariable Long id, @Valid @RequestBody CondicionMatriculaRequest request) {
+        return condicionMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/condiciones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCondicion(@PathVariable Long id) {
+        condicionMatriculaService.eliminar(id);
+    }
+
     // --- Situacion academica del estudiante (item 55) ---
 
     @GetMapping("/situaciones-academicas")
@@ -81,6 +92,17 @@ public class SituacionEstudianteController {
     @Operation(summary = "Crear una situacion academica de estudiante")
     public SituacionAcademicaEstudianteResponse crearSituacionAcademica(@Valid @RequestBody SituacionAcademicaEstudianteRequest request) {
         return situacionAcademicaEstudianteService.crear(request);
+    }
+
+    @PutMapping("/situaciones-academicas/{id}")
+    public SituacionAcademicaEstudianteResponse actualizarSituacionAcademica(@PathVariable Long id, @Valid @RequestBody SituacionAcademicaEstudianteRequest request) {
+        return situacionAcademicaEstudianteService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/situaciones-academicas/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarSituacionAcademica(@PathVariable Long id) {
+        situacionAcademicaEstudianteService.eliminar(id);
     }
 
     // --- Cambio de situacion academica (item 56) ---
@@ -104,6 +126,17 @@ public class SituacionEstudianteController {
         return cambioSituacionAcademicaService.crear(request);
     }
 
+    @PutMapping("/cambios-situacion/{id}")
+    public CambioSituacionAcademicaResponse actualizarCambioSituacion(@PathVariable Long id, @Valid @RequestBody CambioSituacionAcademicaRequest request) {
+        return cambioSituacionAcademicaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/cambios-situacion/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCambioSituacion(@PathVariable Long id) {
+        cambioSituacionAcademicaService.eliminar(id);
+    }
+
     // --- Estudiante observado/suspendido (item 57) ---
 
     @GetMapping("/observados-suspendidos")
@@ -125,6 +158,17 @@ public class SituacionEstudianteController {
         return estudianteObservadoSuspendidoService.crear(request);
     }
 
+    @PutMapping("/observados-suspendidos/{id}")
+    public EstudianteObservadoSuspendidoResponse actualizarObservadoSuspendido(@PathVariable Long id, @Valid @RequestBody EstudianteObservadoSuspendidoRequest request) {
+        return estudianteObservadoSuspendidoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/observados-suspendidos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarObservadoSuspendido(@PathVariable Long id) {
+        estudianteObservadoSuspendidoService.eliminar(id);
+    }
+
     // --- Movilidad estudiantil (item 58) ---
 
     @GetMapping("/movilidades")
@@ -144,5 +188,16 @@ public class SituacionEstudianteController {
     @Operation(summary = "Crear una movilidad estudiantil")
     public MovilidadEstudiantilResponse crearMovilidad(@Valid @RequestBody MovilidadEstudiantilRequest request) {
         return movilidadEstudiantilService.crear(request);
+    }
+
+    @PutMapping("/movilidades/{id}")
+    public MovilidadEstudiantilResponse actualizarMovilidad(@PathVariable Long id, @Valid @RequestBody MovilidadEstudiantilRequest request) {
+        return movilidadEstudiantilService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/movilidades/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarMovilidad(@PathVariable Long id) {
+        movilidadEstudiantilService.eliminar(id);
     }
 }

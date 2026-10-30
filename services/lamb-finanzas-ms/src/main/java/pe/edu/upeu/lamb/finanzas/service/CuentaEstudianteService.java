@@ -39,6 +39,17 @@ public class CuentaEstudianteService {
         return cuentaEstudianteMapper.toResponse(cuentaEstudianteRepository.save(entity));
     }
 
+    public CuentaEstudianteResponse actualizar(Long id, CuentaEstudianteRequest request) {
+        CuentaEstudiante existente = buscarOFallar(id);
+        CuentaEstudiante entity = cuentaEstudianteMapper.toEntity(request);
+        entity.setFechaApertura(Instant.now());
+        return cuentaEstudianteMapper.toResponse(cuentaEstudianteRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        cuentaEstudianteRepository.delete(buscarOFallar(id));
+    }
+
     private CuentaEstudiante buscarOFallar(Long id) {
         return cuentaEstudianteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cuenta de estudiante no encontrada: " + id));

@@ -35,6 +35,16 @@ public class NacionalidadService {
         return nacionalidadMapper.toResponse(nacionalidadRepository.save(entity));
     }
 
+    public NacionalidadResponse actualizar(Long id, NacionalidadRequest request) {
+        Nacionalidad existente = buscarOFallar(id);
+        Nacionalidad entity = nacionalidadMapper.toEntity(request);
+        return nacionalidadMapper.toResponse(nacionalidadRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        nacionalidadRepository.delete(buscarOFallar(id));
+    }
+
     private Nacionalidad buscarOFallar(Long id) {
         return nacionalidadRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Nacionalidad no encontrada: " + id));

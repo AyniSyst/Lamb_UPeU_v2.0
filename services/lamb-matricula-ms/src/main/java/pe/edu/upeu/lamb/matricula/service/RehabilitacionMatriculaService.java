@@ -12,10 +12,12 @@ import pe.edu.upeu.lamb.matricula.repository.RehabilitacionMatriculaRepository;
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /** CRUD opcional: depende de la universidad. */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RehabilitacionMatriculaService {
 
@@ -34,6 +36,17 @@ public class RehabilitacionMatriculaService {
         RehabilitacionMatricula entity = mapper.toEntity(request);
         entity.setFechaRehabilitacion(Instant.now());
         return mapper.toResponse(repository.save(entity));
+    }
+
+    public RehabilitacionMatriculaResponse actualizar(Long id, RehabilitacionMatriculaRequest request) {
+        RehabilitacionMatricula existente = buscarOFallar(id);
+        RehabilitacionMatricula entity = mapper.toEntity(request);
+        entity.setFechaRehabilitacion(Instant.now());
+        return mapper.toResponse(repository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        repository.delete(buscarOFallar(id));
     }
 
     private RehabilitacionMatricula buscarOFallar(Long id) {

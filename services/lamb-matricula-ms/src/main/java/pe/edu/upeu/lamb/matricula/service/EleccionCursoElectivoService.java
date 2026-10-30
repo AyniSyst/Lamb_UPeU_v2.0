@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.EleccionCursoElectivoRepository;
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class EleccionCursoElectivoService {
 
@@ -35,6 +37,17 @@ public class EleccionCursoElectivoService {
         EleccionCursoElectivo eleccionCursoElectivo = eleccionCursoElectivoMapper.toEntity(request);
         eleccionCursoElectivo.setFechaEleccion(Instant.now());
         return eleccionCursoElectivoMapper.toResponse(eleccionCursoElectivoRepository.save(eleccionCursoElectivo));
+    }
+
+    public EleccionCursoElectivoResponse actualizar(Long id, EleccionCursoElectivoRequest request) {
+        EleccionCursoElectivo existente = buscarOFallar(id);
+        EleccionCursoElectivo eleccionCursoElectivo = eleccionCursoElectivoMapper.toEntity(request);
+        eleccionCursoElectivo.setFechaEleccion(Instant.now());
+        return eleccionCursoElectivoMapper.toResponse(eleccionCursoElectivoRepository.save(Actualizacion.copiar(eleccionCursoElectivo, existente)));
+    }
+
+    public void eliminar(Long id) {
+        eleccionCursoElectivoRepository.delete(buscarOFallar(id));
     }
 
     private EleccionCursoElectivo buscarOFallar(Long id) {

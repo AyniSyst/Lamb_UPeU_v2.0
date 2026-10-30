@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.ReactivacionMatriculaAnuladaReposit
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ReactivacionMatriculaAnuladaService {
 
@@ -33,6 +35,17 @@ public class ReactivacionMatriculaAnuladaService {
         ReactivacionMatriculaAnulada entity = mapper.toEntity(request);
         entity.setFechaReactivacion(Instant.now());
         return mapper.toResponse(repository.save(entity));
+    }
+
+    public ReactivacionMatriculaAnuladaResponse actualizar(Long id, ReactivacionMatriculaAnuladaRequest request) {
+        ReactivacionMatriculaAnulada existente = buscarOFallar(id);
+        ReactivacionMatriculaAnulada entity = mapper.toEntity(request);
+        entity.setFechaReactivacion(Instant.now());
+        return mapper.toResponse(repository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        repository.delete(buscarOFallar(id));
     }
 
     private ReactivacionMatriculaAnulada buscarOFallar(Long id) {

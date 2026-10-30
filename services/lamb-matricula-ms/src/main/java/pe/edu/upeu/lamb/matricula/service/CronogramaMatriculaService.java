@@ -11,9 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CronogramaMatriculaService {
 
@@ -33,6 +35,16 @@ public class CronogramaMatriculaService {
     public CronogramaMatriculaResponse crear(CronogramaMatriculaRequest request) {
         CronogramaMatricula entity = cronogramaMatriculaMapper.toEntity(request);
         return cronogramaMatriculaMapper.toResponse(cronogramaMatriculaRepository.save(entity));
+    }
+
+    public CronogramaMatriculaResponse actualizar(Long id, CronogramaMatriculaRequest request) {
+        CronogramaMatricula existente = buscarOFallar(id);
+        CronogramaMatricula entity = cronogramaMatriculaMapper.toEntity(request);
+        return cronogramaMatriculaMapper.toResponse(cronogramaMatriculaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        cronogramaMatriculaRepository.delete(buscarOFallar(id));
     }
 
     private CronogramaMatricula buscarOFallar(Long id) {

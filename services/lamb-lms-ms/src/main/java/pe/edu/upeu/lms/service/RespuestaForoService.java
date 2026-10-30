@@ -13,8 +13,10 @@ import pe.edu.upeu.lms.repository.RespuestaForoRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RespuestaForoService {
 

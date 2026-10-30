@@ -1,0 +1,222 @@
+{
+  "title": "Lamb - Logs (Loki)",
+  "uid": "lamb-logs",
+  "schemaVersion": 39,
+  "version": 1,
+  "editable": true,
+  "timezone": "browser",
+  "time": { "from": "now-1h", "to": "now" },
+  "refresh": "10s",
+  "templating": {
+    "list": [
+      {
+        "name": "app",
+        "label": "Microservicio",
+        "type": "query",
+        "datasource": { "type": "loki", "uid": "lamb-loki" },
+        "query": { "label": "application", "refId": "LokiVariableQueryEditor-VariableQuery", "stream": "", "type": 1 },
+        "definition": "label_values(application)",
+        "refresh": 2,
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".+",
+        "current": { "selected": true, "text": ["All"], "value": ["$__all"] }
+      },
+      {
+        "name": "level",
+        "label": "Nivel",
+        "type": "custom",
+        "query": "ERROR,WARN,INFO,DEBUG",
+        "multi": true,
+        "includeAll": true,
+        "allValue": "ERROR|WARN|INFO|DEBUG|TRACE",
+        "current": { "selected": true, "text": ["All"], "value": ["$__all"] }
+      },
+      {
+        "name": "buscar",
+        "label": "Buscar texto",
+        "type": "textbox",
+        "query": "",
+        "current": { "text": "", "value": "" }
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Errores (rango)",
+      "gridPos": { "h": 5, "w": 6, "x": 0, "y": 0 },
+      "datasource": { "type": "loki", "uid": "lamb-loki" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "red", "value": 1 } ] }
+        },
+        "overrides": []
+      },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "colorMode": "background", "graphMode": "none", "textMode": "value" },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "instant",
+          "datasource": { "type": "loki", "uid": "lamb-loki" },
+          "expr": "sum(count_over_time({application=~\"$app\"} | pattern \"<_> <_> [<trace_id>] <level> <_>\" | level=\"ERROR\" [$__range])) or vector(0)"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Warnings (rango)",
+      "gridPos": { "h": 5, "w": 6, "x": 6, "y": 0 },
+      "datasource": { "type": "loki", "uid": "lamb-loki" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "orange", "value": 1 } ] }
+        },
+        "overrides": []
+      },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "colorMode": "background", "graphMode": "none", "textMode": "value" },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "instant",
+          "datasource": { "type": "loki", "uid": "lamb-loki" },
+          "expr": "sum(count_over_time({application=~\"$app\"} | pattern \"<_> <_> [<trace_id>] <level> <_>\" | level=\"WARN\" [$__range])) or vector(0)"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Lineas de log (rango)",
+      "gridPos": { "h": 5, "w": 6, "x": 12, "y": 0 },
+      "datasource": { "type": "loki", "uid": "lamb-loki" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "blue" } }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "colorMode": "value", "graphMode": "none", "textMode": "value" },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "instant",
+          "datasource": { "type": "loki", "uid": "lamb-loki" },
+          "expr": "sum(count_over_time({application=~\"$app\"} [$__range]))"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "bargauge",
+      "title": "Errores por microservicio (rango)",
+      "gridPos": { "h": 5, "w": 6, "x": 18, "y": 0 },
+      "datasource": { "type": "loki", "uid": "lamb-loki" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "red" } }, "overrides": [] },
+      "options": { "orientation": "horizontal", "displayMode": "basic", "reduceOptions": { "calcs": ["lastNotNull"], "fields": "/^Last \\*$/", "values": true }, "showUnfilled": true, "valueMode": "color", "namePlacement": "left" },
+      "transformations": [
+        { "id": "reduce", "options": { "mode": "seriesToRows", "reducers": ["lastNotNull"] } },
+        { "id": "sortBy", "options": { "sort": [ { "field": "Last *", "desc": true } ] } }
+      ],
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "instant",
+          "datasource": { "type": "loki", "uid": "lamb-loki" },
+          "expr": "sort_desc(sum by (application) (count_over_time({application=~\"$app\"} | pattern \"<_> <_> [<trace_id>] <level> <_>\" | level=\"ERROR\" [$__range])))",
+          "legendFormat": "{{application}}"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Volumen de logs por microservicio",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 5 },
+      "datasource": { "type": "loki", "uid": "lamb-loki" },
+      "fieldConfig": { "defaults": { "custom": { "drawStyle": "bars", "fillOpacity": 60, "stacking": { "mode": "normal" } } }, "overrides": [] },
+      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "multi" } },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "loki", "uid": "lamb-loki" },
+          "expr": "sum by (application) (count_over_time({application=~\"$app\"} [$__auto]))",
+          "legendFormat": "{{application}}"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Logs por nivel",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 5 },
+      "datasource": { "type": "loki", "uid": "lamb-loki" },
+      "fieldConfig": {
+        "defaults": { "custom": { "drawStyle": "bars", "fillOpacity": 60, "stacking": { "mode": "normal" } } },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "ERROR" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } } ] },
+          { "matcher": { "id": "byName", "options": "WARN" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } } ] },
+          { "matcher": { "id": "byName", "options": "INFO" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } } ] },
+          { "matcher": { "id": "byName", "options": "DEBUG" }, "properties": [ { "id": "color", "value": { "mode": "fixed", "fixedColor": "blue" } } ] }
+        ]
+      },
+      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "multi" } },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "loki", "uid": "lamb-loki" },
+          "expr": "sum by (level) (count_over_time({application=~\"$app\"} | pattern \"<_> <_> [<trace_id>] <level> <_>\" | level=~\"$level\" [$__auto]))",
+          "legendFormat": "{{level}}"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "Errores y warnings por microservicio",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 13 },
+      "datasource": { "type": "loki", "uid": "lamb-loki" },
+      "fieldConfig": { "defaults": { "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10, "showPoints": "auto" } }, "overrides": [] },
+      "options": { "legend": { "displayMode": "table", "placement": "right", "calcs": ["sum"] }, "tooltip": { "mode": "multi" } },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "loki", "uid": "lamb-loki" },
+          "expr": "sum by (application, level) (count_over_time({application=~\"$app\"} | pattern \"<_> <_> [<trace_id>] <level> <_>\" | level=~\"ERROR|WARN\" [$__auto]))",
+          "legendFormat": "{{application}} {{level}}"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "logs",
+      "title": "Errores recientes",
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 21 },
+      "datasource": { "type": "loki", "uid": "lamb-loki" },
+      "options": { "showTime": true, "showLabels": true, "wrapLogMessage": true, "sortOrder": "Descending", "enableLogDetails": true, "dedupStrategy": "none", "prettifyLogMessage": false },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "loki", "uid": "lamb-loki" },
+          "expr": "{application=~\"$app\"} | pattern \"<_> <_> [<trace_id>] <level> <_>\" | level=\"ERROR\" |~ \"(?i)$buscar\"",
+          "maxLines": 500
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "logs",
+      "title": "Explorador de logs (filtra por microservicio, nivel y texto)",
+      "gridPos": { "h": 16, "w": 24, "x": 0, "y": 31 },
+      "datasource": { "type": "loki", "uid": "lamb-loki" },
+      "options": { "showTime": true, "showLabels": true, "wrapLogMessage": true, "sortOrder": "Descending", "enableLogDetails": true, "dedupStrategy": "none", "prettifyLogMessage": false },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "loki", "uid": "lamb-loki" },
+          "expr": "{application=~\"$app\"} | pattern \"<_> <_> [<trace_id>] <level> <_>\" | level=~\"$level\" |~ \"(?i)$buscar\"",
+          "maxLines": 1000
+        }
+      ]
+    }
+  ]
+}

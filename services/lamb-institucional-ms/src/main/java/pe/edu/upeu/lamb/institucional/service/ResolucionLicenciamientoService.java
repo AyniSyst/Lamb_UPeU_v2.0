@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.ResolucionLicenciamientoMapper;
 import pe.edu.upeu.lamb.institucional.repository.ResolucionLicenciamientoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ResolucionLicenciamientoService {
 
@@ -31,6 +33,16 @@ public class ResolucionLicenciamientoService {
     public ResolucionLicenciamientoResponse crear(ResolucionLicenciamientoRequest request) {
         ResolucionLicenciamiento entity = resolucionLicenciamientoMapper.toEntity(request);
         return resolucionLicenciamientoMapper.toResponse(resolucionLicenciamientoRepository.save(entity));
+    }
+
+    public ResolucionLicenciamientoResponse actualizar(Long id, ResolucionLicenciamientoRequest request) {
+        ResolucionLicenciamiento existente = buscarOFallar(id);
+        ResolucionLicenciamiento entity = resolucionLicenciamientoMapper.toEntity(request);
+        return resolucionLicenciamientoMapper.toResponse(resolucionLicenciamientoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        resolucionLicenciamientoRepository.delete(buscarOFallar(id));
     }
 
     private ResolucionLicenciamiento buscarOFallar(Long id) {

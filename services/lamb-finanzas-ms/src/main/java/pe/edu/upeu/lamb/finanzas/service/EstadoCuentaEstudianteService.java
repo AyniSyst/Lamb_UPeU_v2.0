@@ -13,9 +13,11 @@ import pe.edu.upeu.lamb.finanzas.repository.CuentaEstudianteRepository;
 import pe.edu.upeu.lamb.finanzas.repository.EstadoCuentaEstudianteRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class EstadoCuentaEstudianteService {
 
@@ -47,6 +49,27 @@ public class EstadoCuentaEstudianteService {
                 .build();
 
         return estadoCuentaEstudianteMapper.toResponse(estadoCuentaEstudianteRepository.save(entity));
+    }
+
+    public EstadoCuentaEstudianteResponse actualizar(Long id, EstadoCuentaEstudianteRequest request) {
+        EstadoCuentaEstudiante existente = buscarOFallar(id);
+        CuentaEstudiante cuentaEstudiante = cuentaEstudianteRepository.findById(request.getIdCuentaEstudiante())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "No se encontro la cuenta de estudiante con id " + request.getIdCuentaEstudiante()));
+
+        EstadoCuentaEstudiante entity = EstadoCuentaEstudiante.builder()
+                .cuentaEstudiante(cuentaEstudiante)
+                .montoTotalDeuda(request.getMontoTotalDeuda())
+                .montoPagado(request.getMontoPagado())
+                .saldoPendiente(request.getSaldoPendiente())
+                .fecha(request.getFecha())
+                .build();
+
+        return estadoCuentaEstudianteMapper.toResponse(estadoCuentaEstudianteRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        estadoCuentaEstudianteRepository.delete(buscarOFallar(id));
     }
 
     private EstadoCuentaEstudiante buscarOFallar(Long id) {

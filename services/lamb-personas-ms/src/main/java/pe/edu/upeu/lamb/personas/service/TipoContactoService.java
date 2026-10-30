@@ -35,6 +35,16 @@ public class TipoContactoService {
         return tipoContactoMapper.toResponse(tipoContactoRepository.save(entity));
     }
 
+    public TipoContactoResponse actualizar(Long id, TipoContactoRequest request) {
+        TipoContacto existente = buscarOFallar(id);
+        TipoContacto entity = tipoContactoMapper.toEntity(request);
+        return tipoContactoMapper.toResponse(tipoContactoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        tipoContactoRepository.delete(buscarOFallar(id));
+    }
+
     private TipoContacto buscarOFallar(Long id) {
         return tipoContactoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tipo de contacto no encontrado: " + id));

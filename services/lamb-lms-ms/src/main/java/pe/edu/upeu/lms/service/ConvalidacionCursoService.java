@@ -12,8 +12,10 @@ import pe.edu.upeu.lms.repository.ConvalidacionCursoRepository;
 import pe.edu.upeu.lms.repository.CursoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ConvalidacionCursoService {
 

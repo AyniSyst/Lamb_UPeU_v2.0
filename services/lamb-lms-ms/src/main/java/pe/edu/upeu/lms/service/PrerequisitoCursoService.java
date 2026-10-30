@@ -12,8 +12,10 @@ import pe.edu.upeu.lms.repository.CursoRepository;
 import pe.edu.upeu.lms.repository.PrerequisitoCursoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class PrerequisitoCursoService {
 

@@ -14,9 +14,11 @@ import pe.edu.upeu.lamb.finanzas.repository.DocumentoPagoRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class DatoFacturacionClienteService {
 
@@ -48,6 +50,27 @@ public class DatoFacturacionClienteService {
         DatoFacturacionCliente guardado = datoFacturacionClienteRepository.save(entity);
         log.info("Dato de facturacion del cliente creado con id: {}", guardado.getId());
         return datoFacturacionClienteMapper.toResponse(guardado);
+    }
+
+    public DatoFacturacionClienteResponse actualizar(Long id, DatoFacturacionClienteRequest request) {
+        DatoFacturacionCliente existente = buscarOFallar(id);
+        DocumentoPago documentoPago = documentoPagoRepository.findById(request.getIdDocumentoPago())
+                .orElseThrow(() -> new ResourceNotFoundException("Documento de pago no encontrado con id: " + request.getIdDocumentoPago()));
+
+        DatoFacturacionCliente entity = DatoFacturacionCliente.builder()
+                .documentoPago(documentoPago)
+                .dni(request.getDni())
+                .ruc(request.getRuc())
+                .razonSocial(request.getRazonSocial())
+                .build();
+
+        DatoFacturacionCliente guardado = datoFacturacionClienteRepository.save(Actualizacion.copiar(entity, existente));
+        log.info("Dato de facturacion del cliente creado con id: {}", guardado.getId());
+        return datoFacturacionClienteMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        datoFacturacionClienteRepository.delete(buscarOFallar(id));
     }
 
     private DatoFacturacionCliente buscarOFallar(Long id) {

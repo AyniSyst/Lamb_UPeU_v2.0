@@ -62,6 +62,17 @@ public class InstitucionController {
         return institucionService.crear(request);
     }
 
+    @PutMapping("/instituciones/{id}")
+    public InstitucionResponse actualizarInstitucion(@PathVariable Long id, @Valid @RequestBody InstitucionRequest request) {
+        return institucionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/instituciones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarInstitucion(@PathVariable Long id) {
+        institucionService.eliminar(id);
+    }
+
     // --- Tipo de institucion (item 2) ---
 
     @GetMapping("/tipos-institucion")
@@ -81,6 +92,17 @@ public class InstitucionController {
     @Operation(summary = "Crear un tipo de institucion")
     public TipoInstitucionResponse crearTipoInstitucion(@Valid @RequestBody TipoInstitucionRequest request) {
         return tipoInstitucionService.crear(request);
+    }
+
+    @PutMapping("/tipos-institucion/{id}")
+    public TipoInstitucionResponse actualizarTipoInstitucion(@PathVariable Long id, @Valid @RequestBody TipoInstitucionRequest request) {
+        return tipoInstitucionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/tipos-institucion/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTipoInstitucion(@PathVariable Long id) {
+        tipoInstitucionService.eliminar(id);
     }
 
     // --- Autoridad institucional (item 3) ---
@@ -104,6 +126,17 @@ public class InstitucionController {
         return autoridadInstitucionalService.crear(request);
     }
 
+    @PutMapping("/autoridades/{id}")
+    public AutoridadInstitucionalResponse actualizarAutoridad(@PathVariable Long id, @Valid @RequestBody AutoridadInstitucionalRequest request) {
+        return autoridadInstitucionalService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/autoridades/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAutoridad(@PathVariable Long id) {
+        autoridadInstitucionalService.eliminar(id);
+    }
+
     // --- Resolucion de licenciamiento (item 4) ---
 
     @GetMapping("/resoluciones-licenciamiento")
@@ -125,6 +158,17 @@ public class InstitucionController {
         return resolucionLicenciamientoService.crear(request);
     }
 
+    @PutMapping("/resoluciones-licenciamiento/{id}")
+    public ResolucionLicenciamientoResponse actualizarResolucionLicenciamiento(@PathVariable Long id, @Valid @RequestBody ResolucionLicenciamientoRequest request) {
+        return resolucionLicenciamientoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/resoluciones-licenciamiento/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarResolucionLicenciamiento(@PathVariable Long id) {
+        resolucionLicenciamientoService.eliminar(id);
+    }
+
     // --- Convenio institucional (item 5, opcional) ---
 
     @GetMapping("/convenios")
@@ -144,5 +188,16 @@ public class InstitucionController {
     @Operation(summary = "Crear un convenio institucional")
     public ConvenioInstitucionalResponse crearConvenio(@Valid @RequestBody ConvenioInstitucionalRequest request) {
         return convenioInstitucionalService.crear(request);
+    }
+
+    @PutMapping("/convenios/{id}")
+    public ConvenioInstitucionalResponse actualizarConvenio(@PathVariable Long id, @Valid @RequestBody ConvenioInstitucionalRequest request) {
+        return convenioInstitucionalService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/convenios/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarConvenio(@PathVariable Long id) {
+        convenioInstitucionalService.eliminar(id);
     }
 }

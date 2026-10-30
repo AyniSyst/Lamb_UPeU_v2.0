@@ -1,1 +1,224 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos globales de Lamb UPeU */
+:root {
+  --azul: #1f4e79;
+  --azul-claro: #e8f0f8;
+  --borde: #d0d7de;
+  --texto: #1f2328;
+  --gris: #57606a;
+  --rojo: #b42318;
+  --verde: #1a7f37;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  color: var(--texto);
+  background: #f6f8fa;
+}
+
+h2 {
+  margin: 0 0 1rem;
+  color: var(--azul);
+}
+
+h3 {
+  margin: 1.25rem 0 0.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--borde);
+  margin: 0.75rem 0;
+}
+
+th,
+td {
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid var(--borde);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--azul-claro);
+  font-weight: 600;
+}
+
+tr:hover td {
+  background: #fafbfc;
+}
+
+button,
+a.boton {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  margin: 0 0.25rem 0.25rem 0;
+  border: 1px solid var(--azul);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--azul);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button:hover,
+a.boton:hover {
+  background: var(--azul-claro);
+}
+
+button[type='submit'],
+a.boton.primario {
+  background: var(--azul);
+  color: #fff;
+}
+
+button.peligro {
+  border-color: var(--rojo);
+  color: var(--rojo);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+input,
+select,
+textarea {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--borde);
+  border-radius: 4px;
+  font: inherit;
+  min-width: 14rem;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border-color: var(--rojo);
+}
+
+.formulario {
+  display: grid;
+  gap: 0.6rem;
+  max-width: 34rem;
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.formulario > div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.formulario label {
+  font-weight: 600;
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: end;
+}
+
+.fila > div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.fila input,
+.fila select {
+  min-width: 8rem;
+}
+
+.acciones {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.barra {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.error {
+  color: var(--rojo);
+}
+
+p.error,
+p.exito {
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  background: #fdecea;
+}
+
+p.exito {
+  color: var(--verde);
+  background: #e6f4ea;
+}
+
+.estado {
+  display: inline-block;
+  padding: 0.05rem 0.45rem;
+  border-radius: 10px;
+  background: #eaeef2;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.estado.ABIERTO,
+.estado.ABIERTA,
+.estado.CONFIRMADA,
+.estado.APROBADO,
+.estado.ADMITIDO,
+.estado.VIGENTE,
+.estado.ACTIVO {
+  background: #dafbe1;
+  color: var(--verde);
+}
+
+.estado.ANULADA,
+.estado.ANULADO,
+.estado.RECHAZADO,
+.estado.RECHAZADA,
+.estado.REEMBOLSADO {
+  background: #ffebe9;
+  color: var(--rojo);
+}
+
+small.ayuda {
+  color: var(--gris);
+}
+
+button.primario {
+  background: var(--azul);
+  color: #fff;
+}
+
+pre.resultado {
+  max-height: 24rem;
+  overflow: auto;
+  padding: 0.75rem;
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+p.ayuda {
+  color: var(--gris);
+  margin: 0 0 0.75rem;
+}

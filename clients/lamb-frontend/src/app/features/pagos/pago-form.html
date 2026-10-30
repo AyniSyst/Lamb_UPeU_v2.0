@@ -1,34 +1,42 @@
 <h2>Nuevo pago</h2>
+<p class="ayuda">Pago directo en caja (tramites, constancias). Los cobros de matricula se generan solos al confirmarla y se pagan desde la lista.</p>
 
 @if (error()) {
   <p class="error">{{ error() }}</p>
 }
 
-<form [formGroup]="form" (ngSubmit)="guardar()">
+<form class="formulario" [formGroup]="form" (ngSubmit)="guardar()">
   <div>
-    <label for="idPersona">ID Persona</label>
-    <input id="idPersona" type="number" formControlName="idPersona" />
+    <label for="idPersona">Persona</label>
+    <select id="idPersona" formControlName="idPersona">
+      <option [ngValue]="null" disabled>Selecciona una persona</option>
+      @for (p of personas(); track p.id) {
+        <option [ngValue]="p.id">{{ p.apellidos }}, {{ p.nombres }} ({{ p.tipoDocumento }} {{ p.numeroDocumento }})</option>
+      }
+    </select>
   </div>
 
   <div>
     <label for="concepto">Concepto</label>
-    <input id="concepto" type="text" formControlName="concepto" />
+    <input id="concepto" type="text" formControlName="concepto" placeholder="Constancia de estudios" />
   </div>
 
   <div>
-    <label for="monto">Monto</label>
-    <input id="monto" type="number" step="0.01" formControlName="monto" />
+    <label for="monto">Monto (S/)</label>
+    <input id="monto" type="number" step="0.01" min="0.01" formControlName="monto" />
   </div>
 
   <div>
     <label for="metodo">Metodo</label>
     <select id="metodo" formControlName="metodo">
-      <option value="">Seleccione...</option>
       @for (m of metodos; track m) {
         <option [value]="m">{{ m }}</option>
       }
     </select>
   </div>
 
-  <button type="submit" [disabled]="enviando()">Procesar</button>
+  <div class="acciones">
+    <button type="submit" [disabled]="enviando()">{{ enviando() ? 'Procesando...' : 'Procesar pago' }}</button>
+    <a routerLink="/pagos">Cancelar</a>
+  </div>
 </form>

@@ -4,21 +4,37 @@
   <p class="error">{{ error() }}</p>
 }
 
-<form [formGroup]="form" (ngSubmit)="guardar()">
+<form class="formulario" [formGroup]="form" (ngSubmit)="guardar()">
   <div>
-    <label for="idPersona">ID Persona</label>
-    <input id="idPersona" type="number" formControlName="idPersona" />
+    <label for="idPersona">Postulante</label>
+    <select id="idPersona" formControlName="idPersona">
+      <option [ngValue]="null" disabled>Selecciona una persona (tipo estudiante)</option>
+      @for (p of personas(); track p.id) {
+        <option [ngValue]="p.id">{{ p.apellidos }}, {{ p.nombres }} ({{ p.tipoDocumento }} {{ p.numeroDocumento }})</option>
+      }
+    </select>
+    @if (!personas().length) {
+      <small class="ayuda">Registra primero al postulante en Personas (tipo Estudiante).</small>
+    }
   </div>
 
   <div>
-    <label for="idPrograma">ID Programa</label>
-    <input id="idPrograma" type="number" formControlName="idPrograma" />
+    <label for="idPrograma">Programa</label>
+    <select id="idPrograma" formControlName="idPrograma">
+      <option [ngValue]="null" disabled>Selecciona un programa</option>
+      @for (p of programas(); track p.id) {
+        <option [ngValue]="p.id">{{ p.nombre }} ({{ p.gradoAcademico }})</option>
+      }
+    </select>
   </div>
 
   <div>
     <label for="periodo">Periodo</label>
-    <input id="periodo" type="text" formControlName="periodo" placeholder="2026-I" />
+    <input id="periodo" type="text" formControlName="periodo" placeholder="2026-II" />
   </div>
 
-  <button type="submit" [disabled]="enviando()">Registrar</button>
+  <div class="acciones">
+    <button type="submit" [disabled]="enviando()">{{ enviando() ? 'Registrando...' : 'Registrar' }}</button>
+    <a routerLink="/postulaciones">Cancelar</a>
+  </div>
 </form>

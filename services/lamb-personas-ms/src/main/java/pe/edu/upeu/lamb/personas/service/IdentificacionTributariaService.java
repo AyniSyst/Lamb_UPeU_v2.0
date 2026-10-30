@@ -37,6 +37,17 @@ public class IdentificacionTributariaService {
         return identificacionTributariaMapper.toResponse(identificacionTributariaRepository.save(entity));
     }
 
+    public IdentificacionTributariaResponse actualizar(Long id, IdentificacionTributariaRequest request) {
+        IdentificacionTributaria existente = buscarOFallar(id);
+        IdentificacionTributaria entity = identificacionTributariaMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return identificacionTributariaMapper.toResponse(identificacionTributariaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        identificacionTributariaRepository.delete(buscarOFallar(id));
+    }
+
     private IdentificacionTributaria buscarOFallar(Long id) {
         return identificacionTributariaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Identificacion tributaria no encontrada: " + id));

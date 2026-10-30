@@ -15,12 +15,14 @@ import pe.edu.upeu.lamb.finanzas.repository.DetalleCobroRepository;
 import pe.edu.upeu.lamb.finanzas.repository.EstadoCobroRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * CRUD opcional: depende de la universidad. Item 18 del documento: "Detalle de cobro".
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class DetalleCobroService {
 
@@ -58,6 +60,32 @@ public class DetalleCobroService {
 
         DetalleCobro guardado = detalleCobroRepository.save(entity);
         return detalleCobroMapper.toResponse(guardado);
+    }
+
+    public DetalleCobroResponse actualizar(Long id, DetalleCobroRequest request) {
+        DetalleCobro existente = buscarOFallar(id);
+        EstadoCobro estadoCobro = estadoCobroRepository.findById(request.getIdEstadoCobro())
+                .orElseThrow(() -> new ResourceNotFoundException("Estado de cobro no encontrado: " + request.getIdEstadoCobro()));
+
+        DescuentoAplicado descuentoAplicado = null;
+        if (request.getIdDescuentoAplicado() != null) {
+            descuentoAplicado = descuentoAplicadoRepository.findById(request.getIdDescuentoAplicado())
+                    .orElseThrow(() -> new ResourceNotFoundException("Descuento aplicado no encontrado: " + request.getIdDescuentoAplicado()));
+        }
+
+        DetalleCobro entity = DetalleCobro.builder()
+                .estadoCobro(estadoCobro)
+                .concepto(request.getConcepto())
+                .monto(request.getMonto())
+                .descuentoAplicado(descuentoAplicado)
+                .build();
+
+        DetalleCobro guardado = detalleCobroRepository.save(Actualizacion.copiar(entity, existente));
+        return detalleCobroMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        detalleCobroRepository.delete(buscarOFallar(id));
     }
 
     private DetalleCobro buscarOFallar(Long id) {

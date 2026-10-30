@@ -37,6 +37,17 @@ public class CambioNombreApellidoService {
         return cambioNombreApellidoMapper.toResponse(cambioNombreApellidoRepository.save(entity));
     }
 
+    public CambioNombreApellidoResponse actualizar(Long id, CambioNombreApellidoRequest request) {
+        CambioNombreApellido existente = buscarOFallar(id);
+        CambioNombreApellido entity = cambioNombreApellidoMapper.toEntity(request);
+        entity.setFechaCambio(Instant.now());
+        return cambioNombreApellidoMapper.toResponse(cambioNombreApellidoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        cambioNombreApellidoRepository.delete(buscarOFallar(id));
+    }
+
     private CambioNombreApellido buscarOFallar(Long id) {
         return cambioNombreApellidoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cambio de nombre/apellido no encontrado: " + id));

@@ -10,8 +10,10 @@ import pe.edu.upeu.ingresospagos.mapper.PagadorTerceroMapper;
 import pe.edu.upeu.ingresospagos.repository.PagadorTerceroRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class PagadorTerceroService {
 

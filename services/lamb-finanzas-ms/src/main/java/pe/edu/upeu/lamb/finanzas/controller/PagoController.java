@@ -2,6 +2,7 @@ package pe.edu.upeu.lamb.finanzas.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import pe.edu.upeu.lamb.finanzas.dto.PagarCargoRequest;
 import pe.edu.upeu.lamb.finanzas.dto.PagoRequest;
 import pe.edu.upeu.lamb.finanzas.dto.PagoResponse;
 import pe.edu.upeu.lamb.finanzas.dto.RecaudacionVentanillaRequest;
@@ -52,6 +53,12 @@ public class PagoController {
         return pagoService.procesar(request);
     }
 
+    @PostMapping("/{id}/pagar")
+    @Operation(summary = "Pagar un cargo pendiente")
+    public PagoResponse pagar(@PathVariable Long id, @Valid @RequestBody PagarCargoRequest request) {
+        return pagoService.pagar(id, request);
+    }
+
     @PostMapping("/{id}/reembolsar")
     @Operation(summary = "Reembolsar un pago")
     public PagoResponse reembolsar(@PathVariable Long id) {
@@ -79,6 +86,17 @@ public class PagoController {
         return voucherService.crear(request);
     }
 
+    @PutMapping("/vouchers/{id}")
+    public VoucherResponse actualizarVoucher(@PathVariable Long id, @Valid @RequestBody VoucherRequest request) {
+        return voucherService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/vouchers/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarVoucher(@PathVariable Long id) {
+        voucherService.eliminar(id);
+    }
+
     // --- Recaudacion por ventanilla ---
 
     @GetMapping("/recaudaciones-ventanilla")
@@ -98,5 +116,16 @@ public class PagoController {
     @Operation(summary = "Crear una recaudacion por ventanilla")
     public RecaudacionVentanillaResponse crearRecaudacion(@Valid @RequestBody RecaudacionVentanillaRequest request) {
         return recaudacionVentanillaService.crear(request);
+    }
+
+    @PutMapping("/recaudaciones-ventanilla/{id}")
+    public RecaudacionVentanillaResponse actualizarRecaudacion(@PathVariable Long id, @Valid @RequestBody RecaudacionVentanillaRequest request) {
+        return recaudacionVentanillaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/recaudaciones-ventanilla/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarRecaudacion(@PathVariable Long id) {
+        recaudacionVentanillaService.eliminar(id);
     }
 }

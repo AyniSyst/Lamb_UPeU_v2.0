@@ -37,6 +37,17 @@ public class VigenciaVencimientoDocumentoService {
         return vigenciaVencimientoDocumentoMapper.toResponse(vigenciaVencimientoDocumentoRepository.save(entity));
     }
 
+    public VigenciaVencimientoDocumentoResponse actualizar(Long id, VigenciaVencimientoDocumentoRequest request) {
+        VigenciaVencimientoDocumento existente = buscarOFallar(id);
+        VigenciaVencimientoDocumento entity = vigenciaVencimientoDocumentoMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return vigenciaVencimientoDocumentoMapper.toResponse(vigenciaVencimientoDocumentoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        vigenciaVencimientoDocumentoRepository.delete(buscarOFallar(id));
+    }
+
     private VigenciaVencimientoDocumento buscarOFallar(Long id) {
         return vigenciaVencimientoDocumentoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Vigencia/vencimiento de documento no encontrada: " + id));

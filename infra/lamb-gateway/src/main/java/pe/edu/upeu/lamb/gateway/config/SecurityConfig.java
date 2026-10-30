@@ -22,7 +22,7 @@ public class SecurityConfig {
 
     // Rutas de gestion academica (coordinacion/admision/curriculo/evaluacion/trayectoria)
     private static final String[] ACADEMICO = {
-            "/api/v1/planes-estudio/**", "/api/v1/cursos/**", "/api/v1/secciones/**", "/api/v1/postulaciones/**"
+            "/api/v1/planes-estudio/**", "/api/v1/cursos/**", "/api/v1/secciones/**", "/api/v1/grupos/**", "/api/v1/postulaciones/**"
     };
 
     // Rutas institucionales y de personas: lectura abierta a cualquier autenticado, escritura restringida
@@ -86,6 +86,13 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/matriculas/**").hasAnyRole("ADMIN", "COORDINADOR", "ESTUDIANTE")
                         .requestMatchers(HttpMethod.GET, "/api/v1/pagos/**").authenticated()
                         .requestMatchers("/api/v1/pagos/**").hasAnyRole("ADMIN", "COORDINADOR")
+                        // Rutas /ms/<servicio>/** (una pagina por microservicio): lectura para cualquier
+                        // autenticado, escritura segun quien opera ese dominio.
+                        .requestMatchers(HttpMethod.GET, "/ms/**").authenticated()
+                        .requestMatchers("/ms/matricula/**").hasAnyRole("ADMIN", "COORDINADOR", "ESTUDIANTE")
+                        .requestMatchers("/ms/evaluacion/**", "/ms/trayectoria/**").hasAnyRole("ADMIN", "COORDINADOR", "DOCENTE")
+                        .requestMatchers("/ms/lms/**").hasAnyRole("ADMIN", "COORDINADOR", "DOCENTE", "ESTUDIANTE")
+                        .requestMatchers("/ms/**").hasAnyRole("ADMIN", "COORDINADOR")
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

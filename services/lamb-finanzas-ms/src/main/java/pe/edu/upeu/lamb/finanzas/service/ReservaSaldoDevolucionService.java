@@ -42,6 +42,17 @@ public class ReservaSaldoDevolucionService {
         return reservaSaldoDevolucionMapper.toResponse(reservaSaldoDevolucionRepository.save(entity));
     }
 
+    public ReservaSaldoDevolucionResponse actualizar(Long id, ReservaSaldoDevolucionRequest request) {
+        ReservaSaldoDevolucion existente = buscarOFallar(id);
+        ReservaSaldoDevolucion entity = reservaSaldoDevolucionMapper.toEntity(request);
+        entity.setFecha(Instant.now());
+        return reservaSaldoDevolucionMapper.toResponse(reservaSaldoDevolucionRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        reservaSaldoDevolucionRepository.delete(buscarOFallar(id));
+    }
+
     private ReservaSaldoDevolucion buscarOFallar(Long id) {
         return reservaSaldoDevolucionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Reserva de saldo para devolucion no encontrada: " + id));

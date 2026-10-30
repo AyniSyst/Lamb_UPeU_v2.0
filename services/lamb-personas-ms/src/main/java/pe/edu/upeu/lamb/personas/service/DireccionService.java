@@ -37,6 +37,17 @@ public class DireccionService {
         return direccionMapper.toResponse(direccionRepository.save(entity));
     }
 
+    public DireccionResponse actualizar(Long id, DireccionRequest request) {
+        Direccion existente = buscarOFallar(id);
+        Direccion entity = direccionMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return direccionMapper.toResponse(direccionRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        direccionRepository.delete(buscarOFallar(id));
+    }
+
     private Direccion buscarOFallar(Long id) {
         return direccionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Direccion no encontrada: " + id));

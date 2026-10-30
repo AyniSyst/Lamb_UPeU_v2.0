@@ -37,6 +37,17 @@ public class DatoSocioeconomicoService {
         return datoSocioeconomicoMapper.toResponse(datoSocioeconomicoRepository.save(entity));
     }
 
+    public DatoSocioeconomicoResponse actualizar(Long id, DatoSocioeconomicoRequest request) {
+        DatoSocioeconomico existente = buscarOFallar(id);
+        DatoSocioeconomico entity = datoSocioeconomicoMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return datoSocioeconomicoMapper.toResponse(datoSocioeconomicoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        datoSocioeconomicoRepository.delete(buscarOFallar(id));
+    }
+
     private DatoSocioeconomico buscarOFallar(Long id) {
         return datoSocioeconomicoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Dato socioeconomico no encontrado: " + id));

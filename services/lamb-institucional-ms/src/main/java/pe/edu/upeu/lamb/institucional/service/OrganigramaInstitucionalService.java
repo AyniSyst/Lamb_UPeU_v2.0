@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.OrganigramaInstitucionalMapper;
 import pe.edu.upeu.lamb.institucional.repository.OrganigramaInstitucionalRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class OrganigramaInstitucionalService {
 
@@ -31,6 +33,16 @@ public class OrganigramaInstitucionalService {
     public OrganigramaInstitucionalResponse crear(OrganigramaInstitucionalRequest request) {
         OrganigramaInstitucional entity = organigramaInstitucionalMapper.toEntity(request);
         return organigramaInstitucionalMapper.toResponse(organigramaInstitucionalRepository.save(entity));
+    }
+
+    public OrganigramaInstitucionalResponse actualizar(Long id, OrganigramaInstitucionalRequest request) {
+        OrganigramaInstitucional existente = buscarOFallar(id);
+        OrganigramaInstitucional entity = organigramaInstitucionalMapper.toEntity(request);
+        return organigramaInstitucionalMapper.toResponse(organigramaInstitucionalRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        organigramaInstitucionalRepository.delete(buscarOFallar(id));
     }
 
     private OrganigramaInstitucional buscarOFallar(Long id) {

@@ -37,6 +37,17 @@ public class DocumentoPersonaService {
         return documentoPersonaMapper.toResponse(documentoPersonaRepository.save(entity));
     }
 
+    public DocumentoPersonaResponse actualizar(Long id, DocumentoPersonaRequest request) {
+        DocumentoPersona existente = buscarOFallar(id);
+        DocumentoPersona entity = documentoPersonaMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return documentoPersonaMapper.toResponse(documentoPersonaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        documentoPersonaRepository.delete(buscarOFallar(id));
+    }
+
     private DocumentoPersona buscarOFallar(Long id) {
         return documentoPersonaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Documento de persona no encontrado: " + id));

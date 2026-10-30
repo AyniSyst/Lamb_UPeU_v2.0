@@ -14,12 +14,14 @@ import pe.edu.upeu.lamb.finanzas.repository.NotaDebitoRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * CRUD marcado con (*) en el documento: "Nota de debito". Opcional.
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class NotaDebitoService {
 
@@ -51,6 +53,27 @@ public class NotaDebitoService {
         NotaDebito guardado = notaDebitoRepository.save(entity);
         log.info("Nota de debito creada con id: {}", guardado.getId());
         return notaDebitoMapper.toResponse(guardado);
+    }
+
+    public NotaDebitoResponse actualizar(Long id, NotaDebitoRequest request) {
+        NotaDebito existente = buscarOFallar(id);
+        DocumentoPago documentoPago = documentoPagoRepository.findById(request.getIdDocumentoPago())
+                .orElseThrow(() -> new ResourceNotFoundException("Documento de pago no encontrado con id: " + request.getIdDocumentoPago()));
+
+        NotaDebito entity = NotaDebito.builder()
+                .documentoPago(documentoPago)
+                .motivo(request.getMotivo())
+                .monto(request.getMonto())
+                .fecha(request.getFecha())
+                .build();
+
+        NotaDebito guardado = notaDebitoRepository.save(Actualizacion.copiar(entity, existente));
+        log.info("Nota de debito creada con id: {}", guardado.getId());
+        return notaDebitoMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        notaDebitoRepository.delete(buscarOFallar(id));
     }
 
     private NotaDebito buscarOFallar(Long id) {

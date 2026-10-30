@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.DireccionSedeMapper;
 import pe.edu.upeu.lamb.institucional.repository.DireccionSedeRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class DireccionSedeService {
 
@@ -31,6 +33,16 @@ public class DireccionSedeService {
     public DireccionSedeResponse crear(DireccionSedeRequest request) {
         DireccionSede entity = direccionSedeMapper.toEntity(request);
         return direccionSedeMapper.toResponse(direccionSedeRepository.save(entity));
+    }
+
+    public DireccionSedeResponse actualizar(Long id, DireccionSedeRequest request) {
+        DireccionSede existente = buscarOFallar(id);
+        DireccionSede entity = direccionSedeMapper.toEntity(request);
+        return direccionSedeMapper.toResponse(direccionSedeRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        direccionSedeRepository.delete(buscarOFallar(id));
     }
 
     private DireccionSede buscarOFallar(Long id) {

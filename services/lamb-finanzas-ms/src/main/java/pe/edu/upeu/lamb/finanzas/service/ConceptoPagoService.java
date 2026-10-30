@@ -48,6 +48,24 @@ public class ConceptoPagoService {
         return conceptoPagoMapper.toResponse(conceptoPagoRepository.save(entity));
     }
 
+    public ConceptoPagoResponse actualizar(Long id, ConceptoPagoRequest request) {
+        ConceptoPago existente = buscarOFallar(id);
+        CategoriaConcepto categoria = categoriaConceptoRepository.findById(request.getIdCategoria())
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria de concepto no encontrada: " + request.getIdCategoria()));
+        ConceptoPago entity = ConceptoPago.builder()
+                .categoria(categoria)
+                .nombre(request.getNombre())
+                .monto(request.getMonto())
+                .vigenciaDesde(request.getVigenciaDesde())
+                .vigenciaHasta(request.getVigenciaHasta())
+                .build();
+        return conceptoPagoMapper.toResponse(conceptoPagoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        conceptoPagoRepository.delete(buscarOFallar(id));
+    }
+
     private ConceptoPago buscarOFallar(Long id) {
         return conceptoPagoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Concepto de pago no encontrado: " + id));

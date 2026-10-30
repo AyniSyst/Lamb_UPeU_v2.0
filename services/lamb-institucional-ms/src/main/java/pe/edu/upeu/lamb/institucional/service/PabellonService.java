@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.PabellonMapper;
 import pe.edu.upeu.lamb.institucional.repository.PabellonRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class PabellonService {
 
@@ -31,6 +33,16 @@ public class PabellonService {
     public PabellonResponse crear(PabellonRequest request) {
         Pabellon entity = pabellonMapper.toEntity(request);
         return pabellonMapper.toResponse(pabellonRepository.save(entity));
+    }
+
+    public PabellonResponse actualizar(Long id, PabellonRequest request) {
+        Pabellon existente = buscarOFallar(id);
+        Pabellon entity = pabellonMapper.toEntity(request);
+        return pabellonMapper.toResponse(pabellonRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        pabellonRepository.delete(buscarOFallar(id));
     }
 
     private Pabellon buscarOFallar(Long id) {

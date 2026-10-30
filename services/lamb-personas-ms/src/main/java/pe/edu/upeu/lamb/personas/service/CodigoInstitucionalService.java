@@ -37,6 +37,17 @@ public class CodigoInstitucionalService {
         return codigoInstitucionalMapper.toResponse(codigoInstitucionalRepository.save(entity));
     }
 
+    public CodigoInstitucionalResponse actualizar(Long id, CodigoInstitucionalRequest request) {
+        CodigoInstitucional existente = buscarOFallar(id);
+        CodigoInstitucional entity = codigoInstitucionalMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return codigoInstitucionalMapper.toResponse(codigoInstitucionalRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        codigoInstitucionalRepository.delete(buscarOFallar(id));
+    }
+
     private CodigoInstitucional buscarOFallar(Long id) {
         return codigoInstitucionalRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Codigo institucional no encontrado: " + id));

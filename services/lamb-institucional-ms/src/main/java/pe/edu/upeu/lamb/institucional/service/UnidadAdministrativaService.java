@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.UnidadAdministrativaMapper;
 import pe.edu.upeu.lamb.institucional.repository.UnidadAdministrativaRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UnidadAdministrativaService {
 
@@ -31,6 +33,16 @@ public class UnidadAdministrativaService {
     public UnidadAdministrativaResponse crear(UnidadAdministrativaRequest request) {
         UnidadAdministrativa entity = unidadAdministrativaMapper.toEntity(request);
         return unidadAdministrativaMapper.toResponse(unidadAdministrativaRepository.save(entity));
+    }
+
+    public UnidadAdministrativaResponse actualizar(Long id, UnidadAdministrativaRequest request) {
+        UnidadAdministrativa existente = buscarOFallar(id);
+        UnidadAdministrativa entity = unidadAdministrativaMapper.toEntity(request);
+        return unidadAdministrativaMapper.toResponse(unidadAdministrativaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        unidadAdministrativaRepository.delete(buscarOFallar(id));
     }
 
     private UnidadAdministrativa buscarOFallar(Long id) {

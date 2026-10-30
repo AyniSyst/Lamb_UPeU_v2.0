@@ -10,8 +10,10 @@ import pe.edu.upeu.ingresospagos.mapper.TipoCambioMapper;
 import pe.edu.upeu.ingresospagos.repository.TipoCambioRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TipoCambioService {
 

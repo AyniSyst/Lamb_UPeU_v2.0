@@ -37,6 +37,17 @@ public class HistorialRevisionDocumentoService {
         return historialRevisionDocumentoMapper.toResponse(historialRevisionDocumentoRepository.save(entity));
     }
 
+    public HistorialRevisionDocumentoResponse actualizar(Long id, HistorialRevisionDocumentoRequest request) {
+        HistorialRevisionDocumento existente = buscarOFallar(id);
+        HistorialRevisionDocumento entity = historialRevisionDocumentoMapper.toEntity(request);
+        entity.setFechaRevision(Instant.now());
+        return historialRevisionDocumentoMapper.toResponse(historialRevisionDocumentoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        historialRevisionDocumentoRepository.delete(buscarOFallar(id));
+    }
+
     private HistorialRevisionDocumento buscarOFallar(Long id) {
         return historialRevisionDocumentoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Historial de revision de documento no encontrado: " + id));

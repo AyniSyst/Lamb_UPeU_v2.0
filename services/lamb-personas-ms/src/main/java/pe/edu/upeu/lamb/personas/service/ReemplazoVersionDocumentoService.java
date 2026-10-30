@@ -37,6 +37,17 @@ public class ReemplazoVersionDocumentoService {
         return reemplazoVersionDocumentoMapper.toResponse(reemplazoVersionDocumentoRepository.save(entity));
     }
 
+    public ReemplazoVersionDocumentoResponse actualizar(Long id, ReemplazoVersionDocumentoRequest request) {
+        ReemplazoVersionDocumento existente = buscarOFallar(id);
+        ReemplazoVersionDocumento entity = reemplazoVersionDocumentoMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return reemplazoVersionDocumentoMapper.toResponse(reemplazoVersionDocumentoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        reemplazoVersionDocumentoRepository.delete(buscarOFallar(id));
+    }
+
     private ReemplazoVersionDocumento buscarOFallar(Long id) {
         return reemplazoVersionDocumentoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Reemplazo de version de documento no encontrado: " + id));

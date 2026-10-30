@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.TipoEventoMapper;
 import pe.edu.upeu.lamb.institucional.repository.TipoEventoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TipoEventoService {
 
@@ -31,6 +33,16 @@ public class TipoEventoService {
     public TipoEventoResponse crear(TipoEventoRequest request) {
         TipoEvento entity = tipoEventoMapper.toEntity(request);
         return tipoEventoMapper.toResponse(tipoEventoRepository.save(entity));
+    }
+
+    public TipoEventoResponse actualizar(Long id, TipoEventoRequest request) {
+        TipoEvento existente = buscarOFallar(id);
+        TipoEvento entity = tipoEventoMapper.toEntity(request);
+        return tipoEventoMapper.toResponse(tipoEventoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        tipoEventoRepository.delete(buscarOFallar(id));
     }
 
     private TipoEvento buscarOFallar(Long id) {

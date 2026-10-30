@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.CambioUnidadAcademicaMapper;
 import pe.edu.upeu.lamb.institucional.repository.CambioUnidadAcademicaRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CambioUnidadAcademicaService {
 
@@ -31,6 +33,16 @@ public class CambioUnidadAcademicaService {
     public CambioUnidadAcademicaResponse crear(CambioUnidadAcademicaRequest request) {
         CambioUnidadAcademica entity = cambioUnidadAcademicaMapper.toEntity(request);
         return cambioUnidadAcademicaMapper.toResponse(cambioUnidadAcademicaRepository.save(entity));
+    }
+
+    public CambioUnidadAcademicaResponse actualizar(Long id, CambioUnidadAcademicaRequest request) {
+        CambioUnidadAcademica existente = buscarOFallar(id);
+        CambioUnidadAcademica entity = cambioUnidadAcademicaMapper.toEntity(request);
+        return cambioUnidadAcademicaMapper.toResponse(cambioUnidadAcademicaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        cambioUnidadAcademicaRepository.delete(buscarOFallar(id));
     }
 
     private CambioUnidadAcademica buscarOFallar(Long id) {

@@ -11,12 +11,14 @@ import pe.edu.upeu.lamb.finanzas.mapper.CronogramaVencimientoMapper;
 import pe.edu.upeu.lamb.finanzas.repository.CronogramaVencimientoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Lote F2b - Calendario y planes (item 13 del documento): Cronograma de vencimientos por periodo.
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CronogramaVencimientoService {
 
@@ -37,6 +39,17 @@ public class CronogramaVencimientoService {
         CronogramaVencimiento entity = cronogramaVencimientoMapper.toEntity(request);
         CronogramaVencimiento guardado = cronogramaVencimientoRepository.save(entity);
         return cronogramaVencimientoMapper.toResponse(guardado);
+    }
+
+    public CronogramaVencimientoResponse actualizar(Long id, CronogramaVencimientoRequest request) {
+        CronogramaVencimiento existente = buscarOFallar(id);
+        CronogramaVencimiento entity = cronogramaVencimientoMapper.toEntity(request);
+        CronogramaVencimiento guardado = cronogramaVencimientoRepository.save(Actualizacion.copiar(entity, existente));
+        return cronogramaVencimientoMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        cronogramaVencimientoRepository.delete(buscarOFallar(id));
     }
 
     private CronogramaVencimiento buscarOFallar(Long id) {

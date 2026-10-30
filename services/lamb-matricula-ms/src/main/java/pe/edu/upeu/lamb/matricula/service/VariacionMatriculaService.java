@@ -11,9 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class VariacionMatriculaService {
 
@@ -33,6 +35,16 @@ public class VariacionMatriculaService {
     public VariacionMatriculaResponse crear(VariacionMatriculaRequest request) {
         VariacionMatricula entity = variacionMatriculaMapper.toEntity(request);
         return variacionMatriculaMapper.toResponse(variacionMatriculaRepository.save(entity));
+    }
+
+    public VariacionMatriculaResponse actualizar(Long id, VariacionMatriculaRequest request) {
+        VariacionMatricula existente = buscarOFallar(id);
+        VariacionMatricula entity = variacionMatriculaMapper.toEntity(request);
+        return variacionMatriculaMapper.toResponse(variacionMatriculaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        variacionMatriculaRepository.delete(buscarOFallar(id));
     }
 
     private VariacionMatricula buscarOFallar(Long id) {

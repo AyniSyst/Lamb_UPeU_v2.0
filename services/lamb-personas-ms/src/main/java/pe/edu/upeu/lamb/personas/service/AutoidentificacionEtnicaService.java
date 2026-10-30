@@ -37,6 +37,17 @@ public class AutoidentificacionEtnicaService {
         return autoidentificacionEtnicaMapper.toResponse(autoidentificacionEtnicaRepository.save(entity));
     }
 
+    public AutoidentificacionEtnicaResponse actualizar(Long id, AutoidentificacionEtnicaRequest request) {
+        AutoidentificacionEtnica existente = buscarOFallar(id);
+        AutoidentificacionEtnica entity = autoidentificacionEtnicaMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return autoidentificacionEtnicaMapper.toResponse(autoidentificacionEtnicaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        autoidentificacionEtnicaRepository.delete(buscarOFallar(id));
+    }
+
     private AutoidentificacionEtnica buscarOFallar(Long id) {
         return autoidentificacionEtnicaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Autoidentificacion etnica no encontrada: " + id));

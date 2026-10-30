@@ -20,10 +20,15 @@ interface TokenClaims {
 const KEY_VERIFIER = 'lamb.pkce.verifier';
 const KEY_STATE = 'lamb.pkce.state';
 const KEY_DESTINO = 'lamb.pkce.destino';
+const KEY_SESION = 'lamb.sesion';
+// Margen para renovar antes de que Keycloak rechace el token (accessTokenLifespan = 300 s)
+const MARGEN_RENOVACION_MS = 30_000;
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly sesion = signal<Sesion | null>(null);
+  // sessionStorage: la sesion sobrevive a un F5 pero no a cerrar la pestana
+  private readonly sesion = signal<Sesion | null>(this.leerSesionGuardada());
+  private renovando: Promise<string | null> | null = null;
   private readonly claims = computed<TokenClaims | null>(() => {
     const token = this.sesion()?.accessToken;
     return token ? decodeJwtPayload<TokenClaims>(token) : null;
@@ -95,16 +100,79 @@ export class AuthService {
       throw new Error('Keycloak rechazo el intercambio del code por un token.');
     }
 
-    const datos = await respuesta.json();
-    this.sesion.set({
-      accessToken: datos.access_token,
-      refreshToken: datos.refresh_token,
-      idToken: datos.id_token,
-      expiraEn: Date.now() + datos.expires_in * 1000,
-    });
+    this.guardarSesion(await respuesta.json());
 
     sessionStorage.removeItem(KEY_VERIFIER);
     sessionStorage.removeItem(KEY_STATE);
+  }
+
+  /**
+   * Token listo para enviar: si esta por vencer lo renueva con el refresh_token.
+   * Las peticiones concurrentes comparten una sola renovacion.
+   */
+  async tokenVigente(): Promise<string | null> {
+    const actual = this.sesion();
+    if (!actual) {
+      return null;
+    }
+    if (actual.expiraEn - Date.now() > MARGEN_RENOVACION_MS) {
+      return actual.accessToken;
+    }
+    return this.renovar();
+  }
+
+  renovar(): Promise<string | null> {
+    this.renovando ??= this.pedirRenovacion().finally(() => (this.renovando = null));
+    return this.renovando;
+  }
+
+  private async pedirRenovacion(): Promise<string | null> {
+    const refreshToken = this.sesion()?.refreshToken;
+    if (!refreshToken) {
+      return null;
+    }
+    const body = new URLSearchParams({
+      grant_type: 'refresh_token',
+      client_id: environment.keycloak.clientId,
+      refresh_token: refreshToken,
+    });
+    const respuesta = await fetch(`${environment.keycloak.issuer}/protocol/openid-connect/token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString(),
+    });
+    if (!respuesta.ok) {
+      // Sesion de Keycloak vencida (ssoSessionIdleTimeout): hay que volver a iniciar sesion
+      this.borrarSesion();
+      return null;
+    }
+    this.guardarSesion(await respuesta.json());
+    return this.sesion()?.accessToken ?? null;
+  }
+
+  private guardarSesion(datos: { access_token: string; refresh_token: string; id_token?: string; expires_in: number }): void {
+    const sesion: Sesion = {
+      accessToken: datos.access_token,
+      refreshToken: datos.refresh_token,
+      idToken: datos.id_token ?? this.sesion()?.idToken ?? '',
+      expiraEn: Date.now() + datos.expires_in * 1000,
+    };
+    this.sesion.set(sesion);
+    sessionStorage.setItem(KEY_SESION, JSON.stringify(sesion));
+  }
+
+  private borrarSesion(): void {
+    this.sesion.set(null);
+    sessionStorage.removeItem(KEY_SESION);
+  }
+
+  private leerSesionGuardada(): Sesion | null {
+    try {
+      const guardada = sessionStorage.getItem(KEY_SESION);
+      return guardada ? (JSON.parse(guardada) as Sesion) : null;
+    } catch {
+      return null;
+    }
   }
 
   destinoPendiente(): string {
@@ -115,7 +183,7 @@ export class AuthService {
 
   cerrarSesion(): void {
     const idToken = this.sesion()?.idToken;
-    this.sesion.set(null);
+    this.borrarSesion();
     const params = new URLSearchParams({
       post_logout_redirect_uri: environment.keycloak.logoutRedirectUri,
       ...(idToken ? { id_token_hint: idToken } : {}),

@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.CampusMapper;
 import pe.edu.upeu.lamb.institucional.repository.CampusRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CampusService {
 
@@ -31,6 +33,16 @@ public class CampusService {
     public CampusResponse crear(CampusRequest request) {
         Campus entity = campusMapper.toEntity(request);
         return campusMapper.toResponse(campusRepository.save(entity));
+    }
+
+    public CampusResponse actualizar(Long id, CampusRequest request) {
+        Campus existente = buscarOFallar(id);
+        Campus entity = campusMapper.toEntity(request);
+        return campusMapper.toResponse(campusRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        campusRepository.delete(buscarOFallar(id));
     }
 
     private Campus buscarOFallar(Long id) {

@@ -35,6 +35,16 @@ public class UbigeoService {
         return ubigeoMapper.toResponse(ubigeoRepository.save(entity));
     }
 
+    public UbigeoResponse actualizar(Long id, UbigeoRequest request) {
+        Ubigeo existente = buscarOFallar(id);
+        Ubigeo entity = ubigeoMapper.toEntity(request);
+        return ubigeoMapper.toResponse(ubigeoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        ubigeoRepository.delete(buscarOFallar(id));
+    }
+
     private Ubigeo buscarOFallar(Long id) {
         return ubigeoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Ubigeo no encontrado: " + id));

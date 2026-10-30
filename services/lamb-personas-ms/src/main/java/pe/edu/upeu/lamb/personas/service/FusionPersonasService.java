@@ -37,6 +37,17 @@ public class FusionPersonasService {
         return fusionPersonasMapper.toResponse(fusionPersonasRepository.save(entity));
     }
 
+    public FusionPersonasResponse actualizar(Long id, FusionPersonasRequest request) {
+        FusionPersonas existente = buscarOFallar(id);
+        FusionPersonas entity = fusionPersonasMapper.toEntity(request);
+        entity.setFechaFusion(Instant.now());
+        return fusionPersonasMapper.toResponse(fusionPersonasRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        fusionPersonasRepository.delete(buscarOFallar(id));
+    }
+
     private FusionPersonas buscarOFallar(Long id) {
         return fusionPersonasRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Fusion de personas no encontrada: " + id));

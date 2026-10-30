@@ -49,6 +49,24 @@ public class MovimientoCuentaService {
         return movimientoCuentaMapper.toResponse(movimientoCuentaRepository.save(entity));
     }
 
+    public MovimientoCuentaResponse actualizar(Long id, MovimientoCuentaRequest request) {
+        MovimientoCuenta existente = buscarOFallar(id);
+        CuentaEstudiante cuenta = cuentaEstudianteRepository.findById(request.getIdCuenta())
+                .orElseThrow(() -> new ResourceNotFoundException("Cuenta de estudiante no encontrada: " + request.getIdCuenta()));
+        MovimientoCuenta entity = MovimientoCuenta.builder()
+                .cuenta(cuenta)
+                .tipo(request.getTipo())
+                .monto(request.getMonto())
+                .concepto(request.getConcepto())
+                .fecha(Instant.now())
+                .build();
+        return movimientoCuentaMapper.toResponse(movimientoCuentaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        movimientoCuentaRepository.delete(buscarOFallar(id));
+    }
+
     private MovimientoCuenta buscarOFallar(Long id) {
         return movimientoCuentaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Movimiento de cuenta no encontrado: " + id));

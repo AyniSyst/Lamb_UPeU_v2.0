@@ -10,8 +10,10 @@ import pe.edu.upeu.lms.mapper.InsigniaMapper;
 import pe.edu.upeu.lms.repository.InsigniaRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class InsigniaService {
 

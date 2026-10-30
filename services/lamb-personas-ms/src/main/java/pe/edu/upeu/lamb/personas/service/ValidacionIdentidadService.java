@@ -37,6 +37,17 @@ public class ValidacionIdentidadService {
         return validacionIdentidadMapper.toResponse(validacionIdentidadRepository.save(entity));
     }
 
+    public ValidacionIdentidadResponse actualizar(Long id, ValidacionIdentidadRequest request) {
+        ValidacionIdentidad existente = buscarOFallar(id);
+        ValidacionIdentidad entity = validacionIdentidadMapper.toEntity(request);
+        entity.setFechaValidacion(Instant.now());
+        return validacionIdentidadMapper.toResponse(validacionIdentidadRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        validacionIdentidadRepository.delete(buscarOFallar(id));
+    }
+
     private ValidacionIdentidad buscarOFallar(Long id) {
         return validacionIdentidadRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Validacion de identidad no encontrada: " + id));

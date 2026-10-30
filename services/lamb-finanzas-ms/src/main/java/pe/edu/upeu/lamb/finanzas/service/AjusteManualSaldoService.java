@@ -42,6 +42,17 @@ public class AjusteManualSaldoService {
         return ajusteManualSaldoMapper.toResponse(ajusteManualSaldoRepository.save(entity));
     }
 
+    public AjusteManualSaldoResponse actualizar(Long id, AjusteManualSaldoRequest request) {
+        AjusteManualSaldo existente = buscarOFallar(id);
+        AjusteManualSaldo entity = ajusteManualSaldoMapper.toEntity(request);
+        entity.setFecha(Instant.now());
+        return ajusteManualSaldoMapper.toResponse(ajusteManualSaldoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        ajusteManualSaldoRepository.delete(buscarOFallar(id));
+    }
+
     private AjusteManualSaldo buscarOFallar(Long id) {
         return ajusteManualSaldoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Ajuste manual de saldo no encontrado: " + id));

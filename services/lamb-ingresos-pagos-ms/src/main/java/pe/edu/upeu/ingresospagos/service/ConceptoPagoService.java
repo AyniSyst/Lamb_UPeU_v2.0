@@ -10,8 +10,10 @@ import pe.edu.upeu.ingresospagos.mapper.ConceptoPagoMapper;
 import pe.edu.upeu.ingresospagos.repository.ConceptoPagoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ConceptoPagoService {
 

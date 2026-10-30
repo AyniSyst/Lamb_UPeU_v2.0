@@ -51,9 +51,15 @@ public class MatriculaService {
      * para no propagar el fallo en cascada; solo se rechaza cuando planificacion SI responde
      * y la seccion no esta ABIERTA.
      */
+    @Transactional
     public MatriculaResponse crear(MatriculaRequest request) {
         Matricula matricula = matriculaMapper.toEntity(request);
         matricula.setEstado(EstadoMatricula.REGISTRADA);
+        validarSecciones(matricula);
+        return matriculaMapper.toResponse(matriculaRepository.save(matricula));
+    }
+
+    private void validarSecciones(Matricula matricula) {
         for (DetalleMatricula detalle : matricula.getDetalles()) {
             SeccionDisponibleDto seccion = planificacionConsultaService.obtenerSeccion(detalle.getIdSeccion());
             if (seccion == null) {
@@ -61,12 +67,11 @@ public class MatriculaService {
                         detalle.getIdSeccion());
                 continue;
             }
-            if (!"ABIERTA".equals(seccion.getEstado())) {
+            if (!"ABIERTO".equals(seccion.getEstado())) {
                 throw new BusinessRuleException("La seccion " + detalle.getIdSeccion()
-                        + " no esta ABIERTA (estado actual: " + seccion.getEstado() + ")");
+                        + " no esta ABIERTO (estado actual: " + seccion.getEstado() + ")");
             }
         }
-        return matriculaMapper.toResponse(matriculaRepository.save(matricula));
     }
 
     /**
@@ -97,6 +102,7 @@ public class MatriculaService {
         return matriculaMapper.toResponse(guardada);
     }
 
+    @Transactional
     public MatriculaResponse anular(Long id) {
         Matricula matricula = buscarOFallar(id);
         if (matricula.getEstado() == EstadoMatricula.ANULADA) {
@@ -131,6 +137,40 @@ public class MatriculaService {
         if (matricula.getEstado() != esperado) {
             throw new BusinessRuleException("No se puede " + accion + " la matricula " + matricula.getId()
                     + ": esta en estado " + matricula.getEstado() + ", se esperaba " + esperado);
+        }
+    }
+
+    /**
+     * Solo una matricula REGISTRADA (aun no confirmada) se puede corregir: periodo y cursos.
+     * Una vez CONFIRMADA ya genero el cobro en Finanzas; desde ahi solo se anula.
+     */
+    @Transactional
+    public MatriculaResponse actualizar(Long id, MatriculaRequest request) {
+        Matricula existente = buscarOFallar(id);
+        exigirRegistrada(existente, "modificar");
+        Matricula corregida = matriculaMapper.toEntity(request);
+        validarSecciones(corregida);
+        existente.setIdPersona(corregida.getIdPersona());
+        existente.setPeriodo(corregida.getPeriodo());
+        existente.getDetalles().clear();
+        for (DetalleMatricula detalle : corregida.getDetalles()) {
+            detalle.setMatricula(existente);
+            existente.getDetalles().add(detalle);
+        }
+        return matriculaMapper.toResponse(matriculaRepository.save(existente));
+    }
+
+    @Transactional
+    public void eliminar(Long id) {
+        Matricula matricula = buscarOFallar(id);
+        exigirRegistrada(matricula, "eliminar");
+        matriculaRepository.delete(matricula);
+    }
+
+    private void exigirRegistrada(Matricula matricula, String accion) {
+        if (matricula.getEstado() != EstadoMatricula.REGISTRADA) {
+            throw new BusinessRuleException("No se puede " + accion + " una matricula en estado "
+                    + matricula.getEstado() + "; solo en REGISTRADA (use anular si ya fue confirmada)");
         }
     }
 

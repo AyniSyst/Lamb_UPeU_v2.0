@@ -35,6 +35,16 @@ public class TipoDireccionService {
         return tipoDireccionMapper.toResponse(tipoDireccionRepository.save(entity));
     }
 
+    public TipoDireccionResponse actualizar(Long id, TipoDireccionRequest request) {
+        TipoDireccion existente = buscarOFallar(id);
+        TipoDireccion entity = tipoDireccionMapper.toEntity(request);
+        return tipoDireccionMapper.toResponse(tipoDireccionRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        tipoDireccionRepository.delete(buscarOFallar(id));
+    }
+
     private TipoDireccion buscarOFallar(Long id) {
         return tipoDireccionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tipo de direccion no encontrado: " + id));

@@ -40,6 +40,16 @@ public class CategoriaConceptoService {
         return categoriaConceptoMapper.toResponse(categoriaConceptoRepository.save(entity));
     }
 
+    public CategoriaConceptoResponse actualizar(Long id, CategoriaConceptoRequest request) {
+        CategoriaConcepto existente = buscarOFallar(id);
+        CategoriaConcepto entity = categoriaConceptoMapper.toEntity(request);
+        return categoriaConceptoMapper.toResponse(categoriaConceptoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        categoriaConceptoRepository.delete(buscarOFallar(id));
+    }
+
     private CategoriaConcepto buscarOFallar(Long id) {
         return categoriaConceptoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Categoria de concepto no encontrada: " + id));

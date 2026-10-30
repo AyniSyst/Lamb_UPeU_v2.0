@@ -37,6 +37,17 @@ public class ColegioProcedenciaService {
         return colegioProcedenciaMapper.toResponse(colegioProcedenciaRepository.save(entity));
     }
 
+    public ColegioProcedenciaResponse actualizar(Long id, ColegioProcedenciaRequest request) {
+        ColegioProcedencia existente = buscarOFallar(id);
+        ColegioProcedencia entity = colegioProcedenciaMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return colegioProcedenciaMapper.toResponse(colegioProcedenciaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        colegioProcedenciaRepository.delete(buscarOFallar(id));
+    }
+
     private ColegioProcedencia buscarOFallar(Long id) {
         return colegioProcedenciaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Colegio de procedencia no encontrado: " + id));

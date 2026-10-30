@@ -6,9 +6,9 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:18180/realms/hooa
+          issuer-uri: http://localhost:18180/realms/lamb
   datasource:
-    url: jdbc:postgresql://localhost:15432/lms_db
+    url: jdbc:postgresql://localhost:15461/lms_db
     username: lms
     password: lms
     driver-class-name: org.postgresql.Driver
@@ -23,7 +23,7 @@ spring:
       hibernate:
         format_sql: true
   kafka:
-    bootstrap-servers: localhost:19092
+    bootstrap-servers: localhost:18092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer

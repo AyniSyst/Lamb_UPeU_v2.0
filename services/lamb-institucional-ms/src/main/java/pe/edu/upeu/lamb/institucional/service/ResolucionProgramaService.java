@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.ResolucionProgramaMapper;
 import pe.edu.upeu.lamb.institucional.repository.ResolucionProgramaRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ResolucionProgramaService {
 
@@ -31,6 +33,16 @@ public class ResolucionProgramaService {
     public ResolucionProgramaResponse crear(ResolucionProgramaRequest request) {
         ResolucionPrograma entity = resolucionProgramaMapper.toEntity(request);
         return resolucionProgramaMapper.toResponse(resolucionProgramaRepository.save(entity));
+    }
+
+    public ResolucionProgramaResponse actualizar(Long id, ResolucionProgramaRequest request) {
+        ResolucionPrograma existente = buscarOFallar(id);
+        ResolucionPrograma entity = resolucionProgramaMapper.toEntity(request);
+        return resolucionProgramaMapper.toResponse(resolucionProgramaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        resolucionProgramaRepository.delete(buscarOFallar(id));
     }
 
     private ResolucionPrograma buscarOFallar(Long id) {

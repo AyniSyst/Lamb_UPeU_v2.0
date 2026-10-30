@@ -37,6 +37,17 @@ public class ContactoService {
         return contactoMapper.toResponse(contactoRepository.save(entity));
     }
 
+    public ContactoResponse actualizar(Long id, ContactoRequest request) {
+        Contacto existente = buscarOFallar(id);
+        Contacto entity = contactoMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return contactoMapper.toResponse(contactoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        contactoRepository.delete(buscarOFallar(id));
+    }
+
     private Contacto buscarOFallar(Long id) {
         return contactoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Contacto no encontrado: " + id));

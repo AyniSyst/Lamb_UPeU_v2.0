@@ -58,6 +58,17 @@ public class ReembolsosCancelacionesController {
         return solicitudDevolucionService.crear(request);
     }
 
+    @PutMapping("/solicitudes-devolucion/{id}")
+    public SolicitudDevolucionResponse actualizarSolicitudDevolucion(@PathVariable Long id, @Valid @RequestBody SolicitudDevolucionRequest request) {
+        return solicitudDevolucionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/solicitudes-devolucion/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarSolicitudDevolucion(@PathVariable Long id) {
+        solicitudDevolucionService.eliminar(id);
+    }
+
     // --- Reembolso de pago (impacta CuentaEstudiante, dominio Saldo del Estudiante) ---
 
     @GetMapping("/reembolsos-pago")
@@ -77,6 +88,17 @@ public class ReembolsosCancelacionesController {
     @Operation(summary = "Crear un reembolso de pago")
     public ReembolsoPagoResponse crearReembolsoPago(@Valid @RequestBody ReembolsoPagoRequest request) {
         return reembolsoPagoService.crear(request);
+    }
+
+    @PutMapping("/reembolsos-pago/{id}")
+    public ReembolsoPagoResponse actualizarReembolsoPago(@PathVariable Long id, @Valid @RequestBody ReembolsoPagoRequest request) {
+        return reembolsoPagoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/reembolsos-pago/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarReembolsoPago(@PathVariable Long id) {
+        reembolsoPagoService.eliminar(id);
     }
 
     // --- Cancelacion de cargo por anulacion de matricula (idMatricula es JALA ID de lamb-matricula-ms) ---
@@ -100,6 +122,17 @@ public class ReembolsosCancelacionesController {
         return cancelacionCargoMatriculaService.crear(request);
     }
 
+    @PutMapping("/cancelaciones-cargo-matricula/{id}")
+    public CancelacionCargoMatriculaResponse actualizarCancelacionCargoMatricula(@PathVariable Long id, @Valid @RequestBody CancelacionCargoMatriculaRequest request) {
+        return cancelacionCargoMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/cancelaciones-cargo-matricula/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCancelacionCargoMatricula(@PathVariable Long id) {
+        cancelacionCargoMatriculaService.eliminar(id);
+    }
+
     // --- Transferencia de pago ---
 
     @GetMapping("/transferencias-pago")
@@ -119,5 +152,16 @@ public class ReembolsosCancelacionesController {
     @Operation(summary = "Crear una transferencia de pago")
     public TransferenciaPagoResponse crearTransferenciaPago(@Valid @RequestBody TransferenciaPagoRequest request) {
         return transferenciaPagoService.crear(request);
+    }
+
+    @PutMapping("/transferencias-pago/{id}")
+    public TransferenciaPagoResponse actualizarTransferenciaPago(@PathVariable Long id, @Valid @RequestBody TransferenciaPagoRequest request) {
+        return transferenciaPagoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/transferencias-pago/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTransferenciaPago(@PathVariable Long id) {
+        transferenciaPagoService.eliminar(id);
     }
 }

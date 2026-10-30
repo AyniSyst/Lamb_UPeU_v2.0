@@ -11,9 +11,11 @@ import pe.edu.upeu.lamb.matricula.mapper.EstudianteObservadoSuspendidoMapper;
 import pe.edu.upeu.lamb.matricula.repository.EstudianteObservadoSuspendidoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class EstudianteObservadoSuspendidoService {
 
@@ -31,6 +33,16 @@ public class EstudianteObservadoSuspendidoService {
     public EstudianteObservadoSuspendidoResponse crear(EstudianteObservadoSuspendidoRequest request) {
         EstudianteObservadoSuspendido entity = mapper.toEntity(request);
         return mapper.toResponse(repository.save(entity));
+    }
+
+    public EstudianteObservadoSuspendidoResponse actualizar(Long id, EstudianteObservadoSuspendidoRequest request) {
+        EstudianteObservadoSuspendido existente = buscarOFallar(id);
+        EstudianteObservadoSuspendido entity = mapper.toEntity(request);
+        return mapper.toResponse(repository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        repository.delete(buscarOFallar(id));
     }
 
     EstudianteObservadoSuspendido buscarOFallar(Long id) {

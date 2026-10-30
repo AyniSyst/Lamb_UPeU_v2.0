@@ -4,6 +4,8 @@ import { authGuard } from './core/auth/auth-guard';
 import { rolGuard } from './core/auth/rol-guard';
 import { Layout } from './core/layout/layout';
 
+const GESTION = rolGuard('ADMIN', 'COORDINADOR');
+
 export const routes: Routes = [
   {
     path: 'auth/callback',
@@ -15,7 +17,14 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./features/inicio/inicio').then((m) => m.Inicio),
+        loadComponent: () =>
+          import('./features/microservicios/microservicios-inicio').then((m) => m.MicroserviciosInicio),
+      },
+      // Una pagina por microservicio (recursos del catalogo generado del backend)
+      {
+        path: 'ms/:clave',
+        loadComponent: () => import('./features/microservicios/microservicio-page').then((m) => m.MicroservicioPage),
+        canActivate: [authGuard],
       },
       {
         path: 'postulaciones',
@@ -27,7 +36,7 @@ export const routes: Routes = [
         path: 'postulaciones/nueva',
         loadComponent: () =>
           import('./features/postulaciones/postulacion-form').then((m) => m.PostulacionForm),
-        canActivate: [authGuard, rolGuard('ADMIN', 'COORDINADOR')],
+        canActivate: [authGuard, GESTION],
       },
       {
         path: 'mi-trayectoria',
@@ -43,12 +52,12 @@ export const routes: Routes = [
       {
         path: 'personas/nueva',
         loadComponent: () => import('./features/personas/persona-form').then((m) => m.PersonaForm),
-        canActivate: [authGuard, rolGuard('ADMIN', 'COORDINADOR')],
+        canActivate: [authGuard, GESTION],
       },
       {
         path: 'personas/:id/editar',
         loadComponent: () => import('./features/personas/persona-form').then((m) => m.PersonaForm),
-        canActivate: [authGuard, rolGuard('ADMIN', 'COORDINADOR')],
+        canActivate: [authGuard, GESTION],
       },
       {
         path: 'facultades',
@@ -60,7 +69,13 @@ export const routes: Routes = [
         path: 'facultades/nueva',
         loadComponent: () =>
           import('./features/facultades/facultad-form').then((m) => m.FacultadForm),
-        canActivate: [authGuard, rolGuard('ADMIN', 'COORDINADOR')],
+        canActivate: [authGuard, GESTION],
+      },
+      {
+        path: 'facultades/:id/editar',
+        loadComponent: () =>
+          import('./features/facultades/facultad-form').then((m) => m.FacultadForm),
+        canActivate: [authGuard, GESTION],
       },
       {
         path: 'programas',
@@ -70,7 +85,12 @@ export const routes: Routes = [
       {
         path: 'programas/nueva',
         loadComponent: () => import('./features/programas/programa-form').then((m) => m.ProgramaForm),
-        canActivate: [authGuard, rolGuard('ADMIN', 'COORDINADOR')],
+        canActivate: [authGuard, GESTION],
+      },
+      {
+        path: 'programas/:id/editar',
+        loadComponent: () => import('./features/programas/programa-form').then((m) => m.ProgramaForm),
+        canActivate: [authGuard, GESTION],
       },
       {
         path: 'cursos',
@@ -78,15 +98,22 @@ export const routes: Routes = [
         canActivate: [authGuard],
       },
       {
-        path: 'secciones',
-        loadComponent: () => import('./features/secciones/seccion-list').then((m) => m.SeccionList),
+        path: 'grupos',
+        loadComponent: () => import('./features/grupos/grupo-list').then((m) => m.GrupoList),
         canActivate: [authGuard],
       },
       {
-        path: 'secciones/nueva',
-        loadComponent: () => import('./features/secciones/seccion-form').then((m) => m.SeccionForm),
-        canActivate: [authGuard, rolGuard('ADMIN', 'COORDINADOR')],
+        path: 'grupos/nuevo',
+        loadComponent: () => import('./features/grupos/grupo-form').then((m) => m.GrupoForm),
+        canActivate: [authGuard, GESTION],
       },
+      {
+        path: 'grupos/:id/editar',
+        loadComponent: () => import('./features/grupos/grupo-form').then((m) => m.GrupoForm),
+        canActivate: [authGuard, GESTION],
+      },
+      // La seccion de antes es hoy el grupo de planificacion
+      { path: 'secciones', redirectTo: 'grupos' },
       {
         path: 'planes-estudio',
         loadComponent: () =>
@@ -97,7 +124,19 @@ export const routes: Routes = [
         path: 'planes-estudio/nueva',
         loadComponent: () =>
           import('./features/planes-estudio/plan-estudio-form').then((m) => m.PlanEstudioForm),
-        canActivate: [authGuard, rolGuard('ADMIN', 'COORDINADOR')],
+        canActivate: [authGuard, GESTION],
+      },
+      {
+        path: 'planes-estudio/:id',
+        loadComponent: () =>
+          import('./features/planes-estudio/plan-estudio-detalle').then((m) => m.PlanEstudioDetalle),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'planes-estudio/:id/editar',
+        loadComponent: () =>
+          import('./features/planes-estudio/plan-estudio-form').then((m) => m.PlanEstudioForm),
+        canActivate: [authGuard, GESTION],
       },
       {
         path: 'matriculas',
@@ -112,12 +151,23 @@ export const routes: Routes = [
         canActivate: [authGuard, rolGuard('ADMIN', 'COORDINADOR', 'ESTUDIANTE')],
       },
       {
+        path: 'matriculas/:id/editar',
+        loadComponent: () =>
+          import('./features/matriculas/matricula-form').then((m) => m.MatriculaForm),
+        canActivate: [authGuard, rolGuard('ADMIN', 'COORDINADOR', 'ESTUDIANTE')],
+      },
+      {
         path: 'notas',
         loadComponent: () => import('./features/notas/nota-list').then((m) => m.NotaList),
         canActivate: [authGuard],
       },
       {
         path: 'notas/nueva',
+        loadComponent: () => import('./features/notas/nota-form').then((m) => m.NotaForm),
+        canActivate: [authGuard, rolGuard('ADMIN', 'DOCENTE')],
+      },
+      {
+        path: 'notas/:id/editar',
         loadComponent: () => import('./features/notas/nota-form').then((m) => m.NotaForm),
         canActivate: [authGuard, rolGuard('ADMIN', 'DOCENTE')],
       },
@@ -134,7 +184,7 @@ export const routes: Routes = [
       {
         path: 'pagos/nueva',
         loadComponent: () => import('./features/pagos/pago-form').then((m) => m.PagoForm),
-        canActivate: [authGuard, rolGuard('ADMIN', 'COORDINADOR')],
+        canActivate: [authGuard, GESTION],
       },
     ],
   },

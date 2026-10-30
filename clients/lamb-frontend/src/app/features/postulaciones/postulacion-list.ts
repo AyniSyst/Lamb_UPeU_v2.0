@@ -1,10 +1,13 @@
+import { mensajeError } from '../../core/http/mensaje-error';
 import { Component, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth/auth-service';
 import { PostulacionService } from './postulacion-service';
 import { EvaluarPostulacionRequest, PostulacionResponse } from './postulacion.model';
 
 @Component({
   selector: 'app-postulacion-list',
+  imports: [RouterLink],
   templateUrl: './postulacion-list.html',
 })
 export class PostulacionList {
@@ -24,7 +27,7 @@ export class PostulacionList {
     this.error.set(null);
     this.service.listar().subscribe({
       next: (data) => this.postulaciones.set(data),
-      error: () => this.error.set('No se pudieron cargar las postulaciones.'),
+      error: (e) => this.error.set(mensajeError(e, 'No se pudieron cargar las postulaciones.')),
     });
   }
 
@@ -42,7 +45,7 @@ export class PostulacionList {
     const request: EvaluarPostulacionRequest = { puntajeExamen: puntaje };
     this.service.evaluar(postulacion.id, request).subscribe({
       next: () => this.cargar(),
-      error: () => this.errorAccion.set('No se pudo evaluar la postulacion.'),
+      error: (e) => this.errorAccion.set(mensajeError(e, 'No se pudo evaluar la postulacion.')),
     });
   }
 
@@ -50,7 +53,7 @@ export class PostulacionList {
     this.errorAccion.set(null);
     this.service.admitir(postulacion.id).subscribe({
       next: () => this.cargar(),
-      error: () => this.errorAccion.set('No se pudo admitir la postulacion (revisa el puntaje minimo de 11).'),
+      error: (e) => this.errorAccion.set(mensajeError(e, 'No se pudo admitir la postulacion (revisa el puntaje minimo de 11).')),
     });
   }
 
@@ -58,7 +61,7 @@ export class PostulacionList {
     this.errorAccion.set(null);
     this.service.rechazar(postulacion.id).subscribe({
       next: () => this.cargar(),
-      error: () => this.errorAccion.set('No se pudo rechazar la postulacion.'),
+      error: (e) => this.errorAccion.set(mensajeError(e, 'No se pudo rechazar la postulacion.')),
     });
   }
 }

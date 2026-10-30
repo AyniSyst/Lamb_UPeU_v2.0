@@ -1,9 +1,9 @@
 <div class="shell">
   <header class="header">
-    <strong>Lamb UPeU · Admision</strong>
+    <a routerLink="/" class="marca">Lamb UPeU</a>
     <div class="sesion-area">
       @if (auth.autenticado()) {
-        <span>{{ auth.nombreUsuario() }}</span>
+        <span>{{ auth.nombreUsuario() }} <small>({{ auth.roles().join(', ') }})</small></span>
         <button type="button" (click)="auth.cerrarSesion()">Cerrar sesion</button>
       } @else {
         <button type="button" (click)="iniciarLogin()">Iniciar sesion</button>
@@ -12,20 +12,26 @@
   </header>
 
   <nav class="sidebar">
-    <a routerLink="/" routerLinkActive="active">Inicio</a>
-    <a routerLink="/postulaciones" routerLinkActive="active">Postulaciones</a>
-    <a routerLink="/postulaciones/nueva" routerLinkActive="active">Nueva postulacion</a>
-    <a routerLink="/mi-trayectoria" routerLinkActive="active">Mi trayectoria</a>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+
+    <div class="seccion">Gestion academica</div>
     <a routerLink="/personas" routerLinkActive="active">Personas</a>
     <a routerLink="/facultades" routerLinkActive="active">Facultades</a>
     <a routerLink="/programas" routerLinkActive="active">Programas</a>
-    <a routerLink="/cursos" routerLinkActive="active">Cursos</a>
-    <a routerLink="/secciones" routerLinkActive="active">Secciones</a>
+    <a routerLink="/postulaciones" routerLinkActive="active">Postulaciones</a>
     <a routerLink="/planes-estudio" routerLinkActive="active">Planes de estudio</a>
+    <a routerLink="/cursos" routerLinkActive="active">Cursos</a>
+    <a routerLink="/grupos" routerLinkActive="active">Grupos</a>
     <a routerLink="/matriculas" routerLinkActive="active">Matriculas</a>
+    <a routerLink="/pagos" routerLinkActive="active">Pagos</a>
     <a routerLink="/notas" routerLinkActive="active">Notas</a>
     <a routerLink="/actas" routerLinkActive="active">Actas</a>
-    <a routerLink="/pagos" routerLinkActive="active">Pagos</a>
+    <a routerLink="/mi-trayectoria" routerLinkActive="active">Mi trayectoria</a>
+
+    <div class="seccion">Microservicios</div>
+    @for (m of microservicios; track m.clave) {
+      <a [routerLink]="['/ms', m.clave]" routerLinkActive="active">{{ m.nombre }}</a>
+    }
   </nav>
 
   <main class="contenido">

@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.ReprogramacionEventoMapper;
 import pe.edu.upeu.lamb.institucional.repository.ReprogramacionEventoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ReprogramacionEventoService {
 
@@ -31,6 +33,16 @@ public class ReprogramacionEventoService {
     public ReprogramacionEventoResponse crear(ReprogramacionEventoRequest request) {
         ReprogramacionEvento entity = reprogramacionEventoMapper.toEntity(request);
         return reprogramacionEventoMapper.toResponse(reprogramacionEventoRepository.save(entity));
+    }
+
+    public ReprogramacionEventoResponse actualizar(Long id, ReprogramacionEventoRequest request) {
+        ReprogramacionEvento existente = buscarOFallar(id);
+        ReprogramacionEvento entity = reprogramacionEventoMapper.toEntity(request);
+        return reprogramacionEventoMapper.toResponse(reprogramacionEventoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        reprogramacionEventoRepository.delete(buscarOFallar(id));
     }
 
     private ReprogramacionEvento buscarOFallar(Long id) {

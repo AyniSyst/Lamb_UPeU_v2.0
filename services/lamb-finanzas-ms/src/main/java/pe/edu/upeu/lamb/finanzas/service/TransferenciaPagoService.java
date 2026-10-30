@@ -15,9 +15,11 @@ import pe.edu.upeu.lamb.finanzas.repository.PagoRepository;
 import pe.edu.upeu.lamb.finanzas.repository.TransferenciaPagoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TransferenciaPagoService {
 
@@ -55,6 +57,32 @@ public class TransferenciaPagoService {
                 .build();
 
         return transferenciaPagoMapper.toResponse(transferenciaPagoRepository.save(entity));
+    }
+
+    public TransferenciaPagoResponse actualizar(Long id, TransferenciaPagoRequest request) {
+        TransferenciaPago existente = buscarOFallar(id);
+        Pago pago = pagoRepository.findById(request.getIdPago())
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontro el pago con id " + request.getIdPago()));
+        ConceptoPago conceptoOrigen = conceptoPagoRepository.findById(request.getIdConceptoOrigen())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "No se encontro el concepto de pago origen con id " + request.getIdConceptoOrigen()));
+        ConceptoPago conceptoDestino = conceptoPagoRepository.findById(request.getIdConceptoDestino())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "No se encontro el concepto de pago destino con id " + request.getIdConceptoDestino()));
+
+        TransferenciaPago entity = TransferenciaPago.builder()
+                .pago(pago)
+                .conceptoOrigen(conceptoOrigen)
+                .conceptoDestino(conceptoDestino)
+                .monto(request.getMonto())
+                .fecha(request.getFecha())
+                .build();
+
+        return transferenciaPagoMapper.toResponse(transferenciaPagoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        transferenciaPagoRepository.delete(buscarOFallar(id));
     }
 
     private TransferenciaPago buscarOFallar(Long id) {

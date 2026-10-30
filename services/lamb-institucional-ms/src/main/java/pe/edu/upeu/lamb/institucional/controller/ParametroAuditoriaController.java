@@ -47,6 +47,17 @@ public class ParametroAuditoriaController {
         return parametroInstitucionalService.crear(request);
     }
 
+    @PutMapping("/parametros-institucionales/{id}")
+    public ParametroInstitucionalResponse actualizarParametroInstitucional(@PathVariable Long id, @Valid @RequestBody ParametroInstitucionalRequest request) {
+        return parametroInstitucionalService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/parametros-institucionales/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarParametroInstitucional(@PathVariable Long id) {
+        parametroInstitucionalService.eliminar(id);
+    }
+
     // --- Parametro de sede/escuela (item 43, opcional) ---
 
     @GetMapping("/parametros-sede-escuela")
@@ -68,6 +79,17 @@ public class ParametroAuditoriaController {
         return parametroSedeEscuelaService.crear(request);
     }
 
+    @PutMapping("/parametros-sede-escuela/{id}")
+    public ParametroSedeEscuelaResponse actualizarParametroSedeEscuela(@PathVariable Long id, @Valid @RequestBody ParametroSedeEscuelaRequest request) {
+        return parametroSedeEscuelaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/parametros-sede-escuela/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarParametroSedeEscuela(@PathVariable Long id) {
+        parametroSedeEscuelaService.eliminar(id);
+    }
+
     // --- Bitacora de cambios de estructura (item 44, opcional) ---
 
     @GetMapping("/bitacora-cambios-estructura")
@@ -87,5 +109,16 @@ public class ParametroAuditoriaController {
     @Operation(summary = "Crear un registro de bitacora de cambios de estructura")
     public BitacoraCambiosEstructuraResponse crearBitacoraCambiosEstructura(@Valid @RequestBody BitacoraCambiosEstructuraRequest request) {
         return bitacoraCambiosEstructuraService.crear(request);
+    }
+
+    @PutMapping("/bitacora-cambios-estructura/{id}")
+    public BitacoraCambiosEstructuraResponse actualizarBitacoraCambiosEstructura(@PathVariable Long id, @Valid @RequestBody BitacoraCambiosEstructuraRequest request) {
+        return bitacoraCambiosEstructuraService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/bitacora-cambios-estructura/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarBitacoraCambiosEstructura(@PathVariable Long id) {
+        bitacoraCambiosEstructuraService.eliminar(id);
     }
 }

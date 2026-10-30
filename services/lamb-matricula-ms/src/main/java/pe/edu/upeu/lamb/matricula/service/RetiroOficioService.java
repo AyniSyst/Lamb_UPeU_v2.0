@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.RetiroOficioRepository;
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RetiroOficioService {
 
@@ -33,6 +35,17 @@ public class RetiroOficioService {
         RetiroOficio entity = mapper.toEntity(request);
         entity.setFechaRetiro(Instant.now());
         return mapper.toResponse(repository.save(entity));
+    }
+
+    public RetiroOficioResponse actualizar(Long id, RetiroOficioRequest request) {
+        RetiroOficio existente = buscarOFallar(id);
+        RetiroOficio entity = mapper.toEntity(request);
+        entity.setFechaRetiro(Instant.now());
+        return mapper.toResponse(repository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        repository.delete(buscarOFallar(id));
     }
 
     private RetiroOficio buscarOFallar(Long id) {

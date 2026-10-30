@@ -37,6 +37,17 @@ public class RedSocialService {
         return redSocialMapper.toResponse(redSocialRepository.save(entity));
     }
 
+    public RedSocialResponse actualizar(Long id, RedSocialRequest request) {
+        RedSocial existente = buscarOFallar(id);
+        RedSocial entity = redSocialMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return redSocialMapper.toResponse(redSocialRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        redSocialRepository.delete(buscarOFallar(id));
+    }
+
     private RedSocial buscarOFallar(Long id) {
         return redSocialRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Red social no encontrada: " + id));

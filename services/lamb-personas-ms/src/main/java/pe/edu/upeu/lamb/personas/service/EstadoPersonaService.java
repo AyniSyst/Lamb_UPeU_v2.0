@@ -37,6 +37,17 @@ public class EstadoPersonaService {
         return estadoPersonaMapper.toResponse(estadoPersonaRepository.save(entity));
     }
 
+    public EstadoPersonaResponse actualizar(Long id, EstadoPersonaRequest request) {
+        EstadoPersona existente = buscarOFallar(id);
+        EstadoPersona entity = estadoPersonaMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return estadoPersonaMapper.toResponse(estadoPersonaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        estadoPersonaRepository.delete(buscarOFallar(id));
+    }
+
     private EstadoPersona buscarOFallar(Long id) {
         return estadoPersonaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Estado de persona no encontrado: " + id));

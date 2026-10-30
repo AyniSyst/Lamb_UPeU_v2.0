@@ -37,6 +37,17 @@ public class RelacionFamiliarService {
         return relacionFamiliarMapper.toResponse(relacionFamiliarRepository.save(entity));
     }
 
+    public RelacionFamiliarResponse actualizar(Long id, RelacionFamiliarRequest request) {
+        RelacionFamiliar existente = buscarOFallar(id);
+        RelacionFamiliar entity = relacionFamiliarMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return relacionFamiliarMapper.toResponse(relacionFamiliarRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        relacionFamiliarRepository.delete(buscarOFallar(id));
+    }
+
     private RelacionFamiliar buscarOFallar(Long id) {
         return relacionFamiliarRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Relacion familiar no encontrada: " + id));

@@ -12,8 +12,10 @@ import pe.edu.upeu.ingresospagos.repository.NotaCreditoDebitoRepository;
 import pe.edu.upeu.ingresospagos.repository.PagoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class NotaCreditoDebitoService {
 

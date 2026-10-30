@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.CalendarioAcademicoMapper;
 import pe.edu.upeu.lamb.institucional.repository.CalendarioAcademicoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CalendarioAcademicoService {
 
@@ -31,6 +33,16 @@ public class CalendarioAcademicoService {
     public CalendarioAcademicoResponse crear(CalendarioAcademicoRequest request) {
         CalendarioAcademico entity = calendarioAcademicoMapper.toEntity(request);
         return calendarioAcademicoMapper.toResponse(calendarioAcademicoRepository.save(entity));
+    }
+
+    public CalendarioAcademicoResponse actualizar(Long id, CalendarioAcademicoRequest request) {
+        CalendarioAcademico existente = buscarOFallar(id);
+        CalendarioAcademico entity = calendarioAcademicoMapper.toEntity(request);
+        return calendarioAcademicoMapper.toResponse(calendarioAcademicoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        calendarioAcademicoRepository.delete(buscarOFallar(id));
     }
 
     private CalendarioAcademico buscarOFallar(Long id) {

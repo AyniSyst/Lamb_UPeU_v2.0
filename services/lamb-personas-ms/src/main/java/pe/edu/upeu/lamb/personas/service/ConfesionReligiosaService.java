@@ -37,6 +37,17 @@ public class ConfesionReligiosaService {
         return confesionReligiosaMapper.toResponse(confesionReligiosaRepository.save(entity));
     }
 
+    public ConfesionReligiosaResponse actualizar(Long id, ConfesionReligiosaRequest request) {
+        ConfesionReligiosa existente = buscarOFallar(id);
+        ConfesionReligiosa entity = confesionReligiosaMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return confesionReligiosaMapper.toResponse(confesionReligiosaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        confesionReligiosaRepository.delete(buscarOFallar(id));
+    }
+
     private ConfesionReligiosa buscarOFallar(Long id) {
         return confesionReligiosaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Confesion religiosa no encontrada: " + id));

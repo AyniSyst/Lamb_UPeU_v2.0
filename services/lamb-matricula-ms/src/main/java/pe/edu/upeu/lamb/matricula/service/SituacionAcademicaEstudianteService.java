@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.SituacionAcademicaEstudianteReposit
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class SituacionAcademicaEstudianteService {
 
@@ -33,6 +35,17 @@ public class SituacionAcademicaEstudianteService {
         SituacionAcademicaEstudiante entity = mapper.toEntity(request);
         entity.setFechaRegistro(Instant.now());
         return mapper.toResponse(repository.save(entity));
+    }
+
+    public SituacionAcademicaEstudianteResponse actualizar(Long id, SituacionAcademicaEstudianteRequest request) {
+        SituacionAcademicaEstudiante existente = buscarOFallar(id);
+        SituacionAcademicaEstudiante entity = mapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return mapper.toResponse(repository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        repository.delete(buscarOFallar(id));
     }
 
     SituacionAcademicaEstudiante buscarOFallar(Long id) {

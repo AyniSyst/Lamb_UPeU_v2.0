@@ -6,9 +6,9 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:18180/realms/hooa
+          issuer-uri: http://localhost:18180/realms/lamb
   datasource:
-    url: jdbc:postgresql://localhost:15433/ingresos_pagos_db
+    url: jdbc:postgresql://localhost:15460/ingresos_pagos_db
     username: ingresospagos
     password: ingresospagos
     driver-class-name: org.postgresql.Driver
@@ -28,7 +28,7 @@ spring:
     livereload:
       enabled: true
   kafka:
-    bootstrap-servers: localhost:19092
+    bootstrap-servers: localhost:18092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer

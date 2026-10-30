@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "lamb-planificacion-ms")
 public interface PlanificacionClient {
 
-    @GetMapping("/api/v1/secciones/{id}")
+    // La seccion de matricula es un grupo de planificacion (V3 renombro secciones -> grupos)
+    @GetMapping("/api/v1/grupos/{id}")
     SeccionDisponibleDto obtenerSeccion(@PathVariable("id") Long id);
 }

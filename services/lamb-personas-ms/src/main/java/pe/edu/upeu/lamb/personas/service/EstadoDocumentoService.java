@@ -37,6 +37,17 @@ public class EstadoDocumentoService {
         return estadoDocumentoMapper.toResponse(estadoDocumentoRepository.save(entity));
     }
 
+    public EstadoDocumentoResponse actualizar(Long id, EstadoDocumentoRequest request) {
+        EstadoDocumento existente = buscarOFallar(id);
+        EstadoDocumento entity = estadoDocumentoMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return estadoDocumentoMapper.toResponse(estadoDocumentoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        estadoDocumentoRepository.delete(buscarOFallar(id));
+    }
+
     private EstadoDocumento buscarOFallar(Long id) {
         return estadoDocumentoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Estado de documento no encontrado: " + id));

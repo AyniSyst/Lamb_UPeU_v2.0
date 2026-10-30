@@ -13,9 +13,11 @@ import pe.edu.upeu.lamb.finanzas.repository.ConstanciaNoAdeudoRepository;
 import pe.edu.upeu.lamb.finanzas.repository.EstadoCobroRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ConstanciaNoAdeudoService {
 
@@ -45,6 +47,25 @@ public class ConstanciaNoAdeudoService {
                 .build();
 
         return constanciaNoAdeudoMapper.toResponse(constanciaNoAdeudoRepository.save(entity));
+    }
+
+    public ConstanciaNoAdeudoResponse actualizar(Long id, ConstanciaNoAdeudoRequest request) {
+        ConstanciaNoAdeudo existente = buscarOFallar(id);
+        EstadoCobro estadoCobro = estadoCobroRepository.findById(request.getIdEstadoCobro())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "No se encontro el estado de cobro con id " + request.getIdEstadoCobro()));
+
+        ConstanciaNoAdeudo entity = ConstanciaNoAdeudo.builder()
+                .estadoCobro(estadoCobro)
+                .codigoConstancia(request.getCodigoConstancia())
+                .fechaEmision(request.getFechaEmision())
+                .build();
+
+        return constanciaNoAdeudoMapper.toResponse(constanciaNoAdeudoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        constanciaNoAdeudoRepository.delete(buscarOFallar(id));
     }
 
     private ConstanciaNoAdeudo buscarOFallar(Long id) {

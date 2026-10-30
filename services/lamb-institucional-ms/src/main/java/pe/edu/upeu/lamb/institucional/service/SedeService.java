@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.SedeMapper;
 import pe.edu.upeu.lamb.institucional.repository.SedeRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class SedeService {
 
@@ -31,6 +33,16 @@ public class SedeService {
     public SedeResponse crear(SedeRequest request) {
         Sede entity = sedeMapper.toEntity(request);
         return sedeMapper.toResponse(sedeRepository.save(entity));
+    }
+
+    public SedeResponse actualizar(Long id, SedeRequest request) {
+        Sede existente = buscarOFallar(id);
+        Sede entity = sedeMapper.toEntity(request);
+        return sedeMapper.toResponse(sedeRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        sedeRepository.delete(buscarOFallar(id));
     }
 
     private Sede buscarOFallar(Long id) {

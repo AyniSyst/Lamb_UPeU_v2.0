@@ -1,3 +1,4 @@
+import { mensajeError } from '../../core/http/mensaje-error';
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth/auth-service';
@@ -25,7 +26,7 @@ export class PlanEstudioList {
     this.error.set(null);
     this.service.listar().subscribe({
       next: (data) => this.planes.set(data),
-      error: () => this.error.set('No se pudieron cargar los planes de estudio.'),
+      error: (e) => this.error.set(mensajeError(e, 'No se pudieron cargar los planes de estudio.')),
     });
   }
 
@@ -33,7 +34,7 @@ export class PlanEstudioList {
     this.errorAccion.set(null);
     this.service.publicar(plan.id).subscribe({
       next: () => this.cargar(),
-      error: () => this.errorAccion.set('No se pudo publicar el plan de estudio.'),
+      error: (e) => this.errorAccion.set(mensajeError(e, 'No se pudo publicar el plan de estudio.')),
     });
   }
 
@@ -41,7 +42,7 @@ export class PlanEstudioList {
     this.errorAccion.set(null);
     this.service.eliminar(plan.id).subscribe({
       next: () => this.cargar(),
-      error: () => this.errorAccion.set('No se pudo eliminar el plan de estudio.'),
+      error: (e) => this.errorAccion.set(mensajeError(e, 'No se pudo eliminar el plan de estudio.')),
     });
   }
 }

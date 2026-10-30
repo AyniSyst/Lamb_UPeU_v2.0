@@ -49,6 +49,17 @@ public class DocumentoPersonaController {
         return tipoDocumentoService.crear(request);
     }
 
+    @PutMapping("/tipos-documento/{id}")
+    public TipoDocumentoResponse actualizarTipoDocumento(@PathVariable Long id, @Valid @RequestBody TipoDocumentoRequest request) {
+        return tipoDocumentoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/tipos-documento/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTipoDocumento(@PathVariable Long id) {
+        tipoDocumentoService.eliminar(id);
+    }
+
     // ===== Documentos de persona =====
 
     @GetMapping("/documentos-persona")
@@ -68,6 +79,17 @@ public class DocumentoPersonaController {
     @Operation(summary = "Crear documento de persona")
     public DocumentoPersonaResponse crearDocumentoPersona(@Valid @RequestBody DocumentoPersonaRequest request) {
         return documentoPersonaService.crear(request);
+    }
+
+    @PutMapping("/documentos-persona/{id}")
+    public DocumentoPersonaResponse actualizarDocumentoPersona(@PathVariable Long id, @Valid @RequestBody DocumentoPersonaRequest request) {
+        return documentoPersonaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/documentos-persona/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarDocumentoPersona(@PathVariable Long id) {
+        documentoPersonaService.eliminar(id);
     }
 
     // ===== Estados de documento =====
@@ -91,6 +113,17 @@ public class DocumentoPersonaController {
         return estadoDocumentoService.crear(request);
     }
 
+    @PutMapping("/estados-documento/{id}")
+    public EstadoDocumentoResponse actualizarEstadoDocumento(@PathVariable Long id, @Valid @RequestBody EstadoDocumentoRequest request) {
+        return estadoDocumentoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/estados-documento/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarEstadoDocumento(@PathVariable Long id) {
+        estadoDocumentoService.eliminar(id);
+    }
+
     // ===== Requisitos documentarios =====
 
     @GetMapping("/requisitos-documentarios")
@@ -110,6 +143,17 @@ public class DocumentoPersonaController {
     @Operation(summary = "Crear requisito documentario")
     public RequisitoDocumentarioResponse crearRequisitoDocumentario(@Valid @RequestBody RequisitoDocumentarioRequest request) {
         return requisitoDocumentarioService.crear(request);
+    }
+
+    @PutMapping("/requisitos-documentarios/{id}")
+    public RequisitoDocumentarioResponse actualizarRequisitoDocumentario(@PathVariable Long id, @Valid @RequestBody RequisitoDocumentarioRequest request) {
+        return requisitoDocumentarioService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/requisitos-documentarios/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarRequisitoDocumentario(@PathVariable Long id) {
+        requisitoDocumentarioService.eliminar(id);
     }
 
     // ===== Historiales de revision de documento =====
@@ -133,6 +177,17 @@ public class DocumentoPersonaController {
         return historialRevisionDocumentoService.crear(request);
     }
 
+    @PutMapping("/historiales-revision-documento/{id}")
+    public HistorialRevisionDocumentoResponse actualizarHistorialRevisionDocumento(@PathVariable Long id, @Valid @RequestBody HistorialRevisionDocumentoRequest request) {
+        return historialRevisionDocumentoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/historiales-revision-documento/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarHistorialRevisionDocumento(@PathVariable Long id) {
+        historialRevisionDocumentoService.eliminar(id);
+    }
+
     // ===== Vigencia/vencimiento de documento =====
 
     @GetMapping("/vigencias-vencimiento-documento")
@@ -152,6 +207,17 @@ public class DocumentoPersonaController {
     @Operation(summary = "Crear vigencia/vencimiento de documento")
     public VigenciaVencimientoDocumentoResponse crearVigenciaVencimientoDocumento(@Valid @RequestBody VigenciaVencimientoDocumentoRequest request) {
         return vigenciaVencimientoDocumentoService.crear(request);
+    }
+
+    @PutMapping("/vigencias-vencimiento-documento/{id}")
+    public VigenciaVencimientoDocumentoResponse actualizarVigenciaVencimientoDocumento(@PathVariable Long id, @Valid @RequestBody VigenciaVencimientoDocumentoRequest request) {
+        return vigenciaVencimientoDocumentoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/vigencias-vencimiento-documento/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarVigenciaVencimientoDocumento(@PathVariable Long id) {
+        vigenciaVencimientoDocumentoService.eliminar(id);
     }
 
     // ===== Reemplazo de version de documento =====
@@ -175,6 +241,17 @@ public class DocumentoPersonaController {
         return reemplazoVersionDocumentoService.crear(request);
     }
 
+    @PutMapping("/reemplazos-version-documento/{id}")
+    public ReemplazoVersionDocumentoResponse actualizarReemplazoVersionDocumento(@PathVariable Long id, @Valid @RequestBody ReemplazoVersionDocumentoRequest request) {
+        return reemplazoVersionDocumentoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/reemplazos-version-documento/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarReemplazoVersionDocumento(@PathVariable Long id) {
+        reemplazoVersionDocumentoService.eliminar(id);
+    }
+
     // ===== Observaciones de documento =====
 
     @GetMapping("/observaciones-documento")
@@ -194,6 +271,17 @@ public class DocumentoPersonaController {
     @Operation(summary = "Crear observacion de documento")
     public ObservacionDocumentoResponse crearObservacionDocumento(@Valid @RequestBody ObservacionDocumentoRequest request) {
         return observacionDocumentoService.crear(request);
+    }
+
+    @PutMapping("/observaciones-documento/{id}")
+    public ObservacionDocumentoResponse actualizarObservacionDocumento(@PathVariable Long id, @Valid @RequestBody ObservacionDocumentoRequest request) {
+        return observacionDocumentoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/observaciones-documento/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarObservacionDocumento(@PathVariable Long id) {
+        observacionDocumentoService.eliminar(id);
     }
 
     // ===== Firma/validacion de documento =====
@@ -217,6 +305,17 @@ public class DocumentoPersonaController {
         return firmaValidacionDocumentoService.crear(request);
     }
 
+    @PutMapping("/firmas-validacion-documento/{id}")
+    public FirmaValidacionDocumentoResponse actualizarFirmaValidacionDocumento(@PathVariable Long id, @Valid @RequestBody FirmaValidacionDocumentoRequest request) {
+        return firmaValidacionDocumentoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/firmas-validacion-documento/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarFirmaValidacionDocumento(@PathVariable Long id) {
+        firmaValidacionDocumentoService.eliminar(id);
+    }
+
     // ===== Expedientes/legajos =====
 
     @GetMapping("/expedientes-legajo")
@@ -236,5 +335,16 @@ public class DocumentoPersonaController {
     @Operation(summary = "Crear expediente/legajo")
     public ExpedienteLegajoResponse crearExpedienteLegajo(@Valid @RequestBody ExpedienteLegajoRequest request) {
         return expedienteLegajoService.crear(request);
+    }
+
+    @PutMapping("/expedientes-legajo/{id}")
+    public ExpedienteLegajoResponse actualizarExpedienteLegajo(@PathVariable Long id, @Valid @RequestBody ExpedienteLegajoRequest request) {
+        return expedienteLegajoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/expedientes-legajo/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarExpedienteLegajo(@PathVariable Long id) {
+        expedienteLegajoService.eliminar(id);
     }
 }

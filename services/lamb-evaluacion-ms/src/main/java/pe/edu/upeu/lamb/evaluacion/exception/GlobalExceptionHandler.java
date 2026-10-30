@@ -50,7 +50,9 @@ public class GlobalExceptionHandler {
         body.put("timestamp", Instant.now().toString());
         body.put("status", HttpStatus.BAD_REQUEST.value());
         body.put("error", "Bad Request");
-        body.put("message", "Error de validacion en los datos enviados");
+        body.put("message", "Datos no validos: " + ex.getBindingResult().getFieldErrors().stream()
+                .map(e -> e.getField() + " " + e.getDefaultMessage())
+                .collect(java.util.stream.Collectors.joining(", ")));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 }

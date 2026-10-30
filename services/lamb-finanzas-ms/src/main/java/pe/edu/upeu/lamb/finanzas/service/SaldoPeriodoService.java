@@ -39,6 +39,17 @@ public class SaldoPeriodoService {
         return saldoPeriodoMapper.toResponse(saldoPeriodoRepository.save(entity));
     }
 
+    public SaldoPeriodoResponse actualizar(Long id, SaldoPeriodoRequest request) {
+        SaldoPeriodo existente = buscarOFallar(id);
+        SaldoPeriodo entity = saldoPeriodoMapper.toEntity(request);
+        entity.setFechaCalculo(Instant.now());
+        return saldoPeriodoMapper.toResponse(saldoPeriodoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        saldoPeriodoRepository.delete(buscarOFallar(id));
+    }
+
     private SaldoPeriodo buscarOFallar(Long id) {
         return saldoPeriodoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Saldo de periodo no encontrado: " + id));

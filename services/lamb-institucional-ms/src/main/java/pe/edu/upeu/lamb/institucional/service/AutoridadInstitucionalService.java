@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.AutoridadInstitucionalMapper;
 import pe.edu.upeu.lamb.institucional.repository.AutoridadInstitucionalRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AutoridadInstitucionalService {
 
@@ -31,6 +33,16 @@ public class AutoridadInstitucionalService {
     public AutoridadInstitucionalResponse crear(AutoridadInstitucionalRequest request) {
         AutoridadInstitucional entity = autoridadInstitucionalMapper.toEntity(request);
         return autoridadInstitucionalMapper.toResponse(autoridadInstitucionalRepository.save(entity));
+    }
+
+    public AutoridadInstitucionalResponse actualizar(Long id, AutoridadInstitucionalRequest request) {
+        AutoridadInstitucional existente = buscarOFallar(id);
+        AutoridadInstitucional entity = autoridadInstitucionalMapper.toEntity(request);
+        return autoridadInstitucionalMapper.toResponse(autoridadInstitucionalRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        autoridadInstitucionalRepository.delete(buscarOFallar(id));
     }
 
     private AutoridadInstitucional buscarOFallar(Long id) {

@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.IntentoCursoRepository;
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class IntentoCursoService {
 
@@ -35,6 +37,17 @@ public class IntentoCursoService {
         IntentoCurso intentoCurso = intentoCursoMapper.toEntity(request);
         intentoCurso.setFechaRegistro(Instant.now());
         return intentoCursoMapper.toResponse(intentoCursoRepository.save(intentoCurso));
+    }
+
+    public IntentoCursoResponse actualizar(Long id, IntentoCursoRequest request) {
+        IntentoCurso existente = buscarOFallar(id);
+        IntentoCurso intentoCurso = intentoCursoMapper.toEntity(request);
+        intentoCurso.setFechaRegistro(Instant.now());
+        return intentoCursoMapper.toResponse(intentoCursoRepository.save(Actualizacion.copiar(intentoCurso, existente)));
+    }
+
+    public void eliminar(Long id) {
+        intentoCursoRepository.delete(buscarOFallar(id));
     }
 
     private IntentoCurso buscarOFallar(Long id) {

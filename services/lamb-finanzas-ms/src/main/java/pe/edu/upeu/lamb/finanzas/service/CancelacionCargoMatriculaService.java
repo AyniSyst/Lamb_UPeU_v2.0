@@ -13,9 +13,11 @@ import pe.edu.upeu.lamb.finanzas.repository.CancelacionCargoMatriculaRepository;
 import pe.edu.upeu.lamb.finanzas.repository.PagoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CancelacionCargoMatriculaService {
 
@@ -46,6 +48,26 @@ public class CancelacionCargoMatriculaService {
                 .build();
 
         return cancelacionCargoMatriculaMapper.toResponse(cancelacionCargoMatriculaRepository.save(entity));
+    }
+
+    public CancelacionCargoMatriculaResponse actualizar(Long id, CancelacionCargoMatriculaRequest request) {
+        CancelacionCargoMatricula existente = buscarOFallar(id);
+        Pago pago = pagoRepository.findById(request.getIdPago())
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontro el pago con id " + request.getIdPago()));
+
+        // idMatricula no se resuelve localmente: la matricula pertenece a lamb-matricula-ms (JALA ID).
+        CancelacionCargoMatricula entity = CancelacionCargoMatricula.builder()
+                .pago(pago)
+                .idMatricula(request.getIdMatricula())
+                .motivo(request.getMotivo())
+                .fecha(request.getFecha())
+                .build();
+
+        return cancelacionCargoMatriculaMapper.toResponse(cancelacionCargoMatriculaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        cancelacionCargoMatriculaRepository.delete(buscarOFallar(id));
     }
 
     private CancelacionCargoMatricula buscarOFallar(Long id) {

@@ -1,0 +1,78 @@
+<h2>Grupos</h2>
+<p class="ayuda">Un grupo se abre sobre una oferta academica. Al crearlo, Evaluacion abre su acta y el grupo queda ABIERTO para matricula.</p>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+@if (errorAccion()) {
+  <p class="error">{{ errorAccion() }}</p>
+}
+
+<div class="barra">
+  @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+    <a class="boton primario" routerLink="/grupos/nuevo">Nuevo grupo</a>
+  }
+  <button type="button" (click)="cargar()">Actualizar</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Grupo</th>
+      <th>Curso</th>
+      <th>Periodo</th>
+      <th>Cupo</th>
+      <th>Horario</th>
+      <th>Docentes</th>
+      <th>Estado</th>
+      @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+        <th>Acciones</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (grupo of grupos(); track grupo.id) {
+      <tr>
+        <td>{{ grupo.id }}</td>
+        <td>{{ grupo.codigo }}</td>
+        <td>{{ grupo.curso?.codigo }} - {{ grupo.curso?.nombre }} ({{ grupo.curso?.creditos }} cr)</td>
+        <td>{{ grupo.periodo }}</td>
+        <td>{{ grupo.cupoMaximo }}</td>
+        <td>
+          @for (h of grupo.horarios; track h.id) {
+            <div>{{ h.diaSemana }} {{ h.horaInicio }}-{{ h.horaFin }} ({{ h.codigoAmbiente }})</div>
+          } @empty {
+            -
+          }
+        </td>
+        <td>
+          @for (d of grupo.docentes; track d.id) {
+            <div>Persona {{ d.idDocente }} · {{ d.rol }} · {{ d.horasSemanales }} h</div>
+          } @empty {
+            -
+          }
+        </td>
+        <td>
+          <span class="estado" [class]="grupo.estado">{{ grupo.estado }}</span>
+          @if (grupo.motivo) {
+            <div><small class="ayuda">{{ grupo.motivo }}</small></div>
+          }
+        </td>
+        @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+          <td>
+            <a class="boton" [routerLink]="['/grupos', grupo.id, 'editar']">Editar</a>
+            @if (grupo.estado === 'PENDIENTE_VALIDACION') {
+              <button type="button" (click)="revalidar(grupo)">Revalidar</button>
+            }
+            <button type="button" class="peligro" (click)="eliminar(grupo)">Eliminar</button>
+          </td>
+        }
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="9">No hay grupos registrados.</td>
+      </tr>
+    }
+  </tbody>
+</table>

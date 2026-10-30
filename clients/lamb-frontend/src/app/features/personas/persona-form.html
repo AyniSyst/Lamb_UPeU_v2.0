@@ -1,18 +1,28 @@
-<h2>{{ enviando() ? 'Guardando...' : 'Persona' }}</h2>
+<h2>{{ idPersona ? 'Editar persona' : 'Nueva persona' }}</h2>
 
 @if (error()) {
   <p class="error">{{ error() }}</p>
 }
 
-<form [formGroup]="form" (ngSubmit)="guardar()">
+<form class="formulario" [formGroup]="form" (ngSubmit)="guardar()">
   <div>
     <label for="tipoDocumento">Tipo de documento</label>
-    <input id="tipoDocumento" type="text" formControlName="tipoDocumento" />
+    <select id="tipoDocumento" formControlName="tipoDocumento">
+      @for (tipo of tiposDocumento(); track tipo.codigo) {
+        <option [value]="tipo.codigo">{{ tipo.codigo }} - {{ tipo.nombre }}</option>
+      }
+    </select>
   </div>
 
   <div>
     <label for="numeroDocumento">Numero de documento</label>
-    <input id="numeroDocumento" type="text" formControlName="numeroDocumento" />
+    <input id="numeroDocumento" type="text" formControlName="numeroDocumento" [placeholder]="documentoActual()?.formato ?? ''" />
+    @if (form.controls.numeroDocumento.touched && form.controls.numeroDocumento.errors?.['formato']) {
+      <small class="error">Debe tener {{ form.controls.numeroDocumento.errors?.['formato'] }}</small>
+    }
+    @if (form.controls.numeroDocumento.touched && form.controls.numeroDocumento.errors?.['required']) {
+      <small class="error">Obligatorio</small>
+    }
   </div>
 
   <div>
@@ -28,11 +38,17 @@
   <div>
     <label for="email">Email</label>
     <input id="email" type="email" formControlName="email" />
+    @if (form.controls.email.touched && form.controls.email.invalid) {
+      <small class="error">Email no valido</small>
+    }
   </div>
 
   <div>
     <label for="telefono">Telefono</label>
-    <input id="telefono" type="text" formControlName="telefono" />
+    <input id="telefono" type="tel" formControlName="telefono" placeholder="987654321" />
+    @if (form.controls.telefono.touched && form.controls.telefono.errors?.['pattern']) {
+      <small class="error">Solo digitos (6 a 15), opcionalmente con +51</small>
+    }
   </div>
 
   <div>
@@ -49,5 +65,8 @@
     </select>
   </div>
 
-  <button type="submit" [disabled]="enviando()">Guardar</button>
+  <div class="acciones">
+    <button type="submit" [disabled]="enviando()">{{ enviando() ? 'Guardando...' : 'Guardar' }}</button>
+    <a routerLink="/personas">Cancelar</a>
+  </div>
 </form>

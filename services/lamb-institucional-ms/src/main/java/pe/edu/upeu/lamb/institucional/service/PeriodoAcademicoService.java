@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.PeriodoAcademicoMapper;
 import pe.edu.upeu.lamb.institucional.repository.PeriodoAcademicoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class PeriodoAcademicoService {
 
@@ -31,6 +33,16 @@ public class PeriodoAcademicoService {
     public PeriodoAcademicoResponse crear(PeriodoAcademicoRequest request) {
         PeriodoAcademico entity = periodoAcademicoMapper.toEntity(request);
         return periodoAcademicoMapper.toResponse(periodoAcademicoRepository.save(entity));
+    }
+
+    public PeriodoAcademicoResponse actualizar(Long id, PeriodoAcademicoRequest request) {
+        PeriodoAcademico existente = buscarOFallar(id);
+        PeriodoAcademico entity = periodoAcademicoMapper.toEntity(request);
+        return periodoAcademicoMapper.toResponse(periodoAcademicoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        periodoAcademicoRepository.delete(buscarOFallar(id));
     }
 
     PeriodoAcademico buscarOFallar(Long id) {

@@ -9,7 +9,7 @@
 }
 
 @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
-  <a routerLink="/programas/nuevo">Nuevo programa</a>
+  <a class="boton primario" routerLink="/programas/nueva">Nuevo programa</a>
 }
 
 <table>
@@ -35,7 +35,8 @@
         <td>{{ programa.facultad.nombre }}</td>
         @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
           <td>
-            <button type="button" (click)="eliminar(programa)">Eliminar</button>
+            <a class="boton" [routerLink]="['/programas', programa.id, 'editar']">Editar</a>
+            <button type="button" class="peligro" (click)="eliminar(programa)">Eliminar</button>
           </td>
         }
       </tr>

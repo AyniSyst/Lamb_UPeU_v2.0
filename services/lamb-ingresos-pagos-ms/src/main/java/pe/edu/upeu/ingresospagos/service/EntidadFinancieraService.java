@@ -10,8 +10,10 @@ import pe.edu.upeu.ingresospagos.mapper.EntidadFinancieraMapper;
 import pe.edu.upeu.ingresospagos.repository.EntidadFinancieraRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class EntidadFinancieraService {
 

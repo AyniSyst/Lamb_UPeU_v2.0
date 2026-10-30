@@ -49,6 +49,17 @@ public class CalendarioPlanesController {
         return cronogramaVencimientoService.crear(request);
     }
 
+    @PutMapping("/cronogramas-vencimiento/{id}")
+    public CronogramaVencimientoResponse actualizarCronograma(@PathVariable Long id, @Valid @RequestBody CronogramaVencimientoRequest request) {
+        return cronogramaVencimientoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/cronogramas-vencimiento/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCronograma(@PathVariable Long id) {
+        cronogramaVencimientoService.eliminar(id);
+    }
+
     // --- Plantilla de plan de pago ---
 
     @GetMapping("/plantillas-plan-pago")
@@ -68,5 +79,16 @@ public class CalendarioPlanesController {
     @Operation(summary = "Crear una plantilla de plan de pago")
     public PlantillaPlanPagoResponse crearPlantilla(@Valid @RequestBody PlantillaPlanPagoRequest request) {
         return plantillaPlanPagoService.crear(request);
+    }
+
+    @PutMapping("/plantillas-plan-pago/{id}")
+    public PlantillaPlanPagoResponse actualizarPlantilla(@PathVariable Long id, @Valid @RequestBody PlantillaPlanPagoRequest request) {
+        return plantillaPlanPagoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/plantillas-plan-pago/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarPlantilla(@PathVariable Long id) {
+        plantillaPlanPagoService.eliminar(id);
     }
 }

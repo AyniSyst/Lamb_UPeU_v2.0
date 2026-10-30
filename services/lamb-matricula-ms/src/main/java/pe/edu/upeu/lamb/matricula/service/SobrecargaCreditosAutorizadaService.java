@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.SobrecargaCreditosAutorizadaReposit
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class SobrecargaCreditosAutorizadaService {
 
@@ -35,6 +37,17 @@ public class SobrecargaCreditosAutorizadaService {
         SobrecargaCreditosAutorizada sobrecargaCreditosAutorizada = sobrecargaCreditosAutorizadaMapper.toEntity(request);
         sobrecargaCreditosAutorizada.setFechaAutorizacion(Instant.now());
         return sobrecargaCreditosAutorizadaMapper.toResponse(sobrecargaCreditosAutorizadaRepository.save(sobrecargaCreditosAutorizada));
+    }
+
+    public SobrecargaCreditosAutorizadaResponse actualizar(Long id, SobrecargaCreditosAutorizadaRequest request) {
+        SobrecargaCreditosAutorizada existente = buscarOFallar(id);
+        SobrecargaCreditosAutorizada sobrecargaCreditosAutorizada = sobrecargaCreditosAutorizadaMapper.toEntity(request);
+        sobrecargaCreditosAutorizada.setFechaAutorizacion(Instant.now());
+        return sobrecargaCreditosAutorizadaMapper.toResponse(sobrecargaCreditosAutorizadaRepository.save(Actualizacion.copiar(sobrecargaCreditosAutorizada, existente)));
+    }
+
+    public void eliminar(Long id) {
+        sobrecargaCreditosAutorizadaRepository.delete(buscarOFallar(id));
     }
 
     private SobrecargaCreditosAutorizada buscarOFallar(Long id) {

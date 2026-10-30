@@ -1,0 +1,54 @@
+.ms-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.ms-recursos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  padding: 0.5rem;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  position: sticky;
+  top: 0.5rem;
+}
+
+.ms-recursos input {
+  min-width: 0;
+  margin-bottom: 0.4rem;
+}
+
+.ms-grupo {
+  margin-top: 0.5rem;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+.ms-recursos a {
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  color: var(--texto);
+  text-decoration: none;
+}
+
+.ms-recursos a:hover {
+  background: var(--azul-claro);
+}
+
+.ms-recursos a.activo {
+  background: var(--azul);
+  color: #fff;
+}
+
+.ms-detalle {
+  min-width: 0;
+  overflow-x: auto;
+}

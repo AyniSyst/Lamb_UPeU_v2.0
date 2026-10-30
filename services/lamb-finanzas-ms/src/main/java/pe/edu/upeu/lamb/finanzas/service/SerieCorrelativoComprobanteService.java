@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.finanzas.repository.SerieCorrelativoComprobanteRepositor
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class SerieCorrelativoComprobanteService {
 
@@ -36,6 +38,18 @@ public class SerieCorrelativoComprobanteService {
         SerieCorrelativoComprobante guardado = serieCorrelativoComprobanteRepository.save(entity);
         log.info("Serie y correlativo de comprobante creado con id: {}", guardado.getId());
         return serieCorrelativoComprobanteMapper.toResponse(guardado);
+    }
+
+    public SerieCorrelativoComprobanteResponse actualizar(Long id, SerieCorrelativoComprobanteRequest request) {
+        SerieCorrelativoComprobante existente = buscarOFallar(id);
+        SerieCorrelativoComprobante entity = serieCorrelativoComprobanteMapper.toEntity(request);
+        SerieCorrelativoComprobante guardado = serieCorrelativoComprobanteRepository.save(Actualizacion.copiar(entity, existente));
+        log.info("Serie y correlativo de comprobante creado con id: {}", guardado.getId());
+        return serieCorrelativoComprobanteMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        serieCorrelativoComprobanteRepository.delete(buscarOFallar(id));
     }
 
     private SerieCorrelativoComprobante buscarOFallar(Long id) {

@@ -75,6 +75,17 @@ public class ProgramaAcademicoController {
         return nivelAcademicoService.crear(request);
     }
 
+    @PutMapping("/niveles-academicos/{id}")
+    public NivelAcademicoResponse actualizarNivelAcademico(@PathVariable Long id, @Valid @RequestBody NivelAcademicoRequest request) {
+        return nivelAcademicoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/niveles-academicos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarNivelAcademico(@PathVariable Long id) {
+        nivelAcademicoService.eliminar(id);
+    }
+
     // --- Modalidad de estudio (item 21) ---
 
     @GetMapping("/modalidades-estudio")
@@ -94,6 +105,17 @@ public class ProgramaAcademicoController {
     @Operation(summary = "Crear una modalidad de estudio")
     public ModalidadEstudioResponse crearModalidadEstudio(@Valid @RequestBody ModalidadEstudioRequest request) {
         return modalidadEstudioService.crear(request);
+    }
+
+    @PutMapping("/modalidades-estudio/{id}")
+    public ModalidadEstudioResponse actualizarModalidadEstudio(@PathVariable Long id, @Valid @RequestBody ModalidadEstudioRequest request) {
+        return modalidadEstudioService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/modalidades-estudio/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarModalidadEstudio(@PathVariable Long id) {
+        modalidadEstudioService.eliminar(id);
     }
 
     // --- Regimen academico (item 22) ---
@@ -117,6 +139,17 @@ public class ProgramaAcademicoController {
         return regimenAcademicoService.crear(request);
     }
 
+    @PutMapping("/regimenes-academicos/{id}")
+    public RegimenAcademicoResponse actualizarRegimenAcademico(@PathVariable Long id, @Valid @RequestBody RegimenAcademicoRequest request) {
+        return regimenAcademicoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/regimenes-academicos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarRegimenAcademico(@PathVariable Long id) {
+        regimenAcademicoService.eliminar(id);
+    }
+
     // --- Programa-sede (item 23) ---
 
     @GetMapping("/programa-sede")
@@ -136,6 +169,17 @@ public class ProgramaAcademicoController {
     @Operation(summary = "Crear una relacion programa-sede")
     public ProgramaSedeResponse crearProgramaSede(@Valid @RequestBody ProgramaSedeRequest request) {
         return programaSedeService.crear(request);
+    }
+
+    @PutMapping("/programa-sede/{id}")
+    public ProgramaSedeResponse actualizarProgramaSede(@PathVariable Long id, @Valid @RequestBody ProgramaSedeRequest request) {
+        return programaSedeService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/programa-sede/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarProgramaSede(@PathVariable Long id) {
+        programaSedeService.eliminar(id);
     }
 
     // --- Grado y titulo (item 24) ---
@@ -159,6 +203,17 @@ public class ProgramaAcademicoController {
         return gradoTituloService.crear(request);
     }
 
+    @PutMapping("/grados-titulos/{id}")
+    public GradoTituloResponse actualizarGradoTitulo(@PathVariable Long id, @Valid @RequestBody GradoTituloRequest request) {
+        return gradoTituloService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/grados-titulos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarGradoTitulo(@PathVariable Long id) {
+        gradoTituloService.eliminar(id);
+    }
+
     // --- Resolucion de programa (item 25) ---
 
     @GetMapping("/resoluciones-programa")
@@ -178,6 +233,17 @@ public class ProgramaAcademicoController {
     @Operation(summary = "Crear una resolucion de programa")
     public ResolucionProgramaResponse crearResolucionPrograma(@Valid @RequestBody ResolucionProgramaRequest request) {
         return resolucionProgramaService.crear(request);
+    }
+
+    @PutMapping("/resoluciones-programa/{id}")
+    public ResolucionProgramaResponse actualizarResolucionPrograma(@PathVariable Long id, @Valid @RequestBody ResolucionProgramaRequest request) {
+        return resolucionProgramaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/resoluciones-programa/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarResolucionPrograma(@PathVariable Long id) {
+        resolucionProgramaService.eliminar(id);
     }
 
     // --- Mencion/especialidad (item 26, opcional) ---
@@ -201,6 +267,17 @@ public class ProgramaAcademicoController {
         return mencionEspecialidadService.crear(request);
     }
 
+    @PutMapping("/menciones-especialidad/{id}")
+    public MencionEspecialidadResponse actualizarMencionEspecialidad(@PathVariable Long id, @Valid @RequestBody MencionEspecialidadRequest request) {
+        return mencionEspecialidadService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/menciones-especialidad/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarMencionEspecialidad(@PathVariable Long id) {
+        mencionEspecialidadService.eliminar(id);
+    }
+
     // --- Acreditacion de programa (item 27, opcional) ---
 
     @GetMapping("/acreditaciones-programa")
@@ -220,5 +297,16 @@ public class ProgramaAcademicoController {
     @Operation(summary = "Crear una acreditacion de programa")
     public AcreditacionProgramaResponse crearAcreditacionPrograma(@Valid @RequestBody AcreditacionProgramaRequest request) {
         return acreditacionProgramaService.crear(request);
+    }
+
+    @PutMapping("/acreditaciones-programa/{id}")
+    public AcreditacionProgramaResponse actualizarAcreditacionPrograma(@PathVariable Long id, @Valid @RequestBody AcreditacionProgramaRequest request) {
+        return acreditacionProgramaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/acreditaciones-programa/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAcreditacionPrograma(@PathVariable Long id) {
+        acreditacionProgramaService.eliminar(id);
     }
 }

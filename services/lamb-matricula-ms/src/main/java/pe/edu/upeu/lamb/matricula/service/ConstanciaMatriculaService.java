@@ -13,9 +13,11 @@ import pe.edu.upeu.lamb.matricula.repository.ConstanciaMatriculaRepository;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ConstanciaMatriculaService {
 
@@ -37,6 +39,18 @@ public class ConstanciaMatriculaService {
         entity.setFechaEmision(Instant.now());
         entity.setCodigoVerificacion(UUID.randomUUID().toString());
         return constanciaMatriculaMapper.toResponse(constanciaMatriculaRepository.save(entity));
+    }
+
+    public ConstanciaMatriculaResponse actualizar(Long id, ConstanciaMatriculaRequest request) {
+        ConstanciaMatricula existente = buscarOFallar(id);
+        ConstanciaMatricula entity = constanciaMatriculaMapper.toEntity(request);
+        entity.setFechaEmision(Instant.now());
+        entity.setCodigoVerificacion(UUID.randomUUID().toString());
+        return constanciaMatriculaMapper.toResponse(constanciaMatriculaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        constanciaMatriculaRepository.delete(buscarOFallar(id));
     }
 
     private ConstanciaMatricula buscarOFallar(Long id) {

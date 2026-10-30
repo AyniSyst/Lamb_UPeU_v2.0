@@ -1,0 +1,97 @@
+<h3>{{ recurso().etiqueta }} <small class="ayuda">{{ recurso().ruta }}</small></h3>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+@if (exito()) {
+  <p class="exito">{{ exito() }}</p>
+}
+
+<div class="barra">
+  @if (recurso().crear && puedeEscribir()) {
+    <button type="button" class="primario" (click)="nuevo()">Nuevo</button>
+  }
+  @if (recurso().listar) {
+    @for (p of recurso().listar!.params; track p.nombre) {
+      <input
+        type="text"
+        [placeholder]="p.etiqueta + (p.requerido ? ' *' : '')"
+        (change)="cambiarFiltroListar(p.nombre, $any($event.target).value)"
+      />
+    }
+    <button type="button" (click)="cargar()">{{ cargando() ? 'Cargando...' : 'Actualizar' }}</button>
+    <input type="search" placeholder="Buscar en la lista" (input)="filtro.set($any($event.target).value)" />
+  }
+  @for (op of recurso().consultas; track op.ruta + op.metodo) {
+    <button type="button" (click)="abrirOperacion(op, null)">{{ op.etiqueta }}</button>
+  }
+</div>
+
+@if (modo()) {
+  <h4>{{ tituloFormulario() }}</h4>
+  <app-formulario-dinamico
+    [campos]="camposFormulario()"
+    [inicial]="inicialFormulario()"
+    [enviando]="enviando()"
+    (enviar)="enviarFormulario($event)"
+    (cancelar)="modo.set(null)"
+  />
+}
+
+@if (resultado() !== null) {
+  <h4>Resultado</h4>
+  <pre class="resultado">{{ resultado() | json }}</pre>
+  <button type="button" (click)="resultado.set(null)">Cerrar</button>
+}
+
+@if (recurso().listar) {
+  <table>
+    <thead>
+      <tr>
+        @for (c of columnas(); track c) {
+          <th>{{ c }}</th>
+        }
+        @if (puedeEscribir() && (recurso().actualizar || recurso().eliminar || recurso().acciones.length)) {
+          <th>Acciones</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (fila of filasVisibles(); track $index) {
+        <tr>
+          @for (c of columnas(); track c) {
+            <td>
+              @if (esEstado(c)) {
+                <span class="estado" [class]="fila[c]">{{ celda(fila[c]) }}</span>
+              } @else {
+                {{ celda(fila[c]) }}
+              }
+            </td>
+          }
+          @if (puedeEscribir() && (recurso().actualizar || recurso().eliminar || recurso().acciones.length)) {
+            <td>
+              @if (recurso().actualizar) {
+                <button type="button" (click)="editar(fila)">Editar</button>
+              }
+              @for (op of recurso().acciones; track op.ruta + op.metodo) {
+                <button type="button" [class.peligro]="op.metodo === 'DELETE'" (click)="abrirOperacion(op, fila)">{{ op.etiqueta }}</button>
+              }
+              @if (recurso().eliminar) {
+                <button type="button" class="peligro" (click)="eliminar(fila)">Eliminar</button>
+              }
+            </td>
+          }
+        </tr>
+      } @empty {
+        <tr>
+          <td [attr.colspan]="columnas().length + 1">{{ cargando() ? 'Cargando...' : 'Sin registros.' }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  @if (filas().length > filasVisibles().length && !filtro()) {
+    <small class="ayuda">Mostrando {{ filasVisibles().length }} de {{ filas().length }}; usa la busqueda para filtrar.</small>
+  }
+} @else {
+  <p class="ayuda">Este recurso no tiene listado: usa las operaciones de arriba.</p>
+}

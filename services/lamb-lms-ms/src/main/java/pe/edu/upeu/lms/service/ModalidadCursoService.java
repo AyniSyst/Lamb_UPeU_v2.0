@@ -10,8 +10,10 @@ import pe.edu.upeu.lms.mapper.ModalidadCursoMapper;
 import pe.edu.upeu.lms.repository.ModalidadCursoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ModalidadCursoService {
 

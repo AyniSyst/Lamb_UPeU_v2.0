@@ -62,6 +62,17 @@ public class SaldoEstudianteController {
         return cuentaEstudianteService.crear(request);
     }
 
+    @PutMapping("/cuentas/{id}")
+    public CuentaEstudianteResponse actualizarCuenta(@PathVariable Long id, @Valid @RequestBody CuentaEstudianteRequest request) {
+        return cuentaEstudianteService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/cuentas/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCuenta(@PathVariable Long id) {
+        cuentaEstudianteService.eliminar(id);
+    }
+
     // --- Movimiento de cuenta (item 65) ---
 
     @GetMapping("/movimientos")
@@ -81,6 +92,17 @@ public class SaldoEstudianteController {
     @Operation(summary = "Crear un movimiento de cuenta")
     public MovimientoCuentaResponse crearMovimiento(@Valid @RequestBody MovimientoCuentaRequest request) {
         return movimientoCuentaService.crear(request);
+    }
+
+    @PutMapping("/movimientos/{id}")
+    public MovimientoCuentaResponse actualizarMovimiento(@PathVariable Long id, @Valid @RequestBody MovimientoCuentaRequest request) {
+        return movimientoCuentaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/movimientos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarMovimiento(@PathVariable Long id) {
+        movimientoCuentaService.eliminar(id);
     }
 
     // --- Saldo por periodo (item 66) ---
@@ -104,6 +126,17 @@ public class SaldoEstudianteController {
         return saldoPeriodoService.crear(request);
     }
 
+    @PutMapping("/saldos-periodo/{id}")
+    public SaldoPeriodoResponse actualizarSaldoPeriodo(@PathVariable Long id, @Valid @RequestBody SaldoPeriodoRequest request) {
+        return saldoPeriodoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/saldos-periodo/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarSaldoPeriodo(@PathVariable Long id) {
+        saldoPeriodoService.eliminar(id);
+    }
+
     // --- Ajuste manual de saldo (item 67, requiere autorizacion) ---
 
     @GetMapping("/ajustes-manuales")
@@ -125,6 +158,17 @@ public class SaldoEstudianteController {
         return ajusteManualSaldoService.crear(request);
     }
 
+    @PutMapping("/ajustes-manuales/{id}")
+    public AjusteManualSaldoResponse actualizarAjusteManual(@PathVariable Long id, @Valid @RequestBody AjusteManualSaldoRequest request) {
+        return ajusteManualSaldoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/ajustes-manuales/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAjusteManual(@PathVariable Long id) {
+        ajusteManualSaldoService.eliminar(id);
+    }
+
     // --- Reserva de saldo para devolucion (item 69, opcional) ---
 
     @GetMapping("/reservas-devolucion")
@@ -144,5 +188,16 @@ public class SaldoEstudianteController {
     @Operation(summary = "Crear una reserva de saldo para devolucion")
     public ReservaSaldoDevolucionResponse crearReservaDevolucion(@Valid @RequestBody ReservaSaldoDevolucionRequest request) {
         return reservaSaldoDevolucionService.crear(request);
+    }
+
+    @PutMapping("/reservas-devolucion/{id}")
+    public ReservaSaldoDevolucionResponse actualizarReservaDevolucion(@PathVariable Long id, @Valid @RequestBody ReservaSaldoDevolucionRequest request) {
+        return reservaSaldoDevolucionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/reservas-devolucion/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarReservaDevolucion(@PathVariable Long id) {
+        reservaSaldoDevolucionService.eliminar(id);
     }
 }

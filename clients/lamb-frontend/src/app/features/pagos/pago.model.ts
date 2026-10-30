@@ -15,7 +15,8 @@ export interface PagoResponse {
   matriculaId: number | null;
   concepto: string;
   monto: number;
-  metodo: MetodoPago;
+  // null mientras el cargo esta PENDIENTE
+  metodo: MetodoPago | null;
   estado: EstadoPago;
   fechaPago: string;
   referenciaExterna: string | null;

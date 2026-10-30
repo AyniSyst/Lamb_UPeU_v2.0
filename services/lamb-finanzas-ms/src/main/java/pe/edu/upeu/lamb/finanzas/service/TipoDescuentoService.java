@@ -11,12 +11,14 @@ import pe.edu.upeu.lamb.finanzas.mapper.TipoDescuentoMapper;
 import pe.edu.upeu.lamb.finanzas.repository.TipoDescuentoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Lote F3 - Descuentos y becas (item 30 del documento): Tipo de Descuento.
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TipoDescuentoService {
 
@@ -37,6 +39,17 @@ public class TipoDescuentoService {
         TipoDescuento entity = tipoDescuentoMapper.toEntity(request);
         TipoDescuento guardado = tipoDescuentoRepository.save(entity);
         return tipoDescuentoMapper.toResponse(guardado);
+    }
+
+    public TipoDescuentoResponse actualizar(Long id, TipoDescuentoRequest request) {
+        TipoDescuento existente = buscarOFallar(id);
+        TipoDescuento entity = tipoDescuentoMapper.toEntity(request);
+        TipoDescuento guardado = tipoDescuentoRepository.save(Actualizacion.copiar(entity, existente));
+        return tipoDescuentoMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        tipoDescuentoRepository.delete(buscarOFallar(id));
     }
 
     private TipoDescuento buscarOFallar(Long id) {

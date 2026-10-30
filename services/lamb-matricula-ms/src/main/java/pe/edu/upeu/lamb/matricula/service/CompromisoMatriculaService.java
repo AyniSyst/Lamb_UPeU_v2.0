@@ -11,9 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CompromisoMatriculaService {
 
@@ -33,6 +35,16 @@ public class CompromisoMatriculaService {
     public CompromisoMatriculaResponse crear(CompromisoMatriculaRequest request) {
         CompromisoMatricula entity = compromisoMatriculaMapper.toEntity(request);
         return compromisoMatriculaMapper.toResponse(compromisoMatriculaRepository.save(entity));
+    }
+
+    public CompromisoMatriculaResponse actualizar(Long id, CompromisoMatriculaRequest request) {
+        CompromisoMatricula existente = buscarOFallar(id);
+        CompromisoMatricula entity = compromisoMatriculaMapper.toEntity(request);
+        return compromisoMatriculaMapper.toResponse(compromisoMatriculaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        compromisoMatriculaRepository.delete(buscarOFallar(id));
     }
 
     private CompromisoMatricula buscarOFallar(Long id) {

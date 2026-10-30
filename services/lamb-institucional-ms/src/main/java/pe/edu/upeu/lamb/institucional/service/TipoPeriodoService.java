@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.TipoPeriodoMapper;
 import pe.edu.upeu.lamb.institucional.repository.TipoPeriodoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TipoPeriodoService {
 
@@ -31,6 +33,16 @@ public class TipoPeriodoService {
     public TipoPeriodoResponse crear(TipoPeriodoRequest request) {
         TipoPeriodo entity = tipoPeriodoMapper.toEntity(request);
         return tipoPeriodoMapper.toResponse(tipoPeriodoRepository.save(entity));
+    }
+
+    public TipoPeriodoResponse actualizar(Long id, TipoPeriodoRequest request) {
+        TipoPeriodo existente = buscarOFallar(id);
+        TipoPeriodo entity = tipoPeriodoMapper.toEntity(request);
+        return tipoPeriodoMapper.toResponse(tipoPeriodoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        tipoPeriodoRepository.delete(buscarOFallar(id));
     }
 
     private TipoPeriodo buscarOFallar(Long id) {

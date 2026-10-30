@@ -1,0 +1,27 @@
+@if (ms(); as m) {
+  <h2>{{ m.nombre }} <small class="ayuda">{{ m.recursos.length }} recursos · Gateway {{ m.prefijo }}</small></h2>
+  <p class="ayuda">{{ m.descripcion }}</p>
+
+  <div class="ms-layout">
+    <aside class="ms-recursos">
+      <input type="search" placeholder="Buscar recurso" (input)="busqueda.set($any($event.target).value)" />
+      @for (g of grupos(); track g.nombre) {
+        <div class="ms-grupo">{{ g.nombre }}</div>
+        @for (r of g.recursos; track r.clave) {
+          <a href="" [class.activo]="r.clave === recurso()?.clave" (click)="$event.preventDefault(); elegir(r)">{{ r.etiqueta }}</a>
+        }
+      } @empty {
+        <p class="ayuda">Sin coincidencias.</p>
+      }
+    </aside>
+
+    <section class="ms-detalle">
+      @if (recurso(); as r) {
+        <app-recurso-crud [ms]="m" [recurso]="r" />
+      }
+    </section>
+  </div>
+} @else {
+  <p class="error">Microservicio no encontrado.</p>
+  <a routerLink="/">Volver al inicio</a>
+}

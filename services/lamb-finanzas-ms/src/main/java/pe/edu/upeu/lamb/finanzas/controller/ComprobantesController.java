@@ -67,6 +67,17 @@ public class ComprobantesController {
         return documentoPagoService.crear(request);
     }
 
+    @PutMapping("/documentos-pago/{id}")
+    public DocumentoPagoResponse actualizarDocumentoPago(@PathVariable Long id, @Valid @RequestBody DocumentoPagoRequest request) {
+        return documentoPagoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/documentos-pago/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarDocumentoPago(@PathVariable Long id) {
+        documentoPagoService.eliminar(id);
+    }
+
     // --- Serie/correlativo de comprobante ---
 
     @GetMapping("/series-correlativos-comprobante")
@@ -86,6 +97,17 @@ public class ComprobantesController {
     @Operation(summary = "Crear una serie/correlativo de comprobante")
     public SerieCorrelativoComprobanteResponse crearSerieCorrelativo(@Valid @RequestBody SerieCorrelativoComprobanteRequest request) {
         return serieCorrelativoComprobanteService.crear(request);
+    }
+
+    @PutMapping("/series-correlativos-comprobante/{id}")
+    public SerieCorrelativoComprobanteResponse actualizarSerieCorrelativo(@PathVariable Long id, @Valid @RequestBody SerieCorrelativoComprobanteRequest request) {
+        return serieCorrelativoComprobanteService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/series-correlativos-comprobante/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarSerieCorrelativo(@PathVariable Long id) {
+        serieCorrelativoComprobanteService.eliminar(id);
     }
 
     // --- Dato de facturacion del cliente ---
@@ -109,6 +131,17 @@ public class ComprobantesController {
         return datoFacturacionClienteService.crear(request);
     }
 
+    @PutMapping("/datos-facturacion-cliente/{id}")
+    public DatoFacturacionClienteResponse actualizarDatoFacturacion(@PathVariable Long id, @Valid @RequestBody DatoFacturacionClienteRequest request) {
+        return datoFacturacionClienteService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/datos-facturacion-cliente/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarDatoFacturacion(@PathVariable Long id) {
+        datoFacturacionClienteService.eliminar(id);
+    }
+
     // --- Anulacion de comprobante ---
 
     @GetMapping("/anulaciones-comprobante")
@@ -128,6 +161,17 @@ public class ComprobantesController {
     @Operation(summary = "Crear una anulacion de comprobante")
     public AnulacionComprobanteResponse crearAnulacionComprobante(@Valid @RequestBody AnulacionComprobanteRequest request) {
         return anulacionComprobanteService.crear(request);
+    }
+
+    @PutMapping("/anulaciones-comprobante/{id}")
+    public AnulacionComprobanteResponse actualizarAnulacionComprobante(@PathVariable Long id, @Valid @RequestBody AnulacionComprobanteRequest request) {
+        return anulacionComprobanteService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/anulaciones-comprobante/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAnulacionComprobante(@PathVariable Long id) {
+        anulacionComprobanteService.eliminar(id);
     }
 
     // --- Nota de credito (opcional) ---
@@ -151,6 +195,17 @@ public class ComprobantesController {
         return notaCreditoService.crear(request);
     }
 
+    @PutMapping("/notas-credito/{id}")
+    public NotaCreditoResponse actualizarNotaCredito(@PathVariable Long id, @Valid @RequestBody NotaCreditoRequest request) {
+        return notaCreditoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/notas-credito/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarNotaCredito(@PathVariable Long id) {
+        notaCreditoService.eliminar(id);
+    }
+
     // --- Nota de debito (opcional) ---
 
     @GetMapping("/notas-debito")
@@ -170,5 +225,16 @@ public class ComprobantesController {
     @Operation(summary = "Crear una nota de debito")
     public NotaDebitoResponse crearNotaDebito(@Valid @RequestBody NotaDebitoRequest request) {
         return notaDebitoService.crear(request);
+    }
+
+    @PutMapping("/notas-debito/{id}")
+    public NotaDebitoResponse actualizarNotaDebito(@PathVariable Long id, @Valid @RequestBody NotaDebitoRequest request) {
+        return notaDebitoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/notas-debito/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarNotaDebito(@PathVariable Long id) {
+        notaDebitoService.eliminar(id);
     }
 }

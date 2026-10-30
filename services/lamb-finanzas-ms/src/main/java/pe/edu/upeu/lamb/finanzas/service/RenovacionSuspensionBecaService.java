@@ -13,12 +13,14 @@ import pe.edu.upeu.lamb.finanzas.repository.BecaAplicadaRepository;
 import pe.edu.upeu.lamb.finanzas.repository.RenovacionSuspensionBecaRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Lote F3 - Descuentos y becas (item 33 del documento): Renovacion o suspension de beca.
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RenovacionSuspensionBecaService {
 
@@ -49,6 +51,26 @@ public class RenovacionSuspensionBecaService {
 
         RenovacionSuspensionBeca guardado = renovacionSuspensionBecaRepository.save(entity);
         return renovacionSuspensionBecaMapper.toResponse(guardado);
+    }
+
+    public RenovacionSuspensionBecaResponse actualizar(Long id, RenovacionSuspensionBecaRequest request) {
+        RenovacionSuspensionBeca existente = buscarOFallar(id);
+        BecaAplicada becaAplicada = becaAplicadaRepository.findById(request.getIdBecaAplicada())
+                .orElseThrow(() -> new ResourceNotFoundException("Beca aplicada no encontrada: " + request.getIdBecaAplicada()));
+
+        RenovacionSuspensionBeca entity = RenovacionSuspensionBeca.builder()
+                .becaAplicada(becaAplicada)
+                .tipo(request.getTipo())
+                .fecha(request.getFecha())
+                .motivo(request.getMotivo())
+                .build();
+
+        RenovacionSuspensionBeca guardado = renovacionSuspensionBecaRepository.save(Actualizacion.copiar(entity, existente));
+        return renovacionSuspensionBecaMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        renovacionSuspensionBecaRepository.delete(buscarOFallar(id));
     }
 
     private RenovacionSuspensionBeca buscarOFallar(Long id) {

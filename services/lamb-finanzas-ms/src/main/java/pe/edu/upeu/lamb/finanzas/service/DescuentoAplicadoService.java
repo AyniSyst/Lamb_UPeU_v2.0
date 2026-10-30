@@ -13,12 +13,14 @@ import pe.edu.upeu.lamb.finanzas.repository.DescuentoAplicadoRepository;
 import pe.edu.upeu.lamb.finanzas.repository.TipoDescuentoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Lote F3 - Descuentos y becas (item 30 del documento): Descuento aplicado.
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class DescuentoAplicadoService {
 
@@ -49,6 +51,26 @@ public class DescuentoAplicadoService {
 
         DescuentoAplicado guardado = descuentoAplicadoRepository.save(entity);
         return descuentoAplicadoMapper.toResponse(guardado);
+    }
+
+    public DescuentoAplicadoResponse actualizar(Long id, DescuentoAplicadoRequest request) {
+        DescuentoAplicado existente = buscarOFallar(id);
+        TipoDescuento tipoDescuento = tipoDescuentoRepository.findById(request.getIdTipoDescuento())
+                .orElseThrow(() -> new ResourceNotFoundException("Tipo de descuento no encontrado: " + request.getIdTipoDescuento()));
+
+        DescuentoAplicado entity = DescuentoAplicado.builder()
+                .idPersona(request.getIdPersona())
+                .tipoDescuento(tipoDescuento)
+                .porcentaje(request.getPorcentaje())
+                .fechaInicio(request.getFechaInicio())
+                .build();
+
+        DescuentoAplicado guardado = descuentoAplicadoRepository.save(Actualizacion.copiar(entity, existente));
+        return descuentoAplicadoMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        descuentoAplicadoRepository.delete(buscarOFallar(id));
     }
 
     DescuentoAplicado buscarOFallar(Long id) {

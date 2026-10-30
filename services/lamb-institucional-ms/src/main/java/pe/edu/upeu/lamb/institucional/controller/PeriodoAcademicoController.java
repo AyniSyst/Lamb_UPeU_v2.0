@@ -50,6 +50,17 @@ public class PeriodoAcademicoController {
         return anioAcademicoService.crear(request);
     }
 
+    @PutMapping("/anios-academicos/{id}")
+    public AnioAcademicoResponse actualizarAnioAcademico(@PathVariable Long id, @Valid @RequestBody AnioAcademicoRequest request) {
+        return anioAcademicoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/anios-academicos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAnioAcademico(@PathVariable Long id) {
+        anioAcademicoService.eliminar(id);
+    }
+
     // --- Tipo de periodo (item 29) ---
 
     @GetMapping("/tipos-periodo")
@@ -69,6 +80,17 @@ public class PeriodoAcademicoController {
     @Operation(summary = "Crear un tipo de periodo")
     public TipoPeriodoResponse crearTipoPeriodo(@Valid @RequestBody TipoPeriodoRequest request) {
         return tipoPeriodoService.crear(request);
+    }
+
+    @PutMapping("/tipos-periodo/{id}")
+    public TipoPeriodoResponse actualizarTipoPeriodo(@PathVariable Long id, @Valid @RequestBody TipoPeriodoRequest request) {
+        return tipoPeriodoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/tipos-periodo/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTipoPeriodo(@PathVariable Long id) {
+        tipoPeriodoService.eliminar(id);
     }
 
     // --- Periodo academico (item 30) ---
@@ -92,6 +114,17 @@ public class PeriodoAcademicoController {
         return periodoAcademicoService.crear(request);
     }
 
+    @PutMapping("/periodos/{id}")
+    public PeriodoAcademicoResponse actualizarPeriodoAcademico(@PathVariable Long id, @Valid @RequestBody PeriodoAcademicoRequest request) {
+        return periodoAcademicoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/periodos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarPeriodoAcademico(@PathVariable Long id) {
+        periodoAcademicoService.eliminar(id);
+    }
+
     // --- Estado de periodo (item 31) ---
 
     @GetMapping("/estados-periodo")
@@ -111,6 +144,17 @@ public class PeriodoAcademicoController {
     @Operation(summary = "Crear un estado de periodo")
     public EstadoPeriodoResponse crearEstadoPeriodo(@Valid @RequestBody EstadoPeriodoRequest request) {
         return estadoPeriodoService.crear(request);
+    }
+
+    @PutMapping("/estados-periodo/{id}")
+    public EstadoPeriodoResponse actualizarEstadoPeriodo(@PathVariable Long id, @Valid @RequestBody EstadoPeriodoRequest request) {
+        return estadoPeriodoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/estados-periodo/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarEstadoPeriodo(@PathVariable Long id) {
+        estadoPeriodoService.eliminar(id);
     }
 
     // --- Periodo-programa-sede (item 32) ---
@@ -134,6 +178,17 @@ public class PeriodoAcademicoController {
         return periodoProgramaSedeService.crear(request);
     }
 
+    @PutMapping("/periodo-programa-sede/{id}")
+    public PeriodoProgramaSedeResponse actualizarPeriodoProgramaSede(@PathVariable Long id, @Valid @RequestBody PeriodoProgramaSedeRequest request) {
+        return periodoProgramaSedeService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/periodo-programa-sede/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarPeriodoProgramaSede(@PathVariable Long id) {
+        periodoProgramaSedeService.eliminar(id);
+    }
+
     // --- Ampliacion/cierre de periodo (item 33) ---
 
     @GetMapping("/ampliaciones-cierre")
@@ -153,5 +208,16 @@ public class PeriodoAcademicoController {
     @Operation(summary = "Crear una ampliacion/cierre de periodo")
     public AmpliacionCierrePeriodoResponse crearAmpliacionCierre(@Valid @RequestBody AmpliacionCierrePeriodoRequest request) {
         return ampliacionCierrePeriodoService.crear(request);
+    }
+
+    @PutMapping("/ampliaciones-cierre/{id}")
+    public AmpliacionCierrePeriodoResponse actualizarAmpliacionCierre(@PathVariable Long id, @Valid @RequestBody AmpliacionCierrePeriodoRequest request) {
+        return ampliacionCierrePeriodoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/ampliaciones-cierre/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAmpliacionCierre(@PathVariable Long id) {
+        ampliacionCierrePeriodoService.eliminar(id);
     }
 }

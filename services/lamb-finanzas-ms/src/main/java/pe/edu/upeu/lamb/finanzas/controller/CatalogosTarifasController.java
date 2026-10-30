@@ -53,6 +53,17 @@ public class CatalogosTarifasController {
         return categoriaConceptoService.crear(request);
     }
 
+    @PutMapping("/categorias-concepto/{id}")
+    public CategoriaConceptoResponse actualizarCategoriaConcepto(@PathVariable Long id, @Valid @RequestBody CategoriaConceptoRequest request) {
+        return categoriaConceptoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/categorias-concepto/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCategoriaConcepto(@PathVariable Long id) {
+        categoriaConceptoService.eliminar(id);
+    }
+
     // --- Concepto de pago ---
 
     @GetMapping("/conceptos-pago")
@@ -74,6 +85,17 @@ public class CatalogosTarifasController {
         return conceptoPagoService.crear(request);
     }
 
+    @PutMapping("/conceptos-pago/{id}")
+    public ConceptoPagoResponse actualizarConceptoPago(@PathVariable Long id, @Valid @RequestBody ConceptoPagoRequest request) {
+        return conceptoPagoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/conceptos-pago/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarConceptoPago(@PathVariable Long id) {
+        conceptoPagoService.eliminar(id);
+    }
+
     // --- Tarifario por escuela y ciclo ---
 
     @GetMapping("/tarifarios-escuela-ciclo")
@@ -93,5 +115,16 @@ public class CatalogosTarifasController {
     @Operation(summary = "Crear un tarifario por escuela y ciclo")
     public TarifarioEscuelaCicloResponse crearTarifario(@Valid @RequestBody TarifarioEscuelaCicloRequest request) {
         return tarifarioEscuelaCicloService.crear(request);
+    }
+
+    @PutMapping("/tarifarios-escuela-ciclo/{id}")
+    public TarifarioEscuelaCicloResponse actualizarTarifario(@PathVariable Long id, @Valid @RequestBody TarifarioEscuelaCicloRequest request) {
+        return tarifarioEscuelaCicloService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/tarifarios-escuela-ciclo/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTarifario(@PathVariable Long id) {
+        tarifarioEscuelaCicloService.eliminar(id);
     }
 }

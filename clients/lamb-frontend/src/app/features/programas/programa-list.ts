@@ -1,3 +1,4 @@
+import { mensajeError } from '../../core/http/mensaje-error';
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth/auth-service';
@@ -25,7 +26,7 @@ export class ProgramaList {
     this.error.set(null);
     this.service.listar().subscribe({
       next: (data) => this.programas.set(data),
-      error: () => this.error.set('No se pudieron cargar los programas.'),
+      error: (e) => this.error.set(mensajeError(e, 'No se pudieron cargar los programas.')),
     });
   }
 
@@ -33,7 +34,7 @@ export class ProgramaList {
     this.errorAccion.set(null);
     this.service.eliminar(programa.id).subscribe({
       next: () => this.cargar(),
-      error: () => this.errorAccion.set('No se pudo eliminar el programa.'),
+      error: (e) => this.errorAccion.set(mensajeError(e, 'No se pudo eliminar el programa.')),
     });
   }
 }

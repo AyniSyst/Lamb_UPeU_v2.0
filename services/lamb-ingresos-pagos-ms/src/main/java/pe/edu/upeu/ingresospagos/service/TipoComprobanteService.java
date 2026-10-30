@@ -10,8 +10,10 @@ import pe.edu.upeu.ingresospagos.mapper.TipoComprobanteMapper;
 import pe.edu.upeu.ingresospagos.repository.TipoComprobanteRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TipoComprobanteService {
 

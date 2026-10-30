@@ -41,6 +41,17 @@ public class RelacionResponsableController {
         return tipoParentescoService.crear(request);
     }
 
+    @PutMapping("/tipos-parentesco/{id}")
+    public TipoParentescoResponse actualizarTipoParentesco(@PathVariable Long id, @Valid @RequestBody TipoParentescoRequest request) {
+        return tipoParentescoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/tipos-parentesco/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTipoParentesco(@PathVariable Long id) {
+        tipoParentescoService.eliminar(id);
+    }
+
     // ---- Relacion familiar ----
     @Operation(summary = "Listar relaciones familiares")
     @GetMapping("/relaciones-familiares")
@@ -61,6 +72,17 @@ public class RelacionResponsableController {
         return relacionFamiliarService.crear(request);
     }
 
+    @PutMapping("/relaciones-familiares/{id}")
+    public RelacionFamiliarResponse actualizarRelacionFamiliar(@PathVariable Long id, @Valid @RequestBody RelacionFamiliarRequest request) {
+        return relacionFamiliarService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/relaciones-familiares/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarRelacionFamiliar(@PathVariable Long id) {
+        relacionFamiliarService.eliminar(id);
+    }
+
     // ---- Responsable de pago ----
     @Operation(summary = "Listar responsables de pago")
     @GetMapping("/responsables-pago")
@@ -79,5 +101,16 @@ public class RelacionResponsableController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponsablePagoResponse crearResponsablePago(@Valid @RequestBody ResponsablePagoRequest request) {
         return responsablePagoService.crear(request);
+    }
+
+    @PutMapping("/responsables-pago/{id}")
+    public ResponsablePagoResponse actualizarResponsablePago(@PathVariable Long id, @Valid @RequestBody ResponsablePagoRequest request) {
+        return responsablePagoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/responsables-pago/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarResponsablePago(@PathVariable Long id) {
+        responsablePagoService.eliminar(id);
     }
 }

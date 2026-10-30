@@ -1,34 +1,78 @@
-<h2>Nueva nota</h2>
+<h2>{{ idNota ? 'Editar nota' : 'Nueva nota' }}</h2>
 
 @if (error()) {
   <p class="error">{{ error() }}</p>
 }
 
-<form [formGroup]="form" (ngSubmit)="guardar()">
+<form class="formulario" [formGroup]="form" (ngSubmit)="guardar()">
   <div>
-    <label for="idPersona">ID Persona</label>
-    <input id="idPersona" type="number" formControlName="idPersona" />
+    <label for="idGrupo">Grupo</label>
+    <select id="idGrupo" formControlName="idGrupo" (change)="alElegirGrupo()">
+      <option [ngValue]="null" disabled>Selecciona un grupo abierto</option>
+      @for (g of grupos(); track g.id) {
+        <option [ngValue]="g.id">{{ g.curso?.codigo }} {{ g.curso?.nombre }} · {{ g.codigo }} · {{ g.periodo }}</option>
+      }
+    </select>
   </div>
 
   <div>
-    <label for="idGrupo">ID Grupo</label>
-    <input id="idGrupo" type="number" formControlName="idGrupo" />
+    <label for="idPersona">Estudiante</label>
+    <select id="idPersona" formControlName="idPersona">
+      <option [ngValue]="null" disabled>Selecciona un estudiante</option>
+      @for (p of estudiantes(); track p.id) {
+        <option [ngValue]="p.id">{{ p.apellidos }}, {{ p.nombres }} ({{ p.tipoDocumento }} {{ p.numeroDocumento }})</option>
+      }
+    </select>
   </div>
 
   <div>
-    <label for="idComponente">ID Componente</label>
-    <input id="idComponente" type="number" formControlName="idComponente" />
+    <label for="idComponente">Componente de evaluacion</label>
+    <select id="idComponente" formControlName="idComponente">
+      <option [ngValue]="null" disabled>Selecciona un componente</option>
+      @for (c of componentes(); track c.id) {
+        <option [ngValue]="c.id">{{ c.codigo }} - {{ c.nombre }} ({{ c.tipo }})</option>
+      }
+    </select>
+    <small class="ayuda">
+      <a href="" (click)="$event.preventDefault(); creandoComponente.set(!creandoComponente())">Crear componente</a>
+    </small>
   </div>
 
-  <div>
-    <label for="calificacion">Calificacion (0-20)</label>
-    <input id="calificacion" type="number" min="0" max="20" step="0.1" formControlName="calificacion" />
+  @if (creandoComponente()) {
+    <div class="fila" [formGroup]="componenteForm">
+      <div>
+        <label>Codigo</label>
+        <input type="text" formControlName="codigo" placeholder="EP" />
+      </div>
+      <div>
+        <label>Nombre</label>
+        <input type="text" formControlName="nombre" placeholder="Examen parcial" />
+      </div>
+      <div>
+        <label>Tipo</label>
+        <select formControlName="tipo">
+          @for (t of tiposComponente; track t) {
+            <option [value]="t">{{ t }}</option>
+          }
+        </select>
+      </div>
+      <button type="button" (click)="guardarComponente()">Crear</button>
+    </div>
+  }
+
+  <div class="fila">
+    <div>
+      <label for="calificacion">Calificacion (0-20)</label>
+      <input id="calificacion" type="number" min="0" max="20" step="0.1" formControlName="calificacion" />
+    </div>
+    <div>
+      <label for="periodo">Periodo</label>
+      <input id="periodo" type="text" formControlName="periodo" />
+    </div>
   </div>
 
-  <div>
-    <label for="periodo">Periodo</label>
-    <input id="periodo" type="text" formControlName="periodo" placeholder="2026-I" />
+  <div class="acciones">
+    <button type="submit" [disabled]="enviando()">{{ enviando() ? 'Guardando...' : 'Guardar' }}</button>
+    <a routerLink="/notas">Cancelar</a>
   </div>
-
-  <button type="submit" [disabled]="enviando()">Registrar</button>
 </form>

@@ -13,12 +13,14 @@ import pe.edu.upeu.lamb.finanzas.repository.PagoRepository;
 import pe.edu.upeu.lamb.finanzas.repository.VoucherRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Item 27 del documento: "Estado de voucher (aceptado, rechazado y en proceso)".
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class VoucherService {
 
@@ -49,6 +51,26 @@ public class VoucherService {
 
         Voucher guardado = voucherRepository.save(entity);
         return voucherMapper.toResponse(guardado);
+    }
+
+    public VoucherResponse actualizar(Long id, VoucherRequest request) {
+        Voucher existente = buscarOFallar(id);
+        Pago pago = pagoRepository.findById(request.getIdPago())
+                .orElseThrow(() -> new ResourceNotFoundException("Pago no encontrado: " + request.getIdPago()));
+
+        Voucher entity = Voucher.builder()
+                .pago(pago)
+                .numeroVoucher(request.getNumeroVoucher())
+                .estado(request.getEstado())
+                .fecha(request.getFecha())
+                .build();
+
+        Voucher guardado = voucherRepository.save(Actualizacion.copiar(entity, existente));
+        return voucherMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        voucherRepository.delete(buscarOFallar(id));
     }
 
     private Voucher buscarOFallar(Long id) {

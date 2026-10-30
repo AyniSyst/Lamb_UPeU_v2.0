@@ -12,8 +12,10 @@ import pe.edu.upeu.lms.repository.CalificacionRepository;
 import pe.edu.upeu.lms.repository.EvaluacionRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CalificacionService {
 

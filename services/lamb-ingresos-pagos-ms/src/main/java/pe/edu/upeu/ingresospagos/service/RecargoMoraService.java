@@ -10,8 +10,10 @@ import pe.edu.upeu.ingresospagos.mapper.RecargoMoraMapper;
 import pe.edu.upeu.ingresospagos.repository.RecargoMoraRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RecargoMoraService {
 

@@ -58,6 +58,17 @@ public class CobrosController {
         return estadoCobroService.crear(request);
     }
 
+    @PutMapping("/estados-cobro/{id}")
+    public EstadoCobroResponse actualizarEstadoCobro(@PathVariable Long id, @Valid @RequestBody EstadoCobroRequest request) {
+        return estadoCobroService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/estados-cobro/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarEstadoCobro(@PathVariable Long id) {
+        estadoCobroService.eliminar(id);
+    }
+
     // --- Detalle de cobro (opcional segun universidad) ---
 
     @GetMapping("/detalles-cobro")
@@ -77,6 +88,17 @@ public class CobrosController {
     @Operation(summary = "Crear un detalle de cobro")
     public DetalleCobroResponse crearDetalleCobro(@Valid @RequestBody DetalleCobroRequest request) {
         return detalleCobroService.crear(request);
+    }
+
+    @PutMapping("/detalles-cobro/{id}")
+    public DetalleCobroResponse actualizarDetalleCobro(@PathVariable Long id, @Valid @RequestBody DetalleCobroRequest request) {
+        return detalleCobroService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/detalles-cobro/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarDetalleCobro(@PathVariable Long id) {
+        detalleCobroService.eliminar(id);
     }
 
     // --- Historial de estado de cobro ---
@@ -100,6 +122,17 @@ public class CobrosController {
         return historialEstadoCobroService.crear(request);
     }
 
+    @PutMapping("/historiales-estado-cobro/{id}")
+    public HistorialEstadoCobroResponse actualizarHistorialEstadoCobro(@PathVariable Long id, @Valid @RequestBody HistorialEstadoCobroRequest request) {
+        return historialEstadoCobroService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/historiales-estado-cobro/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarHistorialEstadoCobro(@PathVariable Long id) {
+        historialEstadoCobroService.eliminar(id);
+    }
+
     // --- Monto de pago ---
 
     @GetMapping("/montos-pago")
@@ -119,5 +152,16 @@ public class CobrosController {
     @Operation(summary = "Crear un monto de pago")
     public MontoPagoResponse crearMontoPago(@Valid @RequestBody MontoPagoRequest request) {
         return montoPagoService.crear(request);
+    }
+
+    @PutMapping("/montos-pago/{id}")
+    public MontoPagoResponse actualizarMontoPago(@PathVariable Long id, @Valid @RequestBody MontoPagoRequest request) {
+        return montoPagoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/montos-pago/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarMontoPago(@PathVariable Long id) {
+        montoPagoService.eliminar(id);
     }
 }

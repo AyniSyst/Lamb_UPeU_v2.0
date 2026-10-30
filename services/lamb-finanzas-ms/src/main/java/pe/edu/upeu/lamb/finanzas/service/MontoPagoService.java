@@ -13,12 +13,14 @@ import pe.edu.upeu.lamb.finanzas.repository.EstadoCobroRepository;
 import pe.edu.upeu.lamb.finanzas.repository.MontoPagoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Item 21 del documento: "Monto de Pago".
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MontoPagoService {
 
@@ -48,6 +50,25 @@ public class MontoPagoService {
 
         MontoPago guardado = montoPagoRepository.save(entity);
         return montoPagoMapper.toResponse(guardado);
+    }
+
+    public MontoPagoResponse actualizar(Long id, MontoPagoRequest request) {
+        MontoPago existente = buscarOFallar(id);
+        EstadoCobro estadoCobro = estadoCobroRepository.findById(request.getIdEstadoCobro())
+                .orElseThrow(() -> new ResourceNotFoundException("Estado de cobro no encontrado: " + request.getIdEstadoCobro()));
+
+        MontoPago entity = MontoPago.builder()
+                .estadoCobro(estadoCobro)
+                .monto(request.getMonto())
+                .fecha(request.getFecha())
+                .build();
+
+        MontoPago guardado = montoPagoRepository.save(Actualizacion.copiar(entity, existente));
+        return montoPagoMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        montoPagoRepository.delete(buscarOFallar(id));
     }
 
     private MontoPago buscarOFallar(Long id) {

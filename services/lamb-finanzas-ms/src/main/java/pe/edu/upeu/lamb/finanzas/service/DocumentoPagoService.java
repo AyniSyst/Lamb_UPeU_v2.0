@@ -14,9 +14,11 @@ import pe.edu.upeu.lamb.finanzas.repository.PagoRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class DocumentoPagoService {
 
@@ -50,6 +52,29 @@ public class DocumentoPagoService {
         DocumentoPago guardado = documentoPagoRepository.save(entity);
         log.info("Documento de pago creado con id: {}", guardado.getId());
         return documentoPagoMapper.toResponse(guardado);
+    }
+
+    public DocumentoPagoResponse actualizar(Long id, DocumentoPagoRequest request) {
+        DocumentoPago existente = buscarOFallar(id);
+        Pago pago = pagoRepository.findById(request.getIdPago())
+                .orElseThrow(() -> new ResourceNotFoundException("Pago no encontrado con id: " + request.getIdPago()));
+
+        DocumentoPago entity = DocumentoPago.builder()
+                .pago(pago)
+                .tipo(request.getTipo())
+                .serie(request.getSerie())
+                .correlativo(request.getCorrelativo())
+                .monto(request.getMonto())
+                .fechaEmision(request.getFechaEmision())
+                .build();
+
+        DocumentoPago guardado = documentoPagoRepository.save(Actualizacion.copiar(entity, existente));
+        log.info("Documento de pago creado con id: {}", guardado.getId());
+        return documentoPagoMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        documentoPagoRepository.delete(buscarOFallar(id));
     }
 
     private DocumentoPago buscarOFallar(Long id) {

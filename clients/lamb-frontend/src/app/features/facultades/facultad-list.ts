@@ -1,3 +1,4 @@
+import { mensajeError } from '../../core/http/mensaje-error';
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth/auth-service';
@@ -25,7 +26,7 @@ export class FacultadList {
     this.error.set(null);
     this.service.listar().subscribe({
       next: (data) => this.facultades.set(data),
-      error: () => this.error.set('No se pudieron cargar las facultades.'),
+      error: (e) => this.error.set(mensajeError(e, 'No se pudieron cargar las facultades.')),
     });
   }
 
@@ -33,7 +34,7 @@ export class FacultadList {
     this.errorAccion.set(null);
     this.service.eliminar(facultad.id).subscribe({
       next: () => this.cargar(),
-      error: () => this.errorAccion.set('No se pudo eliminar la facultad.'),
+      error: (e) => this.errorAccion.set(mensajeError(e, 'No se pudo eliminar la facultad.')),
     });
   }
 }

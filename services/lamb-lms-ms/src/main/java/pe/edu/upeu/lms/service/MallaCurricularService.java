@@ -10,8 +10,10 @@ import pe.edu.upeu.lms.mapper.MallaCurricularMapper;
 import pe.edu.upeu.lms.repository.MallaCurricularRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MallaCurricularService {
 

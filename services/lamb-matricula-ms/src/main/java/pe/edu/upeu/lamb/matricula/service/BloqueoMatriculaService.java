@@ -12,9 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class BloqueoMatriculaService {
 
@@ -48,6 +50,17 @@ public class BloqueoMatriculaService {
             return bloqueoMatriculaMapper.toResponse(bloqueoMatriculaRepository.save(bloqueo));
         }
         throw new BusinessRuleException("No se puede levantar el bloqueo " + id + ": estado invalido");
+    }
+
+    public BloqueoMatriculaResponse actualizar(Long id, BloqueoMatriculaRequest request) {
+        BloqueoMatricula existente = buscarOFallar(id);
+        BloqueoMatricula entity = bloqueoMatriculaMapper.toEntity(request);
+        entity.setActivo(Boolean.TRUE);
+        return bloqueoMatriculaMapper.toResponse(bloqueoMatriculaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        bloqueoMatriculaRepository.delete(buscarOFallar(id));
     }
 
     private BloqueoMatricula buscarOFallar(Long id) {

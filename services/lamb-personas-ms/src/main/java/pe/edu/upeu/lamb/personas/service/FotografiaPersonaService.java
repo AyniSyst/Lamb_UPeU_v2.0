@@ -37,6 +37,17 @@ public class FotografiaPersonaService {
         return fotografiaPersonaMapper.toResponse(fotografiaPersonaRepository.save(entity));
     }
 
+    public FotografiaPersonaResponse actualizar(Long id, FotografiaPersonaRequest request) {
+        FotografiaPersona existente = buscarOFallar(id);
+        FotografiaPersona entity = fotografiaPersonaMapper.toEntity(request);
+        entity.setFechaCarga(Instant.now());
+        return fotografiaPersonaMapper.toResponse(fotografiaPersonaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        fotografiaPersonaRepository.delete(buscarOFallar(id));
+    }
+
     private FotografiaPersona buscarOFallar(Long id) {
         return fotografiaPersonaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Fotografia de persona no encontrada: " + id));

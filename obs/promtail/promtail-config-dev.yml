@@ -9,6 +9,20 @@ clients:
 
 scrape_configs:
   - job_name: lamb-personas-ms
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: America/Lima
     static_configs:
       - targets: [localhost]
         labels:
@@ -16,6 +30,20 @@ scrape_configs:
           __path__: /var/log/lamb/lamb-personas-ms/logs/*.log
 
   - job_name: lamb-institucional-ms
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: America/Lima
     static_configs:
       - targets: [localhost]
         labels:
@@ -23,6 +51,20 @@ scrape_configs:
           __path__: /var/log/lamb/lamb-institucional-ms/logs/*.log
 
   - job_name: lamb-planificacion-ms
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: America/Lima
     static_configs:
       - targets: [localhost]
         labels:
@@ -30,6 +72,20 @@ scrape_configs:
           __path__: /var/log/lamb/lamb-planificacion-ms/logs/*.log
 
   - job_name: lamb-admision-ms
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: America/Lima
     static_configs:
       - targets: [localhost]
         labels:
@@ -37,6 +93,20 @@ scrape_configs:
           __path__: /var/log/lamb/lamb-admision-ms/logs/*.log
 
   - job_name: lamb-matricula-ms
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: America/Lima
     static_configs:
       - targets: [localhost]
         labels:
@@ -44,6 +114,20 @@ scrape_configs:
           __path__: /var/log/lamb/lamb-matricula-ms/logs/*.log
 
   - job_name: lamb-evaluacion-ms
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: America/Lima
     static_configs:
       - targets: [localhost]
         labels:
@@ -51,6 +135,20 @@ scrape_configs:
           __path__: /var/log/lamb/lamb-evaluacion-ms/logs/*.log
 
   - job_name: lamb-finanzas-ms
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: America/Lima
     static_configs:
       - targets: [localhost]
         labels:
@@ -58,6 +156,20 @@ scrape_configs:
           __path__: /var/log/lamb/lamb-finanzas-ms/logs/*.log
 
   - job_name: lamb-curriculo-ms
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: America/Lima
     static_configs:
       - targets: [localhost]
         labels:
@@ -65,13 +177,83 @@ scrape_configs:
           __path__: /var/log/lamb/lamb-curriculo-ms/logs/*.log
 
   - job_name: lamb-trayectoria-ms
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: America/Lima
     static_configs:
       - targets: [localhost]
         labels:
           application: lamb-trayectoria-ms
           __path__: /var/log/lamb/lamb-trayectoria-ms/logs/*.log
 
+  - job_name: lms-ms
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: America/Lima
+    static_configs:
+      - targets: [localhost]
+        labels:
+          application: lms-ms
+          __path__: /var/log/lamb/lamb-lms-ms/logs/*.log
+
+  - job_name: ingresos-pagos-ms
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: America/Lima
+    static_configs:
+      - targets: [localhost]
+        labels:
+          application: ingresos-pagos-ms
+          __path__: /var/log/lamb/lamb-ingresos-pagos-ms/logs/*.log
+
   - job_name: lamb-gateway
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: America/Lima
     static_configs:
       - targets: [localhost]
         labels:
@@ -79,6 +261,20 @@ scrape_configs:
           __path__: /var/log/lamb-gateway/*.log
 
   - job_name: lamb-keycloak
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}[.,]\d{3})'
+      - replace:
+          source: ts
+          expression: '(,)'
+          replace: '.'
+      - timestamp:
+          source: ts
+          format: '2006-01-02 15:04:05.000'
+          location: UTC
     static_configs:
       - targets: [localhost]
         labels:

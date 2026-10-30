@@ -53,6 +53,17 @@ public class CalendarioController {
         return calendarioAcademicoService.crear(request);
     }
 
+    @PutMapping("/calendarios/{id}")
+    public CalendarioAcademicoResponse actualizarCalendario(@PathVariable Long id, @Valid @RequestBody CalendarioAcademicoRequest request) {
+        return calendarioAcademicoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/calendarios/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCalendario(@PathVariable Long id) {
+        calendarioAcademicoService.eliminar(id);
+    }
+
     // --- Tipo de evento (item 35) ---
 
     @GetMapping("/tipos-evento")
@@ -72,6 +83,17 @@ public class CalendarioController {
     @Operation(summary = "Crear un tipo de evento")
     public TipoEventoResponse crearTipoEvento(@Valid @RequestBody TipoEventoRequest request) {
         return tipoEventoService.crear(request);
+    }
+
+    @PutMapping("/tipos-evento/{id}")
+    public TipoEventoResponse actualizarTipoEvento(@PathVariable Long id, @Valid @RequestBody TipoEventoRequest request) {
+        return tipoEventoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/tipos-evento/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTipoEvento(@PathVariable Long id) {
+        tipoEventoService.eliminar(id);
     }
 
     // --- Evento de calendario (item 36) ---
@@ -95,6 +117,17 @@ public class CalendarioController {
         return eventoCalendarioService.crear(request);
     }
 
+    @PutMapping("/eventos/{id}")
+    public EventoCalendarioResponse actualizarEvento(@PathVariable Long id, @Valid @RequestBody EventoCalendarioRequest request) {
+        return eventoCalendarioService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/eventos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarEvento(@PathVariable Long id) {
+        eventoCalendarioService.eliminar(id);
+    }
+
     // --- Feriado no laborable (item 37) ---
 
     @GetMapping("/feriados")
@@ -114,6 +147,17 @@ public class CalendarioController {
     @Operation(summary = "Crear un feriado no laborable")
     public FeriadoNoLaborableResponse crearFeriado(@Valid @RequestBody FeriadoNoLaborableRequest request) {
         return feriadoNoLaborableService.crear(request);
+    }
+
+    @PutMapping("/feriados/{id}")
+    public FeriadoNoLaborableResponse actualizarFeriado(@PathVariable Long id, @Valid @RequestBody FeriadoNoLaborableRequest request) {
+        return feriadoNoLaborableService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/feriados/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarFeriado(@PathVariable Long id) {
+        feriadoNoLaborableService.eliminar(id);
     }
 
     // --- Calendario por facultad/escuela (item 38) ---
@@ -137,6 +181,17 @@ public class CalendarioController {
         return calendarioFacultadEscuelaService.crear(request);
     }
 
+    @PutMapping("/calendario-facultad-escuela/{id}")
+    public CalendarioFacultadEscuelaResponse actualizarCalendarioFacultadEscuela(@PathVariable Long id, @Valid @RequestBody CalendarioFacultadEscuelaRequest request) {
+        return calendarioFacultadEscuelaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/calendario-facultad-escuela/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCalendarioFacultadEscuela(@PathVariable Long id) {
+        calendarioFacultadEscuelaService.eliminar(id);
+    }
+
     // --- Reprogramacion de evento (item 39) ---
 
     @GetMapping("/reprogramaciones-evento")
@@ -156,6 +211,17 @@ public class CalendarioController {
     @Operation(summary = "Crear una reprogramacion de evento")
     public ReprogramacionEventoResponse crearReprogramacionEvento(@Valid @RequestBody ReprogramacionEventoRequest request) {
         return reprogramacionEventoService.crear(request);
+    }
+
+    @PutMapping("/reprogramaciones-evento/{id}")
+    public ReprogramacionEventoResponse actualizarReprogramacionEvento(@PathVariable Long id, @Valid @RequestBody ReprogramacionEventoRequest request) {
+        return reprogramacionEventoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/reprogramaciones-evento/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarReprogramacionEvento(@PathVariable Long id) {
+        reprogramacionEventoService.eliminar(id);
     }
 
     // --- Publicacion de calendario (item 40, opcional) ---
@@ -179,6 +245,17 @@ public class CalendarioController {
         return publicacionCalendarioService.crear(request);
     }
 
+    @PutMapping("/publicaciones/{id}")
+    public PublicacionCalendarioResponse actualizarPublicacion(@PathVariable Long id, @Valid @RequestBody PublicacionCalendarioRequest request) {
+        return publicacionCalendarioService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/publicaciones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarPublicacion(@PathVariable Long id) {
+        publicacionCalendarioService.eliminar(id);
+    }
+
     // --- Recordatorio de calendario (item 41, opcional) ---
 
     @GetMapping("/recordatorios")
@@ -198,5 +275,16 @@ public class CalendarioController {
     @Operation(summary = "Crear un recordatorio de calendario")
     public RecordatorioCalendarioResponse crearRecordatorio(@Valid @RequestBody RecordatorioCalendarioRequest request) {
         return recordatorioCalendarioService.crear(request);
+    }
+
+    @PutMapping("/recordatorios/{id}")
+    public RecordatorioCalendarioResponse actualizarRecordatorio(@PathVariable Long id, @Valid @RequestBody RecordatorioCalendarioRequest request) {
+        return recordatorioCalendarioService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/recordatorios/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarRecordatorio(@PathVariable Long id) {
+        recordatorioCalendarioService.eliminar(id);
     }
 }

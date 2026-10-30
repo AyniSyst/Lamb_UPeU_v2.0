@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.FeriadoNoLaborableMapper;
 import pe.edu.upeu.lamb.institucional.repository.FeriadoNoLaborableRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class FeriadoNoLaborableService {
 
@@ -31,6 +33,16 @@ public class FeriadoNoLaborableService {
     public FeriadoNoLaborableResponse crear(FeriadoNoLaborableRequest request) {
         FeriadoNoLaborable entity = feriadoNoLaborableMapper.toEntity(request);
         return feriadoNoLaborableMapper.toResponse(feriadoNoLaborableRepository.save(entity));
+    }
+
+    public FeriadoNoLaborableResponse actualizar(Long id, FeriadoNoLaborableRequest request) {
+        FeriadoNoLaborable existente = buscarOFallar(id);
+        FeriadoNoLaborable entity = feriadoNoLaborableMapper.toEntity(request);
+        return feriadoNoLaborableMapper.toResponse(feriadoNoLaborableRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        feriadoNoLaborableRepository.delete(buscarOFallar(id));
     }
 
     private FeriadoNoLaborable buscarOFallar(Long id) {

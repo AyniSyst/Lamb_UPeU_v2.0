@@ -37,6 +37,17 @@ public class ObservacionDocumentoService {
         return observacionDocumentoMapper.toResponse(observacionDocumentoRepository.save(entity));
     }
 
+    public ObservacionDocumentoResponse actualizar(Long id, ObservacionDocumentoRequest request) {
+        ObservacionDocumento existente = buscarOFallar(id);
+        ObservacionDocumento entity = observacionDocumentoMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return observacionDocumentoMapper.toResponse(observacionDocumentoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        observacionDocumentoRepository.delete(buscarOFallar(id));
+    }
+
     private ObservacionDocumento buscarOFallar(Long id) {
         return observacionDocumentoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Observacion de documento no encontrada: " + id));

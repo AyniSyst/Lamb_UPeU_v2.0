@@ -21,6 +21,15 @@ export class MatriculaService {
     return this.http.post<MatriculaResponse>(this.baseUrl, request);
   }
 
+  // Solo mientras esta REGISTRADA; confirmada ya genero el cobro y solo se anula
+  actualizar(id: number, request: MatriculaRequest): Observable<MatriculaResponse> {
+    return this.http.put<MatriculaResponse>(`${this.baseUrl}/${id}`, request);
+  }
+
+  eliminar(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
   confirmar(id: number): Observable<MatriculaResponse> {
     return this.http.post<MatriculaResponse>(`${this.baseUrl}/${id}/confirmar`, {});
   }

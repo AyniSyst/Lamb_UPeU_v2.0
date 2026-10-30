@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.ModalidadEstudioMapper;
 import pe.edu.upeu.lamb.institucional.repository.ModalidadEstudioRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ModalidadEstudioService {
 
@@ -31,6 +33,16 @@ public class ModalidadEstudioService {
     public ModalidadEstudioResponse crear(ModalidadEstudioRequest request) {
         ModalidadEstudio entity = modalidadEstudioMapper.toEntity(request);
         return modalidadEstudioMapper.toResponse(modalidadEstudioRepository.save(entity));
+    }
+
+    public ModalidadEstudioResponse actualizar(Long id, ModalidadEstudioRequest request) {
+        ModalidadEstudio existente = buscarOFallar(id);
+        ModalidadEstudio entity = modalidadEstudioMapper.toEntity(request);
+        return modalidadEstudioMapper.toResponse(modalidadEstudioRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        modalidadEstudioRepository.delete(buscarOFallar(id));
     }
 
     private ModalidadEstudio buscarOFallar(Long id) {

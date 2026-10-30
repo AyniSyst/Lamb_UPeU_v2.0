@@ -37,6 +37,17 @@ public class ConsentimientoDatosService {
         return consentimientoDatosMapper.toResponse(consentimientoDatosRepository.save(entity));
     }
 
+    public ConsentimientoDatosResponse actualizar(Long id, ConsentimientoDatosRequest request) {
+        ConsentimientoDatos existente = buscarOFallar(id);
+        ConsentimientoDatos entity = consentimientoDatosMapper.toEntity(request);
+        entity.setFechaConsentimiento(Instant.now());
+        return consentimientoDatosMapper.toResponse(consentimientoDatosRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        consentimientoDatosRepository.delete(buscarOFallar(id));
+    }
+
     private ConsentimientoDatos buscarOFallar(Long id) {
         return consentimientoDatosRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Consentimiento de datos no encontrado: " + id));

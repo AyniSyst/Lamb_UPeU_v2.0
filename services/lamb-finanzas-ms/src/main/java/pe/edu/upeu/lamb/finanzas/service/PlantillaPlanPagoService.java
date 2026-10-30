@@ -11,6 +11,7 @@ import pe.edu.upeu.lamb.finanzas.mapper.PlantillaPlanPagoMapper;
 import pe.edu.upeu.lamb.finanzas.repository.PlantillaPlanPagoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Lote F2b - Calendario y planes (item 14 del documento): Plantilla de plan de pagos
@@ -18,6 +19,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class PlantillaPlanPagoService {
 
@@ -38,6 +40,17 @@ public class PlantillaPlanPagoService {
         PlantillaPlanPago entity = plantillaPlanPagoMapper.toEntity(request);
         PlantillaPlanPago guardado = plantillaPlanPagoRepository.save(entity);
         return plantillaPlanPagoMapper.toResponse(guardado);
+    }
+
+    public PlantillaPlanPagoResponse actualizar(Long id, PlantillaPlanPagoRequest request) {
+        PlantillaPlanPago existente = buscarOFallar(id);
+        PlantillaPlanPago entity = plantillaPlanPagoMapper.toEntity(request);
+        PlantillaPlanPago guardado = plantillaPlanPagoRepository.save(Actualizacion.copiar(entity, existente));
+        return plantillaPlanPagoMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        plantillaPlanPagoRepository.delete(buscarOFallar(id));
     }
 
     private PlantillaPlanPago buscarOFallar(Long id) {

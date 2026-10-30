@@ -11,9 +11,11 @@ import pe.edu.upeu.lamb.matricula.mapper.CondicionMatriculaMapper;
 import pe.edu.upeu.lamb.matricula.repository.CondicionMatriculaRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CondicionMatriculaService {
 
@@ -31,6 +33,16 @@ public class CondicionMatriculaService {
     public CondicionMatriculaResponse crear(CondicionMatriculaRequest request) {
         CondicionMatricula entity = mapper.toEntity(request);
         return mapper.toResponse(repository.save(entity));
+    }
+
+    public CondicionMatriculaResponse actualizar(Long id, CondicionMatriculaRequest request) {
+        CondicionMatricula existente = buscarOFallar(id);
+        CondicionMatricula entity = mapper.toEntity(request);
+        return mapper.toResponse(repository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        repository.delete(buscarOFallar(id));
     }
 
     CondicionMatricula buscarOFallar(Long id) {

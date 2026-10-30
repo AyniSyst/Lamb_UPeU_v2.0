@@ -37,6 +37,17 @@ public class HistorialDocumentoIdentidadService {
         return historialDocumentoIdentidadMapper.toResponse(historialDocumentoIdentidadRepository.save(entity));
     }
 
+    public HistorialDocumentoIdentidadResponse actualizar(Long id, HistorialDocumentoIdentidadRequest request) {
+        HistorialDocumentoIdentidad existente = buscarOFallar(id);
+        HistorialDocumentoIdentidad entity = historialDocumentoIdentidadMapper.toEntity(request);
+        entity.setFechaCambio(Instant.now());
+        return historialDocumentoIdentidadMapper.toResponse(historialDocumentoIdentidadRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        historialDocumentoIdentidadRepository.delete(buscarOFallar(id));
+    }
+
     private HistorialDocumentoIdentidad buscarOFallar(Long id) {
         return historialDocumentoIdentidadRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Historial de documento de identidad no encontrado: " + id));

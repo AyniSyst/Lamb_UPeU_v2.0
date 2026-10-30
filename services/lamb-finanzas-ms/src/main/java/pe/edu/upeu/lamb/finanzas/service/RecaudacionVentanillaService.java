@@ -13,12 +13,14 @@ import pe.edu.upeu.lamb.finanzas.repository.PagoRepository;
 import pe.edu.upeu.lamb.finanzas.repository.RecaudacionVentanillaRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Item 29 del documento: "Recaudacion en ventanilla".
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RecaudacionVentanillaService {
 
@@ -50,6 +52,27 @@ public class RecaudacionVentanillaService {
 
         RecaudacionVentanilla guardado = recaudacionVentanillaRepository.save(entity);
         return recaudacionVentanillaMapper.toResponse(guardado);
+    }
+
+    public RecaudacionVentanillaResponse actualizar(Long id, RecaudacionVentanillaRequest request) {
+        RecaudacionVentanilla existente = buscarOFallar(id);
+        Pago pago = pagoRepository.findById(request.getIdPago())
+                .orElseThrow(() -> new ResourceNotFoundException("Pago no encontrado: " + request.getIdPago()));
+
+        RecaudacionVentanilla entity = RecaudacionVentanilla.builder()
+                .pago(pago)
+                .idCajero(request.getIdCajero())
+                .numeroVentanilla(request.getNumeroVentanilla())
+                .montoRecaudado(request.getMontoRecaudado())
+                .fecha(request.getFecha())
+                .build();
+
+        RecaudacionVentanilla guardado = recaudacionVentanillaRepository.save(Actualizacion.copiar(entity, existente));
+        return recaudacionVentanillaMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        recaudacionVentanillaRepository.delete(buscarOFallar(id));
     }
 
     private RecaudacionVentanilla buscarOFallar(Long id) {

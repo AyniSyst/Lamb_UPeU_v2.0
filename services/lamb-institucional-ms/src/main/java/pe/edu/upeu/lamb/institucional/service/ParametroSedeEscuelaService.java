@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.ParametroSedeEscuelaMapper;
 import pe.edu.upeu.lamb.institucional.repository.ParametroSedeEscuelaRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ParametroSedeEscuelaService {
 
@@ -31,6 +33,16 @@ public class ParametroSedeEscuelaService {
     public ParametroSedeEscuelaResponse crear(ParametroSedeEscuelaRequest request) {
         ParametroSedeEscuela entity = parametroSedeEscuelaMapper.toEntity(request);
         return parametroSedeEscuelaMapper.toResponse(parametroSedeEscuelaRepository.save(entity));
+    }
+
+    public ParametroSedeEscuelaResponse actualizar(Long id, ParametroSedeEscuelaRequest request) {
+        ParametroSedeEscuela existente = buscarOFallar(id);
+        ParametroSedeEscuela entity = parametroSedeEscuelaMapper.toEntity(request);
+        return parametroSedeEscuelaMapper.toResponse(parametroSedeEscuelaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        parametroSedeEscuelaRepository.delete(buscarOFallar(id));
     }
 
     private ParametroSedeEscuela buscarOFallar(Long id) {

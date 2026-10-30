@@ -8,6 +8,14 @@
   <p class="error">{{ errorAccion() }}</p>
 }
 
+<div class="barra">
+  @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+    <a class="boton primario" routerLink="/postulaciones/nueva">Nueva postulacion</a>
+  }
+  <button type="button" (click)="cargar()">Actualizar</button>
+</div>
+<p class="ayuda">Evaluar con puntaje, luego Admitir (minimo 11): al admitir se abre la trayectoria del estudiante.</p>
+
 <table>
   <thead>
     <tr>

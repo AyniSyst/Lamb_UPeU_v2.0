@@ -37,6 +37,17 @@ public class PreferenciaComunicacionService {
         return preferenciaComunicacionMapper.toResponse(preferenciaComunicacionRepository.save(entity));
     }
 
+    public PreferenciaComunicacionResponse actualizar(Long id, PreferenciaComunicacionRequest request) {
+        PreferenciaComunicacion existente = buscarOFallar(id);
+        PreferenciaComunicacion entity = preferenciaComunicacionMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return preferenciaComunicacionMapper.toResponse(preferenciaComunicacionRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        preferenciaComunicacionRepository.delete(buscarOFallar(id));
+    }
+
     private PreferenciaComunicacion buscarOFallar(Long id) {
         return preferenciaComunicacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Preferencia de comunicacion no encontrada: " + id));

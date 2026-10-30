@@ -1,29 +1,32 @@
-<h2>Nuevo plan de estudio</h2>
+<h2>{{ idPlan ? 'Editar plan de estudio' : 'Nuevo plan de estudio' }}</h2>
 
 @if (error()) {
   <p class="error">{{ error() }}</p>
 }
 
-<form [formGroup]="form" (ngSubmit)="guardar()">
+<form class="formulario" [formGroup]="form" (ngSubmit)="guardar()">
   <div>
-    <label for="idPrograma">ID Programa</label>
-    <input id="idPrograma" type="number" formControlName="idPrograma" />
+    <label for="idPrograma">Programa</label>
+    <select id="idPrograma" formControlName="idPrograma">
+      <option [ngValue]="null" disabled>Selecciona un programa</option>
+      @for (p of programas(); track p.id) {
+        <option [ngValue]="p.id">{{ p.nombre }} ({{ p.gradoAcademico }})</option>
+      }
+    </select>
   </div>
 
   <div>
     <label for="version">Version</label>
-    <input id="version" type="text" formControlName="version" placeholder="2026-I" />
+    <input id="version" type="text" formControlName="version" placeholder="2026" />
   </div>
 
   <div>
     <label for="nombre">Nombre</label>
-    <input id="nombre" type="text" formControlName="nombre" />
+    <input id="nombre" type="text" formControlName="nombre" placeholder="Plan de estudios 2026" />
   </div>
 
-  <div>
-    <label for="idModalidad">ID Modalidad</label>
-    <input id="idModalidad" type="number" formControlName="idModalidad" />
+  <div class="acciones">
+    <button type="submit" [disabled]="enviando()">{{ enviando() ? 'Guardando...' : 'Guardar y cargar cursos' }}</button>
+    <a routerLink="/planes-estudio">Cancelar</a>
   </div>
-
-  <button type="submit" [disabled]="enviando()">Registrar</button>
 </form>

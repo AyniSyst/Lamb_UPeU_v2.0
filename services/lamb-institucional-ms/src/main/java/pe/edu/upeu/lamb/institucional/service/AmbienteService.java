@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.AmbienteMapper;
 import pe.edu.upeu.lamb.institucional.repository.AmbienteRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AmbienteService {
 
@@ -31,6 +33,16 @@ public class AmbienteService {
     public AmbienteResponse crear(AmbienteRequest request) {
         Ambiente entity = ambienteMapper.toEntity(request);
         return ambienteMapper.toResponse(ambienteRepository.save(entity));
+    }
+
+    public AmbienteResponse actualizar(Long id, AmbienteRequest request) {
+        Ambiente existente = buscarOFallar(id);
+        Ambiente entity = ambienteMapper.toEntity(request);
+        return ambienteMapper.toResponse(ambienteRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        ambienteRepository.delete(buscarOFallar(id));
     }
 
     private Ambiente buscarOFallar(Long id) {

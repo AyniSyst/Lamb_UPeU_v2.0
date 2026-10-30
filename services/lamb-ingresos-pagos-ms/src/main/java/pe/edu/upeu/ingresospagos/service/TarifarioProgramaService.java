@@ -12,8 +12,10 @@ import pe.edu.upeu.ingresospagos.repository.ConceptoPagoRepository;
 import pe.edu.upeu.ingresospagos.repository.TarifarioProgramaRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TarifarioProgramaService {
 

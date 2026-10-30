@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.GradoTituloMapper;
 import pe.edu.upeu.lamb.institucional.repository.GradoTituloRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class GradoTituloService {
 
@@ -31,6 +33,16 @@ public class GradoTituloService {
     public GradoTituloResponse crear(GradoTituloRequest request) {
         GradoTitulo entity = gradoTituloMapper.toEntity(request);
         return gradoTituloMapper.toResponse(gradoTituloRepository.save(entity));
+    }
+
+    public GradoTituloResponse actualizar(Long id, GradoTituloRequest request) {
+        GradoTitulo existente = buscarOFallar(id);
+        GradoTitulo entity = gradoTituloMapper.toEntity(request);
+        return gradoTituloMapper.toResponse(gradoTituloRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        gradoTituloRepository.delete(buscarOFallar(id));
     }
 
     private GradoTitulo buscarOFallar(Long id) {

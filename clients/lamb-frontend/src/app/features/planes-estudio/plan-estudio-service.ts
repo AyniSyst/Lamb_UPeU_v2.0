@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { PlanEstudioRequest, PlanEstudioResponse } from './plan-estudio.model';
+import { PlanCursoRequest, PlanEstudioRequest, PlanEstudioResponse } from './plan-estudio.model';
 
 @Injectable({ providedIn: 'root' })
 export class PlanEstudioService {
@@ -22,6 +22,19 @@ export class PlanEstudioService {
     return this.http.post<PlanEstudioResponse>(this.baseUrl, request);
   }
 
+  actualizar(id: number, request: PlanEstudioRequest): Observable<PlanEstudioResponse> {
+    return this.http.put<PlanEstudioResponse>(`${this.baseUrl}/${id}`, request);
+  }
+
+  agregarCurso(id: number, request: PlanCursoRequest): Observable<unknown> {
+    return this.http.post(`${this.baseUrl}/${id}/cursos`, request);
+  }
+
+  quitarCurso(id: number, idPlanCurso: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}/cursos/${idPlanCurso}`);
+  }
+
+  // Publicar envia plan.publicado: planificacion copia los cursos para poder abrir grupos
   publicar(id: number): Observable<PlanEstudioResponse> {
     return this.http.post<PlanEstudioResponse>(`${this.baseUrl}/${id}/publicar`, {});
   }

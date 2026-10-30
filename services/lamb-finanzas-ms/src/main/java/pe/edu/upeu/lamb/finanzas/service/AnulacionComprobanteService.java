@@ -14,9 +14,11 @@ import pe.edu.upeu.lamb.finanzas.repository.DocumentoPagoRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AnulacionComprobanteService {
 
@@ -47,6 +49,26 @@ public class AnulacionComprobanteService {
         AnulacionComprobante guardado = anulacionComprobanteRepository.save(entity);
         log.info("Anulacion de comprobante creada con id: {}", guardado.getId());
         return anulacionComprobanteMapper.toResponse(guardado);
+    }
+
+    public AnulacionComprobanteResponse actualizar(Long id, AnulacionComprobanteRequest request) {
+        AnulacionComprobante existente = buscarOFallar(id);
+        DocumentoPago documentoPago = documentoPagoRepository.findById(request.getIdDocumentoPago())
+                .orElseThrow(() -> new ResourceNotFoundException("Documento de pago no encontrado con id: " + request.getIdDocumentoPago()));
+
+        AnulacionComprobante entity = AnulacionComprobante.builder()
+                .documentoPago(documentoPago)
+                .motivo(request.getMotivo())
+                .fecha(request.getFecha())
+                .build();
+
+        AnulacionComprobante guardado = anulacionComprobanteRepository.save(Actualizacion.copiar(entity, existente));
+        log.info("Anulacion de comprobante creada con id: {}", guardado.getId());
+        return anulacionComprobanteMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        anulacionComprobanteRepository.delete(buscarOFallar(id));
     }
 
     private AnulacionComprobante buscarOFallar(Long id) {

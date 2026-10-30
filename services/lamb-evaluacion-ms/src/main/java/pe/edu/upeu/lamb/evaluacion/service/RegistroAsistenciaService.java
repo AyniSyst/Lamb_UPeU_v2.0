@@ -3,7 +3,6 @@ package pe.edu.upeu.lamb.evaluacion.service;
 import pe.edu.upeu.lamb.evaluacion.dto.RegistroAsistenciaRequest;
 import pe.edu.upeu.lamb.evaluacion.dto.RegistroAsistenciaResponse;
 import pe.edu.upeu.lamb.evaluacion.entity.RegistroAsistencia;
-import pe.edu.upeu.lamb.evaluacion.exception.BusinessRuleException;
 import pe.edu.upeu.lamb.evaluacion.exception.ResourceNotFoundException;
 import pe.edu.upeu.lamb.evaluacion.mapper.RegistroAsistenciaMapper;
 import pe.edu.upeu.lamb.evaluacion.repository.RegistroAsistenciaRepository;
@@ -35,7 +34,6 @@ public class RegistroAsistenciaService {
 
     @Transactional
     public RegistroAsistenciaResponse crear(RegistroAsistenciaRequest request) {
-        validar(request, null);
         RegistroAsistencia registroAsistencia = registroAsistenciaMapper.toEntity(request);
         return registroAsistenciaMapper.toResponse(registroAsistenciaRepository.save(registroAsistencia));
     }
@@ -43,7 +41,6 @@ public class RegistroAsistenciaService {
     @Transactional
     public RegistroAsistenciaResponse actualizar(Long id, RegistroAsistenciaRequest request) {
         RegistroAsistencia registroAsistencia = buscarOFallar(id);
-        validar(request, id);
         registroAsistencia.setIdGrupo(request.getIdGrupo());
         registroAsistencia.setIdPersona(request.getIdPersona());
         registroAsistencia.setIdSesionClase(request.getIdSesionClase());
@@ -60,14 +57,5 @@ public class RegistroAsistenciaService {
     RegistroAsistencia buscarOFallar(Long id) {
         return registroAsistenciaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Registro de asistencia no encontrado: " + id));
-    }
-
-    private void validar(RegistroAsistenciaRequest request, Long id) {
-        boolean duplicado = id == null
-                ? registroAsistenciaRepository.existsByIdGrupoAndIdPersonaAndFecha(request.getIdGrupo(), request.getIdPersona(), request.getFecha())
-                : registroAsistenciaRepository.existsByIdGrupoAndIdPersonaAndFechaAndIdNot(request.getIdGrupo(), request.getIdPersona(), request.getFecha(), id);
-        if (duplicado) {
-            throw new BusinessRuleException("Ya existe un registro de registro de asistencia para esa combinacion de: grupo, persona, fecha");
-        }
     }
 }

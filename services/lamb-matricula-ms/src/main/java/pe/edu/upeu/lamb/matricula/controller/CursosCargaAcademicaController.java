@@ -28,6 +28,7 @@ import pe.edu.upeu.lamb.matricula.service.LiberacionExcepcionalPrerrequisitoServ
 import pe.edu.upeu.lamb.matricula.service.SobrecargaCreditosAutorizadaService;
 
 import java.util.List;
+import jakarta.validation.Valid;
 
 /**
  * Dominio "Cursos y carga academica" (CRUD unificado). Subrecursos: intento
@@ -70,6 +71,17 @@ public class CursosCargaAcademicaController {
         return intentoCursoService.crear(request);
     }
 
+    @PutMapping("/intentos-curso/{id}")
+    public IntentoCursoResponse actualizarIntentoCurso(@PathVariable Long id, @Valid @RequestBody IntentoCursoRequest request) {
+        return intentoCursoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/intentos-curso/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarIntentoCurso(@PathVariable Long id) {
+        intentoCursoService.eliminar(id);
+    }
+
     // --- Carga academica por periodo (item 60) ---
 
     @GetMapping("/cargas-periodo")
@@ -89,6 +101,17 @@ public class CursosCargaAcademicaController {
     @Operation(summary = "Crear una carga academica por periodo")
     public CargaAcademicaPeriodoResponse crearCargaPeriodo(@RequestBody CargaAcademicaPeriodoRequest request) {
         return cargaAcademicaPeriodoService.crear(request);
+    }
+
+    @PutMapping("/cargas-periodo/{id}")
+    public CargaAcademicaPeriodoResponse actualizarCargaPeriodo(@PathVariable Long id, @Valid @RequestBody CargaAcademicaPeriodoRequest request) {
+        return cargaAcademicaPeriodoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/cargas-periodo/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCargaPeriodo(@PathVariable Long id) {
+        cargaAcademicaPeriodoService.eliminar(id);
     }
 
     // --- Eleccion de curso electivo (item 61) ---
@@ -112,6 +135,17 @@ public class CursosCargaAcademicaController {
         return eleccionCursoElectivoService.crear(request);
     }
 
+    @PutMapping("/elecciones-electivos/{id}")
+    public EleccionCursoElectivoResponse actualizarEleccionElectivo(@PathVariable Long id, @Valid @RequestBody EleccionCursoElectivoRequest request) {
+        return eleccionCursoElectivoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/elecciones-electivos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarEleccionElectivo(@PathVariable Long id) {
+        eleccionCursoElectivoService.eliminar(id);
+    }
+
     // --- Cruce de horario autorizado (item 62) ---
 
     @GetMapping("/cruces-horario")
@@ -131,6 +165,17 @@ public class CursosCargaAcademicaController {
     @Operation(summary = "Crear un cruce de horario autorizado")
     public CruceHorarioAutorizadoResponse crearCruceHorario(@RequestBody CruceHorarioAutorizadoRequest request) {
         return cruceHorarioAutorizadoService.crear(request);
+    }
+
+    @PutMapping("/cruces-horario/{id}")
+    public CruceHorarioAutorizadoResponse actualizarCruceHorario(@PathVariable Long id, @Valid @RequestBody CruceHorarioAutorizadoRequest request) {
+        return cruceHorarioAutorizadoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/cruces-horario/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCruceHorario(@PathVariable Long id) {
+        cruceHorarioAutorizadoService.eliminar(id);
     }
 
     // --- Liberacion excepcional de prerrequisito (item 63) ---
@@ -154,6 +199,17 @@ public class CursosCargaAcademicaController {
         return liberacionExcepcionalPrerrequisitoService.crear(request);
     }
 
+    @PutMapping("/liberaciones-prerrequisito/{id}")
+    public LiberacionExcepcionalPrerrequisitoResponse actualizarLiberacionPrerrequisito(@PathVariable Long id, @Valid @RequestBody LiberacionExcepcionalPrerrequisitoRequest request) {
+        return liberacionExcepcionalPrerrequisitoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/liberaciones-prerrequisito/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarLiberacionPrerrequisito(@PathVariable Long id) {
+        liberacionExcepcionalPrerrequisitoService.eliminar(id);
+    }
+
     // --- Sobrecarga de creditos autorizada (item 64) ---
 
     @GetMapping("/sobrecargas-creditos")
@@ -175,6 +231,17 @@ public class CursosCargaAcademicaController {
         return sobrecargaCreditosAutorizadaService.crear(request);
     }
 
+    @PutMapping("/sobrecargas-creditos/{id}")
+    public SobrecargaCreditosAutorizadaResponse actualizarSobrecargaCreditos(@PathVariable Long id, @Valid @RequestBody SobrecargaCreditosAutorizadaRequest request) {
+        return sobrecargaCreditosAutorizadaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/sobrecargas-creditos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarSobrecargaCreditos(@PathVariable Long id) {
+        sobrecargaCreditosAutorizadaService.eliminar(id);
+    }
+
     // --- Carga minima autorizada (item 65) ---
 
     @GetMapping("/cargas-minimas")
@@ -194,5 +261,16 @@ public class CursosCargaAcademicaController {
     @Operation(summary = "Crear una carga minima autorizada")
     public CargaMinimaAutorizadaResponse crearCargaMinima(@RequestBody CargaMinimaAutorizadaRequest request) {
         return cargaMinimaAutorizadaService.crear(request);
+    }
+
+    @PutMapping("/cargas-minimas/{id}")
+    public CargaMinimaAutorizadaResponse actualizarCargaMinima(@PathVariable Long id, @Valid @RequestBody CargaMinimaAutorizadaRequest request) {
+        return cargaMinimaAutorizadaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/cargas-minimas/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCargaMinima(@PathVariable Long id) {
+        cargaMinimaAutorizadaService.eliminar(id);
     }
 }

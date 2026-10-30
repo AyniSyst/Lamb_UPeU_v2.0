@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.AutoridadFacultadMapper;
 import pe.edu.upeu.lamb.institucional.repository.AutoridadFacultadRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AutoridadFacultadService {
 
@@ -31,6 +33,16 @@ public class AutoridadFacultadService {
     public AutoridadFacultadResponse crear(AutoridadFacultadRequest request) {
         AutoridadFacultad entity = autoridadFacultadMapper.toEntity(request);
         return autoridadFacultadMapper.toResponse(autoridadFacultadRepository.save(entity));
+    }
+
+    public AutoridadFacultadResponse actualizar(Long id, AutoridadFacultadRequest request) {
+        AutoridadFacultad existente = buscarOFallar(id);
+        AutoridadFacultad entity = autoridadFacultadMapper.toEntity(request);
+        return autoridadFacultadMapper.toResponse(autoridadFacultadRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        autoridadFacultadRepository.delete(buscarOFallar(id));
     }
 
     private AutoridadFacultad buscarOFallar(Long id) {

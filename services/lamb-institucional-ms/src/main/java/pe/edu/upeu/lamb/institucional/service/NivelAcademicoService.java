@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.NivelAcademicoMapper;
 import pe.edu.upeu.lamb.institucional.repository.NivelAcademicoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class NivelAcademicoService {
 
@@ -31,6 +33,16 @@ public class NivelAcademicoService {
     public NivelAcademicoResponse crear(NivelAcademicoRequest request) {
         NivelAcademico entity = nivelAcademicoMapper.toEntity(request);
         return nivelAcademicoMapper.toResponse(nivelAcademicoRepository.save(entity));
+    }
+
+    public NivelAcademicoResponse actualizar(Long id, NivelAcademicoRequest request) {
+        NivelAcademico existente = buscarOFallar(id);
+        NivelAcademico entity = nivelAcademicoMapper.toEntity(request);
+        return nivelAcademicoMapper.toResponse(nivelAcademicoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        nivelAcademicoRepository.delete(buscarOFallar(id));
     }
 
     private NivelAcademico buscarOFallar(Long id) {

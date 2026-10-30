@@ -11,9 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AmpliacionPlazoMatriculaService {
 
@@ -33,6 +35,16 @@ public class AmpliacionPlazoMatriculaService {
     public AmpliacionPlazoMatriculaResponse crear(AmpliacionPlazoMatriculaRequest request) {
         AmpliacionPlazoMatricula entity = ampliacionPlazoMatriculaMapper.toEntity(request);
         return ampliacionPlazoMatriculaMapper.toResponse(ampliacionPlazoMatriculaRepository.save(entity));
+    }
+
+    public AmpliacionPlazoMatriculaResponse actualizar(Long id, AmpliacionPlazoMatriculaRequest request) {
+        AmpliacionPlazoMatricula existente = buscarOFallar(id);
+        AmpliacionPlazoMatricula entity = ampliacionPlazoMatriculaMapper.toEntity(request);
+        return ampliacionPlazoMatriculaMapper.toResponse(ampliacionPlazoMatriculaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        ampliacionPlazoMatriculaRepository.delete(buscarOFallar(id));
     }
 
     private AmpliacionPlazoMatricula buscarOFallar(Long id) {

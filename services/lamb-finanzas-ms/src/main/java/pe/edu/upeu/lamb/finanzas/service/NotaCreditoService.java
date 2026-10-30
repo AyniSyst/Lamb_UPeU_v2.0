@@ -14,12 +14,14 @@ import pe.edu.upeu.lamb.finanzas.repository.NotaCreditoRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * CRUD marcado con (*) en el documento: "Nota de credito". Opcional.
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class NotaCreditoService {
 
@@ -51,6 +53,27 @@ public class NotaCreditoService {
         NotaCredito guardado = notaCreditoRepository.save(entity);
         log.info("Nota de credito creada con id: {}", guardado.getId());
         return notaCreditoMapper.toResponse(guardado);
+    }
+
+    public NotaCreditoResponse actualizar(Long id, NotaCreditoRequest request) {
+        NotaCredito existente = buscarOFallar(id);
+        DocumentoPago documentoPago = documentoPagoRepository.findById(request.getIdDocumentoPago())
+                .orElseThrow(() -> new ResourceNotFoundException("Documento de pago no encontrado con id: " + request.getIdDocumentoPago()));
+
+        NotaCredito entity = NotaCredito.builder()
+                .documentoPago(documentoPago)
+                .motivo(request.getMotivo())
+                .monto(request.getMonto())
+                .fecha(request.getFecha())
+                .build();
+
+        NotaCredito guardado = notaCreditoRepository.save(Actualizacion.copiar(entity, existente));
+        log.info("Nota de credito creada con id: {}", guardado.getId());
+        return notaCreditoMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        notaCreditoRepository.delete(buscarOFallar(id));
     }
 
     private NotaCredito buscarOFallar(Long id) {

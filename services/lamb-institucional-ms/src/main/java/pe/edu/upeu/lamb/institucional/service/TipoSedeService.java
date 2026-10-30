@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.TipoSedeMapper;
 import pe.edu.upeu.lamb.institucional.repository.TipoSedeRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TipoSedeService {
 
@@ -31,6 +33,16 @@ public class TipoSedeService {
     public TipoSedeResponse crear(TipoSedeRequest request) {
         TipoSede entity = tipoSedeMapper.toEntity(request);
         return tipoSedeMapper.toResponse(tipoSedeRepository.save(entity));
+    }
+
+    public TipoSedeResponse actualizar(Long id, TipoSedeRequest request) {
+        TipoSede existente = buscarOFallar(id);
+        TipoSede entity = tipoSedeMapper.toEntity(request);
+        return tipoSedeMapper.toResponse(tipoSedeRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        tipoSedeRepository.delete(buscarOFallar(id));
     }
 
     private TipoSede buscarOFallar(Long id) {

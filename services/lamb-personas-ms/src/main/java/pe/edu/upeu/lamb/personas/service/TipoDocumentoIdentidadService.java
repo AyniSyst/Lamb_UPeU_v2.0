@@ -35,6 +35,16 @@ public class TipoDocumentoIdentidadService {
         return tipoDocumentoIdentidadMapper.toResponse(tipoDocumentoIdentidadRepository.save(entity));
     }
 
+    public TipoDocumentoIdentidadResponse actualizar(Long id, TipoDocumentoIdentidadRequest request) {
+        TipoDocumentoIdentidad existente = buscarOFallar(id);
+        TipoDocumentoIdentidad entity = tipoDocumentoIdentidadMapper.toEntity(request);
+        return tipoDocumentoIdentidadMapper.toResponse(tipoDocumentoIdentidadRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        tipoDocumentoIdentidadRepository.delete(buscarOFallar(id));
+    }
+
     private TipoDocumentoIdentidad buscarOFallar(Long id) {
         return tipoDocumentoIdentidadRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tipo de documento de identidad no encontrado: " + id));

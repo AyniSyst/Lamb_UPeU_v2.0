@@ -11,9 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RequisitoPorTipoMatriculaService {
 
@@ -38,6 +40,16 @@ public class RequisitoPorTipoMatriculaService {
     public RequisitoPorTipoMatriculaResponse crear(RequisitoPorTipoMatriculaRequest request) {
         RequisitoPorTipoMatricula entity = requisitoPorTipoMatriculaMapper.toEntity(request);
         return requisitoPorTipoMatriculaMapper.toResponse(requisitoPorTipoMatriculaRepository.save(entity));
+    }
+
+    public RequisitoPorTipoMatriculaResponse actualizar(Long id, RequisitoPorTipoMatriculaRequest request) {
+        RequisitoPorTipoMatricula existente = buscarOFallar(id);
+        RequisitoPorTipoMatricula entity = requisitoPorTipoMatriculaMapper.toEntity(request);
+        return requisitoPorTipoMatriculaMapper.toResponse(requisitoPorTipoMatriculaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        requisitoPorTipoMatriculaRepository.delete(buscarOFallar(id));
     }
 
     private RequisitoPorTipoMatricula buscarOFallar(Long id) {

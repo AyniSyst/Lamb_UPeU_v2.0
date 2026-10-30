@@ -11,12 +11,14 @@ import pe.edu.upeu.lamb.finanzas.mapper.TipoBecaMapper;
 import pe.edu.upeu.lamb.finanzas.repository.TipoBecaRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Lote F3 - Descuentos y becas (item 31 del documento): Tipo de Beca.
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TipoBecaService {
 
@@ -37,6 +39,17 @@ public class TipoBecaService {
         TipoBeca entity = tipoBecaMapper.toEntity(request);
         TipoBeca guardado = tipoBecaRepository.save(entity);
         return tipoBecaMapper.toResponse(guardado);
+    }
+
+    public TipoBecaResponse actualizar(Long id, TipoBecaRequest request) {
+        TipoBeca existente = buscarOFallar(id);
+        TipoBeca entity = tipoBecaMapper.toEntity(request);
+        TipoBeca guardado = tipoBecaRepository.save(Actualizacion.copiar(entity, existente));
+        return tipoBecaMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        tipoBecaRepository.delete(buscarOFallar(id));
     }
 
     private TipoBeca buscarOFallar(Long id) {

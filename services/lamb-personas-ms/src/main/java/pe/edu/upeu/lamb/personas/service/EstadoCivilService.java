@@ -35,6 +35,16 @@ public class EstadoCivilService {
         return estadoCivilMapper.toResponse(estadoCivilRepository.save(entity));
     }
 
+    public EstadoCivilResponse actualizar(Long id, EstadoCivilRequest request) {
+        EstadoCivil existente = buscarOFallar(id);
+        EstadoCivil entity = estadoCivilMapper.toEntity(request);
+        return estadoCivilMapper.toResponse(estadoCivilRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        estadoCivilRepository.delete(buscarOFallar(id));
+    }
+
     private EstadoCivil buscarOFallar(Long id) {
         return estadoCivilRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Estado civil no encontrado: " + id));

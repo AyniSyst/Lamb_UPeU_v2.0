@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.AnulacionMasivaImpagoRepository;
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AnulacionMasivaImpagoService {
 
@@ -33,6 +35,17 @@ public class AnulacionMasivaImpagoService {
         AnulacionMasivaImpago entity = mapper.toEntity(request);
         entity.setFechaEjecucion(Instant.now());
         return mapper.toResponse(repository.save(entity));
+    }
+
+    public AnulacionMasivaImpagoResponse actualizar(Long id, AnulacionMasivaImpagoRequest request) {
+        AnulacionMasivaImpago existente = buscarOFallar(id);
+        AnulacionMasivaImpago entity = mapper.toEntity(request);
+        entity.setFechaEjecucion(Instant.now());
+        return mapper.toResponse(repository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        repository.delete(buscarOFallar(id));
     }
 
     private AnulacionMasivaImpago buscarOFallar(Long id) {

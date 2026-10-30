@@ -1,3 +1,4 @@
+import { mensajeError } from '../../core/http/mensaje-error';
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth/auth-service';
@@ -26,7 +27,7 @@ export class PersonaList {
     this.error.set(null);
     this.service.listar().subscribe({
       next: (data) => this.personas.set(data),
-      error: () => this.error.set('No se pudieron cargar las personas.'),
+      error: (e) => this.error.set(mensajeError(e, 'No se pudieron cargar las personas.')),
     });
   }
 
@@ -35,10 +36,13 @@ export class PersonaList {
   }
 
   protected eliminar(persona: PersonaResponse): void {
+    if (!confirm(`Eliminar a ${persona.nombres} ${persona.apellidos}?`)) {
+      return;
+    }
     this.errorAccion.set(null);
     this.service.eliminar(persona.id).subscribe({
       next: () => this.cargar(),
-      error: () => this.errorAccion.set('No se pudo eliminar la persona.'),
+      error: (e) => this.errorAccion.set(mensajeError(e, 'No se pudo eliminar la persona.')),
     });
   }
 }

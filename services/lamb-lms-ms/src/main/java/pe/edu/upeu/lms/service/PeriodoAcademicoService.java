@@ -10,8 +10,10 @@ import pe.edu.upeu.lms.mapper.PeriodoAcademicoMapper;
 import pe.edu.upeu.lms.repository.PeriodoAcademicoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class PeriodoAcademicoService {
 

@@ -37,6 +37,17 @@ public class VinculoInstitucionService {
         return vinculoInstitucionMapper.toResponse(vinculoInstitucionRepository.save(entity));
     }
 
+    public VinculoInstitucionResponse actualizar(Long id, VinculoInstitucionRequest request) {
+        VinculoInstitucion existente = buscarOFallar(id);
+        VinculoInstitucion entity = vinculoInstitucionMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return vinculoInstitucionMapper.toResponse(vinculoInstitucionRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        vinculoInstitucionRepository.delete(buscarOFallar(id));
+    }
+
     private VinculoInstitucion buscarOFallar(Long id) {
         return vinculoInstitucionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Vinculo con institucion no encontrado: " + id));

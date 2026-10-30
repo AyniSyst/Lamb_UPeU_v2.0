@@ -37,6 +37,17 @@ public class FirmaValidacionDocumentoService {
         return firmaValidacionDocumentoMapper.toResponse(firmaValidacionDocumentoRepository.save(entity));
     }
 
+    public FirmaValidacionDocumentoResponse actualizar(Long id, FirmaValidacionDocumentoRequest request) {
+        FirmaValidacionDocumento existente = buscarOFallar(id);
+        FirmaValidacionDocumento entity = firmaValidacionDocumentoMapper.toEntity(request);
+        entity.setFechaFirma(Instant.now());
+        return firmaValidacionDocumentoMapper.toResponse(firmaValidacionDocumentoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        firmaValidacionDocumentoRepository.delete(buscarOFallar(id));
+    }
+
     private FirmaValidacionDocumento buscarOFallar(Long id) {
         return firmaValidacionDocumentoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Firma de validacion de documento no encontrada: " + id));

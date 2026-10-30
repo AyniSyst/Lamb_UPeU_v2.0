@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.RecordatorioCalendarioMapper;
 import pe.edu.upeu.lamb.institucional.repository.RecordatorioCalendarioRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RecordatorioCalendarioService {
 
@@ -31,6 +33,16 @@ public class RecordatorioCalendarioService {
     public RecordatorioCalendarioResponse crear(RecordatorioCalendarioRequest request) {
         RecordatorioCalendario entity = recordatorioCalendarioMapper.toEntity(request);
         return recordatorioCalendarioMapper.toResponse(recordatorioCalendarioRepository.save(entity));
+    }
+
+    public RecordatorioCalendarioResponse actualizar(Long id, RecordatorioCalendarioRequest request) {
+        RecordatorioCalendario existente = buscarOFallar(id);
+        RecordatorioCalendario entity = recordatorioCalendarioMapper.toEntity(request);
+        return recordatorioCalendarioMapper.toResponse(recordatorioCalendarioRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        recordatorioCalendarioRepository.delete(buscarOFallar(id));
     }
 
     private RecordatorioCalendario buscarOFallar(Long id) {

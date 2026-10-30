@@ -18,6 +18,7 @@ import pe.edu.upeu.lamb.personas.dto.HistorialEstadoPersonaRequest;
 import pe.edu.upeu.lamb.personas.dto.HistorialEstadoPersonaResponse;
 import pe.edu.upeu.lamb.personas.dto.PersonaRequest;
 import pe.edu.upeu.lamb.personas.dto.PersonaResponse;
+import pe.edu.upeu.lamb.personas.dto.TipoDocumentoPeruResponse;
 import pe.edu.upeu.lamb.personas.dto.VinculoInstitucionRequest;
 import pe.edu.upeu.lamb.personas.dto.VinculoInstitucionResponse;
 import pe.edu.upeu.lamb.personas.service.BajaAnonimizacionService;
@@ -57,6 +58,12 @@ public class PersonaController {
     @Operation(summary = "Listar personas")
     public List<PersonaResponse> listarPersonas() {
         return personaService.listar();
+    }
+
+    @GetMapping("/tipos-documento")
+    @Operation(summary = "Tipos de documento de identidad de Peru con el formato de su numero")
+    public List<TipoDocumentoPeruResponse> listarTiposDocumento() {
+        return personaService.tiposDocumento();
     }
 
     @GetMapping("/personas/{id}")
@@ -106,6 +113,17 @@ public class PersonaController {
         return vinculoInstitucionService.crear(request);
     }
 
+    @PutMapping("/vinculos-institucion/{id}")
+    public VinculoInstitucionResponse actualizarVinculoInstitucion(@PathVariable Long id, @Valid @RequestBody VinculoInstitucionRequest request) {
+        return vinculoInstitucionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/vinculos-institucion/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarVinculoInstitucion(@PathVariable Long id) {
+        vinculoInstitucionService.eliminar(id);
+    }
+
     // --- Estado de la persona ---
 
     @GetMapping("/estados")
@@ -125,6 +143,17 @@ public class PersonaController {
     @Operation(summary = "Crear un estado de persona")
     public EstadoPersonaResponse crearEstado(@Valid @RequestBody EstadoPersonaRequest request) {
         return estadoPersonaService.crear(request);
+    }
+
+    @PutMapping("/estados/{id}")
+    public EstadoPersonaResponse actualizarEstado(@PathVariable Long id, @Valid @RequestBody EstadoPersonaRequest request) {
+        return estadoPersonaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/estados/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarEstado(@PathVariable Long id) {
+        estadoPersonaService.eliminar(id);
     }
 
     // --- Historial de estados de la persona ---
@@ -148,6 +177,17 @@ public class PersonaController {
         return historialEstadoPersonaService.crear(request);
     }
 
+    @PutMapping("/historial-estados/{id}")
+    public HistorialEstadoPersonaResponse actualizarHistorialEstado(@PathVariable Long id, @Valid @RequestBody HistorialEstadoPersonaRequest request) {
+        return historialEstadoPersonaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/historial-estados/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarHistorialEstado(@PathVariable Long id) {
+        historialEstadoPersonaService.eliminar(id);
+    }
+
     // --- Fusion de personas duplicadas ---
 
     @GetMapping("/fusiones")
@@ -167,6 +207,17 @@ public class PersonaController {
     @Operation(summary = "Crear una fusion de personas")
     public FusionPersonasResponse crearFusion(@Valid @RequestBody FusionPersonasRequest request) {
         return fusionPersonasService.crear(request);
+    }
+
+    @PutMapping("/fusiones/{id}")
+    public FusionPersonasResponse actualizarFusion(@PathVariable Long id, @Valid @RequestBody FusionPersonasRequest request) {
+        return fusionPersonasService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/fusiones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarFusion(@PathVariable Long id) {
+        fusionPersonasService.eliminar(id);
     }
 
     // --- Fotografia de la persona (opcional) ---
@@ -190,6 +241,17 @@ public class PersonaController {
         return fotografiaPersonaService.crear(request);
     }
 
+    @PutMapping("/fotografias/{id}")
+    public FotografiaPersonaResponse actualizarFotografia(@PathVariable Long id, @Valid @RequestBody FotografiaPersonaRequest request) {
+        return fotografiaPersonaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/fotografias/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarFotografia(@PathVariable Long id) {
+        fotografiaPersonaService.eliminar(id);
+    }
+
     // --- Baja logica o anonimizacion de datos (opcional) ---
 
     @GetMapping("/bajas-anonimizacion")
@@ -209,5 +271,16 @@ public class PersonaController {
     @Operation(summary = "Crear una baja o anonimizacion de persona")
     public BajaAnonimizacionResponse crearBajaAnonimizacion(@Valid @RequestBody BajaAnonimizacionRequest request) {
         return bajaAnonimizacionService.crear(request);
+    }
+
+    @PutMapping("/bajas-anonimizacion/{id}")
+    public BajaAnonimizacionResponse actualizarBajaAnonimizacion(@PathVariable Long id, @Valid @RequestBody BajaAnonimizacionRequest request) {
+        return bajaAnonimizacionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/bajas-anonimizacion/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarBajaAnonimizacion(@PathVariable Long id) {
+        bajaAnonimizacionService.eliminar(id);
     }
 }

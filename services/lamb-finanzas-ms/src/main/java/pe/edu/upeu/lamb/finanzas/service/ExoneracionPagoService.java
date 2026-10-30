@@ -13,12 +13,14 @@ import pe.edu.upeu.lamb.finanzas.repository.ExoneracionPagoRepository;
 import pe.edu.upeu.lamb.finanzas.repository.PagoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * CRUD marcado con (*) en el documento: "Exoneracion de pago" requiere autorizacion.
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ExoneracionPagoService {
 
@@ -48,6 +50,25 @@ public class ExoneracionPagoService {
 
         ExoneracionPago guardado = exoneracionPagoRepository.save(entity);
         return exoneracionPagoMapper.toResponse(guardado);
+    }
+
+    public ExoneracionPagoResponse actualizar(Long id, ExoneracionPagoRequest request) {
+        ExoneracionPago existente = buscarOFallar(id);
+        Pago pago = pagoRepository.findById(request.getIdPago())
+                .orElseThrow(() -> new ResourceNotFoundException("Pago no encontrado: " + request.getIdPago()));
+
+        ExoneracionPago entity = ExoneracionPago.builder()
+                .pago(pago)
+                .motivo(request.getMotivo())
+                .fecha(request.getFecha())
+                .build();
+
+        ExoneracionPago guardado = exoneracionPagoRepository.save(Actualizacion.copiar(entity, existente));
+        return exoneracionPagoMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        exoneracionPagoRepository.delete(buscarOFallar(id));
     }
 
     private ExoneracionPago buscarOFallar(Long id) {

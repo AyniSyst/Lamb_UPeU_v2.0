@@ -1,10 +1,10 @@
-<h2>Nuevo programa</h2>
+<h2>{{ idPrograma ? 'Editar programa' : 'Nuevo programa' }}</h2>
 
 @if (error()) {
   <p class="error">{{ error() }}</p>
 }
 
-<form [formGroup]="form" (ngSubmit)="guardar()">
+<form class="formulario" [formGroup]="form" (ngSubmit)="guardar()">
   <div>
     <label for="nombre">Nombre</label>
     <input id="nombre" type="text" formControlName="nombre" />
@@ -21,18 +21,24 @@
 
   <div>
     <label for="duracionSemestres">Duracion (semestres)</label>
-    <input id="duracionSemestres" type="number" min="1" formControlName="duracionSemestres" />
+    <input id="duracionSemestres" type="number" min="1" max="20" formControlName="duracionSemestres" />
   </div>
 
   <div>
     <label for="facultadId">Facultad</label>
     <select id="facultadId" formControlName="facultadId">
-      <option [value]="null">Selecciona una facultad</option>
+      <option [ngValue]="null" disabled>Selecciona una facultad</option>
       @for (facultad of facultades(); track facultad.id) {
-        <option [value]="facultad.id">{{ facultad.nombre }}</option>
+        <option [ngValue]="facultad.id">{{ facultad.nombre }}</option>
       }
     </select>
+    @if (!facultades().length) {
+      <small class="ayuda">Primero registra una facultad.</small>
+    }
   </div>
 
-  <button type="submit" [disabled]="enviando()">Registrar</button>
+  <div class="acciones">
+    <button type="submit" [disabled]="enviando()">{{ enviando() ? 'Guardando...' : 'Guardar' }}</button>
+    <a routerLink="/programas">Cancelar</a>
+  </div>
 </form>

@@ -51,6 +51,17 @@ public class DatosPersonalesController {
         return datoPersonalService.crear(request);
     }
 
+    @PutMapping("/datos/{id}")
+    public DatoPersonalResponse actualizarDato(@PathVariable Long id, @Valid @RequestBody DatoPersonalRequest request) {
+        return datoPersonalService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/datos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarDato(@PathVariable Long id) {
+        datoPersonalService.eliminar(id);
+    }
+
     // ---- Sexo ----
     @Operation(summary = "Listar sexos")
     @GetMapping("/sexos")
@@ -69,6 +80,17 @@ public class DatosPersonalesController {
     @ResponseStatus(HttpStatus.CREATED)
     public SexoResponse crearSexo(@Valid @RequestBody SexoRequest request) {
         return sexoService.crear(request);
+    }
+
+    @PutMapping("/sexos/{id}")
+    public SexoResponse actualizarSexo(@PathVariable Long id, @Valid @RequestBody SexoRequest request) {
+        return sexoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/sexos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarSexo(@PathVariable Long id) {
+        sexoService.eliminar(id);
     }
 
     // ---- Estado civil ----
@@ -91,6 +113,17 @@ public class DatosPersonalesController {
         return estadoCivilService.crear(request);
     }
 
+    @PutMapping("/estados-civiles/{id}")
+    public EstadoCivilResponse actualizarEstadoCivil(@PathVariable Long id, @Valid @RequestBody EstadoCivilRequest request) {
+        return estadoCivilService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/estados-civiles/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarEstadoCivil(@PathVariable Long id) {
+        estadoCivilService.eliminar(id);
+    }
+
     // ---- Nacionalidad ----
     @Operation(summary = "Listar nacionalidades")
     @GetMapping("/nacionalidades")
@@ -109,6 +142,17 @@ public class DatosPersonalesController {
     @ResponseStatus(HttpStatus.CREATED)
     public NacionalidadResponse crearNacionalidad(@Valid @RequestBody NacionalidadRequest request) {
         return nacionalidadService.crear(request);
+    }
+
+    @PutMapping("/nacionalidades/{id}")
+    public NacionalidadResponse actualizarNacionalidad(@PathVariable Long id, @Valid @RequestBody NacionalidadRequest request) {
+        return nacionalidadService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/nacionalidades/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarNacionalidad(@PathVariable Long id) {
+        nacionalidadService.eliminar(id);
     }
 
     // ---- Ubigeo ----
@@ -131,6 +175,17 @@ public class DatosPersonalesController {
         return ubigeoService.crear(request);
     }
 
+    @PutMapping("/ubigeos/{id}")
+    public UbigeoResponse actualizarUbigeo(@PathVariable Long id, @Valid @RequestBody UbigeoRequest request) {
+        return ubigeoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/ubigeos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarUbigeo(@PathVariable Long id) {
+        ubigeoService.eliminar(id);
+    }
+
     // ---- Discapacidad / condicion ----
     @Operation(summary = "Listar discapacidades/condiciones")
     @GetMapping("/discapacidades")
@@ -149,6 +204,17 @@ public class DatosPersonalesController {
     @ResponseStatus(HttpStatus.CREATED)
     public DiscapacidadCondicionResponse crearDiscapacidad(@Valid @RequestBody DiscapacidadCondicionRequest request) {
         return discapacidadCondicionService.crear(request);
+    }
+
+    @PutMapping("/discapacidades/{id}")
+    public DiscapacidadCondicionResponse actualizarDiscapacidad(@PathVariable Long id, @Valid @RequestBody DiscapacidadCondicionRequest request) {
+        return discapacidadCondicionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/discapacidades/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarDiscapacidad(@PathVariable Long id) {
+        discapacidadCondicionService.eliminar(id);
     }
 
     // ---- Cambio de nombre/apellido ----
@@ -171,6 +237,17 @@ public class DatosPersonalesController {
         return cambioNombreApellidoService.crear(request);
     }
 
+    @PutMapping("/cambios-nombre-apellido/{id}")
+    public CambioNombreApellidoResponse actualizarCambioNombreApellido(@PathVariable Long id, @Valid @RequestBody CambioNombreApellidoRequest request) {
+        return cambioNombreApellidoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/cambios-nombre-apellido/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCambioNombreApellido(@PathVariable Long id) {
+        cambioNombreApellidoService.eliminar(id);
+    }
+
     // ---- Consentimiento de datos ----
     @Operation(summary = "Listar consentimientos de datos")
     @GetMapping("/consentimientos")
@@ -189,6 +266,17 @@ public class DatosPersonalesController {
     @ResponseStatus(HttpStatus.CREATED)
     public ConsentimientoDatosResponse crearConsentimiento(@Valid @RequestBody ConsentimientoDatosRequest request) {
         return consentimientoDatosService.crear(request);
+    }
+
+    @PutMapping("/consentimientos/{id}")
+    public ConsentimientoDatosResponse actualizarConsentimiento(@PathVariable Long id, @Valid @RequestBody ConsentimientoDatosRequest request) {
+        return consentimientoDatosService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/consentimientos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarConsentimiento(@PathVariable Long id) {
+        consentimientoDatosService.eliminar(id);
     }
 
     // ---- Lengua / idioma ----
@@ -211,6 +299,17 @@ public class DatosPersonalesController {
         return lenguaIdiomaService.crear(request);
     }
 
+    @PutMapping("/lenguas-idiomas/{id}")
+    public LenguaIdiomaResponse actualizarLenguaIdioma(@PathVariable Long id, @Valid @RequestBody LenguaIdiomaRequest request) {
+        return lenguaIdiomaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/lenguas-idiomas/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarLenguaIdioma(@PathVariable Long id) {
+        lenguaIdiomaService.eliminar(id);
+    }
+
     // ---- Autoidentificacion etnica ----
     @Operation(summary = "Listar autoidentificaciones etnicas")
     @GetMapping("/autoidentificaciones-etnicas")
@@ -229,6 +328,17 @@ public class DatosPersonalesController {
     @ResponseStatus(HttpStatus.CREATED)
     public AutoidentificacionEtnicaResponse crearAutoidentificacionEtnica(@Valid @RequestBody AutoidentificacionEtnicaRequest request) {
         return autoidentificacionEtnicaService.crear(request);
+    }
+
+    @PutMapping("/autoidentificaciones-etnicas/{id}")
+    public AutoidentificacionEtnicaResponse actualizarAutoidentificacionEtnica(@PathVariable Long id, @Valid @RequestBody AutoidentificacionEtnicaRequest request) {
+        return autoidentificacionEtnicaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/autoidentificaciones-etnicas/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAutoidentificacionEtnica(@PathVariable Long id) {
+        autoidentificacionEtnicaService.eliminar(id);
     }
 
     // ---- Confesion religiosa ----
@@ -251,6 +361,17 @@ public class DatosPersonalesController {
         return confesionReligiosaService.crear(request);
     }
 
+    @PutMapping("/confesiones-religiosas/{id}")
+    public ConfesionReligiosaResponse actualizarConfesionReligiosa(@PathVariable Long id, @Valid @RequestBody ConfesionReligiosaRequest request) {
+        return confesionReligiosaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/confesiones-religiosas/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarConfesionReligiosa(@PathVariable Long id) {
+        confesionReligiosaService.eliminar(id);
+    }
+
     // ---- Colegio de procedencia ----
     @Operation(summary = "Listar colegios de procedencia")
     @GetMapping("/colegios-procedencia")
@@ -271,6 +392,17 @@ public class DatosPersonalesController {
         return colegioProcedenciaService.crear(request);
     }
 
+    @PutMapping("/colegios-procedencia/{id}")
+    public ColegioProcedenciaResponse actualizarColegioProcedencia(@PathVariable Long id, @Valid @RequestBody ColegioProcedenciaRequest request) {
+        return colegioProcedenciaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/colegios-procedencia/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarColegioProcedencia(@PathVariable Long id) {
+        colegioProcedenciaService.eliminar(id);
+    }
+
     // ---- Dato socioeconomico ----
     @Operation(summary = "Listar datos socioeconomicos")
     @GetMapping("/socioeconomicos")
@@ -289,5 +421,16 @@ public class DatosPersonalesController {
     @ResponseStatus(HttpStatus.CREATED)
     public DatoSocioeconomicoResponse crearDatoSocioeconomico(@Valid @RequestBody DatoSocioeconomicoRequest request) {
         return datoSocioeconomicoService.crear(request);
+    }
+
+    @PutMapping("/socioeconomicos/{id}")
+    public DatoSocioeconomicoResponse actualizarDatoSocioeconomico(@PathVariable Long id, @Valid @RequestBody DatoSocioeconomicoRequest request) {
+        return datoSocioeconomicoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/socioeconomicos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarDatoSocioeconomico(@PathVariable Long id) {
+        datoSocioeconomicoService.eliminar(id);
     }
 }

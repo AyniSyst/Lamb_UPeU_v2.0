@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.LiberacionExcepcionalPrerrequisitoR
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class LiberacionExcepcionalPrerrequisitoService {
 
@@ -35,6 +37,17 @@ public class LiberacionExcepcionalPrerrequisitoService {
         LiberacionExcepcionalPrerrequisito liberacionExcepcionalPrerrequisito = liberacionExcepcionalPrerrequisitoMapper.toEntity(request);
         liberacionExcepcionalPrerrequisito.setFechaAutorizacion(Instant.now());
         return liberacionExcepcionalPrerrequisitoMapper.toResponse(liberacionExcepcionalPrerrequisitoRepository.save(liberacionExcepcionalPrerrequisito));
+    }
+
+    public LiberacionExcepcionalPrerrequisitoResponse actualizar(Long id, LiberacionExcepcionalPrerrequisitoRequest request) {
+        LiberacionExcepcionalPrerrequisito existente = buscarOFallar(id);
+        LiberacionExcepcionalPrerrequisito liberacionExcepcionalPrerrequisito = liberacionExcepcionalPrerrequisitoMapper.toEntity(request);
+        liberacionExcepcionalPrerrequisito.setFechaAutorizacion(Instant.now());
+        return liberacionExcepcionalPrerrequisitoMapper.toResponse(liberacionExcepcionalPrerrequisitoRepository.save(Actualizacion.copiar(liberacionExcepcionalPrerrequisito, existente)));
+    }
+
+    public void eliminar(Long id) {
+        liberacionExcepcionalPrerrequisitoRepository.delete(buscarOFallar(id));
     }
 
     private LiberacionExcepcionalPrerrequisito buscarOFallar(Long id) {

@@ -53,6 +53,17 @@ public class OfertaCuposController {
         return reservaVacanteService.crear(request);
     }
 
+    @PutMapping("/reservas-vacante/{id}")
+    public ReservaVacanteResponse actualizarReservaVacante(@PathVariable Long id, @Valid @RequestBody ReservaVacanteRequest request) {
+        return reservaVacanteService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/reservas-vacante/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarReservaVacante(@PathVariable Long id) {
+        reservaVacanteService.eliminar(id);
+    }
+
     // --- Lista de espera de seccion (item 21) ---
 
     @GetMapping("/listas-espera")
@@ -74,6 +85,17 @@ public class OfertaCuposController {
         return listaEsperaSeccionService.crear(request);
     }
 
+    @PutMapping("/listas-espera/{id}")
+    public ListaEsperaSeccionResponse actualizarListaEspera(@PathVariable Long id, @Valid @RequestBody ListaEsperaSeccionRequest request) {
+        return listaEsperaSeccionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/listas-espera/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarListaEspera(@PathVariable Long id) {
+        listaEsperaSeccionService.eliminar(id);
+    }
+
     // --- Ampliacion autorizada de cupo (item 22) ---
 
     @GetMapping("/ampliaciones-cupo")
@@ -93,5 +115,16 @@ public class OfertaCuposController {
     @Operation(summary = "Crear una ampliacion autorizada de cupo")
     public AmpliacionCupoResponse crearAmpliacionCupo(@Valid @RequestBody AmpliacionCupoRequest request) {
         return ampliacionCupoService.crear(request);
+    }
+
+    @PutMapping("/ampliaciones-cupo/{id}")
+    public AmpliacionCupoResponse actualizarAmpliacionCupo(@PathVariable Long id, @Valid @RequestBody AmpliacionCupoRequest request) {
+        return ampliacionCupoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/ampliaciones-cupo/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAmpliacionCupo(@PathVariable Long id) {
+        ampliacionCupoService.eliminar(id);
     }
 }

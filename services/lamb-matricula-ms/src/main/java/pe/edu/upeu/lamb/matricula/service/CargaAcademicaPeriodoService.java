@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.CargaAcademicaPeriodoRepository;
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CargaAcademicaPeriodoService {
 
@@ -35,6 +37,17 @@ public class CargaAcademicaPeriodoService {
         CargaAcademicaPeriodo cargaAcademicaPeriodo = cargaAcademicaPeriodoMapper.toEntity(request);
         cargaAcademicaPeriodo.setFechaCalculo(Instant.now());
         return cargaAcademicaPeriodoMapper.toResponse(cargaAcademicaPeriodoRepository.save(cargaAcademicaPeriodo));
+    }
+
+    public CargaAcademicaPeriodoResponse actualizar(Long id, CargaAcademicaPeriodoRequest request) {
+        CargaAcademicaPeriodo existente = buscarOFallar(id);
+        CargaAcademicaPeriodo cargaAcademicaPeriodo = cargaAcademicaPeriodoMapper.toEntity(request);
+        cargaAcademicaPeriodo.setFechaCalculo(Instant.now());
+        return cargaAcademicaPeriodoMapper.toResponse(cargaAcademicaPeriodoRepository.save(Actualizacion.copiar(cargaAcademicaPeriodo, existente)));
+    }
+
+    public void eliminar(Long id) {
+        cargaAcademicaPeriodoRepository.delete(buscarOFallar(id));
     }
 
     private CargaAcademicaPeriodo buscarOFallar(Long id) {

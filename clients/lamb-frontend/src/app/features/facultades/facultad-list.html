@@ -9,7 +9,7 @@
 }
 
 @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
-  <a routerLink="/facultades/nueva">Nueva facultad</a>
+  <a class="boton primario" routerLink="/facultades/nueva">Nueva facultad</a>
 }
 
 <table>
@@ -31,7 +31,8 @@
         <td>{{ facultad.decano ?? '-' }}</td>
         @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
           <td>
-            <button type="button" (click)="eliminar(facultad)">Eliminar</button>
+            <a class="boton" [routerLink]="['/facultades', facultad.id, 'editar']">Editar</a>
+            <button type="button" class="peligro" (click)="eliminar(facultad)">Eliminar</button>
           </td>
         }
       </tr>

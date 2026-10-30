@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.NotificacionMatriculaRepository;
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class NotificacionMatriculaService {
 
@@ -36,6 +38,18 @@ public class NotificacionMatriculaService {
         entity.setFechaEnvio(Instant.now());
         entity.setEstadoEnvio("PENDIENTE");
         return notificacionMatriculaMapper.toResponse(notificacionMatriculaRepository.save(entity));
+    }
+
+    public NotificacionMatriculaResponse actualizar(Long id, NotificacionMatriculaRequest request) {
+        NotificacionMatricula existente = buscarOFallar(id);
+        NotificacionMatricula entity = notificacionMatriculaMapper.toEntity(request);
+        entity.setFechaEnvio(Instant.now());
+        entity.setEstadoEnvio("PENDIENTE");
+        return notificacionMatriculaMapper.toResponse(notificacionMatriculaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        notificacionMatriculaRepository.delete(buscarOFallar(id));
     }
 
     private NotificacionMatricula buscarOFallar(Long id) {

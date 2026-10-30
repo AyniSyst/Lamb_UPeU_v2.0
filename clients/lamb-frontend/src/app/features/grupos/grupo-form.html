@@ -1,0 +1,152 @@
+<h2>{{ idGrupo ? 'Editar grupo' : 'Nuevo grupo' }}</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<form class="formulario" [formGroup]="form" (ngSubmit)="guardar()">
+  <div>
+    <label for="idOferta">Oferta academica (curso y periodo)</label>
+    <select id="idOferta" formControlName="idOferta">
+      <option [ngValue]="null" disabled>Selecciona una oferta</option>
+      @for (o of ofertas(); track o.id) {
+        <option [ngValue]="o.id">{{ o.codigoCurso }} · periodo {{ o.codigoPeriodo }} · ciclo {{ o.ciclo }} ({{ o.estado }})</option>
+      }
+    </select>
+    <small class="ayuda">
+      Falta la oferta?
+      <a href="" (click)="$event.preventDefault(); creandoOferta.set(!creandoOferta())">Crear oferta academica</a>
+    </small>
+  </div>
+
+  @if (creandoOferta()) {
+    <div [formGroup]="ofertaForm" class="fila">
+      <div>
+        <label>Periodo</label>
+        <select formControlName="idPeriodo">
+          @for (p of periodos(); track p.id) {
+            <option [ngValue]="p.id">{{ p.codigo }} - {{ p.nombre }}</option>
+          }
+        </select>
+      </div>
+      <div>
+        <label>Programa</label>
+        <select formControlName="idPrograma">
+          @for (p of programas(); track p.id) {
+            <option [ngValue]="p.id">{{ p.nombre }}</option>
+          }
+        </select>
+      </div>
+      <div>
+        <label>Curso</label>
+        <select formControlName="idCurso">
+          @for (c of cursos(); track c.id) {
+            <option [ngValue]="c.id">{{ c.codigo }} - {{ c.nombre }}</option>
+          }
+        </select>
+      </div>
+      <div>
+        <label>Ciclo</label>
+        <input type="number" min="1" max="14" formControlName="ciclo" />
+      </div>
+      <button type="button" (click)="guardarOferta()">Crear oferta</button>
+    </div>
+    @if (!periodos().length || !cursos().length) {
+      <small class="ayuda">
+        Necesitas al menos un periodo (pagina Planificacion) y un curso: los cursos llegan al publicar un plan de estudios.
+      </small>
+    }
+  }
+
+  <div class="fila">
+    <div>
+      <label for="codigo">Codigo del grupo</label>
+      <input id="codigo" type="text" formControlName="codigo" />
+    </div>
+    <div>
+      <label for="cupoMaximo">Cupo maximo</label>
+      <input id="cupoMaximo" type="number" min="1" formControlName="cupoMaximo" />
+    </div>
+  </div>
+
+  <h3>Horario</h3>
+  <div formArrayName="horarios">
+    @for (h of horarios.controls; track $index) {
+      <div class="fila" [formGroupName]="$index">
+        <div>
+          <label>Ambiente</label>
+          <select formControlName="idAmbiente">
+            <option [ngValue]="null" disabled>Ambiente</option>
+            @for (a of ambientes(); track a.id) {
+              <option [ngValue]="a.id">{{ a.codigo }} - {{ a.nombre }} ({{ a.aforo }})</option>
+            }
+          </select>
+        </div>
+        <div>
+          <label>Dia</label>
+          <select formControlName="diaSemana">
+            @for (d of dias; track d) {
+              <option [value]="d">{{ d }}</option>
+            }
+          </select>
+        </div>
+        <div>
+          <label>Inicio</label>
+          <input type="time" formControlName="horaInicio" />
+        </div>
+        <div>
+          <label>Fin</label>
+          <input type="time" formControlName="horaFin" />
+        </div>
+        @if (horarios.length > 1) {
+          <button type="button" class="peligro" (click)="quitarHorario($index)">Quitar</button>
+        }
+      </div>
+    }
+  </div>
+  <div><button type="button" (click)="agregarHorario()">Agregar horario</button></div>
+  @if (!ambientes().length) {
+    <small class="ayuda">No hay ambientes: registralos en la pagina Planificacion (Ambientes).</small>
+  }
+
+  <h3>Docentes</h3>
+  <div formArrayName="docentes">
+    @for (d of docentesForm.controls; track $index) {
+      <div class="fila" [formGroupName]="$index">
+        <div>
+          <label>Docente</label>
+          <select formControlName="idDocente">
+            <option [ngValue]="null" disabled>Docente</option>
+            @for (p of docentes(); track p.id) {
+              <option [ngValue]="p.id">{{ p.apellidos }}, {{ p.nombres }} ({{ p.tipoDocumento }} {{ p.numeroDocumento }})</option>
+            }
+          </select>
+        </div>
+        <div>
+          <label>Rol</label>
+          <select formControlName="rol">
+            @for (r of roles; track r) {
+              <option [value]="r">{{ r }}</option>
+            }
+          </select>
+        </div>
+        <div>
+          <label>Horas/semana</label>
+          <input type="number" min="1" max="40" formControlName="horasSemanales" />
+        </div>
+        @if (docentesForm.length > 1) {
+          <button type="button" class="peligro" (click)="quitarDocente($index)">Quitar</button>
+        }
+      </div>
+    }
+  </div>
+  <div><button type="button" (click)="agregarDocente()">Agregar docente</button></div>
+  @if (!docentes().length) {
+    <small class="ayuda">No hay personas de tipo DOCENTE: registralas en Personas.</small>
+  }
+
+  <div class="acciones">
+    <button type="submit" [disabled]="enviando()">{{ enviando() ? 'Guardando...' : 'Guardar' }}</button>
+    <a routerLink="/grupos">Cancelar</a>
+  </div>
+</form>

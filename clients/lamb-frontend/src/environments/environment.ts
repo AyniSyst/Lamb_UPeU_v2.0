@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:8101',
+  apiBaseUrl: 'http://localhost:18080',
   keycloak: {
     issuer: 'http://localhost:18180/realms/lamb',
     clientId: 'lamb-frontend',

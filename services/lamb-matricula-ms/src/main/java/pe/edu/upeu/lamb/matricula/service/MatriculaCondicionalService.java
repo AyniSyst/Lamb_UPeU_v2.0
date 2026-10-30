@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.mapper.MatriculaCondicionalMapper;
 import pe.edu.upeu.lamb.matricula.repository.MatriculaCondicionalRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MatriculaCondicionalService {
 
@@ -44,6 +46,17 @@ public class MatriculaCondicionalService {
         }
         entity.setLevantada(true);
         return matriculaCondicionalMapper.toResponse(matriculaCondicionalRepository.save(entity));
+    }
+
+    public MatriculaCondicionalResponse actualizar(Long id, MatriculaCondicionalRequest request) {
+        MatriculaCondicional existente = buscarOFallar(id);
+        MatriculaCondicional entity = matriculaCondicionalMapper.toEntity(request);
+        entity.setLevantada(false);
+        return matriculaCondicionalMapper.toResponse(matriculaCondicionalRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        matriculaCondicionalRepository.delete(buscarOFallar(id));
     }
 
     private MatriculaCondicional buscarOFallar(Long id) {

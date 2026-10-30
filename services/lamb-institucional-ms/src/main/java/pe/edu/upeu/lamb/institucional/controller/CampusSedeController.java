@@ -65,6 +65,17 @@ public class CampusSedeController {
         return campusService.crear(request);
     }
 
+    @PutMapping("/campus/{id}")
+    public CampusResponse actualizarCampus(@PathVariable Long id, @Valid @RequestBody CampusRequest request) {
+        return campusService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/campus/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCampus(@PathVariable Long id) {
+        campusService.eliminar(id);
+    }
+
     // --- Sede (item 7) ---
 
     @GetMapping("/sedes")
@@ -84,6 +95,17 @@ public class CampusSedeController {
     @Operation(summary = "Crear una sede")
     public SedeResponse crearSede(@Valid @RequestBody SedeRequest request) {
         return sedeService.crear(request);
+    }
+
+    @PutMapping("/sedes/{id}")
+    public SedeResponse actualizarSede(@PathVariable Long id, @Valid @RequestBody SedeRequest request) {
+        return sedeService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/sedes/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarSede(@PathVariable Long id) {
+        sedeService.eliminar(id);
     }
 
     // --- Tipo de sede (item 8) ---
@@ -107,6 +129,17 @@ public class CampusSedeController {
         return tipoSedeService.crear(request);
     }
 
+    @PutMapping("/tipos-sede/{id}")
+    public TipoSedeResponse actualizarTipoSede(@PathVariable Long id, @Valid @RequestBody TipoSedeRequest request) {
+        return tipoSedeService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/tipos-sede/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTipoSede(@PathVariable Long id) {
+        tipoSedeService.eliminar(id);
+    }
+
     // --- Direccion de sede (item 9) ---
 
     @GetMapping("/direcciones-sede")
@@ -126,6 +159,17 @@ public class CampusSedeController {
     @Operation(summary = "Crear una direccion de sede")
     public DireccionSedeResponse crearDireccionSede(@Valid @RequestBody DireccionSedeRequest request) {
         return direccionSedeService.crear(request);
+    }
+
+    @PutMapping("/direcciones-sede/{id}")
+    public DireccionSedeResponse actualizarDireccionSede(@PathVariable Long id, @Valid @RequestBody DireccionSedeRequest request) {
+        return direccionSedeService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/direcciones-sede/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarDireccionSede(@PathVariable Long id) {
+        direccionSedeService.eliminar(id);
     }
 
     // --- Pabellon (item 10, opcional) ---
@@ -149,6 +193,17 @@ public class CampusSedeController {
         return pabellonService.crear(request);
     }
 
+    @PutMapping("/pabellones/{id}")
+    public PabellonResponse actualizarPabellon(@PathVariable Long id, @Valid @RequestBody PabellonRequest request) {
+        return pabellonService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/pabellones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarPabellon(@PathVariable Long id) {
+        pabellonService.eliminar(id);
+    }
+
     // --- Ambiente (item 11) ---
 
     @GetMapping("/ambientes")
@@ -168,5 +223,16 @@ public class CampusSedeController {
     @Operation(summary = "Crear un ambiente")
     public AmbienteResponse crearAmbiente(@Valid @RequestBody AmbienteRequest request) {
         return ambienteService.crear(request);
+    }
+
+    @PutMapping("/ambientes/{id}")
+    public AmbienteResponse actualizarAmbiente(@PathVariable Long id, @Valid @RequestBody AmbienteRequest request) {
+        return ambienteService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/ambientes/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAmbiente(@PathVariable Long id) {
+        ambienteService.eliminar(id);
     }
 }

@@ -12,8 +12,10 @@ import pe.edu.upeu.lms.repository.EvaluacionRepository;
 import pe.edu.upeu.lms.repository.PreguntaRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class PreguntaService {
 

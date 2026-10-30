@@ -1,3 +1,4 @@
+import { mensajeError } from '../../core/http/mensaje-error';
 import { Component, inject, signal } from '@angular/core';
 import { CursoService } from './curso-service';
 import { CursoResponse } from './curso.model';
@@ -20,7 +21,7 @@ export class CursoList {
     this.error.set(null);
     this.service.listar().subscribe({
       next: (data) => this.cursos.set(data),
-      error: () => this.error.set('No se pudieron cargar los cursos.'),
+      error: (e) => this.error.set(mensajeError(e, 'No se pudieron cargar los cursos.')),
     });
   }
 }

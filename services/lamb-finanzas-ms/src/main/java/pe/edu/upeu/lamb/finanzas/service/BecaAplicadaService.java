@@ -13,12 +13,14 @@ import pe.edu.upeu.lamb.finanzas.repository.BecaAplicadaRepository;
 import pe.edu.upeu.lamb.finanzas.repository.TipoBecaRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Lote F3 - Descuentos y becas (item 32 del documento): Beca aplicada.
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class BecaAplicadaService {
 
@@ -49,6 +51,26 @@ public class BecaAplicadaService {
 
         BecaAplicada guardado = becaAplicadaRepository.save(entity);
         return becaAplicadaMapper.toResponse(guardado);
+    }
+
+    public BecaAplicadaResponse actualizar(Long id, BecaAplicadaRequest request) {
+        BecaAplicada existente = buscarOFallar(id);
+        TipoBeca tipoBeca = tipoBecaRepository.findById(request.getIdTipoBeca())
+                .orElseThrow(() -> new ResourceNotFoundException("Tipo de beca no encontrado: " + request.getIdTipoBeca()));
+
+        BecaAplicada entity = BecaAplicada.builder()
+                .idPersona(request.getIdPersona())
+                .tipoBeca(tipoBeca)
+                .porcentaje(request.getPorcentaje())
+                .fechaInicio(request.getFechaInicio())
+                .build();
+
+        BecaAplicada guardado = becaAplicadaRepository.save(Actualizacion.copiar(entity, existente));
+        return becaAplicadaMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        becaAplicadaRepository.delete(buscarOFallar(id));
     }
 
     private BecaAplicada buscarOFallar(Long id) {

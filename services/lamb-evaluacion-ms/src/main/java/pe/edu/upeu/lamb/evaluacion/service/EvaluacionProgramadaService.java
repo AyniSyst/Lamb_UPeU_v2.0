@@ -4,7 +4,6 @@ import pe.edu.upeu.lamb.evaluacion.dto.EvaluacionProgramadaRequest;
 import pe.edu.upeu.lamb.evaluacion.dto.EvaluacionProgramadaResponse;
 import pe.edu.upeu.lamb.evaluacion.entity.ComponenteEvaluacion;
 import pe.edu.upeu.lamb.evaluacion.entity.EvaluacionProgramada;
-import pe.edu.upeu.lamb.evaluacion.exception.BusinessRuleException;
 import pe.edu.upeu.lamb.evaluacion.exception.ResourceNotFoundException;
 import pe.edu.upeu.lamb.evaluacion.mapper.EvaluacionProgramadaMapper;
 import pe.edu.upeu.lamb.evaluacion.repository.ComponenteEvaluacionRepository;
@@ -38,7 +37,6 @@ public class EvaluacionProgramadaService {
 
     @Transactional
     public EvaluacionProgramadaResponse crear(EvaluacionProgramadaRequest request) {
-        validar(request, null);
         EvaluacionProgramada evaluacionProgramada = evaluacionProgramadaMapper.toEntity(request);
         asignarRelaciones(evaluacionProgramada, request);
         return evaluacionProgramadaMapper.toResponse(evaluacionProgramadaRepository.save(evaluacionProgramada));
@@ -47,7 +45,6 @@ public class EvaluacionProgramadaService {
     @Transactional
     public EvaluacionProgramadaResponse actualizar(Long id, EvaluacionProgramadaRequest request) {
         EvaluacionProgramada evaluacionProgramada = buscarOFallar(id);
-        validar(request, id);
         evaluacionProgramada.setIdGrupo(request.getIdGrupo());
         evaluacionProgramada.setFecha(request.getFecha());
         evaluacionProgramada.setDescripcion(request.getDescripcion());
@@ -63,15 +60,6 @@ public class EvaluacionProgramadaService {
     EvaluacionProgramada buscarOFallar(Long id) {
         return evaluacionProgramadaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Evaluacion programada no encontrada: " + id));
-    }
-
-    private void validar(EvaluacionProgramadaRequest request, Long id) {
-        boolean duplicado = id == null
-                ? evaluacionProgramadaRepository.existsByIdGrupoAndComponenteIdAndFecha(request.getIdGrupo(), request.getIdComponente(), request.getFecha())
-                : evaluacionProgramadaRepository.existsByIdGrupoAndComponenteIdAndFechaAndIdNot(request.getIdGrupo(), request.getIdComponente(), request.getFecha(), id);
-        if (duplicado) {
-            throw new BusinessRuleException("Ya existe un registro de evaluacion programada para esa combinacion de: grupo, componente, fecha");
-        }
     }
 
     private void asignarRelaciones(EvaluacionProgramada evaluacionProgramada, EvaluacionProgramadaRequest request) {

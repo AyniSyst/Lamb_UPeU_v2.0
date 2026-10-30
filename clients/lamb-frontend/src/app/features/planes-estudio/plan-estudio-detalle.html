@@ -1,0 +1,120 @@
+@if (plan(); as p) {
+  <h2>{{ p.nombre }} <span class="estado" [class]="p.estado">{{ p.estado }}</span></h2>
+  <p>Programa {{ p.idPrograma }} · version {{ p.version }} · <strong>{{ p.totalCreditos }}</strong> creditos</p>
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+  @if (exito()) {
+    <p class="exito">{{ exito() }}</p>
+  }
+
+  <div class="barra">
+    <a class="boton" routerLink="/planes-estudio">Volver</a>
+    @if (editable) {
+      <a class="boton" [routerLink]="['/planes-estudio', p.id, 'editar']">Editar datos</a>
+      <button type="button" [disabled]="!p.cursos.length" (click)="publicar()">Publicar plan</button>
+    }
+  </div>
+
+  <h3>Cursos del plan</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Ciclo</th>
+        <th>Codigo</th>
+        <th>Curso</th>
+        <th>Creditos</th>
+        <th>Tipo</th>
+        <th>Area</th>
+        @if (editable) {
+          <th></th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (c of p.cursos; track c.id) {
+        <tr>
+          <td>{{ c.ciclo }}</td>
+          <td>{{ c.codigoCurso }}</td>
+          <td>{{ c.nombreCurso }}</td>
+          <td>{{ c.creditos }}</td>
+          <td>{{ c.tipo }}</td>
+          <td>{{ c.areaCurricular ?? '-' }}</td>
+          @if (editable) {
+            <td><button type="button" class="peligro" (click)="quitarCurso(c)">Quitar</button></td>
+          }
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="7">El plan aun no tiene cursos. Agregalos abajo y luego publicalo.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  @if (editable) {
+    <h3>Agregar curso</h3>
+    <form class="fila" [formGroup]="cursoForm" (ngSubmit)="agregarCurso()">
+      <div>
+        <label>Curso (catalogo)</label>
+        <select formControlName="idCursoCatalogo">
+          <option [ngValue]="null" disabled>Selecciona un curso</option>
+          @for (c of cursosCatalogo(); track c.id) {
+            <option [ngValue]="c.id">{{ c.codigo }} - {{ c.nombre }} ({{ c.creditos }} cr)</option>
+          }
+        </select>
+      </div>
+      <div>
+        <label>Ciclo</label>
+        <input type="number" min="1" max="14" formControlName="ciclo" />
+      </div>
+      <div>
+        <label>Tipo</label>
+        <select formControlName="idTipoCurso">
+          @for (t of tiposCurso(); track t.id) {
+            <option [ngValue]="t.id">{{ t.nombre }}</option>
+          }
+        </select>
+      </div>
+      <div>
+        <label>Area (opcional)</label>
+        <select formControlName="idAreaCurricular">
+          <option [ngValue]="null">-</option>
+          @for (a of areas(); track a.id) {
+            <option [ngValue]="a.id">{{ a.nombre }}</option>
+          }
+        </select>
+      </div>
+      <button type="submit">Agregar</button>
+    </form>
+    <small class="ayuda">
+      El curso no esta en el catalogo?
+      <a href="" (click)="$event.preventDefault(); creandoCurso.set(!creandoCurso())">Crear curso en el catalogo</a>
+    </small>
+
+    @if (creandoCurso()) {
+      <form class="fila" [formGroup]="catalogoForm" (ngSubmit)="crearCursoCatalogo()">
+        <div>
+          <label>Codigo</label>
+          <input type="text" formControlName="codigo" placeholder="IS101" />
+        </div>
+        <div>
+          <label>Nombre</label>
+          <input type="text" formControlName="nombre" placeholder="Programacion I" />
+        </div>
+        <div>
+          <label>Creditos</label>
+          <input type="number" min="1" max="10" formControlName="creditos" />
+        </div>
+        <button type="submit">Crear en catalogo</button>
+      </form>
+    }
+  }
+} @else {
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  } @else {
+    <p>Cargando...</p>
+  }
+}

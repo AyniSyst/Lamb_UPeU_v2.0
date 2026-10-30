@@ -37,6 +37,17 @@ public class ContactoEmergenciaService {
         return contactoEmergenciaMapper.toResponse(contactoEmergenciaRepository.save(entity));
     }
 
+    public ContactoEmergenciaResponse actualizar(Long id, ContactoEmergenciaRequest request) {
+        ContactoEmergencia existente = buscarOFallar(id);
+        ContactoEmergencia entity = contactoEmergenciaMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return contactoEmergenciaMapper.toResponse(contactoEmergenciaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        contactoEmergenciaRepository.delete(buscarOFallar(id));
+    }
+
     private ContactoEmergencia buscarOFallar(Long id) {
         return contactoEmergenciaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Contacto de emergencia no encontrado: " + id));

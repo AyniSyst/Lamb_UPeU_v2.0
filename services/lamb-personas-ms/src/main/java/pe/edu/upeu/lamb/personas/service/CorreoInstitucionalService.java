@@ -37,6 +37,17 @@ public class CorreoInstitucionalService {
         return correoInstitucionalMapper.toResponse(correoInstitucionalRepository.save(entity));
     }
 
+    public CorreoInstitucionalResponse actualizar(Long id, CorreoInstitucionalRequest request) {
+        CorreoInstitucional existente = buscarOFallar(id);
+        CorreoInstitucional entity = correoInstitucionalMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return correoInstitucionalMapper.toResponse(correoInstitucionalRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        correoInstitucionalRepository.delete(buscarOFallar(id));
+    }
+
     private CorreoInstitucional buscarOFallar(Long id) {
         return correoInstitucionalRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Correo institucional no encontrado: " + id));

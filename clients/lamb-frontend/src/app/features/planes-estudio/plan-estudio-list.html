@@ -3,14 +3,17 @@
 @if (error()) {
   <p class="error">{{ error() }}</p>
 }
-
 @if (errorAccion()) {
   <p class="error">{{ errorAccion() }}</p>
 }
 
-@if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
-  <p><a routerLink="/planes-estudio/nuevo">Nuevo plan de estudio</a></p>
-}
+<div class="barra">
+  @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+    <a class="boton primario" routerLink="/planes-estudio/nueva">Nuevo plan de estudio</a>
+  }
+  <button type="button" (click)="cargar()">Actualizar</button>
+</div>
+<p class="ayuda">Un plan BORRADOR se completa con sus cursos y se publica; al publicarlo Planificacion recibe los cursos.</p>
 
 <table>
   <thead>
@@ -20,10 +23,9 @@
       <th>Version</th>
       <th>Nombre</th>
       <th>Estado</th>
+      <th>Cursos</th>
       <th>Creditos</th>
-      @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
-        <th>Acciones</th>
-      }
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -33,20 +35,20 @@
         <td>{{ plan.idPrograma }}</td>
         <td>{{ plan.version }}</td>
         <td>{{ plan.nombre }}</td>
-        <td>{{ plan.estado }}</td>
+        <td><span class="estado" [class]="plan.estado">{{ plan.estado }}</span></td>
+        <td>{{ plan.cursos.length }}</td>
         <td>{{ plan.totalCreditos }}</td>
-        @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
-          <td>
-            @if (plan.estado === 'BORRADOR') {
-              <button type="button" (click)="publicar(plan)">Publicar</button>
-              <button type="button" (click)="eliminar(plan)">Eliminar</button>
-            }
-          </td>
-        }
+        <td>
+          <a class="boton" [routerLink]="['/planes-estudio', plan.id]">Cursos</a>
+          @if (plan.estado === 'BORRADOR' && auth.tieneRol('ADMIN', 'COORDINADOR')) {
+            <button type="button" [disabled]="!plan.cursos.length" (click)="publicar(plan)">Publicar</button>
+            <button type="button" class="peligro" (click)="eliminar(plan)">Eliminar</button>
+          }
+        </td>
       </tr>
     } @empty {
       <tr>
-        <td colspan="7">No hay planes de estudio registrados.</td>
+        <td colspan="8">No hay planes de estudio registrados.</td>
       </tr>
     }
   </tbody>

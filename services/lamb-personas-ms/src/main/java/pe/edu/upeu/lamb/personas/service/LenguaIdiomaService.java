@@ -37,6 +37,17 @@ public class LenguaIdiomaService {
         return lenguaIdiomaMapper.toResponse(lenguaIdiomaRepository.save(entity));
     }
 
+    public LenguaIdiomaResponse actualizar(Long id, LenguaIdiomaRequest request) {
+        LenguaIdioma existente = buscarOFallar(id);
+        LenguaIdioma entity = lenguaIdiomaMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return lenguaIdiomaMapper.toResponse(lenguaIdiomaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        lenguaIdiomaRepository.delete(buscarOFallar(id));
+    }
+
     private LenguaIdioma buscarOFallar(Long id) {
         return lenguaIdiomaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Lengua/idioma no encontrada: " + id));

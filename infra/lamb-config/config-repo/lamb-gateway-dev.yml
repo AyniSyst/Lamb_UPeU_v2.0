@@ -35,6 +35,10 @@ spring:
               uri: lb://lamb-planificacion-ms
               predicates:
                 - Path=/api/v1/secciones/**
+            - id: lamb-planificacion-grupos
+              uri: lb://lamb-planificacion-ms
+              predicates:
+                - Path=/api/v1/grupos/**
             - id: lamb-admision
               uri: lb://lamb-admision-ms
               predicates:
@@ -63,6 +67,74 @@ spring:
               uri: lb://lamb-finanzas-ms
               predicates:
                 - Path=/api/v1/pagos/**
+            # Una ruta por microservicio: /ms/<servicio>/api/v1/... -> /api/v1/... en ese servicio.
+            # Evita los choques de rutas repetidas entre servicios (/cursos, /pagos, /vistas).
+            - id: ms-personas
+              uri: lb://lamb-personas-ms
+              predicates:
+                - Path=/ms/personas/**
+              filters:
+                - StripPrefix=2
+            - id: ms-institucional
+              uri: lb://lamb-institucional-ms
+              predicates:
+                - Path=/ms/institucional/**
+              filters:
+                - StripPrefix=2
+            - id: ms-admision
+              uri: lb://lamb-admision-ms
+              predicates:
+                - Path=/ms/admision/**
+              filters:
+                - StripPrefix=2
+            - id: ms-curriculo
+              uri: lb://lamb-curriculo-ms
+              predicates:
+                - Path=/ms/curriculo/**
+              filters:
+                - StripPrefix=2
+            - id: ms-planificacion
+              uri: lb://lamb-planificacion-ms
+              predicates:
+                - Path=/ms/planificacion/**
+              filters:
+                - StripPrefix=2
+            - id: ms-matricula
+              uri: lb://lamb-matricula-ms
+              predicates:
+                - Path=/ms/matricula/**
+              filters:
+                - StripPrefix=2
+            - id: ms-evaluacion
+              uri: lb://lamb-evaluacion-ms
+              predicates:
+                - Path=/ms/evaluacion/**
+              filters:
+                - StripPrefix=2
+            - id: ms-trayectoria
+              uri: lb://lamb-trayectoria-ms
+              predicates:
+                - Path=/ms/trayectoria/**
+              filters:
+                - StripPrefix=2
+            - id: ms-finanzas
+              uri: lb://lamb-finanzas-ms
+              predicates:
+                - Path=/ms/finanzas/**
+              filters:
+                - StripPrefix=2
+            - id: ms-ingresos-pagos
+              uri: lb://ingresos-pagos-ms
+              predicates:
+                - Path=/ms/ingresos-pagos/**
+              filters:
+                - StripPrefix=2
+            - id: ms-lms
+              uri: lb://lms-ms
+              predicates:
+                - Path=/ms/lms/**
+              filters:
+                - StripPrefix=2
 
 eureka:
   instance:

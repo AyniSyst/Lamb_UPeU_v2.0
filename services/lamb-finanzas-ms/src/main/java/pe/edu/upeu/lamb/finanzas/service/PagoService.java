@@ -1,5 +1,6 @@
 package pe.edu.upeu.lamb.finanzas.service;
 
+import pe.edu.upeu.lamb.finanzas.dto.PagarCargoRequest;
 import pe.edu.upeu.lamb.finanzas.dto.PagoRequest;
 import pe.edu.upeu.lamb.finanzas.dto.PagoResponse;
 import pe.edu.upeu.lamb.finanzas.entity.EstadoPago;
@@ -65,6 +66,7 @@ public class PagoService {
         return pagoMapper.toResponse(buscarOFallar(id));
     }
 
+    @Transactional
     public PagoResponse procesar(PagoRequest request) {
         Pago pago = pagoMapper.toEntity(request);
         pago.setEstado(EstadoPago.APROBADO);
@@ -72,6 +74,19 @@ public class PagoService {
         return pagoMapper.toResponse(pagoRepository.save(pago));
     }
 
+    /** Cancela un cargo PENDIENTE (el de matricula lo genera matricula.confirmada). */
+    @Transactional
+    public PagoResponse pagar(Long id, PagarCargoRequest request) {
+        Pago pago = buscarOFallar(id);
+        validarEstado(pago, EstadoPago.PENDIENTE, "pagar");
+        pago.setMetodo(request.getMetodo());
+        pago.setEstado(EstadoPago.APROBADO);
+        pago.setFechaPago(Instant.now());
+        pago.setReferenciaExterna(UUID.randomUUID().toString());
+        return pagoMapper.toResponse(pagoRepository.save(pago));
+    }
+
+    @Transactional
     public PagoResponse reembolsar(Long id) {
         Pago pago = buscarOFallar(id);
         validarEstado(pago, EstadoPago.APROBADO, "reembolsar");

@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.MencionEspecialidadMapper;
 import pe.edu.upeu.lamb.institucional.repository.MencionEspecialidadRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MencionEspecialidadService {
 
@@ -31,6 +33,16 @@ public class MencionEspecialidadService {
     public MencionEspecialidadResponse crear(MencionEspecialidadRequest request) {
         MencionEspecialidad entity = mencionEspecialidadMapper.toEntity(request);
         return mencionEspecialidadMapper.toResponse(mencionEspecialidadRepository.save(entity));
+    }
+
+    public MencionEspecialidadResponse actualizar(Long id, MencionEspecialidadRequest request) {
+        MencionEspecialidad existente = buscarOFallar(id);
+        MencionEspecialidad entity = mencionEspecialidadMapper.toEntity(request);
+        return mencionEspecialidadMapper.toResponse(mencionEspecialidadRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        mencionEspecialidadRepository.delete(buscarOFallar(id));
     }
 
     private MencionEspecialidad buscarOFallar(Long id) {

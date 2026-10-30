@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.SolicitudRectificacionRepository;
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class SolicitudRectificacionService {
 
@@ -34,6 +36,18 @@ public class SolicitudRectificacionService {
         entity.setEstado("PENDIENTE");
         entity.setFechaSolicitud(Instant.now());
         return mapper.toResponse(repository.save(entity));
+    }
+
+    public SolicitudRectificacionResponse actualizar(Long id, SolicitudRectificacionRequest request) {
+        SolicitudRectificacion existente = buscarOFallar(id);
+        SolicitudRectificacion entity = mapper.toEntity(request);
+        entity.setEstado("PENDIENTE");
+        entity.setFechaSolicitud(Instant.now());
+        return mapper.toResponse(repository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        repository.delete(buscarOFallar(id));
     }
 
     private SolicitudRectificacion buscarOFallar(Long id) {

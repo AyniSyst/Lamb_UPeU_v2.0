@@ -37,6 +37,17 @@ public class DiscapacidadCondicionService {
         return discapacidadCondicionMapper.toResponse(discapacidadCondicionRepository.save(entity));
     }
 
+    public DiscapacidadCondicionResponse actualizar(Long id, DiscapacidadCondicionRequest request) {
+        DiscapacidadCondicion existente = buscarOFallar(id);
+        DiscapacidadCondicion entity = discapacidadCondicionMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return discapacidadCondicionMapper.toResponse(discapacidadCondicionRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        discapacidadCondicionRepository.delete(buscarOFallar(id));
+    }
+
     private DiscapacidadCondicion buscarOFallar(Long id) {
         return discapacidadCondicionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Discapacidad/condicion no encontrada: " + id));

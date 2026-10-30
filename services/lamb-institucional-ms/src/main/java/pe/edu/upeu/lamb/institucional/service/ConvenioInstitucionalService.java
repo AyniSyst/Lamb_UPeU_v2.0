@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.ConvenioInstitucionalMapper;
 import pe.edu.upeu.lamb.institucional.repository.ConvenioInstitucionalRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ConvenioInstitucionalService {
 
@@ -31,6 +33,16 @@ public class ConvenioInstitucionalService {
     public ConvenioInstitucionalResponse crear(ConvenioInstitucionalRequest request) {
         ConvenioInstitucional entity = convenioInstitucionalMapper.toEntity(request);
         return convenioInstitucionalMapper.toResponse(convenioInstitucionalRepository.save(entity));
+    }
+
+    public ConvenioInstitucionalResponse actualizar(Long id, ConvenioInstitucionalRequest request) {
+        ConvenioInstitucional existente = buscarOFallar(id);
+        ConvenioInstitucional entity = convenioInstitucionalMapper.toEntity(request);
+        return convenioInstitucionalMapper.toResponse(convenioInstitucionalRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        convenioInstitucionalRepository.delete(buscarOFallar(id));
     }
 
     private ConvenioInstitucional buscarOFallar(Long id) {

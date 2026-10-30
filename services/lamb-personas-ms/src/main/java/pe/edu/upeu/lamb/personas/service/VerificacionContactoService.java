@@ -37,6 +37,17 @@ public class VerificacionContactoService {
         return verificacionContactoMapper.toResponse(verificacionContactoRepository.save(entity));
     }
 
+    public VerificacionContactoResponse actualizar(Long id, VerificacionContactoRequest request) {
+        VerificacionContacto existente = buscarOFallar(id);
+        VerificacionContacto entity = verificacionContactoMapper.toEntity(request);
+        entity.setFechaVerificacion(Instant.now());
+        return verificacionContactoMapper.toResponse(verificacionContactoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        verificacionContactoRepository.delete(buscarOFallar(id));
+    }
+
     private VerificacionContacto buscarOFallar(Long id) {
         return verificacionContactoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Verificacion de contacto no encontrada: " + id));

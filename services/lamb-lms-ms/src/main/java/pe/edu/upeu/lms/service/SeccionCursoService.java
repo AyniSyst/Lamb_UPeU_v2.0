@@ -16,8 +16,10 @@ import pe.edu.upeu.lms.repository.PeriodoAcademicoRepository;
 import pe.edu.upeu.lms.repository.SeccionCursoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class SeccionCursoService {
 

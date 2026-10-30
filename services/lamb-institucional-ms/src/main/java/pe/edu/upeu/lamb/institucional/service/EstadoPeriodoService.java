@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.EstadoPeriodoMapper;
 import pe.edu.upeu.lamb.institucional.repository.EstadoPeriodoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class EstadoPeriodoService {
 
@@ -31,6 +33,16 @@ public class EstadoPeriodoService {
     public EstadoPeriodoResponse crear(EstadoPeriodoRequest request) {
         EstadoPeriodo entity = estadoPeriodoMapper.toEntity(request);
         return estadoPeriodoMapper.toResponse(estadoPeriodoRepository.save(entity));
+    }
+
+    public EstadoPeriodoResponse actualizar(Long id, EstadoPeriodoRequest request) {
+        EstadoPeriodo existente = buscarOFallar(id);
+        EstadoPeriodo entity = estadoPeriodoMapper.toEntity(request);
+        return estadoPeriodoMapper.toResponse(estadoPeriodoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        estadoPeriodoRepository.delete(buscarOFallar(id));
     }
 
     private EstadoPeriodo buscarOFallar(Long id) {

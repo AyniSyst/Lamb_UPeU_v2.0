@@ -73,6 +73,17 @@ public class MatriculaController {
         return matriculaService.crear(request);
     }
 
+    @PutMapping("/{id}")
+    public MatriculaResponse actualizar(@PathVariable Long id, @Valid @RequestBody MatriculaRequest request) {
+        return matriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminar(@PathVariable Long id) {
+        matriculaService.eliminar(id);
+    }
+
     @PostMapping("/{id}/confirmar")
     @Operation(summary = "Confirmar una matricula (idempotente, dispara evento matricula.confirmada)")
     public MatriculaResponse confirmar(@PathVariable Long id) {
@@ -126,6 +137,17 @@ public class MatriculaController {
         return historialEstadoMatriculaService.crear(request);
     }
 
+    @PutMapping("/historial-estados/{id}")
+    public HistorialEstadoMatriculaResponse actualizarHistorialEstado(@PathVariable Long id, @Valid @RequestBody HistorialEstadoMatriculaRequest request) {
+        return historialEstadoMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/historial-estados/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarHistorialEstado(@PathVariable Long id) {
+        historialEstadoMatriculaService.eliminar(id);
+    }
+
     // --- Matricula condicional (item 27) ---
 
     @GetMapping("/condicionales")
@@ -145,6 +167,17 @@ public class MatriculaController {
     @Operation(summary = "Crear una matricula condicional")
     public MatriculaCondicionalResponse crearCondicional(@Valid @RequestBody MatriculaCondicionalRequest request) {
         return matriculaCondicionalService.crear(request);
+    }
+
+    @PutMapping("/condicionales/{id}")
+    public MatriculaCondicionalResponse actualizarCondicional(@PathVariable Long id, @Valid @RequestBody MatriculaCondicionalRequest request) {
+        return matriculaCondicionalService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/condicionales/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCondicional(@PathVariable Long id) {
+        matriculaCondicionalService.eliminar(id);
     }
 
     @PostMapping("/condicionales/{id}/levantar")
@@ -174,6 +207,17 @@ public class MatriculaController {
         return anulacionMatriculaService.crear(request);
     }
 
+    @PutMapping("/anulaciones/{id}")
+    public AnulacionMatriculaResponse actualizarAnulacion(@PathVariable Long id, @Valid @RequestBody AnulacionMatriculaRequest request) {
+        return anulacionMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/anulaciones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAnulacion(@PathVariable Long id) {
+        anulacionMatriculaService.eliminar(id);
+    }
+
     // --- Observacion de matricula (item 30) ---
 
     @GetMapping("/observaciones")
@@ -193,6 +237,17 @@ public class MatriculaController {
     @Operation(summary = "Crear una observacion de matricula")
     public ObservacionMatriculaResponse crearObservacion(@Valid @RequestBody ObservacionMatriculaRequest request) {
         return observacionMatriculaService.crear(request);
+    }
+
+    @PutMapping("/observaciones/{id}")
+    public ObservacionMatriculaResponse actualizarObservacion(@PathVariable Long id, @Valid @RequestBody ObservacionMatriculaRequest request) {
+        return observacionMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/observaciones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarObservacion(@PathVariable Long id) {
+        observacionMatriculaService.eliminar(id);
     }
 
     // --- Notificacion de matricula (item 34) ---
@@ -216,6 +271,17 @@ public class MatriculaController {
         return notificacionMatriculaService.crear(request);
     }
 
+    @PutMapping("/notificaciones/{id}")
+    public NotificacionMatriculaResponse actualizarNotificacion(@PathVariable Long id, @Valid @RequestBody NotificacionMatriculaRequest request) {
+        return notificacionMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/notificaciones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarNotificacion(@PathVariable Long id) {
+        notificacionMatriculaService.eliminar(id);
+    }
+
     // --- Constancia de matricula (item 35) ---
 
     @GetMapping("/constancias")
@@ -235,5 +301,16 @@ public class MatriculaController {
     @Operation(summary = "Crear una constancia de matricula")
     public ConstanciaMatriculaResponse crearConstancia(@Valid @RequestBody ConstanciaMatriculaRequest request) {
         return constanciaMatriculaService.crear(request);
+    }
+
+    @PutMapping("/constancias/{id}")
+    public ConstanciaMatriculaResponse actualizarConstancia(@PathVariable Long id, @Valid @RequestBody ConstanciaMatriculaRequest request) {
+        return constanciaMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/constancias/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarConstancia(@PathVariable Long id) {
+        constanciaMatriculaService.eliminar(id);
     }
 }

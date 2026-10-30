@@ -15,9 +15,11 @@ import pe.edu.upeu.lamb.finanzas.repository.ReembolsoPagoRepository;
 import pe.edu.upeu.lamb.finanzas.repository.SolicitudDevolucionRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ReembolsoPagoService {
 
@@ -52,6 +54,29 @@ public class ReembolsoPagoService {
                 .build();
 
         return reembolsoPagoMapper.toResponse(reembolsoPagoRepository.save(entity));
+    }
+
+    public ReembolsoPagoResponse actualizar(Long id, ReembolsoPagoRequest request) {
+        ReembolsoPago existente = buscarOFallar(id);
+        SolicitudDevolucion solicitudDevolucion = solicitudDevolucionRepository.findById(request.getIdSolicitudDevolucion())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "No se encontro la solicitud de devolucion con id " + request.getIdSolicitudDevolucion()));
+        CuentaEstudiante cuentaEstudiante = cuentaEstudianteRepository.findById(request.getIdCuentaEstudiante())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "No se encontro la cuenta de estudiante con id " + request.getIdCuentaEstudiante()));
+
+        ReembolsoPago entity = ReembolsoPago.builder()
+                .solicitudDevolucion(solicitudDevolucion)
+                .cuentaEstudiante(cuentaEstudiante)
+                .montoReembolsado(request.getMontoReembolsado())
+                .fecha(request.getFecha())
+                .build();
+
+        return reembolsoPagoMapper.toResponse(reembolsoPagoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        reembolsoPagoRepository.delete(buscarOFallar(id));
     }
 
     private ReembolsoPago buscarOFallar(Long id) {

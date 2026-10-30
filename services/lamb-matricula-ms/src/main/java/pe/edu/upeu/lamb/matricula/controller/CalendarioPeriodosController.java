@@ -61,6 +61,17 @@ public class CalendarioPeriodosController {
         return cronogramaMatriculaService.crear(request);
     }
 
+    @PutMapping("/cronogramas/{id}")
+    public CronogramaMatriculaResponse actualizarCronograma(@PathVariable Long id, @Valid @RequestBody CronogramaMatriculaRequest request) {
+        return cronogramaMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/cronogramas/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCronograma(@PathVariable Long id) {
+        cronogramaMatriculaService.eliminar(id);
+    }
+
     // --- Variacion de matricula (item 4) ---
 
     @GetMapping("/variaciones")
@@ -80,6 +91,17 @@ public class CalendarioPeriodosController {
     @Operation(summary = "Crear una variacion de matricula")
     public VariacionMatriculaResponse crearVariacion(@Valid @RequestBody VariacionMatriculaRequest request) {
         return variacionMatriculaService.crear(request);
+    }
+
+    @PutMapping("/variaciones/{id}")
+    public VariacionMatriculaResponse actualizarVariacion(@PathVariable Long id, @Valid @RequestBody VariacionMatriculaRequest request) {
+        return variacionMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/variaciones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarVariacion(@PathVariable Long id) {
+        variacionMatriculaService.eliminar(id);
     }
 
     // --- Tipo de matricula (item 5) ---
@@ -103,6 +125,17 @@ public class CalendarioPeriodosController {
         return tipoMatriculaService.crear(request);
     }
 
+    @PutMapping("/tipos/{id}")
+    public TipoMatriculaResponse actualizarTipo(@PathVariable Long id, @Valid @RequestBody TipoMatriculaRequest request) {
+        return tipoMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/tipos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTipo(@PathVariable Long id) {
+        tipoMatriculaService.eliminar(id);
+    }
+
     // --- Modalidad de matricula (item 6) ---
 
     @GetMapping("/modalidades")
@@ -124,6 +157,17 @@ public class CalendarioPeriodosController {
         return modalidadMatriculaService.crear(request);
     }
 
+    @PutMapping("/modalidades/{id}")
+    public ModalidadMatriculaResponse actualizarModalidad(@PathVariable Long id, @Valid @RequestBody ModalidadMatriculaRequest request) {
+        return modalidadMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/modalidades/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarModalidad(@PathVariable Long id) {
+        modalidadMatriculaService.eliminar(id);
+    }
+
     // --- Ampliacion de plazo de matricula (item 8) ---
 
     @GetMapping("/ampliaciones-plazo")
@@ -143,5 +187,16 @@ public class CalendarioPeriodosController {
     @Operation(summary = "Crear una ampliacion de plazo de matricula")
     public AmpliacionPlazoMatriculaResponse crearAmpliacionPlazo(@Valid @RequestBody AmpliacionPlazoMatriculaRequest request) {
         return ampliacionPlazoMatriculaService.crear(request);
+    }
+
+    @PutMapping("/ampliaciones-plazo/{id}")
+    public AmpliacionPlazoMatriculaResponse actualizarAmpliacionPlazo(@PathVariable Long id, @Valid @RequestBody AmpliacionPlazoMatriculaRequest request) {
+        return ampliacionPlazoMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/ampliaciones-plazo/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAmpliacionPlazo(@PathVariable Long id) {
+        ampliacionPlazoMatriculaService.eliminar(id);
     }
 }

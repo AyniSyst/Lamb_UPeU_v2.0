@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.ParametroInstitucionalMapper;
 import pe.edu.upeu.lamb.institucional.repository.ParametroInstitucionalRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ParametroInstitucionalService {
 
@@ -31,6 +33,16 @@ public class ParametroInstitucionalService {
     public ParametroInstitucionalResponse crear(ParametroInstitucionalRequest request) {
         ParametroInstitucional entity = parametroInstitucionalMapper.toEntity(request);
         return parametroInstitucionalMapper.toResponse(parametroInstitucionalRepository.save(entity));
+    }
+
+    public ParametroInstitucionalResponse actualizar(Long id, ParametroInstitucionalRequest request) {
+        ParametroInstitucional existente = buscarOFallar(id);
+        ParametroInstitucional entity = parametroInstitucionalMapper.toEntity(request);
+        return parametroInstitucionalMapper.toResponse(parametroInstitucionalRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        parametroInstitucionalRepository.delete(buscarOFallar(id));
     }
 
     private ParametroInstitucional buscarOFallar(Long id) {

@@ -13,12 +13,14 @@ import pe.edu.upeu.lamb.finanzas.repository.EstadoCobroRepository;
 import pe.edu.upeu.lamb.finanzas.repository.HistorialEstadoCobroRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Item 20 del documento: "Historial de estados del cobro".
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class HistorialEstadoCobroService {
 
@@ -48,6 +50,25 @@ public class HistorialEstadoCobroService {
 
         HistorialEstadoCobro guardado = historialEstadoCobroRepository.save(entity);
         return historialEstadoCobroMapper.toResponse(guardado);
+    }
+
+    public HistorialEstadoCobroResponse actualizar(Long id, HistorialEstadoCobroRequest request) {
+        HistorialEstadoCobro existente = buscarOFallar(id);
+        EstadoCobro estadoCobro = estadoCobroRepository.findById(request.getIdEstadoCobro())
+                .orElseThrow(() -> new ResourceNotFoundException("Estado de cobro no encontrado: " + request.getIdEstadoCobro()));
+
+        HistorialEstadoCobro entity = HistorialEstadoCobro.builder()
+                .estadoCobro(estadoCobro)
+                .estado(request.getEstado())
+                .fecha(request.getFecha())
+                .build();
+
+        HistorialEstadoCobro guardado = historialEstadoCobroRepository.save(Actualizacion.copiar(entity, existente));
+        return historialEstadoCobroMapper.toResponse(guardado);
+    }
+
+    public void eliminar(Long id) {
+        historialEstadoCobroRepository.delete(buscarOFallar(id));
     }
 
     private HistorialEstadoCobro buscarOFallar(Long id) {

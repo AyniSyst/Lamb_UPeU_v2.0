@@ -1,12 +1,14 @@
-import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { mensajeError } from '../../core/http/mensaje-error';
+import { Component, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PersonaService } from './persona-service';
-import { TipoPersona } from './persona.model';
+import { TIPOS_DOCUMENTO_PERU, TipoDocumentoPeru, TipoPersona } from './persona.model';
 
 @Component({
   selector: 'app-persona-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './persona-form.html',
 })
 export class PersonaForm {
@@ -17,20 +19,34 @@ export class PersonaForm {
 
   protected readonly error = signal<string | null>(null);
   protected readonly enviando = signal(false);
-  private idPersona: number | null = null;
+  protected readonly tiposDocumento = signal<TipoDocumentoPeru[]>(TIPOS_DOCUMENTO_PERU);
+  protected idPersona: number | null = null;
 
   protected readonly form = this.fb.nonNullable.group({
-    tipoDocumento: ['', [Validators.required, Validators.maxLength(20)]],
-    numeroDocumento: ['', [Validators.required, Validators.maxLength(20)]],
+    tipoDocumento: ['DNI', [Validators.required]],
+    numeroDocumento: ['', [Validators.required, Validators.maxLength(20), (c: AbstractControl) => this.validarNumero(c)]],
     nombres: ['', [Validators.required, Validators.maxLength(100)]],
     apellidos: ['', [Validators.required, Validators.maxLength(100)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(150)]],
-    telefono: ['', [Validators.maxLength(20)]],
+    telefono: ['', [Validators.maxLength(20), Validators.pattern(/^\+?\d{6,15}$/)]],
     fechaNacimiento: [''],
     tipo: ['ESTUDIANTE' as TipoPersona, [Validators.required]],
   });
 
+  private readonly tipoElegido = toSignal(this.form.controls.tipoDocumento.valueChanges, {
+    initialValue: this.form.controls.tipoDocumento.value,
+  });
+  protected readonly documentoActual = computed(() =>
+    this.tiposDocumento().find((t) => t.codigo === this.tipoElegido()),
+  );
+
   constructor() {
+    this.service.tiposDocumento().subscribe({ next: (tipos) => tipos.length && this.tiposDocumento.set(tipos) });
+    // Cambiar de tipo vuelve a validar el numero ya escrito
+    this.form.controls.tipoDocumento.valueChanges.subscribe(() =>
+      this.form.controls.numeroDocumento.updateValueAndValidity(),
+    );
+
     const parametro = this.route.snapshot.paramMap.get('id');
     if (parametro) {
       this.idPersona = Number(parametro);
@@ -41,9 +57,18 @@ export class PersonaForm {
             telefono: persona.telefono ?? '',
             fechaNacimiento: persona.fechaNacimiento ?? '',
           }),
-        error: () => this.error.set('No se pudo cargar la persona.'),
+        error: (e) => this.error.set(mensajeError(e, 'No se pudo cargar la persona.')),
       });
     }
+  }
+
+  private validarNumero(control: AbstractControl): ValidationErrors | null {
+    const tipo = this.tiposDocumento?.().find((t) => t.codigo === this.form?.controls.tipoDocumento.value);
+    const numero = String(control.value ?? '').trim();
+    if (!tipo || !numero) {
+      return null;
+    }
+    return new RegExp(`^(?:${tipo.patron})$`).test(numero) ? null : { formato: tipo.formato };
   }
 
   protected guardar(): void {
@@ -56,6 +81,7 @@ export class PersonaForm {
     const valores = this.form.getRawValue();
     const request = {
       ...valores,
+      numeroDocumento: valores.numeroDocumento.trim().toUpperCase(),
       telefono: valores.telefono || null,
       fechaNacimiento: valores.fechaNacimiento || null,
     };
@@ -64,8 +90,8 @@ export class PersonaForm {
       : this.service.crear(request);
     peticion.subscribe({
       next: () => this.router.navigate(['/personas']),
-      error: () => {
-        this.error.set('No se pudo guardar la persona.');
+      error: (e) => {
+        this.error.set(mensajeError(e, 'No se pudo guardar la persona.'));
         this.enviando.set(false);
       },
     });

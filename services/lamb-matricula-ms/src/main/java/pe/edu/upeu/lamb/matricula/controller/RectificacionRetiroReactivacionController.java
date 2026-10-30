@@ -67,6 +67,17 @@ public class RectificacionRetiroReactivacionController {
         return solicitudRectificacionService.crear(request);
     }
 
+    @PutMapping("/solicitudes-rectificacion/{id}")
+    public SolicitudRectificacionResponse actualizarSolicitudRectificacion(@PathVariable Long id, @Valid @RequestBody SolicitudRectificacionRequest request) {
+        return solicitudRectificacionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/solicitudes-rectificacion/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarSolicitudRectificacion(@PathVariable Long id) {
+        solicitudRectificacionService.eliminar(id);
+    }
+
     // --- Retiro de oficio (item 74) ---
 
     @GetMapping("/retiros-oficio")
@@ -86,6 +97,17 @@ public class RectificacionRetiroReactivacionController {
     @Operation(summary = "Crear un retiro de oficio")
     public RetiroOficioResponse crearRetiroOficio(@Valid @RequestBody RetiroOficioRequest request) {
         return retiroOficioService.crear(request);
+    }
+
+    @PutMapping("/retiros-oficio/{id}")
+    public RetiroOficioResponse actualizarRetiroOficio(@PathVariable Long id, @Valid @RequestBody RetiroOficioRequest request) {
+        return retiroOficioService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/retiros-oficio/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarRetiroOficio(@PathVariable Long id) {
+        retiroOficioService.eliminar(id);
     }
 
     // --- Retiro por inasistencia (item 75, opcional segun universidad) ---
@@ -109,6 +131,17 @@ public class RectificacionRetiroReactivacionController {
         return retiroInasistenciaService.crear(request);
     }
 
+    @PutMapping("/retiros-inasistencia/{id}")
+    public RetiroInasistenciaResponse actualizarRetiroInasistencia(@PathVariable Long id, @Valid @RequestBody RetiroInasistenciaRequest request) {
+        return retiroInasistenciaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/retiros-inasistencia/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarRetiroInasistencia(@PathVariable Long id) {
+        retiroInasistenciaService.eliminar(id);
+    }
+
     // --- Reactivacion de matricula anulada (item 76) ---
 
     @GetMapping("/reactivaciones-matricula-anulada")
@@ -128,6 +161,17 @@ public class RectificacionRetiroReactivacionController {
     @Operation(summary = "Crear una reactivacion de matricula anulada")
     public ReactivacionMatriculaAnuladaResponse crearReactivacion(@Valid @RequestBody ReactivacionMatriculaAnuladaRequest request) {
         return reactivacionMatriculaAnuladaService.crear(request);
+    }
+
+    @PutMapping("/reactivaciones-matricula-anulada/{id}")
+    public ReactivacionMatriculaAnuladaResponse actualizarReactivacion(@PathVariable Long id, @Valid @RequestBody ReactivacionMatriculaAnuladaRequest request) {
+        return reactivacionMatriculaAnuladaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/reactivaciones-matricula-anulada/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarReactivacion(@PathVariable Long id) {
+        reactivacionMatriculaAnuladaService.eliminar(id);
     }
 
     // --- Anulacion masiva por impago (item 77) ---
@@ -151,6 +195,17 @@ public class RectificacionRetiroReactivacionController {
         return anulacionMasivaImpagoService.crear(request);
     }
 
+    @PutMapping("/anulaciones-masivas-impago/{id}")
+    public AnulacionMasivaImpagoResponse actualizarAnulacionMasiva(@PathVariable Long id, @Valid @RequestBody AnulacionMasivaImpagoRequest request) {
+        return anulacionMasivaImpagoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/anulaciones-masivas-impago/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAnulacionMasiva(@PathVariable Long id) {
+        anulacionMasivaImpagoService.eliminar(id);
+    }
+
     // --- Rehabilitacion de matricula (item 78, opcional segun universidad) ---
 
     @GetMapping("/rehabilitaciones-matricula")
@@ -170,5 +225,16 @@ public class RectificacionRetiroReactivacionController {
     @Operation(summary = "Crear una rehabilitacion de matricula")
     public RehabilitacionMatriculaResponse crearRehabilitacion(@Valid @RequestBody RehabilitacionMatriculaRequest request) {
         return rehabilitacionMatriculaService.crear(request);
+    }
+
+    @PutMapping("/rehabilitaciones-matricula/{id}")
+    public RehabilitacionMatriculaResponse actualizarRehabilitacion(@PathVariable Long id, @Valid @RequestBody RehabilitacionMatriculaRequest request) {
+        return rehabilitacionMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/rehabilitaciones-matricula/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarRehabilitacion(@PathVariable Long id) {
+        rehabilitacionMatriculaService.eliminar(id);
     }
 }

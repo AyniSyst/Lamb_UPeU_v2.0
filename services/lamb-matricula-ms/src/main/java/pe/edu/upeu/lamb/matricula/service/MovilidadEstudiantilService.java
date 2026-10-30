@@ -11,6 +11,7 @@ import pe.edu.upeu.lamb.matricula.mapper.MovilidadEstudiantilMapper;
 import pe.edu.upeu.lamb.matricula.repository.MovilidadEstudiantilRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * CRUD opcional (depende de la universidad): movilidad / intercambio estudiantil.
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MovilidadEstudiantilService {
 
@@ -36,6 +38,16 @@ public class MovilidadEstudiantilService {
     public MovilidadEstudiantilResponse crear(MovilidadEstudiantilRequest request) {
         MovilidadEstudiantil entity = mapper.toEntity(request);
         return mapper.toResponse(repository.save(entity));
+    }
+
+    public MovilidadEstudiantilResponse actualizar(Long id, MovilidadEstudiantilRequest request) {
+        MovilidadEstudiantil existente = buscarOFallar(id);
+        MovilidadEstudiantil entity = mapper.toEntity(request);
+        return mapper.toResponse(repository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        repository.delete(buscarOFallar(id));
     }
 
     MovilidadEstudiantil buscarOFallar(Long id) {

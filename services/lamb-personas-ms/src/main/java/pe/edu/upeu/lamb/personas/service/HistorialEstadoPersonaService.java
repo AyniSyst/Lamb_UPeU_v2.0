@@ -37,6 +37,17 @@ public class HistorialEstadoPersonaService {
         return historialEstadoPersonaMapper.toResponse(historialEstadoPersonaRepository.save(entity));
     }
 
+    public HistorialEstadoPersonaResponse actualizar(Long id, HistorialEstadoPersonaRequest request) {
+        HistorialEstadoPersona existente = buscarOFallar(id);
+        HistorialEstadoPersona entity = historialEstadoPersonaMapper.toEntity(request);
+        entity.setFechaCambio(Instant.now());
+        return historialEstadoPersonaMapper.toResponse(historialEstadoPersonaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        historialEstadoPersonaRepository.delete(buscarOFallar(id));
+    }
+
     private HistorialEstadoPersona buscarOFallar(Long id) {
         return historialEstadoPersonaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Historial de estado de persona no encontrado: " + id));

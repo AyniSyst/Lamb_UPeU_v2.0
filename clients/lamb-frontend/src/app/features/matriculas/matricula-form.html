@@ -1,35 +1,65 @@
-<h2>Nueva matricula</h2>
+<h2>{{ idMatricula ? 'Editar matricula' : 'Nueva matricula' }}</h2>
 
 @if (error()) {
   <p class="error">{{ error() }}</p>
 }
 
-<form [formGroup]="form" (ngSubmit)="guardar()">
+<form class="formulario" [formGroup]="form" (ngSubmit)="guardar()">
   <div>
-    <label for="idPersona">ID Persona</label>
-    <input id="idPersona" type="number" formControlName="idPersona" />
+    <label for="idPersona">Estudiante</label>
+    @if (estudiantes().length) {
+      <select id="idPersona" formControlName="idPersona">
+        <option [ngValue]="null" disabled>Selecciona un estudiante</option>
+        @for (p of estudiantes(); track p.id) {
+          <option [ngValue]="p.id">{{ p.apellidos }}, {{ p.nombres }} ({{ p.tipoDocumento }} {{ p.numeroDocumento }})</option>
+        }
+      </select>
+    } @else {
+      <input id="idPersona" type="number" formControlName="idPersona" [readonly]="matriculaPropia" />
+      @if (matriculaPropia) {
+        <small class="ayuda">Te matriculas a ti mismo (persona {{ auth.idPersona() }}).</small>
+      }
+    }
   </div>
 
   <div>
     <label for="periodo">Periodo</label>
-    <input id="periodo" type="text" formControlName="periodo" placeholder="2026-I" />
+    <input id="periodo" type="text" formControlName="periodo" placeholder="Se completa al elegir el grupo" />
   </div>
 
-  <h3>Secciones</h3>
+  <h3>Cursos (grupos abiertos)</h3>
   <div formArrayName="detalles">
     @for (detalle of detalles.controls; track $index) {
-      <div [formGroupName]="$index">
-        <label>ID Seccion</label>
-        <input type="number" formControlName="idSeccion" />
-        <label>Creditos</label>
-        <input type="number" formControlName="creditos" />
-        <button type="button" (click)="quitarDetalle($index)">Quitar</button>
+      <div class="fila" [formGroupName]="$index">
+        <div>
+          <label>Grupo</label>
+          <select formControlName="idSeccion" (change)="alElegirGrupo($index)">
+            <option [ngValue]="null" disabled>Selecciona un grupo</option>
+            @for (g of gruposAbiertos(); track g.id) {
+              <option [ngValue]="g.id">{{ g.curso?.codigo }} {{ g.curso?.nombre }} · {{ g.codigo }} · {{ g.periodo }}</option>
+            }
+          </select>
+        </div>
+        <div>
+          <label>Creditos</label>
+          <input type="number" min="1" formControlName="creditos" />
+        </div>
+        @if (detalles.length > 1) {
+          <button type="button" class="peligro" (click)="quitarDetalle($index)">Quitar</button>
+        }
       </div>
     }
   </div>
-  <button type="button" (click)="agregarDetalle()">Agregar seccion</button>
+  <div class="acciones">
+    <button type="button" (click)="agregarDetalle()">Agregar curso</button>
+    <span>Total: <strong>{{ totalCreditos }}</strong> creditos</span>
+  </div>
+  @if (!gruposAbiertos().length) {
+    <small class="ayuda">No hay grupos ABIERTOS. Crea uno en Grupos (necesita docente TITULAR para que se abra su acta).</small>
+  }
 
-  <div>
-    <button type="submit" [disabled]="enviando()">Registrar</button>
+  <div class="acciones">
+    <button type="submit" [disabled]="enviando()">{{ enviando() ? 'Guardando...' : 'Guardar' }}</button>
+    <a routerLink="/matriculas">Cancelar</a>
   </div>
 </form>

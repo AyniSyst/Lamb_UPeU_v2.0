@@ -47,6 +47,23 @@ public class TarifarioEscuelaCicloService {
         return tarifarioEscuelaCicloMapper.toResponse(tarifarioEscuelaCicloRepository.save(entity));
     }
 
+    public TarifarioEscuelaCicloResponse actualizar(Long id, TarifarioEscuelaCicloRequest request) {
+        TarifarioEscuelaCiclo existente = buscarOFallar(id);
+        ConceptoPago conceptoPago = conceptoPagoRepository.findById(request.getIdConceptoPago())
+                .orElseThrow(() -> new ResourceNotFoundException("Concepto de pago no encontrado: " + request.getIdConceptoPago()));
+        TarifarioEscuelaCiclo entity = TarifarioEscuelaCiclo.builder()
+                .conceptoPago(conceptoPago)
+                .idEscuela(request.getIdEscuela())
+                .ciclo(request.getCiclo())
+                .monto(request.getMonto())
+                .build();
+        return tarifarioEscuelaCicloMapper.toResponse(tarifarioEscuelaCicloRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        tarifarioEscuelaCicloRepository.delete(buscarOFallar(id));
+    }
+
     private TarifarioEscuelaCiclo buscarOFallar(Long id) {
         return tarifarioEscuelaCicloRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tarifario de escuela y ciclo no encontrado: " + id));

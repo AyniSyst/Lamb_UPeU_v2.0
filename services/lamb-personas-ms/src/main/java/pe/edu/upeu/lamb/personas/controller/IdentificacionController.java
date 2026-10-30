@@ -45,6 +45,17 @@ public class IdentificacionController {
         return tipoDocumentoIdentidadService.crear(request);
     }
 
+    @PutMapping("/tipos-documento/{id}")
+    public TipoDocumentoIdentidadResponse actualizarTipoDocumento(@PathVariable Long id, @Valid @RequestBody TipoDocumentoIdentidadRequest request) {
+        return tipoDocumentoIdentidadService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/tipos-documento/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTipoDocumento(@PathVariable Long id) {
+        tipoDocumentoIdentidadService.eliminar(id);
+    }
+
     // ---- DocumentoIdentidad ----
     @GetMapping("/documentos")
     @Operation(summary = "Listar documentos de identidad")
@@ -63,6 +74,17 @@ public class IdentificacionController {
     @Operation(summary = "Crear documento de identidad")
     public DocumentoIdentidadResponse crearDocumento(@Valid @RequestBody DocumentoIdentidadRequest request) {
         return documentoIdentidadService.crear(request);
+    }
+
+    @PutMapping("/documentos/{id}")
+    public DocumentoIdentidadResponse actualizarDocumento(@PathVariable Long id, @Valid @RequestBody DocumentoIdentidadRequest request) {
+        return documentoIdentidadService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/documentos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarDocumento(@PathVariable Long id) {
+        documentoIdentidadService.eliminar(id);
     }
 
     // ---- CodigoInstitucional ----
@@ -85,6 +107,17 @@ public class IdentificacionController {
         return codigoInstitucionalService.crear(request);
     }
 
+    @PutMapping("/codigos-institucionales/{id}")
+    public CodigoInstitucionalResponse actualizarCodigo(@PathVariable Long id, @Valid @RequestBody CodigoInstitucionalRequest request) {
+        return codigoInstitucionalService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/codigos-institucionales/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCodigo(@PathVariable Long id) {
+        codigoInstitucionalService.eliminar(id);
+    }
+
     // ---- HistorialDocumentoIdentidad ----
     @GetMapping("/historial-documentos")
     @Operation(summary = "Listar historial de documentos de identidad")
@@ -103,6 +136,17 @@ public class IdentificacionController {
     @Operation(summary = "Crear historial de documento de identidad")
     public HistorialDocumentoIdentidadResponse crearHistorialDocumento(@Valid @RequestBody HistorialDocumentoIdentidadRequest request) {
         return historialDocumentoIdentidadService.crear(request);
+    }
+
+    @PutMapping("/historial-documentos/{id}")
+    public HistorialDocumentoIdentidadResponse actualizarHistorialDocumento(@PathVariable Long id, @Valid @RequestBody HistorialDocumentoIdentidadRequest request) {
+        return historialDocumentoIdentidadService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/historial-documentos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarHistorialDocumento(@PathVariable Long id) {
+        historialDocumentoIdentidadService.eliminar(id);
     }
 
     // ---- ValidacionIdentidad ----
@@ -125,6 +169,17 @@ public class IdentificacionController {
         return validacionIdentidadService.crear(request);
     }
 
+    @PutMapping("/validaciones/{id}")
+    public ValidacionIdentidadResponse actualizarValidacion(@PathVariable Long id, @Valid @RequestBody ValidacionIdentidadRequest request) {
+        return validacionIdentidadService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/validaciones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarValidacion(@PathVariable Long id) {
+        validacionIdentidadService.eliminar(id);
+    }
+
     // ---- IdentificacionTributaria ----
     @GetMapping("/tributarias")
     @Operation(summary = "Listar identificaciones tributarias")
@@ -145,6 +200,17 @@ public class IdentificacionController {
         return identificacionTributariaService.crear(request);
     }
 
+    @PutMapping("/tributarias/{id}")
+    public IdentificacionTributariaResponse actualizarTributaria(@PathVariable Long id, @Valid @RequestBody IdentificacionTributariaRequest request) {
+        return identificacionTributariaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/tributarias/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTributaria(@PathVariable Long id) {
+        identificacionTributariaService.eliminar(id);
+    }
+
     // ---- CorreccionIdentificacion ----
     @GetMapping("/correcciones")
     @Operation(summary = "Listar correcciones de identificacion")
@@ -163,5 +229,16 @@ public class IdentificacionController {
     @Operation(summary = "Crear correccion de identificacion")
     public CorreccionIdentificacionResponse crearCorreccion(@Valid @RequestBody CorreccionIdentificacionRequest request) {
         return correccionIdentificacionService.crear(request);
+    }
+
+    @PutMapping("/correcciones/{id}")
+    public CorreccionIdentificacionResponse actualizarCorreccion(@PathVariable Long id, @Valid @RequestBody CorreccionIdentificacionRequest request) {
+        return correccionIdentificacionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/correcciones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCorreccion(@PathVariable Long id) {
+        correccionIdentificacionService.eliminar(id);
     }
 }

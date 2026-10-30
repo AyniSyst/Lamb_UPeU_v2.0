@@ -7,6 +7,13 @@ export interface PlanEstudioRequest {
   idModalidad: number | null;
 }
 
+export interface PlanCursoRequest {
+  idCursoCatalogo: number;
+  ciclo: number;
+  idTipoCurso: number;
+  idAreaCurricular: number | null;
+}
+
 export interface PlanCursoResponse {
   id: number;
   idCursoCatalogo: number;

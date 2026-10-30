@@ -1,3 +1,4 @@
+import { mensajeError } from '../../core/http/mensaje-error';
 import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../core/auth/auth-service';
 import { ActaService } from './acta-service';
@@ -23,7 +24,7 @@ export class ActaList {
     this.error.set(null);
     this.service.listar().subscribe({
       next: (data) => this.actas.set(data),
-      error: () => this.error.set('No se pudieron cargar las actas.'),
+      error: (e) => this.error.set(mensajeError(e, 'No se pudieron cargar las actas.')),
     });
   }
 
@@ -31,7 +32,7 @@ export class ActaList {
     this.errorAccion.set(null);
     this.service.cerrar(acta.id).subscribe({
       next: () => this.cargar(),
-      error: () => this.errorAccion.set('No se pudo cerrar el acta.'),
+      error: (e) => this.errorAccion.set(mensajeError(e, 'No se pudo cerrar el acta.')),
     });
   }
 }

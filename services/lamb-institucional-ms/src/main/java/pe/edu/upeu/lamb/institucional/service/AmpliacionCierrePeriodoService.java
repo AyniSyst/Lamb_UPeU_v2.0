@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.AmpliacionCierrePeriodoMapper;
 import pe.edu.upeu.lamb.institucional.repository.AmpliacionCierrePeriodoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AmpliacionCierrePeriodoService {
 
@@ -31,6 +33,16 @@ public class AmpliacionCierrePeriodoService {
     public AmpliacionCierrePeriodoResponse crear(AmpliacionCierrePeriodoRequest request) {
         AmpliacionCierrePeriodo entity = ampliacionCierrePeriodoMapper.toEntity(request);
         return ampliacionCierrePeriodoMapper.toResponse(ampliacionCierrePeriodoRepository.save(entity));
+    }
+
+    public AmpliacionCierrePeriodoResponse actualizar(Long id, AmpliacionCierrePeriodoRequest request) {
+        AmpliacionCierrePeriodo existente = buscarOFallar(id);
+        AmpliacionCierrePeriodo entity = ampliacionCierrePeriodoMapper.toEntity(request);
+        return ampliacionCierrePeriodoMapper.toResponse(ampliacionCierrePeriodoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        ampliacionCierrePeriodoRepository.delete(buscarOFallar(id));
     }
 
     private AmpliacionCierrePeriodo buscarOFallar(Long id) {

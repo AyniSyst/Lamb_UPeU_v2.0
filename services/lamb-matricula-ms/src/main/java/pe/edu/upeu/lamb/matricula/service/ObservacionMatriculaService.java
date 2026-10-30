@@ -12,9 +12,11 @@ import pe.edu.upeu.lamb.matricula.repository.ObservacionMatriculaRepository;
 
 import java.time.Instant;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ObservacionMatriculaService {
 
@@ -35,6 +37,17 @@ public class ObservacionMatriculaService {
         ObservacionMatricula entity = observacionMatriculaMapper.toEntity(request);
         entity.setFechaObservacion(Instant.now());
         return observacionMatriculaMapper.toResponse(observacionMatriculaRepository.save(entity));
+    }
+
+    public ObservacionMatriculaResponse actualizar(Long id, ObservacionMatriculaRequest request) {
+        ObservacionMatricula existente = buscarOFallar(id);
+        ObservacionMatricula entity = observacionMatriculaMapper.toEntity(request);
+        entity.setFechaObservacion(Instant.now());
+        return observacionMatriculaMapper.toResponse(observacionMatriculaRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        observacionMatriculaRepository.delete(buscarOFallar(id));
     }
 
     private ObservacionMatricula buscarOFallar(Long id) {

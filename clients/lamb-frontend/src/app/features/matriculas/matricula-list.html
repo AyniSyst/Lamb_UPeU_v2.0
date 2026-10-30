@@ -3,10 +3,19 @@
 @if (error()) {
   <p class="error">{{ error() }}</p>
 }
-
 @if (errorAccion()) {
   <p class="error">{{ errorAccion() }}</p>
 }
+@if (exito()) {
+  <p class="exito">{{ exito() }}</p>
+}
+
+<div class="barra">
+  @if (auth.tieneRol('ADMIN', 'COORDINADOR', 'ESTUDIANTE')) {
+    <a class="boton primario" routerLink="/matriculas/nueva">Nueva matricula</a>
+  }
+  <button type="button" (click)="cargar()">Actualizar</button>
+</div>
 
 <table>
   <thead>
@@ -16,7 +25,7 @@
       <th>Periodo</th>
       <th>Fecha</th>
       <th>Estado</th>
-      <th>Secciones</th>
+      <th>Cursos</th>
       @if (auth.tieneRol('ADMIN', 'COORDINADOR', 'ESTUDIANTE')) {
         <th>Acciones</th>
       }
@@ -28,11 +37,11 @@
         <td>{{ matricula.id }}</td>
         <td>{{ matricula.idPersona }}</td>
         <td>{{ matricula.periodo }}</td>
-        <td>{{ matricula.fecha }}</td>
-        <td>{{ matricula.estado }}</td>
+        <td>{{ matricula.fecha.slice(0, 16).replace('T', ' ') }}</td>
+        <td><span class="estado" [class]="matricula.estado">{{ matricula.estado }}</span></td>
         <td>
           @for (detalle of matricula.detalles; track detalle.id) {
-            <span>{{ detalle.idSeccion }} ({{ detalle.creditos }} cr)</span>
+            <div>{{ nombreGrupo(detalle.idSeccion) }} · {{ detalle.creditos }} cr</div>
           } @empty {
             -
           }
@@ -41,10 +50,11 @@
           <td>
             @if (matricula.estado === 'REGISTRADA') {
               <button type="button" (click)="confirmar(matricula)">Confirmar</button>
-              <button type="button" (click)="anular(matricula)">Anular</button>
+              <a class="boton" [routerLink]="['/matriculas', matricula.id, 'editar']">Editar</a>
+              <button type="button" class="peligro" (click)="eliminar(matricula)">Eliminar</button>
             }
             @if (matricula.estado === 'CONFIRMADA') {
-              <button type="button" (click)="anular(matricula)">Anular</button>
+              <button type="button" class="peligro" (click)="anular(matricula)">Anular</button>
             }
           </td>
         }

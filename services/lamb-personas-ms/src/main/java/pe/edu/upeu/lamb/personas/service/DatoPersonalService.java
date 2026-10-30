@@ -35,6 +35,16 @@ public class DatoPersonalService {
         return datoPersonalMapper.toResponse(datoPersonalRepository.save(entity));
     }
 
+    public DatoPersonalResponse actualizar(Long id, DatoPersonalRequest request) {
+        DatoPersonal existente = buscarOFallar(id);
+        DatoPersonal entity = datoPersonalMapper.toEntity(request);
+        return datoPersonalMapper.toResponse(datoPersonalRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        datoPersonalRepository.delete(buscarOFallar(id));
+    }
+
     private DatoPersonal buscarOFallar(Long id) {
         return datoPersonalRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Dato personal no encontrado: " + id));

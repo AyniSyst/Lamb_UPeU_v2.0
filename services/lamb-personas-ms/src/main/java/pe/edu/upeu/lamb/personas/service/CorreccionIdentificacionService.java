@@ -37,6 +37,17 @@ public class CorreccionIdentificacionService {
         return correccionIdentificacionMapper.toResponse(correccionIdentificacionRepository.save(entity));
     }
 
+    public CorreccionIdentificacionResponse actualizar(Long id, CorreccionIdentificacionRequest request) {
+        CorreccionIdentificacion existente = buscarOFallar(id);
+        CorreccionIdentificacion entity = correccionIdentificacionMapper.toEntity(request);
+        entity.setFechaCorreccion(Instant.now());
+        return correccionIdentificacionMapper.toResponse(correccionIdentificacionRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        correccionIdentificacionRepository.delete(buscarOFallar(id));
+    }
+
     private CorreccionIdentificacion buscarOFallar(Long id) {
         return correccionIdentificacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Correccion de identificacion no encontrada: " + id));

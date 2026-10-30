@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.EscuelaProfesionalMapper;
 import pe.edu.upeu.lamb.institucional.repository.EscuelaProfesionalRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class EscuelaProfesionalService {
 
@@ -31,6 +33,16 @@ public class EscuelaProfesionalService {
     public EscuelaProfesionalResponse crear(EscuelaProfesionalRequest request) {
         EscuelaProfesional entity = escuelaProfesionalMapper.toEntity(request);
         return escuelaProfesionalMapper.toResponse(escuelaProfesionalRepository.save(entity));
+    }
+
+    public EscuelaProfesionalResponse actualizar(Long id, EscuelaProfesionalRequest request) {
+        EscuelaProfesional existente = buscarOFallar(id);
+        EscuelaProfesional entity = escuelaProfesionalMapper.toEntity(request);
+        return escuelaProfesionalMapper.toResponse(escuelaProfesionalRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        escuelaProfesionalRepository.delete(buscarOFallar(id));
     }
 
     private EscuelaProfesional buscarOFallar(Long id) {

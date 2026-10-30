@@ -11,9 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ListaEsperaSeccionService {
 
@@ -33,6 +35,16 @@ public class ListaEsperaSeccionService {
     public ListaEsperaSeccionResponse crear(ListaEsperaSeccionRequest request) {
         ListaEsperaSeccion entity = listaEsperaSeccionMapper.toEntity(request);
         return listaEsperaSeccionMapper.toResponse(listaEsperaSeccionRepository.save(entity));
+    }
+
+    public ListaEsperaSeccionResponse actualizar(Long id, ListaEsperaSeccionRequest request) {
+        ListaEsperaSeccion existente = buscarOFallar(id);
+        ListaEsperaSeccion entity = listaEsperaSeccionMapper.toEntity(request);
+        return listaEsperaSeccionMapper.toResponse(listaEsperaSeccionRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        listaEsperaSeccionRepository.delete(buscarOFallar(id));
     }
 
     private ListaEsperaSeccion buscarOFallar(Long id) {

@@ -10,8 +10,10 @@ import pe.edu.upeu.lamb.institucional.mapper.DepartamentoAcademicoMapper;
 import pe.edu.upeu.lamb.institucional.repository.DepartamentoAcademicoRepository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class DepartamentoAcademicoService {
 
@@ -31,6 +33,16 @@ public class DepartamentoAcademicoService {
     public DepartamentoAcademicoResponse crear(DepartamentoAcademicoRequest request) {
         DepartamentoAcademico entity = departamentoAcademicoMapper.toEntity(request);
         return departamentoAcademicoMapper.toResponse(departamentoAcademicoRepository.save(entity));
+    }
+
+    public DepartamentoAcademicoResponse actualizar(Long id, DepartamentoAcademicoRequest request) {
+        DepartamentoAcademico existente = buscarOFallar(id);
+        DepartamentoAcademico entity = departamentoAcademicoMapper.toEntity(request);
+        return departamentoAcademicoMapper.toResponse(departamentoAcademicoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        departamentoAcademicoRepository.delete(buscarOFallar(id));
     }
 
     private DepartamentoAcademico buscarOFallar(Long id) {

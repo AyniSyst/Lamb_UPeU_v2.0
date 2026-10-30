@@ -73,6 +73,17 @@ public class FacultadEscuelaController {
         return escuelaProfesionalService.crear(request);
     }
 
+    @PutMapping("/escuelas-profesionales/{id}")
+    public EscuelaProfesionalResponse actualizarEscuelaProfesional(@PathVariable Long id, @Valid @RequestBody EscuelaProfesionalRequest request) {
+        return escuelaProfesionalService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/escuelas-profesionales/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarEscuelaProfesional(@PathVariable Long id) {
+        escuelaProfesionalService.eliminar(id);
+    }
+
     // --- Departamento academico (item 14) ---
 
     @GetMapping("/departamentos-academicos")
@@ -92,6 +103,17 @@ public class FacultadEscuelaController {
     @Operation(summary = "Crear un departamento academico")
     public DepartamentoAcademicoResponse crearDepartamentoAcademico(@Valid @RequestBody DepartamentoAcademicoRequest request) {
         return departamentoAcademicoService.crear(request);
+    }
+
+    @PutMapping("/departamentos-academicos/{id}")
+    public DepartamentoAcademicoResponse actualizarDepartamentoAcademico(@PathVariable Long id, @Valid @RequestBody DepartamentoAcademicoRequest request) {
+        return departamentoAcademicoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/departamentos-academicos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarDepartamentoAcademico(@PathVariable Long id) {
+        departamentoAcademicoService.eliminar(id);
     }
 
     // --- Autoridad de facultad (item 15) ---
@@ -115,6 +137,17 @@ public class FacultadEscuelaController {
         return autoridadFacultadService.crear(request);
     }
 
+    @PutMapping("/autoridades-facultad/{id}")
+    public AutoridadFacultadResponse actualizarAutoridadFacultad(@PathVariable Long id, @Valid @RequestBody AutoridadFacultadRequest request) {
+        return autoridadFacultadService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/autoridades-facultad/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarAutoridadFacultad(@PathVariable Long id) {
+        autoridadFacultadService.eliminar(id);
+    }
+
     // --- Cambio de unidad academica (item 16) ---
 
     @GetMapping("/cambios-unidad-academica")
@@ -134,6 +167,17 @@ public class FacultadEscuelaController {
     @Operation(summary = "Crear un cambio de unidad academica")
     public CambioUnidadAcademicaResponse crearCambioUnidadAcademica(@Valid @RequestBody CambioUnidadAcademicaRequest request) {
         return cambioUnidadAcademicaService.crear(request);
+    }
+
+    @PutMapping("/cambios-unidad-academica/{id}")
+    public CambioUnidadAcademicaResponse actualizarCambioUnidadAcademica(@PathVariable Long id, @Valid @RequestBody CambioUnidadAcademicaRequest request) {
+        return cambioUnidadAcademicaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/cambios-unidad-academica/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCambioUnidadAcademica(@PathVariable Long id) {
+        cambioUnidadAcademicaService.eliminar(id);
     }
 
     // --- Unidad administrativa (item 17, opcional) ---
@@ -157,6 +201,17 @@ public class FacultadEscuelaController {
         return unidadAdministrativaService.crear(request);
     }
 
+    @PutMapping("/unidades-administrativas/{id}")
+    public UnidadAdministrativaResponse actualizarUnidadAdministrativa(@PathVariable Long id, @Valid @RequestBody UnidadAdministrativaRequest request) {
+        return unidadAdministrativaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/unidades-administrativas/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarUnidadAdministrativa(@PathVariable Long id) {
+        unidadAdministrativaService.eliminar(id);
+    }
+
     // --- Organigrama institucional (item 18, opcional) ---
 
     @GetMapping("/organigramas")
@@ -176,5 +231,16 @@ public class FacultadEscuelaController {
     @Operation(summary = "Crear un organigrama institucional")
     public OrganigramaInstitucionalResponse crearOrganigrama(@Valid @RequestBody OrganigramaInstitucionalRequest request) {
         return organigramaInstitucionalService.crear(request);
+    }
+
+    @PutMapping("/organigramas/{id}")
+    public OrganigramaInstitucionalResponse actualizarOrganigrama(@PathVariable Long id, @Valid @RequestBody OrganigramaInstitucionalRequest request) {
+        return organigramaInstitucionalService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/organigramas/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarOrganigrama(@PathVariable Long id) {
+        organigramaInstitucionalService.eliminar(id);
     }
 }

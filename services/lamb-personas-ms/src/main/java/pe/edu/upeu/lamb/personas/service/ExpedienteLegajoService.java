@@ -37,6 +37,17 @@ public class ExpedienteLegajoService {
         return expedienteLegajoMapper.toResponse(expedienteLegajoRepository.save(entity));
     }
 
+    public ExpedienteLegajoResponse actualizar(Long id, ExpedienteLegajoRequest request) {
+        ExpedienteLegajo existente = buscarOFallar(id);
+        ExpedienteLegajo entity = expedienteLegajoMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return expedienteLegajoMapper.toResponse(expedienteLegajoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        expedienteLegajoRepository.delete(buscarOFallar(id));
+    }
+
     private ExpedienteLegajo buscarOFallar(Long id) {
         return expedienteLegajoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Expediente/legajo no encontrado: " + id));

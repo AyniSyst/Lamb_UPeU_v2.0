@@ -47,6 +47,17 @@ public class ContactoDireccionController {
         return tipoContactoService.crear(request);
     }
 
+    @PutMapping("/tipos-contacto/{id}")
+    public TipoContactoResponse actualizarTipoContacto(@PathVariable Long id, @Valid @RequestBody TipoContactoRequest request) {
+        return tipoContactoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/tipos-contacto/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTipoContacto(@PathVariable Long id) {
+        tipoContactoService.eliminar(id);
+    }
+
     // ---- Contacto ----
     @Operation(summary = "Listar contactos")
     @GetMapping("/contactos")
@@ -65,6 +76,17 @@ public class ContactoDireccionController {
     @ResponseStatus(HttpStatus.CREATED)
     public ContactoResponse crearContacto(@Valid @RequestBody ContactoRequest request) {
         return contactoService.crear(request);
+    }
+
+    @PutMapping("/contactos/{id}")
+    public ContactoResponse actualizarContacto(@PathVariable Long id, @Valid @RequestBody ContactoRequest request) {
+        return contactoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/contactos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarContacto(@PathVariable Long id) {
+        contactoService.eliminar(id);
     }
 
     // ---- Tipo de direccion ----
@@ -87,6 +109,17 @@ public class ContactoDireccionController {
         return tipoDireccionService.crear(request);
     }
 
+    @PutMapping("/tipos-direccion/{id}")
+    public TipoDireccionResponse actualizarTipoDireccion(@PathVariable Long id, @Valid @RequestBody TipoDireccionRequest request) {
+        return tipoDireccionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/tipos-direccion/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarTipoDireccion(@PathVariable Long id) {
+        tipoDireccionService.eliminar(id);
+    }
+
     // ---- Direccion ----
     @Operation(summary = "Listar direcciones")
     @GetMapping("/direcciones")
@@ -105,6 +138,17 @@ public class ContactoDireccionController {
     @ResponseStatus(HttpStatus.CREATED)
     public DireccionResponse crearDireccion(@Valid @RequestBody DireccionRequest request) {
         return direccionService.crear(request);
+    }
+
+    @PutMapping("/direcciones/{id}")
+    public DireccionResponse actualizarDireccion(@PathVariable Long id, @Valid @RequestBody DireccionRequest request) {
+        return direccionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/direcciones/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarDireccion(@PathVariable Long id) {
+        direccionService.eliminar(id);
     }
 
     // ---- Correo institucional ----
@@ -127,6 +171,17 @@ public class ContactoDireccionController {
         return correoInstitucionalService.crear(request);
     }
 
+    @PutMapping("/correos-institucionales/{id}")
+    public CorreoInstitucionalResponse actualizarCorreoInstitucional(@PathVariable Long id, @Valid @RequestBody CorreoInstitucionalRequest request) {
+        return correoInstitucionalService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/correos-institucionales/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCorreoInstitucional(@PathVariable Long id) {
+        correoInstitucionalService.eliminar(id);
+    }
+
     // ---- Contacto de emergencia ----
     @Operation(summary = "Listar contactos de emergencia")
     @GetMapping("/contactos-emergencia")
@@ -145,6 +200,17 @@ public class ContactoDireccionController {
     @ResponseStatus(HttpStatus.CREATED)
     public ContactoEmergenciaResponse crearContactoEmergencia(@Valid @RequestBody ContactoEmergenciaRequest request) {
         return contactoEmergenciaService.crear(request);
+    }
+
+    @PutMapping("/contactos-emergencia/{id}")
+    public ContactoEmergenciaResponse actualizarContactoEmergencia(@PathVariable Long id, @Valid @RequestBody ContactoEmergenciaRequest request) {
+        return contactoEmergenciaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/contactos-emergencia/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarContactoEmergencia(@PathVariable Long id) {
+        contactoEmergenciaService.eliminar(id);
     }
 
     // ---- Verificacion de contacto ----
@@ -167,6 +233,17 @@ public class ContactoDireccionController {
         return verificacionContactoService.crear(request);
     }
 
+    @PutMapping("/verificaciones-contacto/{id}")
+    public VerificacionContactoResponse actualizarVerificacionContacto(@PathVariable Long id, @Valid @RequestBody VerificacionContactoRequest request) {
+        return verificacionContactoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/verificaciones-contacto/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarVerificacionContacto(@PathVariable Long id) {
+        verificacionContactoService.eliminar(id);
+    }
+
     // ---- Preferencia de comunicacion ----
     @Operation(summary = "Listar preferencias de comunicacion")
     @GetMapping("/preferencias-comunicacion")
@@ -187,6 +264,17 @@ public class ContactoDireccionController {
         return preferenciaComunicacionService.crear(request);
     }
 
+    @PutMapping("/preferencias-comunicacion/{id}")
+    public PreferenciaComunicacionResponse actualizarPreferenciaComunicacion(@PathVariable Long id, @Valid @RequestBody PreferenciaComunicacionRequest request) {
+        return preferenciaComunicacionService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/preferencias-comunicacion/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarPreferenciaComunicacion(@PathVariable Long id) {
+        preferenciaComunicacionService.eliminar(id);
+    }
+
     // ---- Red social ----
     @Operation(summary = "Listar redes sociales")
     @GetMapping("/redes-sociales")
@@ -205,5 +293,16 @@ public class ContactoDireccionController {
     @ResponseStatus(HttpStatus.CREATED)
     public RedSocialResponse crearRedSocial(@Valid @RequestBody RedSocialRequest request) {
         return redSocialService.crear(request);
+    }
+
+    @PutMapping("/redes-sociales/{id}")
+    public RedSocialResponse actualizarRedSocial(@PathVariable Long id, @Valid @RequestBody RedSocialRequest request) {
+        return redSocialService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/redes-sociales/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarRedSocial(@PathVariable Long id) {
+        redSocialService.eliminar(id);
     }
 }

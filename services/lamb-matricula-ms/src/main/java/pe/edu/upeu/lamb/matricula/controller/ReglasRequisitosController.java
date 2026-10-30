@@ -53,6 +53,17 @@ public class ReglasRequisitosController {
         return requisitoPorTipoMatriculaService.crear(request);
     }
 
+    @PutMapping("/requisitos-por-tipo/{id}")
+    public RequisitoPorTipoMatriculaResponse actualizarRequisito(@PathVariable Long id, @Valid @RequestBody RequisitoPorTipoMatriculaRequest request) {
+        return requisitoPorTipoMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/requisitos-por-tipo/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarRequisito(@PathVariable Long id) {
+        requisitoPorTipoMatriculaService.eliminar(id);
+    }
+
     // --- Bloqueo de matricula (item 13) ---
 
     @GetMapping("/bloqueos")
@@ -72,6 +83,17 @@ public class ReglasRequisitosController {
     @Operation(summary = "Crear un bloqueo de matricula")
     public BloqueoMatriculaResponse crearBloqueo(@Valid @RequestBody BloqueoMatriculaRequest request) {
         return bloqueoMatriculaService.crear(request);
+    }
+
+    @PutMapping("/bloqueos/{id}")
+    public BloqueoMatriculaResponse actualizarBloqueo(@PathVariable Long id, @Valid @RequestBody BloqueoMatriculaRequest request) {
+        return bloqueoMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/bloqueos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarBloqueo(@PathVariable Long id) {
+        bloqueoMatriculaService.eliminar(id);
     }
 
     @PostMapping("/bloqueos/{id}/levantar")
@@ -99,5 +121,16 @@ public class ReglasRequisitosController {
     @Operation(summary = "Crear un compromiso de matricula")
     public CompromisoMatriculaResponse crearCompromiso(@Valid @RequestBody CompromisoMatriculaRequest request) {
         return compromisoMatriculaService.crear(request);
+    }
+
+    @PutMapping("/compromisos/{id}")
+    public CompromisoMatriculaResponse actualizarCompromiso(@PathVariable Long id, @Valid @RequestBody CompromisoMatriculaRequest request) {
+        return compromisoMatriculaService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/compromisos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarCompromiso(@PathVariable Long id) {
+        compromisoMatriculaService.eliminar(id);
     }
 }

@@ -1,0 +1,54 @@
+<form class="formulario" [formGroup]="form()" (ngSubmit)="guardar()">
+  @for (campo of campos(); track campo.nombre) {
+    <div>
+      <label [for]="'campo-' + campo.nombre">
+        {{ campo.etiqueta }}@if (campo.requerido) {<span class="error"> *</span>}
+      </label>
+      @switch (campo.tipo) {
+        @case ('select') {
+          <select [id]="'campo-' + campo.nombre" [formControlName]="campo.nombre">
+            @if (!campo.requerido) {
+              <option value="">-</option>
+            }
+            @for (op of campo.opciones; track op) {
+              <option [value]="op">{{ op }}</option>
+            }
+          </select>
+        }
+        @case ('checkbox') {
+          <input [id]="'campo-' + campo.nombre" type="checkbox" [formControlName]="campo.nombre" />
+        }
+        @case ('textarea') {
+          <textarea [id]="'campo-' + campo.nombre" rows="3" [formControlName]="campo.nombre"></textarea>
+        }
+        @case ('json') {
+          <textarea [id]="'campo-' + campo.nombre" rows="5" [formControlName]="campo.nombre"></textarea>
+          <small class="ayuda">JSON (lista u objeto). Ejemplo: {{ campo.ejemplo }}</small>
+        }
+        @default {
+          <input
+            [id]="'campo-' + campo.nombre"
+            [type]="tipoInput(campo)"
+            [step]="campo.tipo === 'decimal' ? '0.01' : campo.tipo === 'number' ? '1' : null"
+            [attr.maxlength]="campo.max ?? null"
+            [formControlName]="campo.nombre"
+          />
+        }
+      }
+      @if (form().controls[campo.nombre].touched && form().controls[campo.nombre].invalid) {
+        <small class="error">
+          @if (form().controls[campo.nombre].errors?.['required']) { Obligatorio }
+          @if (form().controls[campo.nombre].errors?.['maxlength']) { Maximo {{ campo.max }} caracteres }
+          @if (form().controls[campo.nombre].errors?.['email']) { Email no valido }
+          @if (form().controls[campo.nombre].errors?.['json']) { JSON no valido }
+        </small>
+      }
+    </div>
+  } @empty {
+    <p class="ayuda">Esta operacion no necesita datos.</p>
+  }
+  <div class="acciones">
+    <button type="submit" [disabled]="enviando()">{{ enviando() ? 'Enviando...' : textoBoton() }}</button>
+    <button type="button" (click)="cancelar.emit()">Cancelar</button>
+  </div>
+</form>

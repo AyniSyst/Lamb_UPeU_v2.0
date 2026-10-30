@@ -35,6 +35,16 @@ public class SexoService {
         return sexoMapper.toResponse(sexoRepository.save(entity));
     }
 
+    public SexoResponse actualizar(Long id, SexoRequest request) {
+        Sexo existente = buscarOFallar(id);
+        Sexo entity = sexoMapper.toEntity(request);
+        return sexoMapper.toResponse(sexoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        sexoRepository.delete(buscarOFallar(id));
+    }
+
     private Sexo buscarOFallar(Long id) {
         return sexoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Sexo no encontrado: " + id));

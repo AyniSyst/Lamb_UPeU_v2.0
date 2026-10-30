@@ -11,9 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ReservaVacanteService {
 
@@ -40,6 +42,19 @@ public class ReservaVacanteService {
             entity.setEstado("RESERVADA");
         }
         return reservaVacanteMapper.toResponse(reservaVacanteRepository.save(entity));
+    }
+
+    public ReservaVacanteResponse actualizar(Long id, ReservaVacanteRequest request) {
+        ReservaVacante existente = buscarOFallar(id);
+        ReservaVacante entity = reservaVacanteMapper.toEntity(request);
+        if (entity.getEstado() == null) {
+            entity.setEstado("RESERVADA");
+        }
+        return reservaVacanteMapper.toResponse(reservaVacanteRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        reservaVacanteRepository.delete(buscarOFallar(id));
     }
 
     private ReservaVacante buscarOFallar(Long id) {

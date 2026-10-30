@@ -37,6 +37,17 @@ public class BajaAnonimizacionService {
         return bajaAnonimizacionMapper.toResponse(bajaAnonimizacionRepository.save(entity));
     }
 
+    public BajaAnonimizacionResponse actualizar(Long id, BajaAnonimizacionRequest request) {
+        BajaAnonimizacion existente = buscarOFallar(id);
+        BajaAnonimizacion entity = bajaAnonimizacionMapper.toEntity(request);
+        entity.setFechaAplicacion(Instant.now());
+        return bajaAnonimizacionMapper.toResponse(bajaAnonimizacionRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        bajaAnonimizacionRepository.delete(buscarOFallar(id));
+    }
+
     private BajaAnonimizacion buscarOFallar(Long id) {
         return bajaAnonimizacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Baja/anonimizacion no encontrada: " + id));

@@ -37,6 +37,17 @@ public class RequisitoDocumentarioService {
         return requisitoDocumentarioMapper.toResponse(requisitoDocumentarioRepository.save(entity));
     }
 
+    public RequisitoDocumentarioResponse actualizar(Long id, RequisitoDocumentarioRequest request) {
+        RequisitoDocumentario existente = buscarOFallar(id);
+        RequisitoDocumentario entity = requisitoDocumentarioMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return requisitoDocumentarioMapper.toResponse(requisitoDocumentarioRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        requisitoDocumentarioRepository.delete(buscarOFallar(id));
+    }
+
     private RequisitoDocumentario buscarOFallar(Long id) {
         return requisitoDocumentarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Requisito documentario no encontrado: " + id));

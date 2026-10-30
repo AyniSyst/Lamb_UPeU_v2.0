@@ -37,6 +37,17 @@ public class ResponsablePagoService {
         return responsablePagoMapper.toResponse(responsablePagoRepository.save(entity));
     }
 
+    public ResponsablePagoResponse actualizar(Long id, ResponsablePagoRequest request) {
+        ResponsablePago existente = buscarOFallar(id);
+        ResponsablePago entity = responsablePagoMapper.toEntity(request);
+        entity.setFechaRegistro(Instant.now());
+        return responsablePagoMapper.toResponse(responsablePagoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        responsablePagoRepository.delete(buscarOFallar(id));
+    }
+
     private ResponsablePago buscarOFallar(Long id) {
         return responsablePagoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Responsable de pago no encontrado: " + id));

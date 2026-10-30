@@ -3,10 +3,23 @@
 @if (error()) {
   <p class="error">{{ error() }}</p>
 }
-
 @if (errorAccion()) {
   <p class="error">{{ errorAccion() }}</p>
 }
+
+<div class="barra">
+  @if (auth.tieneRol('ADMIN', 'DOCENTE')) {
+    <a class="boton primario" routerLink="/notas/nueva">Nueva nota</a>
+  }
+  <label for="filtroGrupo">Grupo</label>
+  <select id="filtroGrupo" (change)="filtrar($any($event.target).value)">
+    <option value="">Todos</option>
+    @for (g of grupos(); track g.id) {
+      <option [value]="g.id">{{ g.curso?.codigo }} {{ g.curso?.nombre }} ({{ g.codigo }})</option>
+    }
+  </select>
+  <button type="button" (click)="cargar()">Actualizar</button>
+</div>
 
 <table>
   <thead>
@@ -27,13 +40,14 @@
       <tr>
         <td>{{ nota.id }}</td>
         <td>{{ nota.idPersona }}</td>
-        <td>{{ nota.idGrupo }}</td>
+        <td>{{ nombreGrupo(nota.idGrupo) }}</td>
         <td>{{ nota.codigoComponente }}</td>
-        <td>{{ nota.calificacion }}</td>
+        <td><strong [class.error]="nota.calificacion < 11">{{ nota.calificacion }}</strong></td>
         <td>{{ nota.periodo }}</td>
         @if (auth.tieneRol('ADMIN', 'DOCENTE')) {
           <td>
-            <button type="button" (click)="eliminar(nota)">Eliminar</button>
+            <a class="boton" [routerLink]="['/notas', nota.id, 'editar']">Editar</a>
+            <button type="button" class="peligro" (click)="eliminar(nota)">Eliminar</button>
           </td>
         }
       </tr>

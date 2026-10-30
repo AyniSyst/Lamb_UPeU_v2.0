@@ -35,6 +35,16 @@ public class TipoDocumentoService {
         return tipoDocumentoMapper.toResponse(tipoDocumentoRepository.save(entity));
     }
 
+    public TipoDocumentoResponse actualizar(Long id, TipoDocumentoRequest request) {
+        TipoDocumento existente = buscarOFallar(id);
+        TipoDocumento entity = tipoDocumentoMapper.toEntity(request);
+        return tipoDocumentoMapper.toResponse(tipoDocumentoRepository.save(Actualizacion.copiar(entity, existente)));
+    }
+
+    public void eliminar(Long id) {
+        tipoDocumentoRepository.delete(buscarOFallar(id));
+    }
+
     private TipoDocumento buscarOFallar(Long id) {
         return tipoDocumentoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tipo de documento no encontrado: " + id));
