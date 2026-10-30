@@ -315,14 +315,14 @@ Resumen del alcance funcional: 22 módulos, 94 historias.
 
 Cada módulo funcional se materializa en un microservicio con su propia base de datos. El módulo 22 (Plataforma Transversal) se reparte entre Keycloak (SSO, roles y permisos) y tres servicios propios.
 
-**Estado actual del código**: 11 microservicios implementados, 168 controllers REST analizados, de los cuales 137 son CRUD completo, 23 CRUD parcial y 8 son vistas de solo lectura o acciones de dominio sin persistencia HTTP.
+**Estado actual del código**: 11 microservicios implementados, 181 controllers REST analizados, de los cuales 137 son CRUD completo, 36 CRUD parcial (incluye los 13 controllers de institucional + personas con patrón `GET`/`GET {id}`/`POST`) y 8 son vistas de solo lectura o acciones de dominio sin persistencia HTTP.
 
 #### Implementados
 
 | # | Microservicio | Módulo | HU | Controllers | CRUD completo | Parciales | No-CRUD | Base de datos |
 |---|---------------|--------|----|-------------|---------------|-----------|---------|---------------|
-| 1 | `lamb-institucional-ms` | 1. Institucional y Organización | 001–004 | — | — | — | — | `institucional_db` |
-| 2 | `lamb-personas-ms` | 2. Personas | 005–008 | — | — | — | — | `persona_db` |
+| 1 | `lamb-institucional-ms` | 1. Institucional y Organización | 001–004 | 7 | 0 | 7 | 0 | `institucional_db` |
+| 2 | `lamb-personas-ms` | 2. Personas | 005–008 | 6 | 0 | 6 | 0 | `persona_db` |
 | 3 | `lamb-admision-ms` | 3. Admisión e Ingreso | 009–013 | 11 | 7 | 4 | 0 | `admision_db` |
 | 4 | `lamb-curriculo-ms` | 4. Currículo | 014–018 | 46 | 46 | 0 | 0 | `curriculo_db` |
 | 5 | `lamb-planificacion-ms` | 5. Planificación y Oferta Académica | 019–024 | 36 | 34 | 0 | 2 | `planificacion_db` |
@@ -333,7 +333,7 @@ Cada módulo funcional se materializa en un microservicio con su propia base de 
 | 10 | `lamb-ingresos-pagos-ms` | 11. Ingresos, Cobranza y Pagos | 049–053 | 9 | 8 | 1 | 0 | `ingresos_pagos_db` |
 | 11 | `lamb-lms-ms` | 13. LMS / Aprendizaje | 058–062 | 8 | 7 | 1 | 0 | `lms_db` |
 
-> `lamb-institucional-ms` y `lamb-personas-ms` existen en el repo pero no fueron incluidos en el análisis de controllers del archivo `CRUDS.md`.
+> `lamb-institucional-ms` (7 controllers / 44 CRUD) y `lamb-personas-ms` (6 controllers / 50 CRUD) siguen el patrón `GET` lista + `GET /{id}` + `POST` (sin `PUT`/`DELETE`), por lo que se cuentan como CRUD parciales. Detalle en `CRUDS_INSTITUCIONAL_PERSONAS.md`.
 
 #### Planificados
 
@@ -911,9 +911,38 @@ Controllers REST y endpoints HTTP de los 11 microservicios implementados. Datos 
     | `TrayectoriaController` | `/api/v1/trayectorias` | No-CRUD (derivado de `postulante.admitido` y `acta.cerrada`) |
     | `VistaTrayectoriaController` | `/api/v1/vistas` | No-CRUD (avance-curricular, historial-academico, promedio-ponderado, rendimiento-por-curso, historial-estados) |
 
-??? info "lamb-institucional-ms y lamb-personas-ms"
+??? info "lamb-institucional-ms — 7 controllers (44 CRUD · patrón GET/GET-id/POST)"
 
-    Microservicios implementados en el repositorio pero sin controllers listados en el análisis de `CRUDS.md`. Su documentación de endpoints se añadirá cuando se procesen.
+    Patrón del microservicio: un controller agrupa varios sub-recursos; cada sub-recurso expone solo `GET` lista, `GET /{id}` y `POST` (sin `PUT`/`DELETE`), por lo que todos son CRUD parciales.
+
+    | Controller | Recurso | Sub-recursos |
+    |---|---|---|
+    | `InstitucionController` | `/api/v1/institucion` | Institucion, TipoInstitucion, AutoridadInstitucional, ResolucionLicenciamiento, ConvenioInstitucional |
+    | `CampusSedeController` | `/api/v1/campus-sede` | Campus, Sede, TipoSede, DireccionSede, Pabellon, Ambiente |
+    | `FacultadEscuelaController` | `/api/v1/facultad-escuela` | Facultad, EscuelaProfesional, DepartamentoAcademico, AutoridadFacultad, CambioUnidadAcademica, UnidadAdministrativa, OrganigramaInstitucional |
+    | `ProgramaAcademicoController` | `/api/v1/programa-academico` | Programa, NivelAcademico, ModalidadEstudio, RegimenAcademico, ProgramaSede, GradoTitulo, ResolucionPrograma, MencionEspecialidad, AcreditacionPrograma |
+    | `PeriodoAcademicoController` | `/api/v1/periodo-academico` | AnioAcademico, TipoPeriodo, PeriodoAcademico, EstadoPeriodo, PeriodoProgramaSede, AmpliacionCierrePeriodo |
+    | `CalendarioController` | `/api/v1/calendario` | CalendarioAcademico, TipoEvento, EventoCalendario, FeriadoNoLaborable, CalendarioFacultadEscuela, ReprogramacionEvento, PublicacionCalendario, RecordatorioCalendario |
+    | `ParametroAuditoriaController` | `/api/v1/parametro-auditoria` | ParametroInstitucional, ParametroSedeEscuela, BitacoraCambiosEstructura |
+
+    Migraciones Flyway: V2–V8. Nota: `GradoAcademico` preexistente es un enum embebido en `Programa` y no se tocó; es distinto de `NivelAcademico`/`GradoTitulo` nuevos.
+
+??? info "lamb-personas-ms — 6 controllers (50 CRUD · patrón GET/GET-id/POST)"
+
+    > ⚠️ Cambio de ruta: antes `/api/v1/personas`, ahora `/api/v1/persona/...` (sub-paths). Revisar consumidores/gateway.
+
+    Mismo patrón que institucional: solo `GET` lista + `GET /{id}` + `POST` por sub-recurso.
+
+    | Controller | Recurso | Sub-recursos |
+    |---|---|---|
+    | `PersonaController` | `/api/v1/persona` | Persona, TipoPersona, VinculoInstitucion, EstadoPersona, HistorialEstadoPersona, FusionPersonas, FotografiaPersona, BajaAnonimizacion |
+    | `IdentificacionController` | `/api/v1/identificacion` | TipoDocumentoIdentidad, DocumentoIdentidad, CodigoInstitucional, HistorialDocumentoIdentidad, ValidacionIdentidad, IdentificacionTributaria, CorreccionIdentificacion |
+    | `DatosPersonalesController` | `/api/v1/datos-personales` | DatoPersonal, Sexo, EstadoCivil, Nacionalidad, Ubigeo, DiscapacidadCondicion, CambioNombreApellido, ConsentimientoDatos, LenguaIdioma, AutoidentificacionEtnica, ConfesionReligiosa, ColegioProcedencia, DatoSocioeconomico |
+    | `ContactoDireccionController` | `/api/v1/contacto-direccion` | TipoContacto, Contacto, TipoDireccion, Direccion, CorreoInstitucional, ContactoEmergencia, VerificacionContacto, PreferenciaComunicacion, RedSocial |
+    | `RelacionResponsableController` | `/api/v1/relacion-responsable` | TipoParentesco, RelacionFamiliar, ResponsablePago |
+    | `DocumentoPersonaController` | `/api/v1/documento-persona` | TipoDocumento, DocumentoPersona, EstadoDocumento, RequisitoDocumentario, HistorialRevisionDocumento, VigenciaVencimientoDocumento, ReemplazoVersionDocumento, ObservacionDocumento, FirmaValidacionDocumento, ExpedienteLegajo |
+
+    Migraciones Flyway: V2–V7. Catálogos sin timestamp de auditoría: TipoPersona, TipoDocumentoIdentidad, Sexo, EstadoCivil, Nacionalidad, Ubigeo, TipoContacto, TipoDireccion, TipoParentesco, TipoDocumento.
 
 ## Arquitectura Lamb UPeU 2.0
 
