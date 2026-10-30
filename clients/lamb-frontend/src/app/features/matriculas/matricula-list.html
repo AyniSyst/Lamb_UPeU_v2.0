@@ -1,0 +1,58 @@
+<h2>Matriculas</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (errorAccion()) {
+  <p class="error">{{ errorAccion() }}</p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Persona</th>
+      <th>Periodo</th>
+      <th>Fecha</th>
+      <th>Estado</th>
+      <th>Secciones</th>
+      @if (auth.tieneRol('ADMIN', 'COORDINADOR', 'ESTUDIANTE')) {
+        <th>Acciones</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (matricula of matriculas(); track matricula.id) {
+      <tr>
+        <td>{{ matricula.id }}</td>
+        <td>{{ matricula.idPersona }}</td>
+        <td>{{ matricula.periodo }}</td>
+        <td>{{ matricula.fecha }}</td>
+        <td>{{ matricula.estado }}</td>
+        <td>
+          @for (detalle of matricula.detalles; track detalle.id) {
+            <span>{{ detalle.idSeccion }} ({{ detalle.creditos }} cr)</span>
+          } @empty {
+            -
+          }
+        </td>
+        @if (auth.tieneRol('ADMIN', 'COORDINADOR', 'ESTUDIANTE')) {
+          <td>
+            @if (matricula.estado === 'REGISTRADA') {
+              <button type="button" (click)="confirmar(matricula)">Confirmar</button>
+              <button type="button" (click)="anular(matricula)">Anular</button>
+            }
+            @if (matricula.estado === 'CONFIRMADA') {
+              <button type="button" (click)="anular(matricula)">Anular</button>
+            }
+          </td>
+        }
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="7">No hay matriculas registradas.</td>
+      </tr>
+    }
+  </tbody>
+</table>

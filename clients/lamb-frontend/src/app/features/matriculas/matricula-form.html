@@ -1,0 +1,35 @@
+<h2>Nueva matricula</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <div>
+    <label for="idPersona">ID Persona</label>
+    <input id="idPersona" type="number" formControlName="idPersona" />
+  </div>
+
+  <div>
+    <label for="periodo">Periodo</label>
+    <input id="periodo" type="text" formControlName="periodo" placeholder="2026-I" />
+  </div>
+
+  <h3>Secciones</h3>
+  <div formArrayName="detalles">
+    @for (detalle of detalles.controls; track $index) {
+      <div [formGroupName]="$index">
+        <label>ID Seccion</label>
+        <input type="number" formControlName="idSeccion" />
+        <label>Creditos</label>
+        <input type="number" formControlName="creditos" />
+        <button type="button" (click)="quitarDetalle($index)">Quitar</button>
+      </div>
+    }
+  </div>
+  <button type="button" (click)="agregarDetalle()">Agregar seccion</button>
+
+  <div>
+    <button type="submit" [disabled]="enviando()">Registrar</button>
+  </div>
+</form>

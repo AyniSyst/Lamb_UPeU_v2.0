@@ -1,0 +1,38 @@
+<h2>Nuevo programa</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <div>
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" formControlName="nombre" />
+  </div>
+
+  <div>
+    <label for="gradoAcademico">Grado academico</label>
+    <select id="gradoAcademico" formControlName="gradoAcademico">
+      @for (grado of grados; track grado) {
+        <option [value]="grado">{{ grado }}</option>
+      }
+    </select>
+  </div>
+
+  <div>
+    <label for="duracionSemestres">Duracion (semestres)</label>
+    <input id="duracionSemestres" type="number" min="1" formControlName="duracionSemestres" />
+  </div>
+
+  <div>
+    <label for="facultadId">Facultad</label>
+    <select id="facultadId" formControlName="facultadId">
+      <option [value]="null">Selecciona una facultad</option>
+      @for (facultad of facultades(); track facultad.id) {
+        <option [value]="facultad.id">{{ facultad.nombre }}</option>
+      }
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="enviando()">Registrar</button>
+</form>

@@ -1,0 +1,46 @@
+<h2>Notas</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (errorAccion()) {
+  <p class="error">{{ errorAccion() }}</p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Persona</th>
+      <th>Grupo</th>
+      <th>Componente</th>
+      <th>Calificacion</th>
+      <th>Periodo</th>
+      @if (auth.tieneRol('ADMIN', 'DOCENTE')) {
+        <th>Acciones</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (nota of notas(); track nota.id) {
+      <tr>
+        <td>{{ nota.id }}</td>
+        <td>{{ nota.idPersona }}</td>
+        <td>{{ nota.idGrupo }}</td>
+        <td>{{ nota.codigoComponente }}</td>
+        <td>{{ nota.calificacion }}</td>
+        <td>{{ nota.periodo }}</td>
+        @if (auth.tieneRol('ADMIN', 'DOCENTE')) {
+          <td>
+            <button type="button" (click)="eliminar(nota)">Eliminar</button>
+          </td>
+        }
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="7">No hay notas registradas.</td>
+      </tr>
+    }
+  </tbody>
+</table>

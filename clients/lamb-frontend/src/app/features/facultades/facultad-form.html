@@ -1,0 +1,19 @@
+<h2>Nueva facultad</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <div>
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" formControlName="nombre" />
+  </div>
+
+  <div>
+    <label for="decano">Decano</label>
+    <input id="decano" type="text" formControlName="decano" />
+  </div>
+
+  <button type="submit" [disabled]="enviando()">Registrar</button>
+</form>

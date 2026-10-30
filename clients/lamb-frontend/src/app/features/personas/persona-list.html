@@ -1,0 +1,51 @@
+<h2>Personas</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (errorAccion()) {
+  <p class="error">{{ errorAccion() }}</p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Documento</th>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th>Email</th>
+      <th>Tipo</th>
+      @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+        <th>Acciones</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (persona of personas(); track persona.id) {
+      <tr>
+        <td>{{ persona.id }}</td>
+        <td>{{ persona.tipoDocumento }} {{ persona.numeroDocumento }}</td>
+        <td>{{ persona.nombres }}</td>
+        <td>{{ persona.apellidos }}</td>
+        <td>{{ persona.email }}</td>
+        <td>{{ persona.tipo }}</td>
+        @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+          <td>
+            <button type="button" (click)="editar(persona)">Editar</button>
+            <button type="button" (click)="eliminar(persona)">Eliminar</button>
+          </td>
+        }
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="7">No hay personas registradas.</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+@if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+  <a routerLink="/personas/nueva">Nueva persona</a>
+}

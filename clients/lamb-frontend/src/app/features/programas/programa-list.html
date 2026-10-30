@@ -1,0 +1,48 @@
+<h2>Programas</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (errorAccion()) {
+  <p class="error">{{ errorAccion() }}</p>
+}
+
+@if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+  <a routerLink="/programas/nuevo">Nuevo programa</a>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Grado</th>
+      <th>Duracion (semestres)</th>
+      <th>Facultad</th>
+      @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+        <th>Acciones</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (programa of programas(); track programa.id) {
+      <tr>
+        <td>{{ programa.id }}</td>
+        <td>{{ programa.nombre }}</td>
+        <td>{{ programa.gradoAcademico }}</td>
+        <td>{{ programa.duracionSemestres }}</td>
+        <td>{{ programa.facultad.nombre }}</td>
+        @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+          <td>
+            <button type="button" (click)="eliminar(programa)">Eliminar</button>
+          </td>
+        }
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="6">No hay programas registrados.</td>
+      </tr>
+    }
+  </tbody>
+</table>

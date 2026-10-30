@@ -1,0 +1,53 @@
+<h2>{{ enviando() ? 'Guardando...' : 'Persona' }}</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <div>
+    <label for="tipoDocumento">Tipo de documento</label>
+    <input id="tipoDocumento" type="text" formControlName="tipoDocumento" />
+  </div>
+
+  <div>
+    <label for="numeroDocumento">Numero de documento</label>
+    <input id="numeroDocumento" type="text" formControlName="numeroDocumento" />
+  </div>
+
+  <div>
+    <label for="nombres">Nombres</label>
+    <input id="nombres" type="text" formControlName="nombres" />
+  </div>
+
+  <div>
+    <label for="apellidos">Apellidos</label>
+    <input id="apellidos" type="text" formControlName="apellidos" />
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email" />
+  </div>
+
+  <div>
+    <label for="telefono">Telefono</label>
+    <input id="telefono" type="text" formControlName="telefono" />
+  </div>
+
+  <div>
+    <label for="fechaNacimiento">Fecha de nacimiento</label>
+    <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento" />
+  </div>
+
+  <div>
+    <label for="tipo">Tipo de persona</label>
+    <select id="tipo" formControlName="tipo">
+      <option value="ESTUDIANTE">Estudiante</option>
+      <option value="DOCENTE">Docente</option>
+      <option value="ADMINISTRATIVO">Administrativo</option>
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="enviando()">Guardar</button>
+</form>

@@ -1,0 +1,44 @@
+<h2>Facultades</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (errorAccion()) {
+  <p class="error">{{ errorAccion() }}</p>
+}
+
+@if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+  <a routerLink="/facultades/nueva">Nueva facultad</a>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Decano</th>
+      @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+        <th>Acciones</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (facultad of facultades(); track facultad.id) {
+      <tr>
+        <td>{{ facultad.id }}</td>
+        <td>{{ facultad.nombre }}</td>
+        <td>{{ facultad.decano ?? '-' }}</td>
+        @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+          <td>
+            <button type="button" (click)="eliminar(facultad)">Eliminar</button>
+          </td>
+        }
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="4">No hay facultades registradas.</td>
+      </tr>
+    }
+  </tbody>
+</table>

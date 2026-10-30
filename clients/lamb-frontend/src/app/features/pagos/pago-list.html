@@ -1,0 +1,50 @@
+<h2>Pagos</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (errorAccion()) {
+  <p class="error">{{ errorAccion() }}</p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Persona</th>
+      <th>Concepto</th>
+      <th>Monto</th>
+      <th>Metodo</th>
+      <th>Estado</th>
+      <th>Fecha</th>
+      @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+        <th>Acciones</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (pago of pagos(); track pago.id) {
+      <tr>
+        <td>{{ pago.id }}</td>
+        <td>{{ pago.idPersona }}</td>
+        <td>{{ pago.concepto }}</td>
+        <td>{{ pago.monto }}</td>
+        <td>{{ pago.metodo }}</td>
+        <td>{{ pago.estado }}</td>
+        <td>{{ pago.fechaPago }}</td>
+        @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+          <td>
+            @if (pago.estado === 'APROBADO') {
+              <button type="button" (click)="reembolsar(pago)">Reembolsar</button>
+            }
+          </td>
+        }
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="8">No hay pagos registrados.</td>
+      </tr>
+    }
+  </tbody>
+</table>

@@ -1,0 +1,50 @@
+<h2>Actas</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (errorAccion()) {
+  <p class="error">{{ errorAccion() }}</p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Grupo</th>
+      <th>Curso</th>
+      <th>Periodo</th>
+      <th>Docente</th>
+      <th>Estado</th>
+      <th>Fecha cierre</th>
+      @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+        <th>Acciones</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (acta of actas(); track acta.id) {
+      <tr>
+        <td>{{ acta.id }}</td>
+        <td>{{ acta.idGrupo }}</td>
+        <td>{{ acta.codigoCurso }}</td>
+        <td>{{ acta.periodo }}</td>
+        <td>{{ acta.idDocente ?? '-' }}</td>
+        <td>{{ acta.estado }}</td>
+        <td>{{ acta.fechaCierre ?? '-' }}</td>
+        @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+          <td>
+            @if (acta.estado === 'ABIERTA') {
+              <button type="button" (click)="cerrar(acta)">Cerrar</button>
+            }
+          </td>
+        }
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="8">No hay actas registradas.</td>
+      </tr>
+    }
+  </tbody>
+</table>

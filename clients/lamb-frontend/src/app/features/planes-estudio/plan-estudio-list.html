@@ -1,0 +1,53 @@
+<h2>Planes de estudio</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (errorAccion()) {
+  <p class="error">{{ errorAccion() }}</p>
+}
+
+@if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+  <p><a routerLink="/planes-estudio/nuevo">Nuevo plan de estudio</a></p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Programa</th>
+      <th>Version</th>
+      <th>Nombre</th>
+      <th>Estado</th>
+      <th>Creditos</th>
+      @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+        <th>Acciones</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (plan of planes(); track plan.id) {
+      <tr>
+        <td>{{ plan.id }}</td>
+        <td>{{ plan.idPrograma }}</td>
+        <td>{{ plan.version }}</td>
+        <td>{{ plan.nombre }}</td>
+        <td>{{ plan.estado }}</td>
+        <td>{{ plan.totalCreditos }}</td>
+        @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+          <td>
+            @if (plan.estado === 'BORRADOR') {
+              <button type="button" (click)="publicar(plan)">Publicar</button>
+              <button type="button" (click)="eliminar(plan)">Eliminar</button>
+            }
+          </td>
+        }
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="7">No hay planes de estudio registrados.</td>
+      </tr>
+    }
+  </tbody>
+</table>

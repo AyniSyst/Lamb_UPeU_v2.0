@@ -1,0 +1,40 @@
+<h2>Mi trayectoria</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (pendiente()) {
+  <p>Aun no tienes trayectoria registrada. Se actualizara automaticamente cuando tu admision se procese.</p>
+}
+
+@if (trayectoria()) {
+  <section>
+    <p><strong>Estado:</strong> {{ trayectoria()!.trayectoria.estado }}</p>
+    <p><strong>Programa:</strong> {{ trayectoria()!.trayectoria.idPrograma }}</p>
+    <p><strong>Periodo:</strong> {{ trayectoria()!.trayectoria.periodo }}</p>
+    <p><strong>Fecha de ingreso:</strong> {{ trayectoria()!.trayectoria.fechaIngreso }}</p>
+
+    <h3>Historial de cursos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Curso</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (curso of trayectoria()!.historial; track curso.idCurso) {
+          <tr>
+            <td>{{ curso.nombreCurso }}</td>
+            <td>{{ curso.estado }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="2">Sin cursos registrados aun.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+}

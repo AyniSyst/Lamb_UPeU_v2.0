@@ -1,0 +1,29 @@
+<h2>Nuevo plan de estudio</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <div>
+    <label for="idPrograma">ID Programa</label>
+    <input id="idPrograma" type="number" formControlName="idPrograma" />
+  </div>
+
+  <div>
+    <label for="version">Version</label>
+    <input id="version" type="text" formControlName="version" placeholder="2026-I" />
+  </div>
+
+  <div>
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" formControlName="nombre" />
+  </div>
+
+  <div>
+    <label for="idModalidad">ID Modalidad</label>
+    <input id="idModalidad" type="number" formControlName="idModalidad" />
+  </div>
+
+  <button type="submit" [disabled]="enviando()">Registrar</button>
+</form>

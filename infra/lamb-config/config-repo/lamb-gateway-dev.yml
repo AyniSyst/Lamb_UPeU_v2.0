@@ -18,7 +18,7 @@ spring:
             - id: lamb-personas
               uri: lb://lamb-personas-ms
               predicates:
-                - Path=/api/v1/personas/**
+                - Path=/api/v1/persona/**
             - id: lamb-institucional-facultades
               uri: lb://lamb-institucional-ms
               predicates:

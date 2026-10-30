@@ -1,0 +1,24 @@
+<h2>Nueva postulacion</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <div>
+    <label for="idPersona">ID Persona</label>
+    <input id="idPersona" type="number" formControlName="idPersona" />
+  </div>
+
+  <div>
+    <label for="idPrograma">ID Programa</label>
+    <input id="idPrograma" type="number" formControlName="idPrograma" />
+  </div>
+
+  <div>
+    <label for="periodo">Periodo</label>
+    <input id="periodo" type="text" formControlName="periodo" placeholder="2026-I" />
+  </div>
+
+  <button type="submit" [disabled]="enviando()">Registrar</button>
+</form>

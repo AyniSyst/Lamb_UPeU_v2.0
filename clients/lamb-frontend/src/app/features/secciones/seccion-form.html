@@ -1,0 +1,34 @@
+<h2>Nueva seccion</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <div>
+    <label for="cursoId">ID Curso</label>
+    <input id="cursoId" type="number" formControlName="cursoId" />
+  </div>
+
+  <div>
+    <label for="periodo">Periodo</label>
+    <input id="periodo" type="text" formControlName="periodo" placeholder="2026-I" />
+  </div>
+
+  <div>
+    <label for="docente">Docente</label>
+    <input id="docente" type="text" formControlName="docente" />
+  </div>
+
+  <div>
+    <label for="cupoMaximo">Cupo maximo</label>
+    <input id="cupoMaximo" type="number" formControlName="cupoMaximo" />
+  </div>
+
+  <div>
+    <label for="horario">Horario</label>
+    <input id="horario" type="text" formControlName="horario" />
+  </div>
+
+  <button type="submit" [disabled]="enviando()">Registrar</button>
+</form>

@@ -1,0 +1,60 @@
+<h2>Postulaciones</h2>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (errorAccion()) {
+  <p class="error">{{ errorAccion() }}</p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Persona</th>
+      <th>Programa</th>
+      <th>Periodo</th>
+      <th>Puntaje</th>
+      <th>Estado</th>
+      @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+        <th>Acciones</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (postulacion of postulaciones(); track postulacion.id) {
+      <tr>
+        <td>{{ postulacion.id }}</td>
+        <td>{{ postulacion.idPersona }}</td>
+        <td>{{ postulacion.idPrograma }}</td>
+        <td>{{ postulacion.periodo }}</td>
+        <td>{{ postulacion.puntajeExamen ?? '-' }}</td>
+        <td>{{ postulacion.estado }}</td>
+        @if (auth.tieneRol('ADMIN', 'COORDINADOR')) {
+          <td>
+            @if (postulacion.estado === 'INSCRITO') {
+              <input
+                type="number"
+                min="0"
+                max="20"
+                step="0.1"
+                placeholder="Puntaje"
+                (input)="actualizarPuntaje(postulacion.id, $any($event.target).value)"
+              />
+              <button type="button" (click)="evaluar(postulacion)">Evaluar</button>
+            }
+            @if (postulacion.estado === 'EVALUADO') {
+              <button type="button" (click)="admitir(postulacion)">Admitir</button>
+              <button type="button" (click)="rechazar(postulacion)">Rechazar</button>
+            }
+          </td>
+        }
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="7">No hay postulaciones registradas.</td>
+      </tr>
+    }
+  </tbody>
+</table>
