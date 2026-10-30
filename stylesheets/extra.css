@@ -1,29 +1,91 @@
-/* Tablas de historias de usuario: columnas legibles */
+/* === Paleta pagatu === */
+:root {
+  --md-primary-fg-color:        #2b6cb0;
+  --md-primary-fg-color--light: #4a86c4;
+  --md-primary-fg-color--dark:  #22568c;
+  --md-accent-fg-color:         #b7791f;
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color:        #2b6cb0;
+  --md-accent-fg-color:         #d69e2e;
+}
+
+/* === Ancho de contenido mas amplio para que las tablas respiren === */
+.md-grid {
+  max-width: 72rem;
+}
+
+/* === Tablas: permitir scroll horizontal en lugar de romper layout === */
+.md-typeset__table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .md-typeset table:not([class]) {
+  display: table;
+  width: 100%;
   font-size: 0.72rem;
+  line-height: 1.4;
 }
 .md-typeset table:not([class]) th {
   background: var(--md-primary-fg-color);
-  color: var(--md-primary-bg-color);
+  color: #fff;
   white-space: nowrap;
+  font-weight: 600;
 }
-.md-typeset table:not([class]) td:nth-child(2),
-.md-typeset table:not([class]) td:nth-child(3),
-.md-typeset table:not([class]) td:nth-child(4) {
-  min-width: 9rem;
-}
-.md-typeset table:not([class]) td:last-child {
-  min-width: 16rem;
+.md-typeset table:not([class]) td,
+.md-typeset table:not([class]) th {
+  padding: 0.55rem 0.7rem;
+  vertical-align: top;
 }
 
-/* Tarjetas de resumen */
+/* Tablas de historias (5 columnas): HU estrecho, criterios ancho */
+.md-typeset table:not([class]) td:first-child {
+  width: 3rem;
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.md-typeset table:not([class]) td:nth-child(2) {
+  min-width: 8rem;
+  white-space: nowrap;
+}
+.md-typeset table:not([class]) td:nth-child(3),
+.md-typeset table:not([class]) td:nth-child(4) {
+  min-width: 11rem;
+}
+.md-typeset table:not([class]) td:last-child {
+  min-width: 20rem;
+}
+
+/* Filas alternadas suaves */
+.md-typeset table:not([class]) tbody tr:nth-child(even) {
+  background: rgba(43, 108, 176, 0.04);
+}
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* === Tarjetas de resumen (grid cards) === */
 .md-typeset .grid.cards > ul > li {
   text-align: center;
   border-radius: 0.6rem;
+  border-top: 3px solid var(--md-primary-fg-color);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.md-typeset .grid.cards > ul > li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
 }
 
-/* Diagramas Mermaid centrados */
+/* === Diagramas Mermaid centrados === */
 .md-typeset .mermaid {
   text-align: center;
   overflow-x: auto;
+}
+
+/* === Bloques de codigo tipo "producto del curso" al estilo pagatu === */
+.md-typeset pre > code {
+  font-size: 0.78rem;
+  line-height: 1.5;
 }
