@@ -606,6 +606,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="2. Microservicios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planificados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -613,6 +641,17 @@
     <span class="md-ellipsis">
       
         3. Atributos por microservicio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-endpoints-por-microservicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Endpoints por microservicio
       
     </span>
   </a>
@@ -1021,6 +1060,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="2. Microservicios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planificados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1028,6 +1095,17 @@
     <span class="md-ellipsis">
       
         3. Atributos por microservicio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-endpoints-por-microservicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Endpoints por microservicio
       
     </span>
   </a>
@@ -2294,6 +2372,8 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 </table>
 <h3 id="2-microservicios">2. Microservicios<a class="headerlink" href="#2-microservicios" title="Permanent link">&para;</a></h3>
 <p>Cada módulo funcional se materializa en un microservicio con su propia base de datos. El módulo 22 (Plataforma Transversal) se reparte entre Keycloak (SSO, roles y permisos) y tres servicios propios.</p>
+<p><strong>Estado actual del código</strong>: 11 microservicios implementados, 168 controllers REST analizados, de los cuales 137 son CRUD completo, 23 CRUD parcial y 8 son vistas de solo lectura o acciones de dominio sin persistencia HTTP.</p>
+<h4 id="implementados">Implementados<a class="headerlink" href="#implementados" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -2301,121 +2381,171 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <th>Microservicio</th>
 <th>Módulo</th>
 <th>HU</th>
-<th>Responsabilidad</th>
+<th>Controllers</th>
+<th>CRUD completo</th>
+<th>Parciales</th>
+<th>No-CRUD</th>
 <th>Base de datos</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1</td>
-<td><code>institucional-ms</code></td>
+<td><code>lamb-institucional-ms</code></td>
 <td>1. Institucional y Organización</td>
 <td>001–004</td>
-<td>Estructura organizacional: institución, sedes, campus, facultades, escuelas, programas, periodos y calendario académico.</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
 <td><code>institucional_db</code></td>
 </tr>
 <tr>
 <td>2</td>
-<td><code>persona-ms</code></td>
+<td><code>lamb-personas-ms</code></td>
 <td>2. Personas</td>
 <td>005–008</td>
-<td>Fuente única de identidad: personas, datos de contacto, documentos y roles asociados.</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
 <td><code>persona_db</code></td>
 </tr>
 <tr>
 <td>3</td>
-<td><code>admision-ms</code></td>
+<td><code>lamb-admision-ms</code></td>
 <td>3. Admisión e Ingreso</td>
 <td>009–013</td>
-<td>Proceso de admisión: postulación, examen en línea, publicación de resultados e ingreso al núcleo académico.</td>
+<td>11</td>
+<td>7</td>
+<td>4</td>
+<td>0</td>
 <td><code>admision_db</code></td>
 </tr>
 <tr>
 <td>4</td>
-<td><code>curriculo-ms</code></td>
+<td><code>lamb-curriculo-ms</code></td>
 <td>4. Currículo</td>
 <td>014–018</td>
-<td>Planes de estudio, versiones, asignaturas, créditos, prerrequisitos y equivalencias; malla curricular del estudiante.</td>
+<td>46</td>
+<td>46</td>
+<td>0</td>
+<td>0</td>
 <td><code>curriculo_db</code></td>
 </tr>
 <tr>
 <td>5</td>
-<td><code>oferta-ms</code></td>
+<td><code>lamb-planificacion-ms</code></td>
 <td>5. Planificación y Oferta Académica</td>
 <td>019–024</td>
-<td>Oferta académica del periodo: secciones, docentes, aulas, horarios, cupos y modalidad.</td>
-<td><code>oferta_db</code></td>
+<td>36</td>
+<td>34</td>
+<td>0</td>
+<td>2</td>
+<td><code>planificacion_db</code></td>
 </tr>
 <tr>
 <td>6</td>
-<td><code>matricula-ms</code></td>
+<td><code>lamb-matricula-ms</code></td>
 <td>6. Matrícula</td>
 <td>025–030</td>
-<td>Inscripción, retiros, cambios de sección, reservas y bloqueos de matrícula, con validación de reglas.</td>
+<td>7</td>
+<td>0</td>
+<td>7</td>
+<td>0</td>
 <td><code>matricula_db</code></td>
 </tr>
 <tr>
 <td>7</td>
-<td><code>evaluacion-ms</code></td>
+<td><code>lamb-evaluacion-ms</code></td>
 <td>7. Evaluación y Cierre Académico</td>
 <td>031–035</td>
-<td>Evaluaciones, registro de notas, cierre de actas, rectificaciones y cierre académico del periodo.</td>
+<td>22</td>
+<td>20</td>
+<td>0</td>
+<td>2</td>
 <td><code>evaluacion_db</code></td>
 </tr>
 <tr>
 <td>8</td>
-<td><code>trayectoria-ms</code></td>
+<td><code>lamb-trayectoria-ms</code></td>
 <td>8. Trayectoria Académica</td>
 <td>036–039</td>
-<td>Historial académico derivado, promedio ponderado, avance de créditos, convalidaciones y reconocimientos.</td>
+<td>18</td>
+<td>15</td>
+<td>1</td>
+<td>2</td>
 <td><code>trayectoria_db</code></td>
 </tr>
 <tr>
 <td>9</td>
-<td><code>finanzas-estudiante-ms</code></td>
+<td><code>lamb-finanzas-ms</code></td>
 <td>9. Finanzas del Estudiante</td>
 <td>040–044</td>
-<td>Cargos del estudiante (matrícula, enseñanza, derechos), tarifario, becas, descuentos y saldos.</td>
-<td><code>finanzas_estudiante_db</code></td>
+<td>9</td>
+<td>0</td>
+<td>9</td>
+<td>0</td>
+<td><code>finanzas_db</code></td>
 </tr>
 <tr>
 <td>10</td>
-<td><code>egreso-ms</code></td>
-<td>10. Egreso, Grados, Títulos y Certificación</td>
-<td>045–048</td>
-<td>Trámite de egreso, solicitud de grados y títulos, y certificados y constancias verificables.</td>
-<td><code>egreso_db</code></td>
+<td><code>lamb-ingresos-pagos-ms</code></td>
+<td>11. Ingresos, Cobranza y Pagos</td>
+<td>049–053</td>
+<td>9</td>
+<td>8</td>
+<td>1</td>
+<td>0</td>
+<td><code>ingresos_pagos_db</code></td>
 </tr>
 <tr>
 <td>11</td>
-<td><code>cobranza-ms</code></td>
-<td>11. Ingresos, Cobranza y Pagos</td>
-<td>049–053</td>
-<td>Pagos en línea y en caja, pasarela, comprobantes y devoluciones; consulta el saldo vigente a Finanzas del Estudiante.</td>
-<td><code>cobranza_db</code></td>
+<td><code>lamb-lms-ms</code></td>
+<td>13. LMS / Aprendizaje</td>
+<td>058–062</td>
+<td>8</td>
+<td>7</td>
+<td>1</td>
+<td>0</td>
+<td><code>lms_db</code></td>
 </tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>lamb-institucional-ms</code> y <code>lamb-personas-ms</code> existen en el repo pero no fueron incluidos en el análisis de controllers del archivo <code>CRUDS.md</code>.</p>
+</blockquote>
+<h4 id="planificados">Planificados<a class="headerlink" href="#planificados" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Microservicio</th>
+<th>Módulo</th>
+<th>HU</th>
+<th>Base de datos</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>12</td>
-<td><code>extension-ms</code></td>
-<td>12. Extensión, Educación Continua y Eventos</td>
-<td>054–057</td>
-<td>Talleres, diplomados, seminarios y congresos: publicación, inscripción, asistencia y certificado de participación.</td>
-<td><code>extension_db</code></td>
+<td><code>egreso-ms</code></td>
+<td>10. Egreso, Grados, Títulos y Certificación</td>
+<td>045–048</td>
+<td><code>egreso_db</code></td>
 </tr>
 <tr>
 <td>13</td>
-<td><code>lms-ms</code></td>
-<td>13. LMS / Aprendizaje</td>
-<td>058–062</td>
-<td>Aula virtual: contenidos, tareas, foros, evaluaciones en línea y seguimiento del progreso.</td>
-<td><code>lms_db</code></td>
+<td><code>extension-ms</code></td>
+<td>12. Extensión, Educación Continua y Eventos</td>
+<td>054–057</td>
+<td><code>extension_db</code></td>
 </tr>
 <tr>
 <td>14</td>
 <td><code>servicios-estudiante-ms</code></td>
 <td>14. Servicios al Estudiante</td>
 <td>063–066</td>
-<td>Tutoría y asesoría, trámites y solicitudes administrativas, reclamos y casos de acompañamiento.</td>
 <td><code>servicios_estudiante_db</code></td>
 </tr>
 <tr>
@@ -2423,7 +2553,6 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <td><code>investigacion-ms</code></td>
 <td>15. Investigación</td>
 <td>067–070</td>
-<td>Proyectos, grupos y semilleros de investigación, producción científica, repositorio y jornadas.</td>
 <td><code>investigacion_db</code></td>
 </tr>
 <tr>
@@ -2431,7 +2560,6 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <td><code>practicas-ms</code></td>
 <td>16. Prácticas, Internado y Vinculación</td>
 <td>071–074</td>
-<td>Prácticas preprofesionales e internado: plazas, postulaciones, evidencias, horas y evaluación del supervisor.</td>
 <td><code>practicas_db</code></td>
 </tr>
 <tr>
@@ -2439,7 +2567,6 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <td><code>movilidad-ms</code></td>
 <td>17. Movilidad e Internacionalización</td>
 <td>075–077</td>
-<td>Movilidad saliente y entrante, estancias académicas y reconocimiento de cursos.</td>
 <td><code>movilidad_db</code></td>
 </tr>
 <tr>
@@ -2447,7 +2574,6 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <td><code>egresados-ms</code></td>
 <td>18. Egresados y Seguimiento</td>
 <td>078–080</td>
-<td>Seguimiento laboral de egresados, bolsa de trabajo e indicadores de empleabilidad.</td>
 <td><code>egresados_db</code></td>
 </tr>
 <tr>
@@ -2455,7 +2581,6 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <td><code>convenios-ms</code></td>
 <td>19. Convenios y Relaciones Institucionales</td>
 <td>081–083</td>
-<td>Instituciones asociadas, convenios marco y específicos, vigencia y alertas de vencimiento.</td>
 <td><code>convenios_db</code></td>
 </tr>
 <tr>
@@ -2463,7 +2588,6 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <td><code>biblioteca-ms</code></td>
 <td>20. Biblioteca y Recursos Académicos</td>
 <td>084–087</td>
-<td>Catálogo, préstamos, devoluciones, penalidades y acceso a recursos digitales y bases de datos.</td>
 <td><code>biblioteca_db</code></td>
 </tr>
 <tr>
@@ -2471,7 +2595,6 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <td><code>analitica-ms</code></td>
 <td>21. Analítica, Indicadores y BI</td>
 <td>088–090</td>
-<td>Dashboards e indicadores institucionales (rendimiento, deserción, demanda, carga docente, ingresos). Solo lectura sobre datos cerrados.</td>
 <td><code>analitica_db</code></td>
 </tr>
 <tr>
@@ -2479,7 +2602,6 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <td><code>workflow-ms</code></td>
 <td>22. Plataforma Transversal</td>
 <td>093</td>
-<td>Flujos de trabajo y firma digital de documentos.</td>
 <td><code>workflow_db</code></td>
 </tr>
 <tr>
@@ -2487,7 +2609,6 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <td><code>notificacion-ms</code></td>
 <td>22. Plataforma Transversal</td>
 <td>transversal</td>
-<td>Notificaciones transversales por correo y en la plataforma (resultados, trámites, alertas, confirmaciones).</td>
 <td><code>notificacion_db</code></td>
 </tr>
 <tr>
@@ -2495,7 +2616,6 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <td><code>auditoria-ms</code></td>
 <td>22. Plataforma Transversal</td>
 <td>094</td>
-<td>Registro de auditoría inmutable de acciones del sistema.</td>
 <td><code>auditoria_db</code></td>
 </tr>
 </tbody>
@@ -3296,6 +3416,947 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 </tr>
 </tbody>
 </table>
+</details>
+<h3 id="4-endpoints-por-microservicio">4. Endpoints por microservicio<a class="headerlink" href="#4-endpoints-por-microservicio" title="Permanent link">&para;</a></h3>
+<p>Controllers REST y endpoints HTTP de los 11 microservicios implementados. Datos extraídos del análisis de los 168 archivos <code>*Controller.java</code> del repositorio. Despliega cada microservicio para ver el detalle.</p>
+<details class="info">
+<summary>lamb-admision-ms — 11 controllers (7 completo · 4 parcial)</summary>
+<table>
+<thead>
+<tr>
+<th>Controller</th>
+<th>Recurso</th>
+<th>CRUD</th>
+<th>Acciones custom</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AdjudicacionController</code></td>
+<td><code>/api/v1/adjudicaciones</code></td>
+<td>Completo</td>
+<td><code>POST /{id}/publicar</code></td>
+</tr>
+<tr>
+<td><code>CalificacionController</code></td>
+<td><code>/api/v1/calificaciones</code></td>
+<td>Completo</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>CasoEspecialController</code></td>
+<td><code>/api/v1/casos-especiales</code></td>
+<td>Completo</td>
+<td><code>POST /{id}/resolver</code></td>
+</tr>
+<tr>
+<td><code>ConvocatoriaController</code></td>
+<td><code>/api/v1/convocatorias</code></td>
+<td>Completo</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ExamenAdmisionController</code></td>
+<td><code>/api/v1/examenes-admision</code></td>
+<td>Completo</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>InscripcionController</code></td>
+<td><code>/api/v1/inscripciones</code></td>
+<td>Parcial (falta UPDATE, DELETE)</td>
+<td><code>POST /{id}/responder</code>, <code>POST /{id}/anular</code></td>
+</tr>
+<tr>
+<td><code>ModalidadAdmisionController</code></td>
+<td><code>/api/v1/modalidades-admision</code></td>
+<td>Parcial (solo lectura)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PostulacionController</code></td>
+<td><code>/api/v1/postulaciones</code></td>
+<td>Parcial (falta UPDATE, DELETE)</td>
+<td><code>POST /{id}/evaluar</code>, <code>/admitir</code>, <code>/rechazar</code></td>
+</tr>
+<tr>
+<td><code>PostulanteController</code></td>
+<td><code>/api/v1/postulantes</code></td>
+<td>Completo</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>SeguimientoController</code></td>
+<td><code>/api/v1/seguimientos</code></td>
+<td>Completo</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TipoDocumentoController</code></td>
+<td><code>/api/v1/tipos-documento</code></td>
+<td>Parcial (solo lectura)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>lamb-curriculo-ms — 46 controllers (46 completo)</summary>
+<p>Todos los controllers exponen CRUD completo (<code>GET</code> lista, <code>GET /{id}</code>, <code>POST</code>, <code>PUT /{id}</code>, <code>DELETE /{id}</code>). Muchos aceptan filtro por query param (ej. <code>?idPlan=</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Controller</th>
+<th>Recurso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ActividadFormacionController</code></td>
+<td><code>/api/v1/actividades-formacion</code></td>
+</tr>
+<tr>
+<td><code>AreaCurricularController</code></td>
+<td><code>/api/v1/areas-curriculares</code></td>
+</tr>
+<tr>
+<td><code>CicloPlanController</code></td>
+<td><code>/api/v1/ciclos-plan?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>ComisionCurricularController</code></td>
+<td><code>/api/v1/comisiones-curriculares</code></td>
+</tr>
+<tr>
+<td><code>CompetenciaEspecificaController</code></td>
+<td><code>/api/v1/competencias-especificas?idPerfilEgreso=</code></td>
+</tr>
+<tr>
+<td><code>CompetenciaGeneralController</code></td>
+<td><code>/api/v1/competencias-generales</code></td>
+</tr>
+<tr>
+<td><code>CreditosCicloController</code></td>
+<td><code>/api/v1/creditos-ciclo?idCicloPlan=</code></td>
+</tr>
+<tr>
+<td><code>CursoCatalogoController</code></td>
+<td><code>/api/v1/cursos-catalogo?idDepartamento=</code></td>
+</tr>
+<tr>
+<td><code>CursoExternoConvalidableController</code></td>
+<td><code>/api/v1/cursos-externos-convalidables?idTabla=</code></td>
+</tr>
+<tr>
+<td><code>CursoInvestigacionController</code></td>
+<td><code>/api/v1/cursos-investigacion?idLinea=</code></td>
+</tr>
+<tr>
+<td><code>DenominacionProgramaController</code></td>
+<td><code>/api/v1/denominaciones-programa</code></td>
+</tr>
+<tr>
+<td><code>DepartamentoAcademicoController</code></td>
+<td><code>/api/v1/departamentos-academicos?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>DistribucionHorasController</code></td>
+<td><code>/api/v1/distribuciones-horas?idCurso=</code></td>
+</tr>
+<tr>
+<td><code>EjeCurricularController</code></td>
+<td><code>/api/v1/ejes-curriculares?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>EquivalenciaPlanController</code></td>
+<td><code>/api/v1/equivalencias-plan?idPlanCursoOrigen=</code></td>
+</tr>
+<tr>
+<td><code>EvaluacionCurricularController</code></td>
+<td><code>/api/v1/evaluaciones-curriculares?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>GradoAcademicoController</code></td>
+<td><code>/api/v1/grados-academicos</code></td>
+</tr>
+<tr>
+<td><code>GrupoElectivoController</code></td>
+<td><code>/api/v1/grupos-electivos?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>LineaInvestigacionController</code></td>
+<td><code>/api/v1/lineas-investigacion</code></td>
+</tr>
+<tr>
+<td><code>MallaCurricularController</code></td>
+<td><code>/api/v1/mallas-curriculares?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>MencionController</code></td>
+<td><code>/api/v1/menciones?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>MiembroComisionController</code></td>
+<td><code>/api/v1/miembros-comision?idComision=</code></td>
+</tr>
+<tr>
+<td><code>ModalidadController</code></td>
+<td><code>/api/v1/modalidades</code></td>
+</tr>
+<tr>
+<td><code>ModalidadTitulacionController</code></td>
+<td><code>/api/v1/modalidades-titulacion?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>PerfilEgresoController</code></td>
+<td><code>/api/v1/perfiles-egreso?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>PerfilIngresoController</code></td>
+<td><code>/api/v1/perfiles-ingreso?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>PlanAdecuacionController</code></td>
+<td><code>/api/v1/planes-adecuacion?idPlanOrigen=</code></td>
+</tr>
+<tr>
+<td><code>PlanEstudioController</code></td>
+<td><code>/api/v1/planes-estudio?idPrograma=</code> (agregado con cursos y prerrequisitos; <code>POST /{id}/publicar</code>)</td>
+</tr>
+<tr>
+<td><code>ProyeccionSocialController</code></td>
+<td><code>/api/v1/proyecciones-sociales</code></td>
+</tr>
+<tr>
+<td><code>RequisitoEgresoController</code></td>
+<td><code>/api/v1/requisitos-egreso?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>RequisitoExtracurricularController</code></td>
+<td><code>/api/v1/requisitos-extracurriculares?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>RequisitoIdiomaController</code></td>
+<td><code>/api/v1/requisitos-idioma?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>RequisitoInvestigacionController</code></td>
+<td><code>/api/v1/requisitos-investigacion?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>RequisitoMatriculaController</code></td>
+<td><code>/api/v1/requisitos-matricula?idPlanCurso=</code></td>
+</tr>
+<tr>
+<td><code>RequisitoPracticasController</code></td>
+<td><code>/api/v1/requisitos-practicas?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>ResolucionPlanController</code></td>
+<td><code>/api/v1/resoluciones-plan?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>ResultadoAprendizajeController</code></td>
+<td><code>/api/v1/resultados-aprendizaje?idCurso=</code></td>
+</tr>
+<tr>
+<td><code>SilaboBaseController</code></td>
+<td><code>/api/v1/silabos-base?idCurso=</code></td>
+</tr>
+<tr>
+<td><code>SolicitudModificacionCurricularController</code></td>
+<td><code>/api/v1/solicitudes-modificacion-curricular?idPlan=</code> (<code>POST /{id}/responder</code>)</td>
+</tr>
+<tr>
+<td><code>SumillaCursoController</code></td>
+<td><code>/api/v1/sumillas-curso?idCurso=</code></td>
+</tr>
+<tr>
+<td><code>TablaConvalidacionController</code></td>
+<td><code>/api/v1/tablas-convalidacion?idUniversidad=</code></td>
+</tr>
+<tr>
+<td><code>TipoCursoController</code></td>
+<td><code>/api/v1/tipos-curso</code></td>
+</tr>
+<tr>
+<td><code>TituloProfesionalController</code></td>
+<td><code>/api/v1/titulos-profesionales</code></td>
+</tr>
+<tr>
+<td><code>UnidadAprendizajeController</code></td>
+<td><code>/api/v1/unidades-aprendizaje?idSilabo=</code></td>
+</tr>
+<tr>
+<td><code>UniversidadOrigenController</code></td>
+<td><code>/api/v1/universidades-origen</code></td>
+</tr>
+<tr>
+<td><code>VigenciaCohorteController</code></td>
+<td><code>/api/v1/vigencias-cohorte?idPlan=</code></td>
+</tr>
+<tr>
+<td><code>VoluntariadoController</code></td>
+<td><code>/api/v1/voluntariados</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>lamb-evaluacion-ms — 22 controllers (20 completo · 2 no-CRUD)</summary>
+<table>
+<thead>
+<tr>
+<th>Controller</th>
+<th>Recurso</th>
+<th>CRUD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ActaComplementariaController</code></td>
+<td><code>/api/v1/actas-complementarias</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>ActaRectificacionController</code></td>
+<td><code>/api/v1/actas-rectificacion</code></td>
+<td>Completo (<code>POST /{id}/responder</code>)</td>
+</tr>
+<tr>
+<td><code>CalificacionCriterioController</code></td>
+<td><code>/api/v1/calificaciones-criterio</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>ComponenteEvaluacionController</code></td>
+<td><code>/api/v1/componentes-evaluacion</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>ConfiguracionEvaluacionController</code></td>
+<td><code>/api/v1/configuraciones-evaluacion</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>CriterioRubricaController</code></td>
+<td><code>/api/v1/criterios-rubrica</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>EncuestaDocenteController</code></td>
+<td><code>/api/v1/encuestas-docente</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>EscalaCalificacionController</code></td>
+<td><code>/api/v1/escalas-calificacion</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>EvaluacionProgramadaController</code></td>
+<td><code>/api/v1/evaluaciones-programadas</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>FirmaActaController</code></td>
+<td><code>/api/v1/firmas-acta</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>InhabilitacionInasistenciaController</code></td>
+<td><code>/api/v1/inhabilitaciones-inasistencia</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>JustificacionInasistenciaController</code></td>
+<td><code>/api/v1/justificaciones-inasistencia</code></td>
+<td>Completo (<code>POST /{id}/responder</code>)</td>
+</tr>
+<tr>
+<td><code>NotaController</code></td>
+<td><code>/api/v1/notas</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>PlazoAperturaController</code></td>
+<td><code>/api/v1/plazos-apertura</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>PreguntaEncuestaController</code></td>
+<td><code>/api/v1/preguntas-encuesta</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>RegistroAsistenciaController</code></td>
+<td><code>/api/v1/registros-asistencia</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>RespuestaEncuestaController</code></td>
+<td><code>/api/v1/respuestas-encuesta</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>RespuestaSolicitudAperturaController</code></td>
+<td><code>/api/v1/respuestas-solicitud-apertura</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>RubricaController</code></td>
+<td><code>/api/v1/rubricas</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>SolicitudAperturaNotasController</code></td>
+<td><code>/api/v1/solicitudes-apertura-notas</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>ActaController</code></td>
+<td><code>/api/v1/actas</code></td>
+<td>No-CRUD (nace de evento <code>grupo.abierto</code>, solo <code>POST /{id}/cerrar</code>)</td>
+</tr>
+<tr>
+<td><code>VistaController</code></td>
+<td><code>/api/v1/vistas</code></td>
+<td>No-CRUD (vistas calculadas de solo lectura)</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>lamb-finanzas-ms — 9 controllers (9 parcial)</summary>
+<p>Patrón: ningún controller tiene <code>PUT/PATCH</code> ni <code>DELETE</code>. Todos los sub-recursos exponen solo <code>GET</code> lista, <code>GET /{id}</code> y <code>POST</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Controller</th>
+<th>Recurso</th>
+<th>Sub-recursos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CalendarioPlanesController</code></td>
+<td><code>/api/v1/calendario-planes</code></td>
+<td>cronogramas-vencimiento, plantillas-plan-pago</td>
+</tr>
+<tr>
+<td><code>CatalogosTarifasController</code></td>
+<td><code>/api/v1/catalogos-tarifas</code></td>
+<td>categorias-concepto, conceptos-pago, tarifarios-escuela-ciclo</td>
+</tr>
+<tr>
+<td><code>CobrosController</code></td>
+<td><code>/api/v1/cobros</code></td>
+<td>estados-cobro, detalles-cobro, historiales-estado-cobro, montos-pago</td>
+</tr>
+<tr>
+<td><code>ComprobantesController</code></td>
+<td><code>/api/v1/comprobantes</code></td>
+<td>documentos-pago, series-correlativos-comprobante, datos-facturacion-cliente, anulaciones-comprobante, notas-credito, notas-debito</td>
+</tr>
+<tr>
+<td><code>ControlCierreController</code></td>
+<td><code>/api/v1/control-cierre</code></td>
+<td>reclamos-pago, estados-cuenta-estudiante, constancias-no-adeudo</td>
+</tr>
+<tr>
+<td><code>DescuentosBecasController</code></td>
+<td><code>/api/v1/descuentos-becas</code></td>
+<td>tipos-descuento, descuentos-aplicados, convenios-institucionales-descuento, exoneraciones-pago, tipos-beca, becas-aplicadas, renovaciones-suspensiones-beca</td>
+</tr>
+<tr>
+<td><code>PagoController</code></td>
+<td><code>/api/v1/pagos</code></td>
+<td>vouchers, recaudaciones-ventanilla (<code>POST /{id}/reembolsar</code>)</td>
+</tr>
+<tr>
+<td><code>ReembolsosCancelacionesController</code></td>
+<td><code>/api/v1/reembolsos-cancelaciones</code></td>
+<td>solicitudes-devolucion, reembolsos-pago, cancelaciones-cargo-matricula, transferencias-pago</td>
+</tr>
+<tr>
+<td><code>SaldoEstudianteController</code></td>
+<td><code>/api/v1/saldo-estudiante</code></td>
+<td>cuentas, movimientos, saldos-periodo, ajustes-manuales, reservas-devolucion</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>lamb-ingresos-pagos-ms — 9 controllers (8 completo · 1 parcial)</summary>
+<table>
+<thead>
+<tr>
+<th>Controller</th>
+<th>Recurso</th>
+<th>CRUD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BancosController</code></td>
+<td><code>/api/v1/ingresos-pagos/bancos</code></td>
+<td>Completo (sub: entidades-financieras, tipos-cambio)</td>
+</tr>
+<tr>
+<td><code>CajaController</code></td>
+<td><code>/api/v1/ingresos-pagos/caja</code></td>
+<td>Completo (sub: cajas, sesiones-caja, arqueos-caja)</td>
+</tr>
+<tr>
+<td><code>CargosController</code></td>
+<td><code>/api/v1/ingresos-pagos/cargos</code></td>
+<td>Completo (sub: conceptos-pago, tarifarios-programa, recargos-mora)</td>
+</tr>
+<tr>
+<td><code>ComponentesTransversalesController</code></td>
+<td><code>/api/v1/ingresos-pagos/transversales</code></td>
+<td>Completo (sub: bitacoras-auditoria-pago, plantillas-notificacion)</td>
+</tr>
+<tr>
+<td><code>ComprobantesController</code></td>
+<td><code>/api/v1/ingresos-pagos/comprobantes</code></td>
+<td>Completo (sub: tipos-comprobante, series-comprobante)</td>
+</tr>
+<tr>
+<td><code>CuentasPorCobrarController</code></td>
+<td><code>/api/v1/ingresos-pagos/cuentas-por-cobrar</code></td>
+<td>Completo (sub: becas, becas-asignadas, convenios-institucionales, financiamientos-educativos, pagadores-terceros)</td>
+</tr>
+<tr>
+<td><code>DevolucionesController</code></td>
+<td><code>/api/v1/ingresos-pagos/devoluciones</code></td>
+<td>Completo (sub: notas-credito-debito)</td>
+</tr>
+<tr>
+<td><code>PagosController</code></td>
+<td><code>/api/v1/ingresos-pagos/pagos-dominio</code></td>
+<td>Parcial (sub-recurso "pagos" solo lectura; "estudiantes" solo acción <code>estado-cuenta</code>; "metodos-pago" CRUD completo)</td>
+</tr>
+<tr>
+<td><code>PasarelasController</code></td>
+<td><code>/api/v1/ingresos-pagos/pasarelas</code></td>
+<td>Completo (sub: logs-transaccion-pasarela)</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>lamb-lms-ms — 8 controllers (7 completo · 1 parcial)</summary>
+<p>Todos bajo prefijo <code>/api/v1/lms</code>. Las rutas de recurso van en cada método.</p>
+<table>
+<thead>
+<tr>
+<th>Controller</th>
+<th>Sub-recursos</th>
+<th>CRUD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CertificadosController</code></td>
+<td>plantillas-certificado</td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>ContenidosController</code></td>
+<td>contenidos, recursos-complementarios, anuncios-curso</td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>EstructuraAcademicaController</code></td>
+<td>cursos, docentes, modalidades-curso, periodos-academicos, estados-matricula, categorias-curso, mallas-curriculares, prerequisitos-curso, secciones-curso, horarios-clase, sesiones-clase</td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>EvaluacionesController</code></td>
+<td>evaluaciones, preguntas, calificaciones, rubricas-evaluacion, preguntas-banco</td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>ForosController</code></td>
+<td>foros-hilo, respuestas-foro</td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>MatriculaController</code></td>
+<td>matriculas (solo <code>POST /enrolar</code>, <code>GET</code> lista, <code>GET /{id}</code>), listas-espera, convalidaciones-curso</td>
+<td>Parcial (recurso principal sin UPDATE/DELETE)</td>
+</tr>
+<tr>
+<td><code>SeguimientoController</code></td>
+<td>avances-contenido, asistencias, encuestas-satisfaccion, insignias, insignias-estudiante</td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>TareasController</code></td>
+<td>tareas, entregas-tarea</td>
+<td>Completo</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>lamb-matricula-ms — 7 controllers (7 parcial)</summary>
+<p>Patrón: ningún sub-recurso tiene <code>PUT/PATCH</code>. Solo existe un <code>DELETE</code> en todo el microservicio (quitar una condición de una matrícula), no para borrar el recurso principal.</p>
+<table>
+<thead>
+<tr>
+<th>Controller</th>
+<th>Recurso</th>
+<th>Sub-recursos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CalendarioPeriodosController</code></td>
+<td><code>/api/v1/calendario-periodos</code></td>
+<td>cronogramas, variaciones, tipos, modalidades, ampliaciones-plazo</td>
+</tr>
+<tr>
+<td><code>CursosCargaAcademicaController</code></td>
+<td><code>/api/v1/cursos-carga-academica</code></td>
+<td>intentos-curso, cargas-periodo, elecciones-electivos, cruces-horario, liberaciones-prerrequisito, sobrecargas-creditos, cargas-minimas</td>
+</tr>
+<tr>
+<td><code>MatriculaController</code></td>
+<td><code>/api/v1/matriculas</code></td>
+<td>estados, historial-estados, condicionales, anulaciones, observaciones, notificaciones, constancias (<code>POST /{id}/confirmar</code>, <code>/anular</code>, <code>/condiciones</code>, <code>DELETE /{id}/condiciones/{idCondicion}</code>)</td>
+</tr>
+<tr>
+<td><code>OfertaCuposController</code></td>
+<td><code>/api/v1/oferta-cupos</code></td>
+<td>reservas-vacante, listas-espera, ampliaciones-cupo</td>
+</tr>
+<tr>
+<td><code>RectificacionRetiroReactivacionController</code></td>
+<td><code>/api/v1/rectificacion-retiro-reactivacion</code></td>
+<td>solicitudes-rectificacion, retiros-oficio, retiros-inasistencia, reactivaciones-matricula-anulada, anulaciones-masivas-impago, rehabilitaciones-matricula</td>
+</tr>
+<tr>
+<td><code>ReglasRequisitosController</code></td>
+<td><code>/api/v1/reglas-requisitos</code></td>
+<td>requisitos-por-tipo, bloqueos, compromisos</td>
+</tr>
+<tr>
+<td><code>SituacionEstudianteController</code></td>
+<td><code>/api/v1/situacion-estudiante</code></td>
+<td>condiciones, situaciones-academicas, cambios-situacion, observados-suspendidos, movilidades</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>lamb-planificacion-ms — 36 controllers (34 completo · 2 no-CRUD)</summary>
+<p>Todas las actualizaciones son <code>PUT</code> (no se usa <code>@PatchMapping</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Controller</th>
+<th>Recurso</th>
+<th>CRUD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AmbienteController</code></td>
+<td><code>/api/v1/ambientes</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>AsignacionDocenteController</code></td>
+<td><code>/api/v1/asignaciones-docente</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>AulaVirtualGrupoController</code></td>
+<td><code>/api/v1/aulas-virtuales-grupo</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>CalendarioAcademicoController</code></td>
+<td><code>/api/v1/calendarios-academicos</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>CargaLectivaController</code></td>
+<td><code>/api/v1/cargas-lectivas</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>CargaNoLectivaController</code></td>
+<td><code>/api/v1/cargas-no-lectivas</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>CronogramaSesionController</code></td>
+<td><code>/api/v1/cronogramas-sesion</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>CupoGrupoController</code></td>
+<td><code>/api/v1/cupos-grupo</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>CupoTallerController</code></td>
+<td><code>/api/v1/cupos-taller</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>CursoNivelacionController</code></td>
+<td><code>/api/v1/cursos-nivelacion</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>DiaNoLectivoController</code></td>
+<td><code>/api/v1/dias-no-lectivos</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>DisponibilidadDocenteController</code></td>
+<td><code>/api/v1/disponibilidades-docente</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>EquipamientoAmbienteController</code></td>
+<td><code>/api/v1/equipamientos-ambiente</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>EquivalenciaCursoController</code></td>
+<td><code>/api/v1/equivalencias-curso</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>GrupoController</code></td>
+<td><code>/api/v1/grupos</code></td>
+<td>Completo (<code>POST /{id}/revalidar</code>)</td>
+</tr>
+<tr>
+<td><code>GrupoHabilitadoEquivalenciaController</code></td>
+<td><code>/api/v1/grupos-habilitados-equivalencia</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>GrupoTallerController</code></td>
+<td><code>/api/v1/grupos-taller</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>HitoCalendarioController</code></td>
+<td><code>/api/v1/hitos-calendario</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>HorarioGrupoController</code></td>
+<td><code>/api/v1/horarios-grupo</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>LimiteCreditosController</code></td>
+<td><code>/api/v1/limites-creditos</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>OfertaAcademicaController</code></td>
+<td><code>/api/v1/oferta-academica</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>PabellonController</code></td>
+<td><code>/api/v1/pabellones</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>ParametroMatriculaController</code></td>
+<td><code>/api/v1/parametros-matricula</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>PeriodoAcademicoController</code></td>
+<td><code>/api/v1/periodos-academicos</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>PreferenciaCursoDocenteController</code></td>
+<td><code>/api/v1/preferencias-curso-docente</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>SesionClaseController</code></td>
+<td><code>/api/v1/sesiones-clase</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>SilaboGrupoController</code></td>
+<td><code>/api/v1/silabos-grupo</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>SolicitudAperturaGrupoController</code></td>
+<td><code>/api/v1/solicitudes-apertura-grupo</code></td>
+<td>Completo (<code>POST /{id}/responder</code>)</td>
+</tr>
+<tr>
+<td><code>SolicitudCambioAulaController</code></td>
+<td><code>/api/v1/solicitudes-cambio-aula</code></td>
+<td>Completo (<code>POST /{id}/responder</code>)</td>
+</tr>
+<tr>
+<td><code>SolicitudCambioDocenteController</code></td>
+<td><code>/api/v1/solicitudes-cambio-docente</code></td>
+<td>Completo (<code>POST /{id}/responder</code>)</td>
+</tr>
+<tr>
+<td><code>SolicitudCambioHorarioController</code></td>
+<td><code>/api/v1/solicitudes-cambio-horario</code></td>
+<td>Completo (<code>POST /{id}/responder</code>)</td>
+</tr>
+<tr>
+<td><code>SolicitudCierreFusionGrupoController</code></td>
+<td><code>/api/v1/solicitudes-cierre-fusion-grupo</code></td>
+<td>Completo (<code>POST /{id}/responder</code>)</td>
+</tr>
+<tr>
+<td><code>SolicitudGrupoEquivalenteController</code></td>
+<td><code>/api/v1/solicitudes-grupo-equivalente</code></td>
+<td>Completo (<code>POST /{id}/responder</code>)</td>
+</tr>
+<tr>
+<td><code>TipoAmbienteController</code></td>
+<td><code>/api/v1/tipos-ambiente</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>TipoPeriodoController</code></td>
+<td><code>/api/v1/tipos-periodo</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>CursoController</code></td>
+<td><code>/api/v1/cursos</code></td>
+<td>No-CRUD (los cursos llegan por evento <code>plan.publicado</code> desde curriculo)</td>
+</tr>
+<tr>
+<td><code>VistaController</code></td>
+<td><code>/api/v1/vistas</code></td>
+<td>No-CRUD (vista calculada <code>horario-estudiante</code>)</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>lamb-trayectoria-ms — 18 controllers (15 completo · 1 parcial · 2 no-CRUD)</summary>
+<table>
+<thead>
+<tr>
+<th>Controller</th>
+<th>Recurso</th>
+<th>CRUD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AlertaRiesgoController</code></td>
+<td><code>/api/v1/alertas-riesgo</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>CambioAcademicoController</code></td>
+<td><code>/api/v1/cambios-academicos</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>CasoSeguimientoController</code></td>
+<td><code>/api/v1/casos-seguimiento</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>ControlRepitenciaController</code></td>
+<td><code>/api/v1/controles-repitencia</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>CumplimientoRequisitoController</code></td>
+<td><code>/api/v1/cumplimientos-requisito</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>EgresoController</code></td>
+<td><code>/api/v1/egresos</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>InformeTrayectoriaController</code></td>
+<td><code>/api/v1/informes-trayectoria</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>NivelRiesgoController</code></td>
+<td><code>/api/v1/niveles-riesgo</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>PlanRefuerzoController</code></td>
+<td><code>/api/v1/planes-refuerzo</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>ProgramaTutoriaController</code></td>
+<td><code>/api/v1/programas-tutoria</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>ReconocimientoController</code></td>
+<td><code>/api/v1/reconocimientos</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>ReglaAlertaController</code></td>
+<td><code>/api/v1/reglas-alerta</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>SesionTutoriaController</code></td>
+<td><code>/api/v1/sesiones-tutoria</code></td>
+<td>Parcial (falta GET lista propia; se lista desde <code>/api/v1/tutorias/{id}/sesiones</code>)</td>
+</tr>
+<tr>
+<td><code>SituacionCierreController</code></td>
+<td><code>/api/v1/situaciones-cierre</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>SolicitudConstanciaController</code></td>
+<td><code>/api/v1/solicitudes-constancia</code></td>
+<td>Completo</td>
+</tr>
+<tr>
+<td><code>TutoriaController</code></td>
+<td><code>/api/v1/tutorias</code></td>
+<td>Completo (sub: sesiones)</td>
+</tr>
+<tr>
+<td><code>TrayectoriaController</code></td>
+<td><code>/api/v1/trayectorias</code></td>
+<td>No-CRUD (derivado de <code>postulante.admitido</code> y <code>acta.cerrada</code>)</td>
+</tr>
+<tr>
+<td><code>VistaTrayectoriaController</code></td>
+<td><code>/api/v1/vistas</code></td>
+<td>No-CRUD (avance-curricular, historial-academico, promedio-ponderado, rendimiento-por-curso, historial-estados)</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="info">
+<summary>lamb-institucional-ms y lamb-personas-ms</summary>
+<p>Microservicios implementados en el repositorio pero sin controllers listados en el análisis de <code>CRUDS.md</code>. Su documentación de endpoints se añadirá cuando se procesen.</p>
 </details>
 <h2 id="arquitectura-lamb-upeu-20">Arquitectura Lamb UPeU 2.0<a class="headerlink" href="#arquitectura-lamb-upeu-20" title="Permanent link">&para;</a></h2>
 <h3 id="nivel-1-contexto-del-sistema-system-context-c4-nivel-1">Nivel 1: Contexto del sistema (System Context - C4 nivel 1)<a class="headerlink" href="#nivel-1-contexto-del-sistema-system-context-c4-nivel-1" title="Permanent link">&para;</a></h3>
