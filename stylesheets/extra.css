@@ -10,18 +10,18 @@
   --md-accent-fg-color:         #d69e2e;
 }
 
-/* === Ancho total: aprovechar toda la pantalla === */
+/* === Ancho equilibrado estilo pagatu === */
 .md-grid {
-  max-width: 85rem;
+  max-width: 68rem;
 }
 
-/* Sidebar izquierdo (navegacion) un poco mas ancho para empujarlo hacia la derecha */
+/* Sidebars al estilo pagatu: nav izquierda estandar, TOC derecha mas cerca del contenido */
 @media screen and (min-width: 76.25em) {
   .md-sidebar--primary {
-    width: 14rem;
+    width: 12.1rem;
   }
   .md-sidebar--secondary {
-    width: 12rem;
+    width: 11rem;
   }
 }
 
