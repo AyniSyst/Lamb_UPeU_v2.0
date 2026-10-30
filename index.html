@@ -4382,6 +4382,7 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
     class Pasarela,ERP,Externos external;</code></pre>
 <p>Lamb se ve como una sola caja negra: importa quién lo usa (estudiantes, docentes, personal administrativo y directivos) y con qué sistemas externos conversa (pasarela de pagos, ERP Administrativo, instituciones y empleadores). El detalle contable permanece en el ERP; Lamb solo informa los ingresos cobrados.</p>
 <h3 id="nivel-2-contenedores-container-diagram-c4-nivel-2">Nivel 2: Contenedores (Container diagram - C4 nivel 2)<a class="headerlink" href="#nivel-2-contenedores-container-diagram-c4-nivel-2" title="Permanent link">&para;</a></h3>
+<p>Diagrama "as-is / to-be": los microservicios con fondo azul están <strong>implementados</strong> en el repositorio (11 ms, 168 controllers REST). Los que aparecen con línea punteada y fondo gris están <strong>planificados</strong> y respaldados por historias de usuario del punto 1.</p>
 <pre class="mermaid"><code>%%{init: {"flowchart": {"nodeSpacing": 18, "rankSpacing": 28, "curve": "basis"}} }%%
 flowchart LR
     Angular["lamb-ng (Angular)"]
@@ -4395,25 +4396,25 @@ flowchart LR
 
     subgraph Runtime["microservicios - cada uno con su base de datos"]
         subgraph Core["núcleo académico"]
-            Inst["institucional-ms"]
-            Pers["persona-ms"]
-            Adm["admision-ms"]
-            Curr["curriculo-ms"]
-            Ofe["oferta-ms"]
-            Mat["matricula-ms"]
-            Eva["evaluacion-ms"]
-            Tray["trayectoria-ms"]
+            Inst["lamb-institucional-ms"]
+            Pers["lamb-personas-ms"]
+            Adm["lamb-admision-ms"]
+            Curr["lamb-curriculo-ms"]
+            Plan["lamb-planificacion-ms"]
+            Mat["lamb-matricula-ms"]
+            Eva["lamb-evaluacion-ms"]
+            Tray["lamb-trayectoria-ms"]
             Egr["egreso-ms"]
         end
 
         subgraph Fin["finanzas"]
-            FinEst["finanzas-estudiante-ms"]
-            Cob["cobranza-ms"]
+            FinEst["lamb-finanzas-ms"]
+            Cob["lamb-ingresos-pagos-ms"]
         end
 
         subgraph Serv["servicios académicos"]
             Ext["extension-ms"]
-            Lms["lms-ms"]
+            Lms["lamb-lms-ms"]
             SEst["servicios-estudiante-ms"]
             Bib["biblioteca-ms"]
         end
@@ -4453,105 +4454,144 @@ flowchart LR
     Runtime -. "registra instancias" .-&gt; Eureka
     Gateway -. "descubre servicios" .-&gt; Eureka
 
-    Adm --&gt;|"Feign: crea persona/estudiante"| Pers
+    Adm --&gt;|"Feign: crea persona"| Pers
     Mat --&gt;|"Feign: prerrequisitos"| Curr
-    Mat --&gt;|"Feign: cupo y horario"| Ofe
+    Mat --&gt;|"Feign: cupo y horario"| Plan
     Cob --&gt;|"Feign: saldo vigente"| FinEst
     Cob --&gt; Pasarela
     Ana --&gt;|"ingresos cobrados"| ERP
 
+    Adm --&gt;|"postulante.admitido"| Broker
+    Curr --&gt;|"plan.publicado"| Broker
+    Plan --&gt;|"grupo.abierto"| Broker
     Mat --&gt;|"matricula.confirmada"| Broker
     Eva --&gt;|"acta.cerrada, periodo.cerrado"| Broker
     Cob --&gt;|"pago.registrado"| Broker
-    Adm --&gt;|"resultado.publicado"| Broker
+
     Broker --&gt; FinEst
     Broker --&gt; Tray
     Broker --&gt; Mat
+    Broker --&gt; Eva
+    Broker --&gt; Plan
     Broker --&gt; Ana
     Broker --&gt; Notif
     Broker --&gt; Aud
 
+    classDef implemented fill:#eef6ff,stroke:#2b6cb0,stroke-width:2px,color:#111;
+    classDef planned fill:#f1f1f1,stroke:#888,stroke-width:1px,stroke-dasharray: 4 3,color:#555;
     classDef external fill:#fff3cd,stroke:#b7791f,stroke-width:2px,color:#5f370e;
+
+    class Inst,Pers,Adm,Curr,Plan,Mat,Eva,Tray,FinEst,Cob,Lms implemented;
+    class Egr,Ext,SEst,Bib,Inv,Prac,Mov,Egd,Conv,Flujo,Notif,Aud,Ana planned;
     class Pasarela,ERP external;</code></pre>
-<p>Convención del diagrama: las flechas continuas representan interacciones de negocio o consultas directas; las flechas punteadas representan dependencias de infraestructura, seguridad, configuración o descubrimiento.</p>
+<p>Convención del diagrama:</p>
+<ul>
+<li><strong>Azul sólido</strong> → microservicio implementado (confirmado en <code>CRUDS.md</code>).</li>
+<li><strong>Gris punteado</strong> → microservicio planificado (respaldado por HU del punto 1).</li>
+<li><strong>Amarillo</strong> → sistema externo.</li>
+<li>Flechas continuas: interacciones de negocio (Feign síncrono o eventos Kafka).</li>
+<li>Flechas punteadas: dependencias de infraestructura, seguridad, configuración o descubrimiento.</li>
+</ul>
 <h3 id="eventos-clave-entre-servicios">Eventos clave entre servicios<a class="headerlink" href="#eventos-clave-entre-servicios" title="Permanent link">&para;</a></h3>
+<p>Eventos extraídos del análisis real del código: los controllers no-CRUD de <code>lamb-evaluacion-ms</code>, <code>lamb-planificacion-ms</code> y <code>lamb-trayectoria-ms</code> declaran explícitamente en comentarios que sus recursos nacen de eventos de dominio (no se crean por HTTP).</p>
 <table>
 <thead>
 <tr>
 <th>Evento</th>
 <th>Publica</th>
 <th>Consume</th>
-<th>HU relacionadas</th>
+<th>HU</th>
+<th>Verificable en</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>resultado.publicado</code></td>
-<td>admision-ms</td>
-<td>notificacion-ms</td>
-<td>011, 012</td>
+<td><code>postulante.admitido</code></td>
+<td>lamb-admision-ms</td>
+<td>lamb-personas-ms, lamb-trayectoria-ms</td>
+<td>011–013</td>
+<td><code>TrayectoriaController</code> lo documenta como fuente</td>
 </tr>
 <tr>
-<td><code>ingreso.registrado</code></td>
-<td>admision-ms</td>
-<td>persona-ms, matricula-ms</td>
-<td>013</td>
+<td><code>plan.publicado</code></td>
+<td>lamb-curriculo-ms</td>
+<td>lamb-planificacion-ms</td>
+<td>014–018</td>
+<td><code>CursoController</code> de planificacion lo documenta como fuente</td>
+</tr>
+<tr>
+<td><code>grupo.abierto</code></td>
+<td>lamb-planificacion-ms</td>
+<td>lamb-evaluacion-ms, lamb-matricula-ms</td>
+<td>019–024</td>
+<td><code>ActaController</code> de evaluacion lo documenta como fuente</td>
 </tr>
 <tr>
 <td><code>matricula.confirmada</code></td>
-<td>matricula-ms</td>
-<td>finanzas-estudiante-ms, notificacion-ms</td>
+<td>lamb-matricula-ms</td>
+<td>lamb-finanzas-ms, notificacion-ms</td>
 <td>025, 026, 040, 041</td>
+<td><code>MatriculaController</code> tiene <code>POST /{id}/confirmar</code></td>
 </tr>
 <tr>
-<td><code>matricula.retirada</code></td>
-<td>matricula-ms</td>
-<td>oferta-ms (libera cupo)</td>
+<td><code>matricula.anulada</code></td>
+<td>lamb-matricula-ms</td>
+<td>lamb-planificacion-ms (libera cupo), lamb-finanzas-ms</td>
 <td>027</td>
+<td><code>POST /{id}/anular</code></td>
 </tr>
 <tr>
 <td><code>acta.cerrada</code></td>
-<td>evaluacion-ms</td>
-<td>trayectoria-ms</td>
+<td>lamb-evaluacion-ms</td>
+<td>lamb-trayectoria-ms</td>
 <td>033</td>
+<td><code>ActaController</code> tiene <code>POST /{id}/cerrar</code></td>
 </tr>
 <tr>
 <td><code>periodo.cerrado</code></td>
-<td>evaluacion-ms</td>
-<td>trayectoria-ms, analitica-ms</td>
+<td>lamb-evaluacion-ms</td>
+<td>lamb-trayectoria-ms, analitica-ms</td>
 <td>035, 037, 088–090</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>pago.registrado</code></td>
-<td>cobranza-ms</td>
-<td>finanzas-estudiante-ms, notificacion-ms</td>
-<td>044, 049, 050, 051</td>
+<td>lamb-ingresos-pagos-ms</td>
+<td>lamb-finanzas-ms, notificacion-ms</td>
+<td>044, 049–051</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>cargo.cancelado</code></td>
-<td>finanzas-estudiante-ms</td>
-<td>matricula-ms (libera bloqueo financiero)</td>
+<td>lamb-finanzas-ms</td>
+<td>lamb-matricula-ms (libera bloqueo)</td>
 <td>030, 044</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>convenio.por_vencer</code></td>
-<td>convenios-ms</td>
+<td>convenios-ms (planif.)</td>
 <td>notificacion-ms</td>
 <td>083</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<p><code>auditoria-ms</code> consume todos los eventos para mantener el registro de auditoría (HU 094).</p>
+<p><code>auditoria-ms</code> (planificado) consume todos los eventos para mantener el registro de auditoría (HU 094).</p>
 <h2 id="flujo-de-trabajo">Flujo de trabajo<a class="headerlink" href="#flujo-de-trabajo" title="Permanent link">&para;</a></h2>
+<p>Flujo end-to-end alineado con las acciones reales que exponen los microservicios implementados.</p>
 <ol>
-<li><strong>Base institucional:</strong> el administrador registra sedes, facultades, escuelas, programas y periodos (módulo 1), y las personas con su identidad única (módulo 2).</li>
-<li><strong>Admisión:</strong> el postulante rinde el examen en línea, se publican los resultados y el ingreso del admitido lo habilita como estudiante (módulo 3).</li>
-<li><strong>Currículo y oferta:</strong> el coordinador define planes, prerrequisitos y equivalencias (módulo 4) y abre secciones con docente, aula, horario y cupo (módulo 5).</li>
-<li><strong>Matrícula y finanzas:</strong> el estudiante se inscribe validando prerrequisitos, cupo y horario (módulo 6); se generan los cargos de matrícula y enseñanza (módulo 9) y se pagan en línea o en caja (módulo 11).</li>
-<li><strong>Evaluación y trayectoria:</strong> el docente registra notas y cierra actas (módulo 7); el cierre del periodo recalcula promedio y avance (módulo 8).</li>
-<li><strong>Egreso:</strong> con el plan completo, el estudiante tramita egreso, título y certificados verificables (módulo 10).</li>
-<li><strong>Servicios y vinculación:</strong> aula virtual, extensión, biblioteca, servicios al estudiante, investigación, prácticas, movilidad, egresados y convenios (módulos 12 al 20).</li>
-<li><strong>Gestión:</strong> analítica e indicadores sobre datos cerrados (módulo 21), con SSO, roles, firma digital, notificaciones y auditoría transversales (módulo 22).</li>
+<li><strong>Base institucional</strong> (<code>lamb-institucional-ms</code> + <code>lamb-personas-ms</code>): se registran sedes, facultades, escuelas, programas y periodos; cada persona queda con identidad única.</li>
+<li><strong>Admisión</strong> (<code>lamb-admision-ms</code>): el postulante se inscribe, rinde examen y las postulaciones pasan por <code>POST /postulaciones/{id}/evaluar</code>, <code>/admitir</code> o <code>/rechazar</code>; la adjudicación se publica con <code>POST /adjudicaciones/{id}/publicar</code> y emite el evento <code>postulante.admitido</code>.</li>
+<li><strong>Currículo</strong> (<code>lamb-curriculo-ms</code>): el coordinador define planes de estudio con cursos, prerrequisitos y equivalencias; al llamar <code>POST /planes-estudio/{id}/publicar</code> emite <code>plan.publicado</code>.</li>
+<li><strong>Oferta académica</strong> (<code>lamb-planificacion-ms</code>): se abren grupos con docente, aula, horario y cupo; <code>GrupoController</code> emite <code>grupo.abierto</code> que habilita las actas en evaluación y los cupos en matrícula. Las solicitudes de cambio (aula, docente, horario, apertura, cierre, equivalente) se resuelven con <code>POST /{id}/responder</code>.</li>
+<li><strong>Matrícula</strong> (<code>lamb-matricula-ms</code>): el estudiante inscribe cursos; <code>POST /matriculas/{id}/confirmar</code> emite <code>matricula.confirmada</code> → finanzas y notificaciones. <code>POST /matriculas/{id}/anular</code> libera cupo.</li>
+<li><strong>Finanzas y pagos</strong> (<code>lamb-finanzas-ms</code> + <code>lamb-ingresos-pagos-ms</code>): se generan cargos y planes de pago; el estudiante paga por pasarela o caja; el evento <code>pago.registrado</code> concilia saldos.</li>
+<li><strong>Evaluación y cierre</strong> (<code>lamb-evaluacion-ms</code>): el docente registra notas, rúbricas y asistencias; <code>ActaController</code> cierra el acta con <code>POST /actas/{id}/cerrar</code> y emite <code>acta.cerrada</code>.</li>
+<li><strong>Trayectoria</strong> (<code>lamb-trayectoria-ms</code>): recibe <code>postulante.admitido</code> y <code>acta.cerrada</code>; expone solo vistas calculadas (avance curricular, historial académico, promedio ponderado) — por diseño no se escribe por HTTP.</li>
+<li><strong>LMS</strong> (<code>lamb-lms-ms</code>): aula virtual con cursos, secciones, contenidos, tareas, foros, evaluaciones en línea, asistencias e insignias.</li>
+<li><strong>Egreso, servicios y vinculación</strong> (planificados): egreso-ms, extension-ms, servicios-estudiante-ms, biblioteca-ms, investigacion-ms, practicas-ms, movilidad-ms, egresados-ms, convenios-ms.</li>
+<li><strong>Analítica y transversal</strong> (planificados): analitica-ms sobre datos cerrados; workflow-ms, notificacion-ms y auditoria-ms transversales a todos.</li>
 </ol>
 <h2 id="enlaces">Enlaces<a class="headerlink" href="#enlaces" title="Permanent link">&para;</a></h2>
 <ul>
