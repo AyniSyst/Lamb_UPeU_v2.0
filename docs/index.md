@@ -315,32 +315,43 @@ Resumen del alcance funcional: 22 módulos, 94 historias.
 
 Cada módulo funcional se materializa en un microservicio con su propia base de datos. El módulo 22 (Plataforma Transversal) se reparte entre Keycloak (SSO, roles y permisos) y tres servicios propios.
 
-| # | Microservicio | Módulo | HU | Responsabilidad | Base de datos |
-|---|---------------|--------|----|-----------------|---------------|
-| 1 | `institucional-ms` | 1. Institucional y Organización | 001–004 | Estructura organizacional: institución, sedes, campus, facultades, escuelas, programas, periodos y calendario académico. | `institucional_db` |
-| 2 | `persona-ms` | 2. Personas | 005–008 | Fuente única de identidad: personas, datos de contacto, documentos y roles asociados. | `persona_db` |
-| 3 | `admision-ms` | 3. Admisión e Ingreso | 009–013 | Proceso de admisión: postulación, examen en línea, publicación de resultados e ingreso al núcleo académico. | `admision_db` |
-| 4 | `curriculo-ms` | 4. Currículo | 014–018 | Planes de estudio, versiones, asignaturas, créditos, prerrequisitos y equivalencias; malla curricular del estudiante. | `curriculo_db` |
-| 5 | `oferta-ms` | 5. Planificación y Oferta Académica | 019–024 | Oferta académica del periodo: secciones, docentes, aulas, horarios, cupos y modalidad. | `oferta_db` |
-| 6 | `matricula-ms` | 6. Matrícula | 025–030 | Inscripción, retiros, cambios de sección, reservas y bloqueos de matrícula, con validación de reglas. | `matricula_db` |
-| 7 | `evaluacion-ms` | 7. Evaluación y Cierre Académico | 031–035 | Evaluaciones, registro de notas, cierre de actas, rectificaciones y cierre académico del periodo. | `evaluacion_db` |
-| 8 | `trayectoria-ms` | 8. Trayectoria Académica | 036–039 | Historial académico derivado, promedio ponderado, avance de créditos, convalidaciones y reconocimientos. | `trayectoria_db` |
-| 9 | `finanzas-estudiante-ms` | 9. Finanzas del Estudiante | 040–044 | Cargos del estudiante (matrícula, enseñanza, derechos), tarifario, becas, descuentos y saldos. | `finanzas_estudiante_db` |
-| 10 | `egreso-ms` | 10. Egreso, Grados, Títulos y Certificación | 045–048 | Trámite de egreso, solicitud de grados y títulos, y certificados y constancias verificables. | `egreso_db` |
-| 11 | `cobranza-ms` | 11. Ingresos, Cobranza y Pagos | 049–053 | Pagos en línea y en caja, pasarela, comprobantes y devoluciones; consulta el saldo vigente a Finanzas del Estudiante. | `cobranza_db` |
-| 12 | `extension-ms` | 12. Extensión, Educación Continua y Eventos | 054–057 | Talleres, diplomados, seminarios y congresos: publicación, inscripción, asistencia y certificado de participación. | `extension_db` |
-| 13 | `lms-ms` | 13. LMS / Aprendizaje | 058–062 | Aula virtual: contenidos, tareas, foros, evaluaciones en línea y seguimiento del progreso. | `lms_db` |
-| 14 | `servicios-estudiante-ms` | 14. Servicios al Estudiante | 063–066 | Tutoría y asesoría, trámites y solicitudes administrativas, reclamos y casos de acompañamiento. | `servicios_estudiante_db` |
-| 15 | `investigacion-ms` | 15. Investigación | 067–070 | Proyectos, grupos y semilleros de investigación, producción científica, repositorio y jornadas. | `investigacion_db` |
-| 16 | `practicas-ms` | 16. Prácticas, Internado y Vinculación | 071–074 | Prácticas preprofesionales e internado: plazas, postulaciones, evidencias, horas y evaluación del supervisor. | `practicas_db` |
-| 17 | `movilidad-ms` | 17. Movilidad e Internacionalización | 075–077 | Movilidad saliente y entrante, estancias académicas y reconocimiento de cursos. | `movilidad_db` |
-| 18 | `egresados-ms` | 18. Egresados y Seguimiento | 078–080 | Seguimiento laboral de egresados, bolsa de trabajo e indicadores de empleabilidad. | `egresados_db` |
-| 19 | `convenios-ms` | 19. Convenios y Relaciones Institucionales | 081–083 | Instituciones asociadas, convenios marco y específicos, vigencia y alertas de vencimiento. | `convenios_db` |
-| 20 | `biblioteca-ms` | 20. Biblioteca y Recursos Académicos | 084–087 | Catálogo, préstamos, devoluciones, penalidades y acceso a recursos digitales y bases de datos. | `biblioteca_db` |
-| 21 | `analitica-ms` | 21. Analítica, Indicadores y BI | 088–090 | Dashboards e indicadores institucionales (rendimiento, deserción, demanda, carga docente, ingresos). Solo lectura sobre datos cerrados. | `analitica_db` |
-| 22 | `workflow-ms` | 22. Plataforma Transversal | 093 | Flujos de trabajo y firma digital de documentos. | `workflow_db` |
-| 23 | `notificacion-ms` | 22. Plataforma Transversal | transversal | Notificaciones transversales por correo y en la plataforma (resultados, trámites, alertas, confirmaciones). | `notificacion_db` |
-| 24 | `auditoria-ms` | 22. Plataforma Transversal | 094 | Registro de auditoría inmutable de acciones del sistema. | `auditoria_db` |
+**Estado actual del código**: 11 microservicios implementados, 168 controllers REST analizados, de los cuales 137 son CRUD completo, 23 CRUD parcial y 8 son vistas de solo lectura o acciones de dominio sin persistencia HTTP.
+
+#### Implementados
+
+| # | Microservicio | Módulo | HU | Controllers | CRUD completo | Parciales | No-CRUD | Base de datos |
+|---|---------------|--------|----|-------------|---------------|-----------|---------|---------------|
+| 1 | `lamb-institucional-ms` | 1. Institucional y Organización | 001–004 | — | — | — | — | `institucional_db` |
+| 2 | `lamb-personas-ms` | 2. Personas | 005–008 | — | — | — | — | `persona_db` |
+| 3 | `lamb-admision-ms` | 3. Admisión e Ingreso | 009–013 | 11 | 7 | 4 | 0 | `admision_db` |
+| 4 | `lamb-curriculo-ms` | 4. Currículo | 014–018 | 46 | 46 | 0 | 0 | `curriculo_db` |
+| 5 | `lamb-planificacion-ms` | 5. Planificación y Oferta Académica | 019–024 | 36 | 34 | 0 | 2 | `planificacion_db` |
+| 6 | `lamb-matricula-ms` | 6. Matrícula | 025–030 | 7 | 0 | 7 | 0 | `matricula_db` |
+| 7 | `lamb-evaluacion-ms` | 7. Evaluación y Cierre Académico | 031–035 | 22 | 20 | 0 | 2 | `evaluacion_db` |
+| 8 | `lamb-trayectoria-ms` | 8. Trayectoria Académica | 036–039 | 18 | 15 | 1 | 2 | `trayectoria_db` |
+| 9 | `lamb-finanzas-ms` | 9. Finanzas del Estudiante | 040–044 | 9 | 0 | 9 | 0 | `finanzas_db` |
+| 10 | `lamb-ingresos-pagos-ms` | 11. Ingresos, Cobranza y Pagos | 049–053 | 9 | 8 | 1 | 0 | `ingresos_pagos_db` |
+| 11 | `lamb-lms-ms` | 13. LMS / Aprendizaje | 058–062 | 8 | 7 | 1 | 0 | `lms_db` |
+
+> `lamb-institucional-ms` y `lamb-personas-ms` existen en el repo pero no fueron incluidos en el análisis de controllers del archivo `CRUDS.md`.
+
+#### Planificados
+
+| # | Microservicio | Módulo | HU | Base de datos |
+|---|---------------|--------|----|---------------|
+| 12 | `egreso-ms` | 10. Egreso, Grados, Títulos y Certificación | 045–048 | `egreso_db` |
+| 13 | `extension-ms` | 12. Extensión, Educación Continua y Eventos | 054–057 | `extension_db` |
+| 14 | `servicios-estudiante-ms` | 14. Servicios al Estudiante | 063–066 | `servicios_estudiante_db` |
+| 15 | `investigacion-ms` | 15. Investigación | 067–070 | `investigacion_db` |
+| 16 | `practicas-ms` | 16. Prácticas, Internado y Vinculación | 071–074 | `practicas_db` |
+| 17 | `movilidad-ms` | 17. Movilidad e Internacionalización | 075–077 | `movilidad_db` |
+| 18 | `egresados-ms` | 18. Egresados y Seguimiento | 078–080 | `egresados_db` |
+| 19 | `convenios-ms` | 19. Convenios y Relaciones Institucionales | 081–083 | `convenios_db` |
+| 20 | `biblioteca-ms` | 20. Biblioteca y Recursos Académicos | 084–087 | `biblioteca_db` |
+| 21 | `analitica-ms` | 21. Analítica, Indicadores y BI | 088–090 | `analitica_db` |
+| 22 | `workflow-ms` | 22. Plataforma Transversal | 093 | `workflow_db` |
+| 23 | `notificacion-ms` | 22. Plataforma Transversal | transversal | `notificacion_db` |
+| 24 | `auditoria-ms` | 22. Plataforma Transversal | 094 | `auditoria_db` |
 
 Componentes de infraestructura y plataforma:
 
@@ -672,6 +683,237 @@ Entidades principales y sus atributos, derivados de las historias de usuario. De
     | Entidad | Atributos |
     |---------|-----------|
     | `RegistroAuditoria` | id, usuario_id, accion, modulo, fecha_hora, detalle (solo lectura, no editable ni eliminable) |
+
+### 4. Endpoints por microservicio
+
+Controllers REST y endpoints HTTP de los 11 microservicios implementados. Datos extraídos del análisis de los 168 archivos `*Controller.java` del repositorio. Despliega cada microservicio para ver el detalle.
+
+??? info "lamb-admision-ms — 11 controllers (7 completo · 4 parcial)"
+
+    | Controller | Recurso | CRUD | Acciones custom |
+    |---|---|---|---|
+    | `AdjudicacionController` | `/api/v1/adjudicaciones` | Completo | `POST /{id}/publicar` |
+    | `CalificacionController` | `/api/v1/calificaciones` | Completo | — |
+    | `CasoEspecialController` | `/api/v1/casos-especiales` | Completo | `POST /{id}/resolver` |
+    | `ConvocatoriaController` | `/api/v1/convocatorias` | Completo | — |
+    | `ExamenAdmisionController` | `/api/v1/examenes-admision` | Completo | — |
+    | `InscripcionController` | `/api/v1/inscripciones` | Parcial (falta UPDATE, DELETE) | `POST /{id}/responder`, `POST /{id}/anular` |
+    | `ModalidadAdmisionController` | `/api/v1/modalidades-admision` | Parcial (solo lectura) | — |
+    | `PostulacionController` | `/api/v1/postulaciones` | Parcial (falta UPDATE, DELETE) | `POST /{id}/evaluar`, `/admitir`, `/rechazar` |
+    | `PostulanteController` | `/api/v1/postulantes` | Completo | — |
+    | `SeguimientoController` | `/api/v1/seguimientos` | Completo | — |
+    | `TipoDocumentoController` | `/api/v1/tipos-documento` | Parcial (solo lectura) | — |
+
+??? info "lamb-curriculo-ms — 46 controllers (46 completo)"
+
+    Todos los controllers exponen CRUD completo (`GET` lista, `GET /{id}`, `POST`, `PUT /{id}`, `DELETE /{id}`). Muchos aceptan filtro por query param (ej. `?idPlan=`).
+
+    | Controller | Recurso |
+    |---|---|
+    | `ActividadFormacionController` | `/api/v1/actividades-formacion` |
+    | `AreaCurricularController` | `/api/v1/areas-curriculares` |
+    | `CicloPlanController` | `/api/v1/ciclos-plan?idPlan=` |
+    | `ComisionCurricularController` | `/api/v1/comisiones-curriculares` |
+    | `CompetenciaEspecificaController` | `/api/v1/competencias-especificas?idPerfilEgreso=` |
+    | `CompetenciaGeneralController` | `/api/v1/competencias-generales` |
+    | `CreditosCicloController` | `/api/v1/creditos-ciclo?idCicloPlan=` |
+    | `CursoCatalogoController` | `/api/v1/cursos-catalogo?idDepartamento=` |
+    | `CursoExternoConvalidableController` | `/api/v1/cursos-externos-convalidables?idTabla=` |
+    | `CursoInvestigacionController` | `/api/v1/cursos-investigacion?idLinea=` |
+    | `DenominacionProgramaController` | `/api/v1/denominaciones-programa` |
+    | `DepartamentoAcademicoController` | `/api/v1/departamentos-academicos?idPlan=` |
+    | `DistribucionHorasController` | `/api/v1/distribuciones-horas?idCurso=` |
+    | `EjeCurricularController` | `/api/v1/ejes-curriculares?idPlan=` |
+    | `EquivalenciaPlanController` | `/api/v1/equivalencias-plan?idPlanCursoOrigen=` |
+    | `EvaluacionCurricularController` | `/api/v1/evaluaciones-curriculares?idPlan=` |
+    | `GradoAcademicoController` | `/api/v1/grados-academicos` |
+    | `GrupoElectivoController` | `/api/v1/grupos-electivos?idPlan=` |
+    | `LineaInvestigacionController` | `/api/v1/lineas-investigacion` |
+    | `MallaCurricularController` | `/api/v1/mallas-curriculares?idPlan=` |
+    | `MencionController` | `/api/v1/menciones?idPlan=` |
+    | `MiembroComisionController` | `/api/v1/miembros-comision?idComision=` |
+    | `ModalidadController` | `/api/v1/modalidades` |
+    | `ModalidadTitulacionController` | `/api/v1/modalidades-titulacion?idPlan=` |
+    | `PerfilEgresoController` | `/api/v1/perfiles-egreso?idPlan=` |
+    | `PerfilIngresoController` | `/api/v1/perfiles-ingreso?idPlan=` |
+    | `PlanAdecuacionController` | `/api/v1/planes-adecuacion?idPlanOrigen=` |
+    | `PlanEstudioController` | `/api/v1/planes-estudio?idPrograma=` (agregado con cursos y prerrequisitos; `POST /{id}/publicar`) |
+    | `ProyeccionSocialController` | `/api/v1/proyecciones-sociales` |
+    | `RequisitoEgresoController` | `/api/v1/requisitos-egreso?idPlan=` |
+    | `RequisitoExtracurricularController` | `/api/v1/requisitos-extracurriculares?idPlan=` |
+    | `RequisitoIdiomaController` | `/api/v1/requisitos-idioma?idPlan=` |
+    | `RequisitoInvestigacionController` | `/api/v1/requisitos-investigacion?idPlan=` |
+    | `RequisitoMatriculaController` | `/api/v1/requisitos-matricula?idPlanCurso=` |
+    | `RequisitoPracticasController` | `/api/v1/requisitos-practicas?idPlan=` |
+    | `ResolucionPlanController` | `/api/v1/resoluciones-plan?idPlan=` |
+    | `ResultadoAprendizajeController` | `/api/v1/resultados-aprendizaje?idCurso=` |
+    | `SilaboBaseController` | `/api/v1/silabos-base?idCurso=` |
+    | `SolicitudModificacionCurricularController` | `/api/v1/solicitudes-modificacion-curricular?idPlan=` (`POST /{id}/responder`) |
+    | `SumillaCursoController` | `/api/v1/sumillas-curso?idCurso=` |
+    | `TablaConvalidacionController` | `/api/v1/tablas-convalidacion?idUniversidad=` |
+    | `TipoCursoController` | `/api/v1/tipos-curso` |
+    | `TituloProfesionalController` | `/api/v1/titulos-profesionales` |
+    | `UnidadAprendizajeController` | `/api/v1/unidades-aprendizaje?idSilabo=` |
+    | `UniversidadOrigenController` | `/api/v1/universidades-origen` |
+    | `VigenciaCohorteController` | `/api/v1/vigencias-cohorte?idPlan=` |
+    | `VoluntariadoController` | `/api/v1/voluntariados` |
+
+??? info "lamb-evaluacion-ms — 22 controllers (20 completo · 2 no-CRUD)"
+
+    | Controller | Recurso | CRUD |
+    |---|---|---|
+    | `ActaComplementariaController` | `/api/v1/actas-complementarias` | Completo |
+    | `ActaRectificacionController` | `/api/v1/actas-rectificacion` | Completo (`POST /{id}/responder`) |
+    | `CalificacionCriterioController` | `/api/v1/calificaciones-criterio` | Completo |
+    | `ComponenteEvaluacionController` | `/api/v1/componentes-evaluacion` | Completo |
+    | `ConfiguracionEvaluacionController` | `/api/v1/configuraciones-evaluacion` | Completo |
+    | `CriterioRubricaController` | `/api/v1/criterios-rubrica` | Completo |
+    | `EncuestaDocenteController` | `/api/v1/encuestas-docente` | Completo |
+    | `EscalaCalificacionController` | `/api/v1/escalas-calificacion` | Completo |
+    | `EvaluacionProgramadaController` | `/api/v1/evaluaciones-programadas` | Completo |
+    | `FirmaActaController` | `/api/v1/firmas-acta` | Completo |
+    | `InhabilitacionInasistenciaController` | `/api/v1/inhabilitaciones-inasistencia` | Completo |
+    | `JustificacionInasistenciaController` | `/api/v1/justificaciones-inasistencia` | Completo (`POST /{id}/responder`) |
+    | `NotaController` | `/api/v1/notas` | Completo |
+    | `PlazoAperturaController` | `/api/v1/plazos-apertura` | Completo |
+    | `PreguntaEncuestaController` | `/api/v1/preguntas-encuesta` | Completo |
+    | `RegistroAsistenciaController` | `/api/v1/registros-asistencia` | Completo |
+    | `RespuestaEncuestaController` | `/api/v1/respuestas-encuesta` | Completo |
+    | `RespuestaSolicitudAperturaController` | `/api/v1/respuestas-solicitud-apertura` | Completo |
+    | `RubricaController` | `/api/v1/rubricas` | Completo |
+    | `SolicitudAperturaNotasController` | `/api/v1/solicitudes-apertura-notas` | Completo |
+    | `ActaController` | `/api/v1/actas` | No-CRUD (nace de evento `grupo.abierto`, solo `POST /{id}/cerrar`) |
+    | `VistaController` | `/api/v1/vistas` | No-CRUD (vistas calculadas de solo lectura) |
+
+??? info "lamb-finanzas-ms — 9 controllers (9 parcial)"
+
+    Patrón: ningún controller tiene `PUT/PATCH` ni `DELETE`. Todos los sub-recursos exponen solo `GET` lista, `GET /{id}` y `POST`.
+
+    | Controller | Recurso | Sub-recursos |
+    |---|---|---|
+    | `CalendarioPlanesController` | `/api/v1/calendario-planes` | cronogramas-vencimiento, plantillas-plan-pago |
+    | `CatalogosTarifasController` | `/api/v1/catalogos-tarifas` | categorias-concepto, conceptos-pago, tarifarios-escuela-ciclo |
+    | `CobrosController` | `/api/v1/cobros` | estados-cobro, detalles-cobro, historiales-estado-cobro, montos-pago |
+    | `ComprobantesController` | `/api/v1/comprobantes` | documentos-pago, series-correlativos-comprobante, datos-facturacion-cliente, anulaciones-comprobante, notas-credito, notas-debito |
+    | `ControlCierreController` | `/api/v1/control-cierre` | reclamos-pago, estados-cuenta-estudiante, constancias-no-adeudo |
+    | `DescuentosBecasController` | `/api/v1/descuentos-becas` | tipos-descuento, descuentos-aplicados, convenios-institucionales-descuento, exoneraciones-pago, tipos-beca, becas-aplicadas, renovaciones-suspensiones-beca |
+    | `PagoController` | `/api/v1/pagos` | vouchers, recaudaciones-ventanilla (`POST /{id}/reembolsar`) |
+    | `ReembolsosCancelacionesController` | `/api/v1/reembolsos-cancelaciones` | solicitudes-devolucion, reembolsos-pago, cancelaciones-cargo-matricula, transferencias-pago |
+    | `SaldoEstudianteController` | `/api/v1/saldo-estudiante` | cuentas, movimientos, saldos-periodo, ajustes-manuales, reservas-devolucion |
+
+??? info "lamb-ingresos-pagos-ms — 9 controllers (8 completo · 1 parcial)"
+
+    | Controller | Recurso | CRUD |
+    |---|---|---|
+    | `BancosController` | `/api/v1/ingresos-pagos/bancos` | Completo (sub: entidades-financieras, tipos-cambio) |
+    | `CajaController` | `/api/v1/ingresos-pagos/caja` | Completo (sub: cajas, sesiones-caja, arqueos-caja) |
+    | `CargosController` | `/api/v1/ingresos-pagos/cargos` | Completo (sub: conceptos-pago, tarifarios-programa, recargos-mora) |
+    | `ComponentesTransversalesController` | `/api/v1/ingresos-pagos/transversales` | Completo (sub: bitacoras-auditoria-pago, plantillas-notificacion) |
+    | `ComprobantesController` | `/api/v1/ingresos-pagos/comprobantes` | Completo (sub: tipos-comprobante, series-comprobante) |
+    | `CuentasPorCobrarController` | `/api/v1/ingresos-pagos/cuentas-por-cobrar` | Completo (sub: becas, becas-asignadas, convenios-institucionales, financiamientos-educativos, pagadores-terceros) |
+    | `DevolucionesController` | `/api/v1/ingresos-pagos/devoluciones` | Completo (sub: notas-credito-debito) |
+    | `PagosController` | `/api/v1/ingresos-pagos/pagos-dominio` | Parcial (sub-recurso "pagos" solo lectura; "estudiantes" solo acción `estado-cuenta`; "metodos-pago" CRUD completo) |
+    | `PasarelasController` | `/api/v1/ingresos-pagos/pasarelas` | Completo (sub: logs-transaccion-pasarela) |
+
+??? info "lamb-lms-ms — 8 controllers (7 completo · 1 parcial)"
+
+    Todos bajo prefijo `/api/v1/lms`. Las rutas de recurso van en cada método.
+
+    | Controller | Sub-recursos | CRUD |
+    |---|---|---|
+    | `CertificadosController` | plantillas-certificado | Completo |
+    | `ContenidosController` | contenidos, recursos-complementarios, anuncios-curso | Completo |
+    | `EstructuraAcademicaController` | cursos, docentes, modalidades-curso, periodos-academicos, estados-matricula, categorias-curso, mallas-curriculares, prerequisitos-curso, secciones-curso, horarios-clase, sesiones-clase | Completo |
+    | `EvaluacionesController` | evaluaciones, preguntas, calificaciones, rubricas-evaluacion, preguntas-banco | Completo |
+    | `ForosController` | foros-hilo, respuestas-foro | Completo |
+    | `MatriculaController` | matriculas (solo `POST /enrolar`, `GET` lista, `GET /{id}`), listas-espera, convalidaciones-curso | Parcial (recurso principal sin UPDATE/DELETE) |
+    | `SeguimientoController` | avances-contenido, asistencias, encuestas-satisfaccion, insignias, insignias-estudiante | Completo |
+    | `TareasController` | tareas, entregas-tarea | Completo |
+
+??? info "lamb-matricula-ms — 7 controllers (7 parcial)"
+
+    Patrón: ningún sub-recurso tiene `PUT/PATCH`. Solo existe un `DELETE` en todo el microservicio (quitar una condición de una matrícula), no para borrar el recurso principal.
+
+    | Controller | Recurso | Sub-recursos |
+    |---|---|---|
+    | `CalendarioPeriodosController` | `/api/v1/calendario-periodos` | cronogramas, variaciones, tipos, modalidades, ampliaciones-plazo |
+    | `CursosCargaAcademicaController` | `/api/v1/cursos-carga-academica` | intentos-curso, cargas-periodo, elecciones-electivos, cruces-horario, liberaciones-prerrequisito, sobrecargas-creditos, cargas-minimas |
+    | `MatriculaController` | `/api/v1/matriculas` | estados, historial-estados, condicionales, anulaciones, observaciones, notificaciones, constancias (`POST /{id}/confirmar`, `/anular`, `/condiciones`, `DELETE /{id}/condiciones/{idCondicion}`) |
+    | `OfertaCuposController` | `/api/v1/oferta-cupos` | reservas-vacante, listas-espera, ampliaciones-cupo |
+    | `RectificacionRetiroReactivacionController` | `/api/v1/rectificacion-retiro-reactivacion` | solicitudes-rectificacion, retiros-oficio, retiros-inasistencia, reactivaciones-matricula-anulada, anulaciones-masivas-impago, rehabilitaciones-matricula |
+    | `ReglasRequisitosController` | `/api/v1/reglas-requisitos` | requisitos-por-tipo, bloqueos, compromisos |
+    | `SituacionEstudianteController` | `/api/v1/situacion-estudiante` | condiciones, situaciones-academicas, cambios-situacion, observados-suspendidos, movilidades |
+
+??? info "lamb-planificacion-ms — 36 controllers (34 completo · 2 no-CRUD)"
+
+    Todas las actualizaciones son `PUT` (no se usa `@PatchMapping`).
+
+    | Controller | Recurso | CRUD |
+    |---|---|---|
+    | `AmbienteController` | `/api/v1/ambientes` | Completo |
+    | `AsignacionDocenteController` | `/api/v1/asignaciones-docente` | Completo |
+    | `AulaVirtualGrupoController` | `/api/v1/aulas-virtuales-grupo` | Completo |
+    | `CalendarioAcademicoController` | `/api/v1/calendarios-academicos` | Completo |
+    | `CargaLectivaController` | `/api/v1/cargas-lectivas` | Completo |
+    | `CargaNoLectivaController` | `/api/v1/cargas-no-lectivas` | Completo |
+    | `CronogramaSesionController` | `/api/v1/cronogramas-sesion` | Completo |
+    | `CupoGrupoController` | `/api/v1/cupos-grupo` | Completo |
+    | `CupoTallerController` | `/api/v1/cupos-taller` | Completo |
+    | `CursoNivelacionController` | `/api/v1/cursos-nivelacion` | Completo |
+    | `DiaNoLectivoController` | `/api/v1/dias-no-lectivos` | Completo |
+    | `DisponibilidadDocenteController` | `/api/v1/disponibilidades-docente` | Completo |
+    | `EquipamientoAmbienteController` | `/api/v1/equipamientos-ambiente` | Completo |
+    | `EquivalenciaCursoController` | `/api/v1/equivalencias-curso` | Completo |
+    | `GrupoController` | `/api/v1/grupos` | Completo (`POST /{id}/revalidar`) |
+    | `GrupoHabilitadoEquivalenciaController` | `/api/v1/grupos-habilitados-equivalencia` | Completo |
+    | `GrupoTallerController` | `/api/v1/grupos-taller` | Completo |
+    | `HitoCalendarioController` | `/api/v1/hitos-calendario` | Completo |
+    | `HorarioGrupoController` | `/api/v1/horarios-grupo` | Completo |
+    | `LimiteCreditosController` | `/api/v1/limites-creditos` | Completo |
+    | `OfertaAcademicaController` | `/api/v1/oferta-academica` | Completo |
+    | `PabellonController` | `/api/v1/pabellones` | Completo |
+    | `ParametroMatriculaController` | `/api/v1/parametros-matricula` | Completo |
+    | `PeriodoAcademicoController` | `/api/v1/periodos-academicos` | Completo |
+    | `PreferenciaCursoDocenteController` | `/api/v1/preferencias-curso-docente` | Completo |
+    | `SesionClaseController` | `/api/v1/sesiones-clase` | Completo |
+    | `SilaboGrupoController` | `/api/v1/silabos-grupo` | Completo |
+    | `SolicitudAperturaGrupoController` | `/api/v1/solicitudes-apertura-grupo` | Completo (`POST /{id}/responder`) |
+    | `SolicitudCambioAulaController` | `/api/v1/solicitudes-cambio-aula` | Completo (`POST /{id}/responder`) |
+    | `SolicitudCambioDocenteController` | `/api/v1/solicitudes-cambio-docente` | Completo (`POST /{id}/responder`) |
+    | `SolicitudCambioHorarioController` | `/api/v1/solicitudes-cambio-horario` | Completo (`POST /{id}/responder`) |
+    | `SolicitudCierreFusionGrupoController` | `/api/v1/solicitudes-cierre-fusion-grupo` | Completo (`POST /{id}/responder`) |
+    | `SolicitudGrupoEquivalenteController` | `/api/v1/solicitudes-grupo-equivalente` | Completo (`POST /{id}/responder`) |
+    | `TipoAmbienteController` | `/api/v1/tipos-ambiente` | Completo |
+    | `TipoPeriodoController` | `/api/v1/tipos-periodo` | Completo |
+    | `CursoController` | `/api/v1/cursos` | No-CRUD (los cursos llegan por evento `plan.publicado` desde curriculo) |
+    | `VistaController` | `/api/v1/vistas` | No-CRUD (vista calculada `horario-estudiante`) |
+
+??? info "lamb-trayectoria-ms — 18 controllers (15 completo · 1 parcial · 2 no-CRUD)"
+
+    | Controller | Recurso | CRUD |
+    |---|---|---|
+    | `AlertaRiesgoController` | `/api/v1/alertas-riesgo` | Completo |
+    | `CambioAcademicoController` | `/api/v1/cambios-academicos` | Completo |
+    | `CasoSeguimientoController` | `/api/v1/casos-seguimiento` | Completo |
+    | `ControlRepitenciaController` | `/api/v1/controles-repitencia` | Completo |
+    | `CumplimientoRequisitoController` | `/api/v1/cumplimientos-requisito` | Completo |
+    | `EgresoController` | `/api/v1/egresos` | Completo |
+    | `InformeTrayectoriaController` | `/api/v1/informes-trayectoria` | Completo |
+    | `NivelRiesgoController` | `/api/v1/niveles-riesgo` | Completo |
+    | `PlanRefuerzoController` | `/api/v1/planes-refuerzo` | Completo |
+    | `ProgramaTutoriaController` | `/api/v1/programas-tutoria` | Completo |
+    | `ReconocimientoController` | `/api/v1/reconocimientos` | Completo |
+    | `ReglaAlertaController` | `/api/v1/reglas-alerta` | Completo |
+    | `SesionTutoriaController` | `/api/v1/sesiones-tutoria` | Parcial (falta GET lista propia; se lista desde `/api/v1/tutorias/{id}/sesiones`) |
+    | `SituacionCierreController` | `/api/v1/situaciones-cierre` | Completo |
+    | `SolicitudConstanciaController` | `/api/v1/solicitudes-constancia` | Completo |
+    | `TutoriaController` | `/api/v1/tutorias` | Completo (sub: sesiones) |
+    | `TrayectoriaController` | `/api/v1/trayectorias` | No-CRUD (derivado de `postulante.admitido` y `acta.cerrada`) |
+    | `VistaTrayectoriaController` | `/api/v1/vistas` | No-CRUD (avance-curricular, historial-academico, promedio-ponderado, rendimiento-por-curso, historial-estados) |
+
+??? info "lamb-institucional-ms y lamb-personas-ms"
+
+    Microservicios implementados en el repositorio pero sin controllers listados en el análisis de `CRUDS.md`. Su documentación de endpoints se añadirá cuando se procesen.
 
 ## Arquitectura Lamb UPeU 2.0
 
