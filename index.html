@@ -2372,7 +2372,7 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 </table>
 <h3 id="2-microservicios">2. Microservicios<a class="headerlink" href="#2-microservicios" title="Permanent link">&para;</a></h3>
 <p>Cada módulo funcional se materializa en un microservicio con su propia base de datos. El módulo 22 (Plataforma Transversal) se reparte entre Keycloak (SSO, roles y permisos) y tres servicios propios.</p>
-<p><strong>Estado actual del código</strong>: 11 microservicios implementados, 168 controllers REST analizados, de los cuales 137 son CRUD completo, 23 CRUD parcial y 8 son vistas de solo lectura o acciones de dominio sin persistencia HTTP.</p>
+<p><strong>Estado actual del código</strong>: 11 microservicios implementados, 181 controllers REST analizados, de los cuales 137 son CRUD completo, 36 CRUD parcial (incluye los 13 controllers de institucional + personas con patrón <code>GET</code>/<code>GET {id}</code>/<code>POST</code>) y 8 son vistas de solo lectura o acciones de dominio sin persistencia HTTP.</p>
 <h4 id="implementados">Implementados<a class="headerlink" href="#implementados" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
@@ -2394,10 +2394,10 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <td><code>lamb-institucional-ms</code></td>
 <td>1. Institucional y Organización</td>
 <td>001–004</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
+<td>7</td>
+<td>0</td>
+<td>7</td>
+<td>0</td>
 <td><code>institucional_db</code></td>
 </tr>
 <tr>
@@ -2405,10 +2405,10 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 <td><code>lamb-personas-ms</code></td>
 <td>2. Personas</td>
 <td>005–008</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
+<td>6</td>
+<td>0</td>
+<td>6</td>
+<td>0</td>
 <td><code>persona_db</code></td>
 </tr>
 <tr>
@@ -2513,7 +2513,7 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 </tbody>
 </table>
 <blockquote>
-<p><code>lamb-institucional-ms</code> y <code>lamb-personas-ms</code> existen en el repo pero no fueron incluidos en el análisis de controllers del archivo <code>CRUDS.md</code>.</p>
+<p><code>lamb-institucional-ms</code> (7 controllers / 44 CRUD) y <code>lamb-personas-ms</code> (6 controllers / 50 CRUD) siguen el patrón <code>GET</code> lista + <code>GET /{id}</code> + <code>POST</code> (sin <code>PUT</code>/<code>DELETE</code>), por lo que se cuentan como CRUD parciales. Detalle en <code>CRUDS_INSTITUCIONAL_PERSONAS.md</code>.</p>
 </blockquote>
 <h4 id="planificados">Planificados<a class="headerlink" href="#planificados" title="Permanent link">&para;</a></h4>
 <table>
@@ -4355,8 +4355,104 @@ por estudiantes, docentes, postulantes, egresados y personal administrativo.
 </table>
 </details>
 <details class="info">
-<summary>lamb-institucional-ms y lamb-personas-ms</summary>
-<p>Microservicios implementados en el repositorio pero sin controllers listados en el análisis de <code>CRUDS.md</code>. Su documentación de endpoints se añadirá cuando se procesen.</p>
+<summary>lamb-institucional-ms — 7 controllers (44 CRUD · patrón GET/GET-id/POST)</summary>
+<p>Patrón del microservicio: un controller agrupa varios sub-recursos; cada sub-recurso expone solo <code>GET</code> lista, <code>GET /{id}</code> y <code>POST</code> (sin <code>PUT</code>/<code>DELETE</code>), por lo que todos son CRUD parciales.</p>
+<table>
+<thead>
+<tr>
+<th>Controller</th>
+<th>Recurso</th>
+<th>Sub-recursos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InstitucionController</code></td>
+<td><code>/api/v1/institucion</code></td>
+<td>Institucion, TipoInstitucion, AutoridadInstitucional, ResolucionLicenciamiento, ConvenioInstitucional</td>
+</tr>
+<tr>
+<td><code>CampusSedeController</code></td>
+<td><code>/api/v1/campus-sede</code></td>
+<td>Campus, Sede, TipoSede, DireccionSede, Pabellon, Ambiente</td>
+</tr>
+<tr>
+<td><code>FacultadEscuelaController</code></td>
+<td><code>/api/v1/facultad-escuela</code></td>
+<td>Facultad, EscuelaProfesional, DepartamentoAcademico, AutoridadFacultad, CambioUnidadAcademica, UnidadAdministrativa, OrganigramaInstitucional</td>
+</tr>
+<tr>
+<td><code>ProgramaAcademicoController</code></td>
+<td><code>/api/v1/programa-academico</code></td>
+<td>Programa, NivelAcademico, ModalidadEstudio, RegimenAcademico, ProgramaSede, GradoTitulo, ResolucionPrograma, MencionEspecialidad, AcreditacionPrograma</td>
+</tr>
+<tr>
+<td><code>PeriodoAcademicoController</code></td>
+<td><code>/api/v1/periodo-academico</code></td>
+<td>AnioAcademico, TipoPeriodo, PeriodoAcademico, EstadoPeriodo, PeriodoProgramaSede, AmpliacionCierrePeriodo</td>
+</tr>
+<tr>
+<td><code>CalendarioController</code></td>
+<td><code>/api/v1/calendario</code></td>
+<td>CalendarioAcademico, TipoEvento, EventoCalendario, FeriadoNoLaborable, CalendarioFacultadEscuela, ReprogramacionEvento, PublicacionCalendario, RecordatorioCalendario</td>
+</tr>
+<tr>
+<td><code>ParametroAuditoriaController</code></td>
+<td><code>/api/v1/parametro-auditoria</code></td>
+<td>ParametroInstitucional, ParametroSedeEscuela, BitacoraCambiosEstructura</td>
+</tr>
+</tbody>
+</table>
+<p>Migraciones Flyway: V2–V8. Nota: <code>GradoAcademico</code> preexistente es un enum embebido en <code>Programa</code> y no se tocó; es distinto de <code>NivelAcademico</code>/<code>GradoTitulo</code> nuevos.</p>
+</details>
+<details class="info">
+<summary>lamb-personas-ms — 6 controllers (50 CRUD · patrón GET/GET-id/POST)</summary>
+<blockquote>
+<p>⚠️ Cambio de ruta: antes <code>/api/v1/personas</code>, ahora <code>/api/v1/persona/...</code> (sub-paths). Revisar consumidores/gateway.</p>
+</blockquote>
+<p>Mismo patrón que institucional: solo <code>GET</code> lista + <code>GET /{id}</code> + <code>POST</code> por sub-recurso.</p>
+<table>
+<thead>
+<tr>
+<th>Controller</th>
+<th>Recurso</th>
+<th>Sub-recursos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PersonaController</code></td>
+<td><code>/api/v1/persona</code></td>
+<td>Persona, TipoPersona, VinculoInstitucion, EstadoPersona, HistorialEstadoPersona, FusionPersonas, FotografiaPersona, BajaAnonimizacion</td>
+</tr>
+<tr>
+<td><code>IdentificacionController</code></td>
+<td><code>/api/v1/identificacion</code></td>
+<td>TipoDocumentoIdentidad, DocumentoIdentidad, CodigoInstitucional, HistorialDocumentoIdentidad, ValidacionIdentidad, IdentificacionTributaria, CorreccionIdentificacion</td>
+</tr>
+<tr>
+<td><code>DatosPersonalesController</code></td>
+<td><code>/api/v1/datos-personales</code></td>
+<td>DatoPersonal, Sexo, EstadoCivil, Nacionalidad, Ubigeo, DiscapacidadCondicion, CambioNombreApellido, ConsentimientoDatos, LenguaIdioma, AutoidentificacionEtnica, ConfesionReligiosa, ColegioProcedencia, DatoSocioeconomico</td>
+</tr>
+<tr>
+<td><code>ContactoDireccionController</code></td>
+<td><code>/api/v1/contacto-direccion</code></td>
+<td>TipoContacto, Contacto, TipoDireccion, Direccion, CorreoInstitucional, ContactoEmergencia, VerificacionContacto, PreferenciaComunicacion, RedSocial</td>
+</tr>
+<tr>
+<td><code>RelacionResponsableController</code></td>
+<td><code>/api/v1/relacion-responsable</code></td>
+<td>TipoParentesco, RelacionFamiliar, ResponsablePago</td>
+</tr>
+<tr>
+<td><code>DocumentoPersonaController</code></td>
+<td><code>/api/v1/documento-persona</code></td>
+<td>TipoDocumento, DocumentoPersona, EstadoDocumento, RequisitoDocumentario, HistorialRevisionDocumento, VigenciaVencimientoDocumento, ReemplazoVersionDocumento, ObservacionDocumento, FirmaValidacionDocumento, ExpedienteLegajo</td>
+</tr>
+</tbody>
+</table>
+<p>Migraciones Flyway: V2–V7. Catálogos sin timestamp de auditoría: TipoPersona, TipoDocumentoIdentidad, Sexo, EstadoCivil, Nacionalidad, Ubigeo, TipoContacto, TipoDireccion, TipoParentesco, TipoDocumento.</p>
 </details>
 <h2 id="arquitectura-lamb-upeu-20">Arquitectura Lamb UPeU 2.0<a class="headerlink" href="#arquitectura-lamb-upeu-20" title="Permanent link">&para;</a></h2>
 <h3 id="nivel-1-contexto-del-sistema-system-context-c4-nivel-1">Nivel 1: Contexto del sistema (System Context - C4 nivel 1)<a class="headerlink" href="#nivel-1-contexto-del-sistema-system-context-c4-nivel-1" title="Permanent link">&para;</a></h3>
