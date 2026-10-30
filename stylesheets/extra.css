@@ -10,52 +10,55 @@
   --md-accent-fg-color:         #d69e2e;
 }
 
-/* === Ancho de contenido mas amplio para que las tablas respiren === */
+/* === Ancho total: aprovechar toda la pantalla === */
 .md-grid {
-  max-width: 72rem;
+  max-width: 85rem;
 }
 
-/* === Tablas: permitir scroll horizontal en lugar de romper layout === */
+/* Sidebar izquierdo (navegacion) un poco mas ancho para empujarlo hacia la derecha */
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--primary {
+    width: 14rem;
+  }
+  .md-sidebar--secondary {
+    width: 12rem;
+  }
+}
+
+/* === Tablas: SIN scroll horizontal, todo cabe con word-wrap === */
 .md-typeset__table {
   display: block;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: visible;
 }
 .md-typeset table:not([class]) {
   display: table;
   width: 100%;
-  font-size: 0.72rem;
+  table-layout: fixed;
+  font-size: 0.7rem;
   line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .md-typeset table:not([class]) th {
   background: var(--md-primary-fg-color);
   color: #fff;
-  white-space: nowrap;
   font-weight: 600;
+  white-space: normal;
 }
 .md-typeset table:not([class]) td,
 .md-typeset table:not([class]) th {
-  padding: 0.55rem 0.7rem;
+  padding: 0.45rem 0.55rem;
   vertical-align: top;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
-/* Tablas de historias (5 columnas): HU estrecho, criterios ancho */
-.md-typeset table:not([class]) td:first-child {
-  width: 3rem;
-  text-align: center;
-  font-weight: 600;
-  white-space: nowrap;
-}
-.md-typeset table:not([class]) td:nth-child(2) {
-  min-width: 8rem;
-  white-space: nowrap;
-}
-.md-typeset table:not([class]) td:nth-child(3),
-.md-typeset table:not([class]) td:nth-child(4) {
-  min-width: 11rem;
-}
-.md-typeset table:not([class]) td:last-child {
-  min-width: 20rem;
+/* Codigo inline dentro de tablas: que haga wrap */
+.md-typeset table:not([class]) code {
+  white-space: normal;
+  word-break: break-word;
+  font-size: 0.9em;
 }
 
 /* Filas alternadas suaves */
@@ -84,7 +87,7 @@
   overflow-x: auto;
 }
 
-/* === Bloques de codigo tipo "producto del curso" al estilo pagatu === */
+/* === Bloques de codigo tipo "producto del curso" === */
 .md-typeset pre > code {
   font-size: 0.78rem;
   line-height: 1.5;
