@@ -4,5 +4,6 @@ public enum GradoAcademico {
     BACHILLER,
     LICENCIATURA,
     MAESTRIA,
-    DOCTORADO
+    DOCTORADO,
+    SIN_ASIGNAR
 }

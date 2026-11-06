@@ -25,6 +25,7 @@ public class ProgramaAcademicoController {
 
     private final ProgramaService programaService;
     private final NivelAcademicoService nivelAcademicoService;
+    private final GradoAcademicoCatalogoService gradoAcademicoCatalogoService;
     private final ModalidadEstudioService modalidadEstudioService;
     private final RegimenAcademicoService regimenAcademicoService;
     private final ProgramaSedeService programaSedeService;
@@ -84,6 +85,38 @@ public class ProgramaAcademicoController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminarNivelAcademico(@PathVariable Long id) {
         nivelAcademicoService.eliminar(id);
+    }
+
+    // --- Grado academico (catalogo flexible) ---
+
+    @GetMapping("/grados-academicos")
+    @Operation(summary = "Listar grados academicos")
+    public List<GradoAcademicoCatalogoResponse> listarGradosAcademicos() {
+        return gradoAcademicoCatalogoService.listar();
+    }
+
+    @GetMapping("/grados-academicos/{id}")
+    @Operation(summary = "Obtener un grado academico")
+    public GradoAcademicoCatalogoResponse obtenerGradoAcademico(@PathVariable Long id) {
+        return gradoAcademicoCatalogoService.obtener(id);
+    }
+
+    @PostMapping("/grados-academicos")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Crear un grado academico")
+    public GradoAcademicoCatalogoResponse crearGradoAcademico(@Valid @RequestBody GradoAcademicoCatalogoRequest request) {
+        return gradoAcademicoCatalogoService.crear(request);
+    }
+
+    @PutMapping("/grados-academicos/{id}")
+    public GradoAcademicoCatalogoResponse actualizarGradoAcademico(@PathVariable Long id, @Valid @RequestBody GradoAcademicoCatalogoRequest request) {
+        return gradoAcademicoCatalogoService.actualizar(id, request);
+    }
+
+    @DeleteMapping("/grados-academicos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarGradoAcademico(@PathVariable Long id) {
+        gradoAcademicoCatalogoService.eliminar(id);
     }
 
     // --- Modalidad de estudio (item 21) ---

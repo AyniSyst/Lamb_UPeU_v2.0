@@ -20,7 +20,7 @@ public class Programa {
     private String nombre;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "grado_academico", nullable = false, length = 20)
+    @Column(name = "grado_academico", length = 20)
     private GradoAcademico gradoAcademico;
 
     @Column(name = "duracion_semestres", nullable = false)
@@ -29,4 +29,12 @@ public class Programa {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_facultad", nullable = false)
     private Facultad facultad;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_nivel_academico")
+    private NivelAcademico nivelAcademico;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_grado_academico_catalogo")
+    private GradoAcademicoCatalogo gradoAcademicoCatalogo;
 }

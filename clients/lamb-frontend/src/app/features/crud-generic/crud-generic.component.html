@@ -1,0 +1,313 @@
+@if (def(); as d) {
+  <div class="page">
+    <!-- Page header estilo LAMB: franja amarilla + título + regresar -->
+    <header class="page__head">
+      <h2 class="page__title">{{ d.label }}</h2>
+      <button class="btn btn--ghost" (click)="back()">
+        <span class="material-symbols-outlined">arrow_back</span> Regresar
+      </button>
+    </header>
+
+    @if (tabOptions().length > 1) {
+      <div class="tabs">
+        @for (opt of tabOptions(); track opt.slug) {
+          <button type="button"
+                  class="tabs__btn"
+                  [class.tabs__btn--active]="opt.slug === d.slug"
+                  (click)="selectTab(opt)">
+            <span class="material-symbols-outlined">{{ opt.icon }}</span>
+            {{ opt.label }}
+          </button>
+        }
+      </div>
+    }
+
+    <!-- Card intro con ícono tipo LAMB -->
+    <div class="intro-card">
+      <div class="intro-card__icon">
+        <span class="material-symbols-outlined">{{ d.icon }}</span>
+      </div>
+      <div class="intro-card__text">
+        <h3>{{ d.label }}</h3>
+        <p>{{ d.description }}</p>
+      </div>
+      <div class="intro-card__actions">
+        <button class="btn btn--primary" (click)="openCreate()">
+          <span class="material-symbols-outlined">add</span> Nuevo
+        </button>
+        <button class="btn btn--outline" (click)="load()">
+          <span class="material-symbols-outlined">refresh</span> Recargar
+        </button>
+      </div>
+    </div>
+
+    @if (showForm()) {
+      <!-- Formulario estilo LAMB: card con título header, grid de campos, acciones al pie -->
+      <div class="form-card">
+        <header class="form-card__head">
+          <span class="material-symbols-outlined">{{ editingId() ? 'edit' : 'add_circle' }}</span>
+          <h3>{{ editingId() ? 'Editar registro #' + editingId() : 'Nuevo registro' }}</h3>
+          <button class="icon-btn" (click)="showForm.set(false)" aria-label="cerrar">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </header>
+
+        <div class="form-grid">
+          @for (field of editableFields(); track field.key) {
+            <div class="field" [class.field--full]="field.type === 'textarea' || field.type === 'reniec' || field.type === 'file'">
+              <label class="field__label">
+                {{ field.label }}
+                @if (field.required) { <em class="req">*</em> }
+              </label>
+
+              @switch (field.type) {
+                @case ('text') {
+                  <div class="input">
+                    <span class="material-symbols-outlined input__icon">edit</span>
+                    <input type="text"
+                           [value]="form()[field.key] ?? ''"
+                           (input)="updateField(field.key, $any($event.target).value)"
+                           [placeholder]="field.label">
+                  </div>
+                }
+                @case ('number') {
+                  <div class="input">
+                    <span class="material-symbols-outlined input__icon">tag</span>
+                    <input type="number"
+                           [value]="form()[field.key] ?? ''"
+                           (input)="updateField(field.key, $any($event.target).valueAsNumber)">
+                  </div>
+                }
+                @case ('decimal') {
+                  <div class="input">
+                    <span class="material-symbols-outlined input__icon">pin</span>
+                    <input type="number" step="0.01"
+                           [value]="form()[field.key] ?? ''"
+                           (input)="updateField(field.key, $any($event.target).valueAsNumber)">
+                  </div>
+                }
+                @case ('date') {
+                  <div class="input">
+                    <span class="material-symbols-outlined input__icon">event</span>
+                    <input type="date"
+                           [value]="form()[field.key] ?? ''"
+                           (input)="updateField(field.key, $any($event.target).value)">
+                  </div>
+                }
+                @case ('datetime') {
+                  <div class="input">
+                    <span class="material-symbols-outlined input__icon">schedule</span>
+                    <input type="datetime-local"
+                           [value]="form()[field.key] ?? ''"
+                           (input)="updateField(field.key, $any($event.target).value)">
+                  </div>
+                }
+                @case ('enum') {
+                  <div class="input" [class.input--disabled]="field.disabled">
+                    <span class="material-symbols-outlined input__icon">list</span>
+                    <select [value]="form()[field.key] ?? ''"
+                            [disabled]="field.disabled"
+                            (change)="updateField(field.key, $any($event.target).value)">
+                      <option value="">— Seleccionar —</option>
+                      @if (form()[field.key] === 'SIN_ASIGNAR') {
+                        <option value="SIN_ASIGNAR">SIN ASIGNAR</option>
+                      }
+                      @for (opt of field.options; track opt) {
+                        <option [value]="opt">{{ opt }}</option>
+                      }
+                    </select>
+                  </div>
+                }
+                @case ('ref') {
+                  <div class="input">
+                    <span class="material-symbols-outlined input__icon">link</span>
+                    <select [value]="form()[field.key] ?? ''"
+                            (change)="updateField(field.key, $any($event.target).value ? +$any($event.target).value : null)">
+                      <option value="">— Seleccionar —</option>
+                      @for (opt of refOptions()[field.key] ?? []; track opt.id) {
+                        <option [value]="opt.id">{{ opt[field.refLabelKey ?? 'nombre'] }}</option>
+                      }
+                    </select>
+                  </div>
+                }
+                @case ('boolean') {
+                  <label class="switch">
+                    <input type="checkbox"
+                           [checked]="form()[field.key] === true"
+                           (change)="updateField(field.key, $any($event.target).checked)">
+                    <span class="switch__track"><span class="switch__dot"></span></span>
+                    <span class="switch__label">{{ form()[field.key] ? 'Sí' : 'No' }}</span>
+                  </label>
+                }
+                @case ('textarea') {
+                  <textarea rows="3"
+                            [value]="form()[field.key] ?? ''"
+                            (input)="updateField(field.key, $any($event.target).value)"
+                            [placeholder]="field.label"></textarea>
+                }
+                @case ('id') {
+                  <div class="input input--disabled">
+                    <span class="material-symbols-outlined input__icon">lock</span>
+                    <input type="text" disabled [value]="form()[field.key] ?? 'auto'">
+                  </div>
+                }
+                @case ('file') {
+                  <div class="file-drop"
+                       [class.file-drop--over]="fileDragOver()"
+                       (dragover)="$event.preventDefault(); fileDragOver.set(true)"
+                       (dragleave)="fileDragOver.set(false)"
+                       (drop)="onFileDrop($event, field)">
+                    <div class="input">
+                      <span class="material-symbols-outlined input__icon">upload_file</span>
+                      <input type="text" readonly
+                             [value]="form()[field.key] ?? ''"
+                             placeholder="Ningún archivo elegido">
+                      <button type="button" class="btn btn--outline file-drop__pick" (click)="fileInput.click()">
+                        Elegir archivo
+                      </button>
+                    </div>
+                    <input #fileInput type="file" hidden
+                           (change)="onFileSelected($event, field)">
+                    <div class="file-drop__zone">
+                      <span class="material-symbols-outlined">cloud_upload</span>
+                      <p>Arrastra aquí el archivo de la malla, o usa "Elegir archivo" arriba</p>
+                    </div>
+                  </div>
+                }
+                @case ('reniec') {
+                  <div class="reniec-box">
+                    <div class="reniec-row">
+                      <div class="input">
+                        <span class="material-symbols-outlined input__icon">fingerprint</span>
+                        <input type="text" maxlength="8"
+                               placeholder="8 dígitos — ej. 76903779"
+                               [value]="reniecDni()"
+                               (input)="reniecDni.set($any($event.target).value)"
+                               (keyup.enter)="buscarReniec()">
+                      </div>
+                      <button type="button" class="btn btn--primary" (click)="buscarReniec()" [disabled]="reniecLoading()">
+                        @if (reniecLoading()) {
+                          <span class="material-symbols-outlined spin">progress_activity</span> Buscando...
+                        } @else {
+                          <span class="material-symbols-outlined">search</span> Consultar
+                        }
+                      </button>
+                    </div>
+                    @if (reniecError()) {
+                      <div class="reniec-msg reniec-msg--err">{{ reniecError() }}</div>
+                    }
+                    @if (reniecResult(); as r) {
+                      @if (r.encontrado) {
+                        <div class="reniec-msg reniec-msg--ok">
+                          <span class="material-symbols-outlined">verified</span>
+                          <strong>{{ r.nombreCompleto }}</strong>
+                          <span class="reniec-src">fuente: {{ r.fuente }}</span>
+                        </div>
+                      }
+                    }
+                  </div>
+                }
+              }
+
+              @if (field.refSourceHint) {
+                <p class="field__hint">
+                  <span class="material-symbols-outlined field__hint-icon">info</span>
+                  {{ field.refSourceHint }}
+                </p>
+              }
+            </div>
+          }
+        </div>
+
+        <footer class="form-card__foot">
+          <button class="btn btn--ghost" (click)="showForm.set(false)">Cancelar</button>
+          <button class="btn btn--primary" (click)="save()">
+            <span class="material-symbols-outlined">save</span> Guardar
+          </button>
+        </footer>
+      </div>
+    }
+
+    @if (error(); as e) {
+      <div class="alert alert--error">
+        <span class="material-symbols-outlined">error</span>
+        <span>{{ e }}</span>
+      </div>
+    }
+
+    <!-- Tabla / Empty state estilo LAMB -->
+    <div class="table-card">
+      <header class="table-card__head">
+        <h4>REGISTROS</h4>
+        <span class="table-card__count">{{ items().length }} registro(s)</span>
+      </header>
+
+      @if (loading()) {
+        <div class="empty">
+          <div class="empty__circle"><span class="material-symbols-outlined">hourglass_empty</span></div>
+          <h4>Cargando...</h4>
+          <p>Obteniendo registros del servidor.</p>
+        </div>
+      } @else if (items().length === 0) {
+        <div class="empty">
+          <div class="empty__circle"><span class="material-symbols-outlined">{{ d.icon }}</span></div>
+          <h4>Sin registros</h4>
+          <p>Aún no se han registrado datos para {{ d.label.toLowerCase() }}.</p>
+          <button class="btn btn--primary" (click)="openCreate()">
+            <span class="material-symbols-outlined">add</span> Crear el primero
+          </button>
+        </div>
+      } @else {
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                @for (col of listedFields(); track col.key) { <th>{{ col.label }}</th> }
+                <th class="actions-col">ACCIONES</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of items(); track row.id) {
+                <tr>
+                  @for (col of listedFields(); track col.key) {
+                    <td [class.col--num]="col.type === 'number' || col.type === 'decimal' || col.type === 'id'">
+                      @if (col.type === 'date' || col.type === 'datetime') {
+                        {{ row[col.key] | date:(col.type === 'date' ? 'mediumDate' : 'short') }}
+                      } @else if (col.type === 'boolean') {
+                        <span [class]="row[col.key] ? 'chip chip--ok' : 'chip chip--muted'">
+                          {{ row[col.key] ? 'Sí' : 'No' }}
+                        </span>
+                      } @else if (col.type === 'enum') {
+                        @if (row[col.key] === 'SIN_ASIGNAR') {
+                          <span class="chip chip--muted">SIN ASIGNAR</span>
+                        } @else {
+                          <span class="chip">{{ fmtCell(row, col) }}</span>
+                        }
+                      } @else {
+                        {{ fmtCell(row, col) }}
+                      }
+                    </td>
+                  }
+                  <td class="actions-col">
+                    <button class="act act--edit" (click)="openEdit(row)" title="editar">
+                      <span class="material-symbols-outlined">edit</span>
+                    </button>
+                    <button class="act act--delete" (click)="deleteRow(row)" title="eliminar">
+                      <span class="material-symbols-outlined">delete</span>
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  </div>
+} @else {
+  <div class="empty">
+    <div class="empty__circle"><span class="material-symbols-outlined">search_off</span></div>
+    <h4>CRUD no encontrado</h4>
+    <p>El recurso solicitado no está disponible.</p>
+  </div>
+}

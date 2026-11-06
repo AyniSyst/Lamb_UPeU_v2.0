@@ -18,4 +18,6 @@ public class ProgramaResponse {
     private GradoAcademico gradoAcademico;
     private Integer duracionSemestres;
     private FacultadResponse facultad;
+    private NivelAcademicoResponse nivelAcademico;
+    private GradoAcademicoCatalogoResponse gradoAcademicoCatalogo;
 }

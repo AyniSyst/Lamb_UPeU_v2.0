@@ -11,11 +11,13 @@ import org.springframework.stereotype.Component;
 public class ProgramaMapper {
 
     private final FacultadMapper facultadMapper;
+    private final NivelAcademicoMapper nivelAcademicoMapper;
+    private final GradoAcademicoCatalogoMapper gradoAcademicoCatalogoMapper;
 
     public Programa toEntity(ProgramaRequest request) {
         return Programa.builder()
                 .nombre(request.getNombre())
-                .gradoAcademico(request.getGradoAcademico())
+                .gradoAcademico(request.getGradoAcademico() != null ? request.getGradoAcademico() : pe.edu.upeu.lamb.institucional.entity.GradoAcademico.SIN_ASIGNAR)
                 .duracionSemestres(request.getDuracionSemestres())
                 .build();
     }
@@ -27,6 +29,8 @@ public class ProgramaMapper {
                 .gradoAcademico(programa.getGradoAcademico())
                 .duracionSemestres(programa.getDuracionSemestres())
                 .facultad(facultadMapper.toResponse(programa.getFacultad()))
+                .nivelAcademico(programa.getNivelAcademico() != null ? nivelAcademicoMapper.toResponse(programa.getNivelAcademico()) : null)
+                .gradoAcademicoCatalogo(programa.getGradoAcademicoCatalogo() != null ? gradoAcademicoCatalogoMapper.toResponse(programa.getGradoAcademicoCatalogo()) : null)
                 .build();
     }
 }

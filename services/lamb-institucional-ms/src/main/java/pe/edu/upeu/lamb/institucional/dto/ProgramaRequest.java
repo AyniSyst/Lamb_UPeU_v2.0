@@ -16,7 +16,6 @@ public class ProgramaRequest {
     @Size(max = 150)
     private String nombre;
 
-    @NotNull
     private GradoAcademico gradoAcademico;
 
     @NotNull
@@ -25,4 +24,8 @@ public class ProgramaRequest {
 
     @NotNull
     private Long facultadId;
+
+    private Long nivelAcademicoId;
+
+    private Long gradoAcademicoCatalogoId;
 }
