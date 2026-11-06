@@ -132,3 +132,40 @@ S11: integración frontend Angular + Keycloak. Explícitamente pospuesto hasta t
 3. Si el Bloque 1 quedó incompleto, continuar desde donde se cortó — no repetir desde cero lo que ya esté hecho y compilando.
 4. Si el Bloque 1 ya está completo y validado, seguir con el Bloque 2, dominio por dominio (no los 12 de una vez).
 5. Mantener la misma regla: las guías `.md` de sesión mandan sobre lo que ya exista copiado de D:.
+
+## 7. Sesión aparte (2026-11-06) — CRUD genérico frontend + catálogos flexibles Nivel/Grado académico
+
+Trabajo independiente del plan de Bloques 1/2 de arriba, hecho sobre `lamb-institucional-ms` (módulo Institucional) y el frontend Angular (`clients/lamb-frontend`). Hecho en worktree `purring-wondering-matsumoto`, copiado después a `F:\SISTEMAS\Lamb_UPeU_v2.0` real.
+
+### CRUD genérico (frontend)
+- Sistema de CRUD data-driven: catálogo `clients/lamb-frontend/src/app/features/cruds.catalog.ts` (arreglo de `CrudDef[]`, cada uno define `path`, `icon`, `fields: FieldDef[]`) + componente standalone reusable `crud-generic` que renderiza tabla+formulario para cualquier entrada del catálogo.
+- `FieldDef` soporta tipos: texto, número, `enum` (opciones fijas), y `ref` (FK a otro CRUD — dropdown poblado desde el endpoint de otro catálogo, con `refPath`, `refLabelKey`, `refResponseKey`, `refSourceHint`, `default`, `disabled`).
+- Evita escribir una pantalla Angular nueva por cada entidad simple — se agrega una entrada al catálogo y ya queda con tabla+alta+edición+baja.
+
+### Catálogo flexible: Nivel académico (hecho primero)
+- Se convirtió "Nivel académico" de enum fijo a catálogo real editable por el usuario: tabla `niveles_academicos`, entidad `NivelAcademico`, DTO/mapper/repository/service/controller (`/api/v1/programa-academico/niveles-academicos`), migración Flyway con fila semilla "Sin asignar".
+- Entrada CRUD standalone `inst-niveles-academicos` en el catálogo frontend.
+- `Programa` quedó con relación `@ManyToOne` a `NivelAcademico` (antes enum).
+
+### Reversión pedida por el usuario: Grado académico flexible, Nivel académico bloqueado
+Petición exacta: "ahora haz lo mismo con Grado porque quiero que sea flexible, y que Nivel esté bloqueado como grado" — se invirtió cuál de los dos campos es editable en el formulario de Programa:
+- **Grado académico** pasó a ser catálogo flexible igual que Nivel académico (mismo patrón, espejado 1:1):
+  - Nuevo: `entity/GradoAcademicoCatalogo.java`, `dto/GradoAcademicoCatalogoRequest.java`, `dto/GradoAcademicoCatalogoResponse.java`, `mapper/GradoAcademicoCatalogoMapper.java`, `repository/GradoAcademicoCatalogoRepository.java`, `service/GradoAcademicoCatalogoService.java`.
+  - Endpoints CRUD agregados en `ProgramaAcademicoController.java` bajo `/api/v1/programa-academico/grados-academicos` (GET lista, GET por id, POST, PUT, DELETE).
+  - Migración `V11__create_grados_academicos.sql`: tabla `grados_academicos`, columna `id_grado_academico_catalogo` en `programas` (FK), se quitó el `NOT NULL` del `grado_academico` legado (enum, columna vieja), fila semilla "Sin asignar" (id=1) + `setval` de secuencia.
+  - `Programa` entity: agregado `@ManyToOne` `gradoAcademicoCatalogo` (columna `id_grado_academico_catalogo`); el enum legado `gradoAcademico` se mantiene en la entidad/tabla (compatibilidad), ya no es obligatorio.
+  - `ProgramaRequest`/`ProgramaResponse`/`ProgramaMapper`/`ProgramaService` (controlador real es `ProgramaController` en `/api/v1/programas`, no `ProgramaAcademicoController`) actualizados: `gradoAcademicoCatalogoId` nuevo, `gradoAcademico` (enum legado) ahora opcional, con fallback a `SIN_ASIGNAR` al crear y `set` condicional (solo si viene) al actualizar, para no pisar el dato legado si el form ya no lo manda.
+  - Frontend: nueva entrada CRUD standalone `inst-grados-academicos`; en el form de Programa, el campo `gradoAcademicoCatalogoId` quedó como `ref` editable (`default: 1`), y el campo `nivelAcademicoId` quedó con `disabled: true` (visible pero bloqueado, con `default: 1` y `refSourceHint`) — justo lo opuesto a antes.
+- Build verificado limpio (`./mvnw -o clean compile -q`) en `lamb-institucional-ms`. **No se tocó `lamb-curriculo-ms`** (fuera de alcance explícito).
+
+### Push a git
+- Se hizo commit y push directo a `origin/main` **sin** línea `Co-Authored-By: Claude` — instrucción explícita del usuario ("sube todo sin que aparezcas tu como colaborador"), tiene prioridad sobre la atribución por defecto.
+- Método usado (worktree no puede hacer `git checkout main` ni `cd` al checkout real: ambos bloqueados por el sandbox): verificar fast-forward limpio con `git merge-base --is-ancestor origin/main HEAD`, luego `git push origin <rama-worktree>:main` directo, sin necesidad de checkout local de `main`.
+- Commit `112c1bf` en `main` con todo el trabajo de esta sección. Verificado después con `git status`/`git log` que no quedó nada pendiente.
+
+### Cómo retomar esta sub-sesión
+1. Esta parte es independiente del plan de 22 dominios (sección 1-6) — no mezclar alcance.
+2. Si se pide extender el CRUD genérico a otra entidad simple: agregar entrada a `cruds.catalog.ts`, no crear pantalla Angular nueva.
+3. Si se pide otro catálogo flexible (como Nivel/Grado): copiar el patrón completo (entity/dto/mapper/repository/service/endpoints/migración+seed "Sin asignar") de `NivelAcademico`/`GradoAcademicoCatalogo`.
+4. Recordar: controlador real de Programa es `ProgramaController` (`/api/v1/programas`), no `ProgramaAcademicoController`.
+5. Push desde worktree a `main`: no usar `git checkout main` ni `cd` al checkout real (bloqueado); usar `git push origin <rama-worktree>:main` tras verificar fast-forward.
